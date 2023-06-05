@@ -1,0 +1,8 @@
+@startuml
+participant Sender
+participant Empfänger
+Sender -> Empfänger : Anfrage senden
+activate Empfänger
+Empfänger --> Sender : Antwort senden
+deactivate Empfänger
+@enduml

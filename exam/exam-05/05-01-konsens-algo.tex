@@ -1,0 +1,39 @@
+\documentclass{article}
+
+\begin{document}
+
+\title{Übungsaufgabe: Raft, Paxos und Zookeeper Atomic Broadcast (ZAB)}
+\maketitle
+
+\section*{Aufgabe}
+
+Die Algorithmen Raft, Paxos und Zookeeper Atomic Broadcast (ZAB) sind wichtige Algorithmen für die Konsensfindung in verteilten Systemen. In dieser Aufgabe sollen Sie Ihr Verständnis dieser Algorithmen anhand von praktischen Beispielen vertiefen.
+
+\subsection*{Teil 1: Raft}
+
+Betrachten Sie ein verteiltes System, das den Raft-Algorithmus verwendet und fünf Server (S1, S2, S3, S4 und S5) umfasst.
+
+\begin{enumerate}
+\item Beschreiben Sie, was geschieht, wenn S1 einen Leader-Election-Algorithmus startet.
+\item Was geschieht, wenn während des Leader-Election-Prozesses S3 ausfällt?
+\end{enumerate}
+
+\subsection*{Teil 2: Paxos}
+
+Nehmen Sie an, dass das gleiche verteilte System den Paxos-Algorithmus verwendet.
+
+\begin{enumerate}
+\item Erklären Sie, wie der Paxos-Algorithmus in diesem System einen Konsens erzielen würde.
+\item Was würde passieren, wenn während des Konsensprozesses S2 ausfällt?
+\end{enumerate}
+
+\subsection*{Teil 3: ZAB}
+
+Jetzt nehmen Sie an, dass das System den ZAB-Algorithmus verwendet.
+
+\begin{enumerate}
+\item Beschreiben Sie, wie der ZAB-Algorithmus in diesem System einen Atomic Broadcast erreichen würde.
+\item Was würde passieren, wenn während des Broadcast-Prozesses S4 ausfällt?
+\end{enumerate}
+
+\end{document}

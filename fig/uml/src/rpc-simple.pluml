@@ -1,0 +1,36 @@
+@startuml
+skinparam linetype ortho
+
+package "Application" {
+
+package "Client" {
+  [App on PI]
+  [Application Stub (Consumer)]
+}
+
+package "Server" {
+  [Application Stub (Provider)]
+  [App on Lamp]
+}
+}
+
+database "Network\n(Communication\nProtocol)"
+
+package "Middleware" {
+  [Client Stub]
+  [Server Stub]
+}
+
+[App on PI] --> [Application Stub (Consumer)] : controlLamp(true)
+[Application Stub (Consumer)] -[hidden]-> [Client Stub] : invoke(signature)
+[Application Stub (Consumer)] -d-> [Middleware] : invoke(signature)
+'[Middleware] -d-> [Client Stub] : Marshalling
+[Client Stub] -d-> "Network\n(Communication\nProtocol)" : Send request
+
+"Network\n(Communication\nProtocol)" -u-> [Server Stub] : Receive request
+'[Server Stub] -u-> [Server Stub] : Unmarshalling
+[Server Stub] -u-> [Application Stub (Provider)] : call(signature)
+
+[Application Stub (Provider)] -u-> [App on Lamp] : controlLamp(true)
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+interface Product {
+  + operation(): String
+}
+
+class ConcreteProductA {
+  + operation(): String
+}
+
+class ConcreteProductB {
+  + operation(): String
+}
+
+class ProductFactory {
+  + createProduct(type: String): Product
+}
+
+Product <|.. ConcreteProductA
+Product <|.. ConcreteProductB
+
+ProductFactory --> Product: creates
+@enduml

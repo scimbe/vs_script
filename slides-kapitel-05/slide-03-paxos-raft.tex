@@ -1,0 +1,155 @@
+
+\subsection{Konsens}
+\begin{frame}
+  \frametitle{Algorithmen}
+  \framesubtitle{Konsens}
+  \begin{itemize}
+    \item Viele Systeme auf hochverfügbare und korrekte Systeme angewiesen
+    \item Einzelne Kerne, CPUs oder Systeme dem nicht gewachsen
+    \item Redundanz hilfreich? Zwingend Zusammenarbeit/ Kooperation!
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Problem}
+  \begin{itemize}
+    \item Es existiert eine Gruppe 
+    \item Teilnehmer kommunizieren mit Nachrichten
+    \item Teilnehmer oder Nachrichten können fehlerhaft sein
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsens Fallbeispiel}
+  \framesubtitle{Anwendungsbeispiel}
+  \begin{itemize}
+  \item Verteiltes System von zwei Ampeln, das den Verkehr an einer Baustelle reguliert
+  \item Jede Ampel arbeitet autonom 
+  \item Koordiniert sich mit anderer Ampel über Nachrichten
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Anforderungen}
+  \begin{itemize}
+    \item Einigkeit
+    \item Integrität
+    \item Terminierung
+    \item Validität
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Follow the Leader}
+  \begin{itemize}
+    \item Ein Knoten wird zu Leader gewählt
+    \item Reduziert Komplexität
+    \item Paxos nutzt alternativen Multi-Leader Ansatz
+    \item P2P Architekturen können auch Leaderless funktionieren
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Bekannte Lösungen}
+  \begin{itemize}
+    \item Paxos (Mutter)
+    \item RAFT (Einfacher)
+    \item ZAB (Zookeeper)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Paxos}
+  \begin{itemize}
+    \item Leslie Lamport 1990
+    \item Mutter aller Konsens-Algorithmen
+    \item Arbeitet mit Rollen: Proposer oder Acceptors
+    \item Berüchtigt für seine Komplexität
+  \end{itemize}
+  \footnote{Weitere Details im Script}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Raft}
+  \begin{itemize}
+    \item Diego Ongaro und John Ousterhout (2013/2014)
+    \item Alternative zu komplexen Paxos
+    \item Konzentriert sich auf drei Aufgaben
+    \begin{itemize}
+      \item Leader Election
+      \item Log Replication  
+      \item Safety
+    \end{itemize}
+  \end{itemize}
+  \footnote{Weitere Details im Script}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{ZAB}
+  \begin{itemize}
+    \item Speziell für ZooKeeper entworfen und optimiert
+    \item Zuverlässige und geordnete Zustandsaktualisierung in einer Replikationsgruppe
+    \item Im Wesentlichen ein Zwei-Phasen-Commit-Protokoll mit einer Führungsfindungsphase
+    \item Toll für Namensdienst, Konfigurationsmanagement, etc
+    \item Aber schlecht auf großen Datenmengen, bei vielen Schreibvorgängen, etc 
+  \end{itemize}
+    \footnote{Weitere Details im Script}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Konsens mit Crash Failures}
+  \begin{itemize}
+    \item Unmöglichkeit von 1-Crash-Konsens (fundamentale Beweis 1985)
+    \item Als FLP-Unmöglichkeitstheorem bezeichnet
+    \item Unterscheidung Nachricht verzögert oder Empfänger abgestürzt
+  \end{itemize}
+  \textcolor{red}{Für ein asynchrones verteiltes System mit nur einem möglicherweise fehlerhaften Prozess (d.h. einem Prozess, der abstürzen kann) kann es keinen deterministischen Algorithmus geben, der immer zu einem Konsens führt}\footnote{Ein asynchrones System ist ein System, in dem es keine festen Obergrenzen für die Zeit gibt}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{FLP-Unmöglichkeitstheorem}
+  \begin{itemize}
+    \item Teilsynchrone Systeme (Asynchron ist kaum durchzuhalten)
+    \item Randomisierte Algorithmen (Randomized Consensus Algorithmen-Gruppe)
+    \item Praktische Konsensalgorithmen (Paxos, Raft oder ZAB)
+    \item Konsens durch teilweise Synchronität
+    \begin{itemize}
+      \item Bracha-Toueg Crash Consensus
+      \item Chandra-Toueg Unreliable Failure Detectors 
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Unreliable Failure Detectors }
+  \begin{itemize}
+    \item Fehlerdetektoren müssen nicht perfekt sein (False positives)
+    \item Beispiel ist: Timeout-basierter Fehlerdetektoren
+    \item Alternativen sind Heartbeat-Mechanismus, Quorum-basierte Ansätze
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Konsens mit Byzantine Failures}
+  \begin{itemize}
+    \item Basis weiter Byzantinische Generäle Problem
+    \item Mehr als zwei Drittel der Knoten müssen korrekt sein
+    \item Möglicher algorithmischer Ansatz Practical Byzantine Fault Tolerance (PBFT)
+  \end{itemize}
+\end{frame}
+

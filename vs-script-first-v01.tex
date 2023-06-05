@@ -1,0 +1,216 @@
+% !TEX options=--shell-escape
+\immediate\write18{makeindex \jobname.idx \jobname.glo -t \jobname.glg -s \jobname.ist -o \jobname.gls}
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry} %Ändert alle Ränder auf 2cm
+% oder Sie können einzelne Ränder so anpassen:
+%\usepackage[left=3cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+
+% Pakete
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{subcaption} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{caption}
+
+\usepackage{showidx}
+\usepackage{imakeidx}
+
+\usepackage[version=4]{mhchem}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor} 
+\usepackage{plantuml}
+\usepackage{csquotes}
+\usepackage{enumitem} \setitemize{leftmargin=*}   
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{microtype}
+\usepackage{booktabs}
+
+\usepackage{fancyhdr}
+
+
+
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{#1}} % Aktualisieren Sie den rechten Markierungsbefehl, um den Abschnittstitel zu speichern
+\fancyhf{} % Löscht die aktuellen Kopf- und Fußzeilen
+\fancyhead[R]{\rightmark} % Setzen Sie den rechten Kopfzeileninhalt auf den Abschnittstitel
+\fancyfoot[C]{\thepage{} von \pageref*{LastPage}} % Setzt die Seitenzahlen in der Fußzeile
+\fancyfoot[R]{\copyright\ CC BY-NC-SA 4.0}
+\fancyfoot[L]{VS-Becke-V0.9-1}
+
+
+\renewcommand{\headrulewidth}{0.4pt} % Fügt eine Linie unter der Kopfzeile hinzu
+\renewcommand{\footrulewidth}{0.4pt} % Fügt eine Linie über der Fußzeile hinzu
+\renewcommand{\headrulewidth}{0pt} % Entfernt die Linie unter der Kopfzeile
+\renewcommand{\footrulewidth}{0.4pt} % Fügt eine Linie über der Fußzeile hinzu
+
+
+\definecolor{dkgreen} {rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{references.bib}
+
+% Titel und Autor
+\title{Verteilte Systeme\\ (Script zum Modul v0.9-1)}
+\author{Prof. Dr. Martin Becke\footnote{Dieser Text wurde in Teilen mit der Unterstützung von ChatGPT erzeugt. Dieser Text{} wird durchgehend vom Autor geprüft, erweitert und verfeinert. Dieser Text ist nur für die Lehre vorgesehen. Bitte beachten Sie Lizenz und Version}}
+
+
+\pgfplotsset{compat=1.18} 
+
+\makeindex
+
+
+% Beginn des Dokuments
+\begin{document}
+
+% Titelseite
+\maketitle
+\vspace*{\fill} % Fügt vertikalen Raum hinzu, um das Bild in der Mitte zu zentrieren
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.25\textwidth]{fig/graphics/CADS_Logo_Quadrat_300x300_RGB_72dpi.jpg} % Passt die Breite des Bildes an, hier ist sie auf die Hälfte der Textbreite eingestellt.
+  %\caption{Ihr Bildtitel}
+\end{figure}
+\vspace*{\fill}
+
+\newpage
+% Fügen Sie hier Ihre Copyright-Notiz und Nutzungserklärung hinzu
+\noindent
+\textcopyright\ 2022, Prof. Dr. Martin Becke\\\\ 
+Dieses Werk ist lizenziert unter der Creative Commons (4.0 International License)\\
+- Namensnennung\\ - Nicht-kommerziell\\ - Weitergabe unter gleichen Bedingungen \\Um eine Kopie dieser Lizenz zu sehen, besuchen Sie\\ \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.\\
+Sonstig: Alle Rechte vorbehalten.
+\noindent
+\\\\
+Versionen:\\
+0.9-0 2023 SoSe - Initiale Version, noch stark Text-basiert. Schlichtes Layout\\
+0.9-1 2023 SoSe - Weiter noch stark Text-basiert. Besseres Layout (DinA4, Header, Footer)
+\\\\\\
+Liebe Studierende,\\\\ vor uns liegt eine einzigartige Gelegenheit. Unser gemeinsames Skript, an dem bereits viele engagierte Geister gearbeitet haben, wartet darauf, durch unsere Ideen, Erkenntnisse und Beiträge weiter verbessert zu werden. Es ist ein lebendiges Werkzeug für das Lernen, und wir sind die aktuellen Hüter.
+
+Sie haben alle die Möglichkeit, Ihren Stempel auf dieses Skript zu setzen und es noch besser zu machen. Durch Ihre Teilnahme an der Überarbeitung dieses Skripts tragen Sie dazu bei, die Qualität unserer Ausbildung zu verbessern und unser gemeinsames Wissen zu erweitern.
+
+Indem Sie Ihre Ideen und Beobachtungen teilen, tragen Sie dazu bei, den Inhalt zu verfeinern und zu erweitern. Vielleicht haben Sie eine neue Methode oder ein neues Konzept entdeckt, das aufgenommen werden könnte. Oder vielleicht haben Sie eine Möglichkeit entdeckt, eine komplexe Idee klarer oder anschaulicher zu erklären. Jeder Beitrag, unabhängig von seiner Größe, wird dazu beitragen, dieses Skript zu einem noch besseren Lernwerkzeug zu machen.
+
+Darüber hinaus bietet Ihnen die Mitarbeit an diesem Skript eine wertvolle Möglichkeit, Ihre Fähigkeiten in der Zusammenarbeit, der Wissenschaftskommunikation und der kritischen Analyse zu vertiefen. Sie werden durch die Diskussionen in der Lage sein, Ihr Wissen auf die Probe zu stellen und gleichzeitig neue Erkenntnisse zu gewinnen.
+
+In diesem Prozess sind wir mehr als nur Einzelpersonen; wir sind Teil einer Gemeinschaft von Lernenden, die zusammenarbeiten, um ein gemeinsames Ziel zu erreichen. Der Erfolg dieses Skripts hängt von jedem von uns ab. Lassen Sie uns also unsere Kräfte bündeln, unsere Kreativität und unser Wissen nutzen, um dieses Skript zum Besten zu machen, was es sein kann.
+
+Ihr Beitrag wird nicht nur Ihnen und Ihren Kommilitonen zugutekommen, sondern auch zukünftigen Studierenden, die auf diesem Skript aufbauen werden. Lassen Sie uns dieses Erbe fortsetzen und gemeinsam ein Skript schaffen, auf das wir stolz sein können.
+\\\\
+Martin Becke
+\\\\
+Dank für die Kommentare, Anmerkungen und Korrekturen: \\
+2023 SoSe Frank Matthiesen (Korrekturen Vortragsfolien) \\
+2023 SoSe Niklas Kück (Korrekturen und Textvorschläge Kapitel 1 \& 2)\\
+2023 SoSe Matz Heitmüller (Korrekturen: Beispiel-Architekturen und Folien Kapitel 2) \\
+\\
+ToDo:\\
+- Quellen und Links zu Tools\\
+- Mehr beschreibene Graphiken\\
+- Textüberarbeitung\\
+- Noch Raum für Sicherheit\\
+- Stichwortverzeichnis
+\newpage
+% Inhaltsverzeichnis
+\tableofcontents
+\newpage
+% Einleitung
+% Termin 1 - vs-slides-chapter01-1
+\section{Einleitung}
+Verteilte Systeme sind ein wichtiges Feld der Informatik, das sich mit der Vernetzung und Zusammenarbeit unabhängiger Computer beschäftigt, um in vielen Fällen eine gemeinsame Aufgabe zu erfüllen. Durch die Verwendung von verteilten Systemen können komplexe Anwendungen und Aufgaben effektiver und effizienter gelöst werden, indem die Rechenleistung und Speicherkapazität mehrerer Computer gemeinsam genutzt werden. Verteilte Systeme sind in vielen Bereichen der IT Branche und inbesondere im industriellen Umfeld weit verbreitet und spielen eine wichtige Rolle bei der Entwicklung neuer Technologien und Anwendungen. Beispiele sind weit verbreitet, insbesondere im Bereich der Cloud Anwendungen, der Künstlichen Intelligenz, des maschinellen Lernens oder auch des Internet of Things (IoT). Im Folgenden soll ein kleiner Einlick für Verteilte Systeme am Standort Hamburg gegeben werden, auf dem eine Defintion des Begriffes \enquote{Verteilte Systeme}  mit einer angemessenen Abgrenzung folgt. 
+\input{kapitel-01/einleitung-verteilte-systeme}
+\input{kapitel-01/definition-verteilte-systeme}
+\input{kapitel-01/abgrenzung-ai-its}
+\input{kapitel-01/ziele}
+% Termin 2 - vs-slides-chapter01-2
+\input{kapitel-01/ziele-detail}
+\newpage
+% Termin 2 - vs-slides-chapter01-2
+% Termin 2 - vs-slides-chapter01-3
+% Kapitel 1 
+\newpage
+\section{Architektur}
+In diesem Kapitel werden die Grundlagen behandelt, um die unterschiedlichen Formen der Realisierung von verteilten Systemen zu klassifizieren und einordnen zu können. Diese Diskussion sagt noch nichts über die reale Umsetzung aus, bietet aber den Einstiegspunkt in diese. Es wird darauf eingegangen, welche Vorkenntnisse notwendig sind und welche Ziele mit den Architekturansätzen erreicht werden sollen. 
+\input{kapitel-02/realisierung}
+%Termin-3 - vs-slides-chapter02-1
+ 
+\input{kapitel-02/architekturen}
+%Termin-4 - vs-slides-chapter02-2
+
+\input{kapitel-02/pattern}
+%Termin-5 - vs-slides-chapter02-3
+%Termin-5 - vs-slides-chapter02-4
+
+\subsection{Beispielarchitekturen}
+Die Remote Procedure Call (RPC) Architektur und die Peer-to-Peer (P2P) Architektur sind zwei grundlegend unterschiedliche Ansätze zur Entwicklung verteilter Systeme, die jeweils ihre eigenen Stärken und Schwächen aufweisen. Beide Architekturen bieten Lösungen für verschiedene Anwendungsfälle und Probleme, die in verteilter Systementwicklung auftreten. Durch das Vergleichen dieser beiden Beispielarchitekturen können wir ein besseres Verständnis der verschiedenen Aspekte und Herausforderungen bei der Entwicklung verteilter Systeme gewinnen.
+\input{kapitel-02/rpc-architecture}
+\input{kapitel-02/chord-architecture}
+%Termin-6 - vs-slides-chapter02-5
+
+\newpage
+% Work in progress
+\section{Realisierung}
+Bei der Implementierung von verteilten Systemen müssen mehrere Aspekte berücksichtigt werden, um sicherzustellen, dass das System effizient, zuverlässig und skalierbar ist. Eine umfassende Erörterung der Anforderungen in der Implementierung zu diksutieren ist aussichtslos, da eine nicht erfassbare Menge von Faktoren Einfluss haben. In den folgenden Punkten soll sich auf die grundsätzliche Anforderungen an Prozesse und Kommunikations konzentriert werden. In den weiteren Kapiteln werden besondere Aspekte der Algorithmik, Koordination, Adressierung und Fehlertoleranz in verteilten Systemen addressiert, bevor sich das Script dem Testen und  dem Deployment zuwendet. 
+\input{kapitel-03/prozess}
+
+%Termin-7 - vs-slides-chapter03-1
+\newpage
+\input{kapitel-03/kommunikation}
+
+%Termin-8 - vs-slides-chapter03-2
+\newpage
+%vs-slides-chapter04-1 koordination
+\input{kapitel-04/koordination}
+\input{kapitel-04/sync}
+%Termin-9 -
+\input{kapitel-04/konsens}
+%Termin-10 - Konsens mit Raft und Paxos Algorithmus
+
+\newpage
+\input{kapitel-05/algorithmen}
+%Termin-11 -
+
+\newpage
+
+\input{kapitel-06/monitoring}
+\input{kapitel-06/debugging}
+\input{kapitel-06/deployment}
+%Termin-12 -
+\renewcommand{\indexname}{Stichwortverzeichnis}
+\addcontentsline{toc}{section}{Stichwortverzeichnis}
+\printindex
+\newpage
+% Literaturverzeichnis
+\printbibliography
+
+\end{document}

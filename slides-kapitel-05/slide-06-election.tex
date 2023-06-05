@@ -1,0 +1,98 @@
+\subsection{Election}
+\begin{frame}
+  \frametitle{Algorithmen}
+  \framesubtitle{Election}
+  \begin{itemize}
+    \item Election in Rings (Ring Election Algorithmus) (Stabil, bekannte Nodes)
+    \item Bully Algorithmus (Weniger stabil, weniger bekannte Nodes)
+    \item Echo-Algorithmus mit Ausnahmen (Unbekannte Nodes, recht Fehlertolerant)
+    \item Tree Election Algorithmus (Unbekannte Nodes aber sehr stabil in ihrer Ordnung)
+    \item Minimum Spanning Tree (Unbekannte Nodes, stabil aber mit weichen Kriterium)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Election}
+  \framesubtitle{Anwendungsfall Bussystem}
+  \begin{itemize}
+    \item IEEE 1394 ist ein serieller Busstandard
+    \item Zur Datenübertragung und Kommunikation eingesetzt (auch als FireWire bekannt)
+    \item Zentrale Komponente ist der Bus Manager
+    \item Wahl des Bus Manager nahe am Bully
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{IEEE 1394}
+  \framesubtitle{Wahl des Bus Managers}
+  \begin{itemize}
+  \item Selbstnominierung: Jedes Gerät auf dem Bus, das die Rolle des Bus Managers übernehmen kann und will, sendet eine Selbstevaluierungsnachricht. Diese Nachricht enthält die Fähigkeiten des Geräts.
+  \item Vergleich der Fähigkeiten: Jedes Gerät auf dem Bus vergleicht seine eigenen Fähigkeiten mit den in den Selbstevaluierungsnachrichten der anderen Geräte angegebenen Fähigkeiten.
+  \item Wahl: Das Gerät mit den höchsten Fähigkeiten wird zum Bus Manager gewählt. (Gleichstandregel)
+  \item Kommunikation der Wahl: Das gewählte Gerät sendet eine Nachricht an alle anderen Geräte auf dem Bus.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{IEEE 1394}
+  \framesubtitle{IEEE 1394 und Bully}
+  \begin{itemize}
+  \item  Beide Algorithmen versuchen, einen Leader in einem verteilten System zu wählen
+  \item Bully-Algorithmus setzt eher auf die Identität der Knoten
+  \item Bei IEEE 1394 Algorithmus Fokus auf Ressourcenvergleich
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Election}
+  \framesubtitle{Wahl in anonymen Ring}
+  \begin{itemize}
+    \item Alle Knoten in einem Ring identisch und ununterscheidbar  (anonym)
+    \item Auch keine eindeutige ID zuweisbar
+    \item  In solchen Fällen ist es unmöglich, einen eindeutigen Leader oder Koordinator zu wählen
+    \item In synchronen Netzwerken mit begrenzten erwarteten Verzögerungen kann das Problem jedoch gelöst werden
+    \item Dieser Algorithmus funktioniert, weil die begrenzten erwarteten Verzögerungen in einem synchronen Netzwerk garantieren, dass die Nachrichten in einer vorhersehbaren Reihenfolge ankommen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Election}
+  \framesubtitle{Wahl in anonymen Ring}
+  \begin{itemize}
+    \item Voraussetzung: alle Operationen finden in vorhersehbaren und begrenzten Zeitschritten statt
+    \item Die Zeit ist Unterscheidungsmerkmal
+    \begin{itemize}
+      \item  Jeder Knoten sendet zu Beginn einer Zeiteinheit eine Nachricht
+      \item  Wenn ein Knoten eine Nachricht erhält, bevor er seine eigene Nachricht sendet, gibt er die Wahl auf und wird zum Follower
+      \item Dieser Prozess wird so lange fortgesetzt, bis nur noch ein Kandidat übrig ist, der zum Leader wird
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algorithmen}
+  \framesubtitle{Synchronizer}
+  \begin{itemize}
+    \item Ziel: asynchrone verteilte Systeme zu synchronisieren
+    \item Es gibt keine globale Uhr oder garantierte Nachrichtenlieferzeiten
+    \item  Bekannte Synchronizer sind Alpha, Beta und Gamma 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronizer}
+  \framesubtitle{Funktionsweise}
+  \begin{itemize}
+  \item Nachrichtenaustausch: Jeder Knoten in einem asynchronen Netzwerk sendet Nachrichten an seine Nachbarn und empfängt Nachrichten von ihnen.
+  \item Synchronisierung: Der Synchronizer-Algorithmus stellt sicher, dass alle Knoten in regelmäßigen Abständen, die als Runden bezeichnet werden, synchronisiert werden. Am Ende jeder Runde wartet jeder Knoten, bis er Nachrichten von allen seinen Nachbarn erhalten hat, bevor er zur nächsten Runde übergeht.
+  \end{itemize}   
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronizer}
+  \framesubtitle{Alpha, Beta und Gamma}
+  \begin{itemize}
+  \item Unterscheidung der Art und Weise wie Synchronisierung erreicht wird, sowie in ihrer Effizienz und Komplexität
+  \item Im Allgemeinen sind sie unterscheidbar in Anzahl der benötigten Nachrichten und der Anzahl der Runden
+  \end{itemize}   
+\end{frame}

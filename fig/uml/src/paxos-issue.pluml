@@ -1,0 +1,40 @@
+@startuml
+participant "Proposer1" as P1
+participant "Proposer2" as P2
+participant "Acceptor1" as A1
+participant "Acceptor2" as A2
+participant "Acceptor3" as A3
+
+P1 -> A1: Prepare(1)
+P1 -> A2: Prepare(1)
+P1 -> A3: Prepare(1)
+
+P2 -> A1: Prepare(2)
+P2 -> A2: Prepare(2)
+P2 -> A3: Prepare(2)
+
+A1 --> P1: Promise(1, null)
+A2 -x P1: Network Failure
+A3 --> P1: Promise(1, null)
+
+A1 --> P2: Promise(2, null)
+A2 --> P2: Promise(2, null)
+A3 --> P2: Promise(2, null)
+
+P1 -> A1: Accept(1, Value)
+P1 -> A2: Accept(1, Value)
+P1 -> A3: Accept(1, Value)
+
+P2 -> A1: Accept(2, Value)
+P2 -> A2: Accept(2, Value)
+P2 -> A3: Accept(2, Value)
+
+A1 -x P1: Process Failure
+A2 --> P1: Accepted(1, Value)
+A3 --> P1: Accepted(1, Value)
+
+A1 --> P2: Accepted(2, Value)
+A2 --> P2: Accepted(2, Value)
+A3 --> P2: Accepted(2, Value)
+
+@enduml

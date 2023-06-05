@@ -1,0 +1,31 @@
+@startuml
+
+
+package "CVM (Controller-View-Model)" {
+  class C_User
+  class C_Model
+  class C_View
+  class C_Controller
+}
+C_User --> C_View : Input
+C_User <|... C_View: notify
+C_Controller ...|>  C_View : notify
+C_Controller --> C_Model : Update Data
+C_View --> C_Controller : User Input
+C_Model ...|> C_Controller : notify
+
+package "VCM (View-Controller-Model)" {
+  class V_User
+  class V_Model
+  class V_View
+  class V_Controller
+}
+V_User --> V_Controller : Input
+V_User <|... V_View : notify
+
+
+V_Controller --> V_Model : Update Data
+V_Model ...|>  V_View : Data
+
+
+@enduml

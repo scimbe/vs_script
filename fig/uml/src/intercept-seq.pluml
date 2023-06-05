@@ -1,0 +1,13 @@
+@startuml
+actor Client
+component Component
+component FirstInterceptor
+component SecondInterceptor
+component LastInterceptor
+Client -> Component: sendRequest()
+Component -> FirstInterceptor: processMessage()
+FirstInterceptor -> SecondInterceptor: processMessage()
+SecondInterceptor -> LastInterceptor: processMessage()
+LastInterceptor -> Component: processMessage()
+Component -> Client: response
+@enduml

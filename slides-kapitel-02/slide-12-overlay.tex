@@ -1,0 +1,47 @@
+%\section{Einleitung}
+\subsection{Overlay Network}
+\begin{frame}
+  \frametitle{Overlay}
+  \framesubtitle{Idee}
+  \begin{itemize}
+    \item Logische Verbindung muss keiner physikalischen Verbindung entsprechen
+    \item Genutzte Netzwerkstruktur besteht häufig auf der obersten Schicht einer physikalischen Netzwerkstruktur
+    \item Zusätzliche Abstraktion und Organisation
+    \item Zusätzliche Komplexität und Overhead
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overlay}
+  \framesubtitle{Beispiel P2P}
+  \begin{itemize}
+    \item In einem P2P-Netzwerk sind die Knoten gleichberechtigte Teilnehmer
+    \item Teil oder voll vermascht 
+    \item Bekanntes Beispiel für ein P2P-Overlay-Netzwerk ist BitTorrent
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overlay}
+  \framesubtitle{P2P - Strukturierte Netzwerke}
+  \begin{itemize}
+    \item Geordnete Struktur
+    \item Verwenden meist deterministische Verfahren oder Algorithmen
+    \item Routing effizienter und vorhersagbarer 
+    \item Ein Beispiel für ein strukturiertes Routing-Verfahren ist DHT
+    \item Suche kann in logarithmischer Zeit (O(log N)) durchgeführt werden
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overlay}
+  \framesubtitle{P2P - Un-Strukturierte Netzwerke}
+  \begin{itemize}
+    \item Keine Struktur
+    \item Verwendung auf Basis von Heuristiken und Zufall
+    \item Routing kaum effizient zu gestalten 
+    \item Typisch ist hohe Netzwerklast
+    \item Flooding- oder Random-Walk-Verfahren für die Suche
+    \item Schädliche Teilnehmer ein besonderes Problem
+  \end{itemize}
+\end{frame}

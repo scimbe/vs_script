@@ -1,0 +1,35 @@
+@startuml
+package "Client" {
+    class Client
+    interface ServiceInterface {
+        +service1(): void
+        +service2(): void
+    }
+    Client -> ServiceInterface
+}
+
+package "ServiceLocator" {
+    class ServiceLocator
+    class ServiceRegistry
+    interface LocatorInterface {
+        +getService(name: String): ServiceInterface
+    }
+    ServiceLocator -up-> LocatorInterface
+    ServiceRegistry -up-> LocatorInterface
+    Client -> LocatorInterface
+}
+
+package "ServiceProviders" {
+    class ServiceProvider1 {
+        +service1(): void
+    }
+    class ServiceProvider2 {
+        +service2(): void
+    }
+    ServiceProvider1 .up.|> ServiceInterface
+    ServiceProvider2 .up.|> ServiceInterface
+    ServiceLocator -> ServiceProvider1
+    ServiceLocator -> ServiceProvider2
+}
+
+@enduml

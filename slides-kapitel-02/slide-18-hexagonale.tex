@@ -1,0 +1,35 @@
+%\section{Einleitung}
+\subsection{Hexagonal Onion Architektur}
+\begin{frame}
+  \frametitle{Hexagonal Onion Architektur}
+  \framesubtitle{Idee}
+  \begin{itemize}
+    \item Kombination aus zwei bekannten Architekturmustern: Hexagonale Architektur und Zwiebelarchitektur
+    \item Die Kernlogik des Systems ist unabhängig von externen Einflüssen 
+    \item Ports und Adaptern dienen als Schnittstelle zwischen der Kernlogik und externen Anliegen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hexagonal Onion Architecture}
+  \framesubtitle{Typische Schichten}
+  \begin{itemize}
+    \item Domain
+    \item Application 
+    \item Ports
+    \item Adapters
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hexagonal Onion Architecture}
+  \framesubtitle{Beispiel mit Microservices}
+  \begin{itemize}
+    \item Domain: Verwalten von Produkten und Dienstleister
+    \item Application: Prozesse für Kauf, Verkauf, Retoure, Wartung, etc 
+    \item Microservice: Online Bestellungs-Service mit Abhängigkeit Bezahlservice
+    \item Microservice: Online Produkt-Service
+    \item Microservice: Online Zahlungs-Service
+    \item Microservice: Online Versand-Service 
+  \end{itemize}
+\end{frame}

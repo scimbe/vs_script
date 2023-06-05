@@ -1,0 +1,27 @@
+@startuml
+
+
+class Lampe << Model >> << Observable >>{
+  +data: Object
+  +addObserver(Observer)
+  +removeObserver(Observer)
+  +notifyObservers()
+}
+
+class KundenApp << View >> << Observer >>{
+  +update()
+}
+
+
+interface Observer {
+  +update()
+}
+
+KundenApp -up-|> Observer
+
+
+
+Lampe "1" -right-> "*" Observer : notify
+Observer <|.. KundenApp
+
+@enduml

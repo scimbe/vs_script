@@ -1,0 +1,196 @@
+%\section{Einleitung}
+\subsection{Koordination}
+\begin{frame}
+  \frametitle{Koordination}
+  \framesubtitle{Algorithmen}
+  \begin{itemize}
+    \item Einzelne Komponenten agieren unabhängig
+    \item Dennoch gemeinsames Ziele 
+    \item Verschiedene Ansätze und Techniken
+  \end{itemize}
+\end{frame}
+
+\subsection{Waves}
+\begin{frame}
+  \frametitle{Koordination}
+  \framesubtitle{Waves}
+  \begin{itemize}
+    \item Klasse von Algorithmen in der Graphentheorie
+    \item Ziel ist Verteilung von Informationen
+    \item Es wird nicht nur zur Zustandsspeicherung genutzt, sondern auch es kann Aktionen triggern, oder Informationen an die Nachricht anhängen
+    \item Exisitieren viele Varianten
+    \begin{itemize}
+      \item Wellen gleichzeitig
+      \item Besondere Ausbreitung
+      \item Spezielle Techniken der Optimierung
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Waves}
+  \framesubtitle{Grundsätzlicher Ablauf}
+  \begin{itemize}
+     \item Ein Startknoten sendet eine Welle an alle seine Nachbarn.
+     \item Jeder Knoten, der die Welle erhält, führt eine bestimmte Aktion aus (zum Beispiel aktualisiert er einen Zähler oder speichert eine Information) und sendet die Welle an alle seine Nachbarn, die die Welle noch nicht erhalten haben.
+     \item Dieser Prozess wiederholt sich, bis alle Knoten im Graphen die Welle erhalten und verarbeitet haben.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Waves}
+  \framesubtitle{Anwendung}
+  \begin{itemize}
+     \item Routing
+     \item Synchronisation
+     \item Identifikation von Ressourcen
+     \item ...
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Waves}
+  \framesubtitle{Spezielle Klassen}
+  \begin{itemize}
+     \item Traversal
+     \item Tree
+     \item Echo 
+     \item ...
+  \end{itemize}
+\end{frame}
+
+\subsection{Snapshot}
+\begin{frame}
+  \frametitle{Koordniation}
+  \framesubtitle{Snapshot}
+  \begin{itemize}
+    \item Erfassung eines globalen Zustands
+    \item Ziel konsistenter Zustand
+    \item Ein Schnappschuss erstellen und koordinieren
+    \item Verschiedene Ansätze, beispielhaft
+     \begin{itemize}
+      \item Chandy-Lamport-Algorithmus
+      \item Lai-Yang-Algorithmus
+      \item ...
+     \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Snapshot}
+  \framesubtitle{Chandy-Lamport-Algorithmus}
+  \begin{itemize}
+    \item Initiator speichert Zustand und sendet Marker-Nachrichten an direkte Kommunikationspartner
+    \item Knoten erhält Marker
+      \begin{itemize}
+      \item Neuer Marker: Speichert Zustand und sendet Marker aus, speichert alle Nachrichten von jedem Kanal, außer von dem initiierenden
+      \item Bekannter Marker: stoppt Aufzeichnung von Nachrichten von diesem Kanal
+     \end{itemize}
+    \item Schnappschuss besteht aus dem gespeicherten Zustand jedes Prozesses und den gespeicherten Nachrichten
+    \item Der Zustand kann eingesammelt werden und die Zustände entsprechen der Happens-before Relation
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Snapshot}
+  \framesubtitle{Lai-Yang-Algorithmus}
+  \begin{itemize}
+    \item Farbiger Algorithmus 
+    \item Prozesse und Nachrichten sind Rot oder Weiß
+      \begin{itemize}
+      \item Bei Initialisierung alle weiß
+      \item Bei Start kann beliebiger Knoten beginnen und Farbe auf Rot setzen (Speichert Zustand und sendet rote Nachrichten)
+      \item Bei roter Nachricht, Zustandsänderung auf Rot, Speicher Zustand und sendet rote Nachrichten
+      \item Terminiert, wenn alle Knoten rot sind und keine weißen Nachrichten mehr im System.
+     \end{itemize}
+     \item Keine Synchronisation des Startpunktes notwendig
+     \item Hoher Ressourcenverbrauch für das Tracking
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Snapshot}
+  \framesubtitle{Einsatz}
+  \begin{itemize}
+    \item Deadlock-Erkennung
+    \item Eventuelle Konsistenz
+    \item Monitoring und Debugging
+    \item Simulation von verteilten Systemen
+    \item Konsistenz in verteilten Datenbanken
+    \item Globales Checkpointing
+    \item ...
+  \end{itemize}
+\end{frame}
+
+\subsection{Checkpoint}
+\begin{frame}
+  \frametitle{Koordniation}
+  \framesubtitle{Checkpointing}
+  \begin{itemize}
+    \item Erfassung eines globalen Zustands 
+    \item UND das System zu einem konsistenten Zustand zurückzusetzen
+    \item Möglicher Einsatz bei Fehlern im System
+    \item Verschiedene Ansätze, beispielhaft
+     \begin{itemize}
+      \item Peterson-Kearns Rollback Recovery-Algorithmus
+     \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Checkpoint}
+  \framesubtitle{Peterson-Kearns Rollback Recovery-Algorithmus}
+  \begin{itemize}
+    \item Jeder Prozess im System führt in regelmäßigen Abständen ein lokales Checkpointing durch
+    \item Zusätzlich zum Checkpointing protokolliert jeder Prozess alle gesendeten und empfangenen Nachrichten
+    \item Bei Fehler wird Prozess und abhängige Prozesse zurückgesetzt
+    \item Nach dem Rollback werden alle Nachrichten, die nach dem letzten Checkpoint erneut gesendet
+    \item Fortsetzung 
+  \end{itemize}
+\end{frame}
+
+\subsection{Deadlock Detection}
+\begin{frame}
+  \frametitle{Koordniation}
+  \framesubtitle{Deadlock Detection}
+  \begin{itemize}
+    \item Deadlock: Zwei oder mehr Prozesse warten unbegrenzt
+    \item Situationen zu identifizieren 
+    \item und gegebenenfalls zu beheben
+    \item Idee: Ressourcenzuteilungsgraphen des Systems überprüfen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Deadlock Detection}
+  \framesubtitle{Ressourcenzuteilungsgraphen}
+  \begin{itemize}
+    \item Graph besteht aus Knoten, die Prozesse und Ressourcen darstellen
+    \item Kanten stellen die Beziehungen zwischen diesen Elementen da
+    \begin{itemize}
+      \item \enquote{Prozess P besitzt Ressource R}
+      \item \enquote{Prozess P wartet auf Ressource R}
+    \end{itemize}  
+    \item Ein Deadlock tritt auf, wenn es in diesem Graphen einen Zyklus gibt
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Deadlock Detection}
+  \framesubtitle{Grundsätzliche Verfahren}
+  \begin{itemize}
+    \item Wait-for-Graphs-Algorithmus
+    \begin{itemize}
+      \item Setzt voraus, dass genaue und aktuelle Informationen über alle Prozesse und Ressourcen im System verfügbar sind
+      \item Nicht fehlertolerant
+    \end{itemize}  
+    \item Konsensbasierte Algorithmen 
+    \begin{itemize}
+      \item Unvollständige oder verzögerte Informationen über das System
+      \item Fehlertolerant 
+    \end{itemize}  
+  \end{itemize}
+\end{frame}

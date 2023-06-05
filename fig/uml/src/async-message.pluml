@@ -1,0 +1,6 @@
+@startuml
+participant Sender
+participant Empfänger
+Sender -> Empfänger : Nachricht senden
+Empfänger -> Sender: Nachricht speichern
+@enduml

@@ -1,0 +1,128 @@
+\documentclass[german,11pt]{beamer}
+% ------------------------------------------------------------------------------
+% Packages
+\usepackage[german,english,french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ragged2e}
+\usepackage[normalem]{ulem}
+
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor} 
+\usepackage{plantuml}
+% \usepackage{enumitem} \setitemize{leftmargin=*}   // Keine Aufzählung
+\usepackage{pgfplots}
+
+\usepackage{csquotes}
+
+\pgfplotsset{compat=1.18}
+
+\definecolor{dkgreen} {rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+% ------------------------------------------------------------------------------
+% Parameters
+\mode<presentation>{\usetheme{Luebeck}}
+\setbeamertemplate{itemize items}[triangle]
+\setbeamercovered{transparent}
+\usecolortheme{dove}
+\usefonttheme{serif}
+\addtobeamertemplate{block begin}{}{\justifying}
+% ToC
+\AtBeginSection[] {
+  \begin{frame}{Inhalt}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+% Headline
+\makeatletter
+\setbeamertemplate{headline}{%
+  \leavevmode%
+  \@tempdimb=2.4375ex%
+  \ifnum\beamer@subsectionmax<\beamer@sectionmax%
+    \multiply\@tempdimb by\beamer@sectionmax%
+  \else%
+    \multiply\@tempdimb by\beamer@subsectionmax%
+  \fi%
+  \ifdim\@tempdimb>0pt%
+    \advance\@tempdimb by 1.825ex%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=\@tempdimb]{section in head/foot}%
+      \vbox to\@tempdimb{\hfill\insertsectionnavigation{.3\paperwidth}\vfil}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.3\paperwidth,ht=\@tempdimb]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\insertsubsectionnavigation{.5\paperwidth}\vfil}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.2\paperwidth,ht=\@tempdimb]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\hfill\includegraphics[height=1cm]{fig/graphics/logo.jpg}\vfil}
+    \end{beamercolorbox}%    
+  \fi%
+}
+\makeatother
+% Footline
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortdate \hfill \insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle \hfill \insertframenumber\,/\,\inserttotalframenumber
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+\addto\captionsenglish{% Replace "english" with the language you use
+  \renewcommand{\contentsname}%
+    {Whatever}%
+}
+
+% ------------------------------------------------------------------------------
+% Infos
+\title[VS]{Verteilte Systeme}
+%\subtitle[Short subtitle]{Subtitle}
+\author[BCK]{Prof. Dr. Martin Becke}
+\date[0.9]{Version 0.9}
+\institute[CaDS]{CaDS - HAW Hamburg}
+%\logo{\includegraphics[height=1cm]{fig/graphics/logo.jpg}}
+% ------------------------------------------------------------------------------
+
+% Document
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Titlepage
+\begin{frame}
+  \titlepage{}
+\end{frame}
+% ------------------------------------------------------------------------------
+% ToC
+%\begin{frame}{Contents}
+%  \tableofcontents
+%\end{frame}
+% ------------------------------------------------------------------------------
+
+\include{slides-kapitel-05/slide-04-koordniation}
+
+% ------------------------------------------------------------------------------
+% Fin
+\end{document}

@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+
+package "Presentation Layer" {
+  class PresentationLayer {
+    +displayForm()
+    +handleInput()
+    +showResults()
+  }
+}
+
+package "Business Logic Layer" {
+  class BusinessLogicLayer {
+    +validateUser()
+    +performOperation()
+    +generateReport()
+  }
+}
+
+package "Data Access Layer" {
+  class DataAccessLayer {
+    +saveData()
+    +getData()
+  }
+}
+
+PresentationLayer --> BusinessLogicLayer
+BusinessLogicLayer --> DataAccessLayer
+@enduml
+

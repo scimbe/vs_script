@@ -1,0 +1,57 @@
+@startuml
+title OSI-Referenzmodell
+
+class PhysicalLayer {
+  - dataLink: DataLinkLayer
+  + sendData(data: byte[]): void
+  + receiveData(data: byte[]): void
+}
+
+class DataLinkLayer {
+  - physical: PhysicalLayer
+  - network: NetworkLayer
+  + sendData(data: byte[]): void
+  + receiveData(data: byte[]): void
+}
+
+class NetworkLayer {
+  - dataLink: DataLinkLayer
+  - transport: TransportLayer
+  + sendData(data: byte[]): void
+  + receiveData(data: byte[]): void
+}
+
+class TransportLayer {
+  - network: NetworkLayer
+  - session: SessionLayer
+  + sendData(data: byte[]): void
+  + receiveData(data: byte[]): void
+}
+
+class SessionLayer {
+  - transport: TransportLayer
+  - presentation: PresentationLayer
+  + sendData(data: byte[]): void
+  + receiveData(data: byte[]): void
+}
+
+class PresentationLayer {
+  - session: SessionLayer
+  - application: ApplicationLayer
+  + sendData(data: byte[]): void
+  + receiveData(data: byte[]): void
+}
+
+class ApplicationLayer {
+  - presentation: PresentationLayer
+  + sendData(data: byte[]): void
+  + receiveData(data: byte[]): void
+}
+
+PhysicalLayer --> DataLinkLayer
+DataLinkLayer --> NetworkLayer
+NetworkLayer --> TransportLayer
+TransportLayer --> SessionLayer
+SessionLayer --> PresentationLayer
+PresentationLayer --> ApplicationLayer
+@enduml

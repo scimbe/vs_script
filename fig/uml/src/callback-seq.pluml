@@ -1,0 +1,18 @@
+@startuml
+participant Main
+participant Task
+participant Callback
+
+Main -> Task : new Task(callback)
+Main -> Task : execute()
+activate Task
+
+Task -> Callback : onEvent(message)
+activate Callback
+Callback --> Task : return
+deactivate Callback
+
+Task --> Main : return
+deactivate Task
+
+@enduml

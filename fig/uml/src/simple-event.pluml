@@ -1,0 +1,5 @@
+@startuml
+[*] -> Zustand1 : Event ausgelöst
+Zustand1 -> Zustand2 : Aktion ausführen
+Zustand2 -> [*] : Event beendet
+@enduml

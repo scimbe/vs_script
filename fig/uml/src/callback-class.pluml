@@ -1,0 +1,19 @@
+@startuml
+
+interface Callback {
+    + onEvent(message: String)
+}
+
+class Task {
+    + execute()
+}
+
+class Main {
+    + main(args: String[])
+}
+
+Task --> Callback : uses > onEvent
+Main --> Task : creates
+Main --> Callback : implements
+
+@enduml

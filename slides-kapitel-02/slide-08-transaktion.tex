@@ -1,0 +1,106 @@
+%\section{Einleitung}
+\subsection{Transaktion}
+\begin{frame}
+  \frametitle{Transaktion}
+  \framesubtitle{Idee}
+  \begin{itemize}
+    \item Eine Sequenz von Operationen
+    \item Wichtig für Konsistenz und Integrität
+    \item ACID-Eigenschaften 
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Transaktion}
+  \framesubtitle{Beispiele}
+  \begin{itemize}
+    \item Bankwesen
+    \item E-Commerce
+    \item Verteilte Datenbanken
+    \item Roboter/Urlaub (Diskussion)
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Transaktion}
+  \framesubtitle{Transaktionsmanager}
+  \begin{itemize}
+    \item Verschachtelte Transaktionen 
+    \item Größere Transaktionen separat abschlie  ßen
+    \item Koordiniert zurückzurollen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transaktionsmanager}
+  \framesubtitle{Aufgaben}
+  \begin{itemize}
+    \item Koordination
+    \item Protokollierung und Wiederherstellung
+    \item Isolierung und Synchronisation
+    \item Commit und Rollback
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transaktion}
+  \framesubtitle{Message Passing}
+  \begin{itemize}
+    \item Kommunikationsparadigma
+    \item Grundlegendes Konzept
+    \item Nutzt Nachrichten, die Daten oder Anweisungen enthalten
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Message Passing}
+  \framesubtitle{Eigenschaften}
+  \begin{itemize}
+    \item Asynchrone Kommunikation
+    \item Lose Kopplung
+    \item Skalierbarkeit
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Message Passing}
+  \framesubtitle{Beispiele}
+  \begin{itemize}
+    \item Message Queues
+    \item Message Passing Interface (MPI)
+    \item Publish-Subscribe-Systeme
+    \item MOM
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Message Passing}
+  \framesubtitle{Actor-Modell}
+  \begin{itemize}
+    \item Setzt auf das Konzept von Message Passing auf
+    \item Ist ein Konzept für das Design von verteilten Systemen
+    \item Actoren sind grundlegende Recheneinheiten
+    \item Isolation
+    \item Nachrichtenbasiert
+    \item Lokalitätstransparent
+    \item Fehlertolerant
+    \item Beispiel CAF (HAW Hamburg)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Idempotent}
+  \framesubtitle{Eigenschaft}
+  \begin{itemize}
+    \item Operationen, die wiederholt ausgeführt werden können, ohne dass sich das Ergebnis nach der ersten Anwendung ändert
+    \item Beispiel HTTP Put
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{DHT}
+  \framesubtitle{Eigenschaft}
+  \begin{itemize}
+    \item Schlüssel-Wert-Speichersystem
+    \item Bedeutung im Peer-to-Peer-Netzwerk
+    \item Wichtig ist der Schlüsselraum
+  \end{itemize}
+\end{frame}

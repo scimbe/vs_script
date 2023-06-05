@@ -1,0 +1,21 @@
+@startuml
+
+class Lampe << Model >> {
+  +data: Object
+}
+
+class KundenApp << View >> {
+  +update()
+}
+
+class Pi << Controller >> {
+  +handleRequest()
+}
+
+
+Lampe <-l- KundenApp : data
+Lampe ..|> KundenApp : notify
+Pi -> Lampe : data
+Pi <|.. KundenApp :   notify
+Pi -> KundenApp : data
+@enduml

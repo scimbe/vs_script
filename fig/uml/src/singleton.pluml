@@ -1,0 +1,10 @@
+@startuml
+class Singleton {
+  - static instance: Singleton
+  - Singleton()
+  + static getInstance(): Singleton
+}
+
+note right of Singleton: Private constructor\nprevents instantiation\nfrom other classes
+note top of Singleton: Only one instance\nis created and\naccessible via getInstance()
+@enduml

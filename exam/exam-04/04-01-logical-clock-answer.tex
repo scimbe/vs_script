@@ -1,0 +1,47 @@
+\documentclass{article}
+
+\begin{document}
+
+\title{Lösung: Logische Uhren und Permutationen}
+\maketitle
+
+\section*{Rekonstruktion der logischen Uhren}
+
+Basierend auf der gegebenen Logdatei können die logischen Uhren der einzelnen Server wie folgt rekonstruiert werden:
+
+\begin{itemize}
+  \item Server A: 8 (hat insgesamt 5 Nachrichten gesendet und 4 Nachrichten empfangen)
+  \item Server B: 7 (hat insgesamt 4 Nachrichten gesendet und 3 Nachrichten empfangen)
+  \item Server C: 5 (hat insgesamt 3 Nachrichten gesendet und 4 Nachrichten empfangen)
+\end{itemize}
+
+\section*{Alternative Permutation der Reihenfolge der Eintragungen in der Logdatei}
+
+Eine alternative, gültige Permutation der Reihenfolge der Eintragungen in der Logdatei könnte folgendermaßen aussehen:
+
+\begin{enumerate}
+  \item A sendet an B, Senden: [A:1], Empfangen: [B:2]
+  \item B sendet an A, Senden: [B:3], Empfangen: [A:4]
+  \item A sendet an B, Senden: [A:6], Empfangen: [B:6]
+  \item B sendet an A, Senden: [B:7], Empfangen: [A:7]
+  \item A sendet an C, Senden: [A:2], Empfangen: [C:1]
+  \item C sendet an A, Senden: [C:2], Empfangen: [A:5]
+  \item C sendet an A, Senden: [C:5], Empfangen: [A:8]
+  \item C sendet an B, Senden: [C:3], Empfangen: [B:4]
+  \item B sendet an C, Senden: [B:5], Empfangen: [C:4]
+\end{enumerate}
+
+\section*{Begründung der Gültigkeit der alternativen Permutation}
+
+Diese alternative Permutation ist gültig, da sie die folgenden Eigenschaften der logischen Uhren berücksichtigt:
+
+\begin{itemize}
+  \item Die logische Uhr eines Servers erhöht sich jedes Mal, wenn dieser Server eine Aktion ausführt (eine Nachricht sendet oder empfängt).
+  \item Eine Nachricht, die von einem Server an einen anderen Server gesendet wird, trägt den Zeitstempel der logischen Uhr des Senders zum Zeitpunkt des Sendens.
+  \item Eine Nachricht, die von einem
+Server empfangen wird, trägt den Zeitstempel der logischen Uhr des Empfängers zum Zeitpunkt des Empfangens.
+\end{itemize}
+
+In der alternativen Permutation erhöht sich die logische Uhr jedes Servers korrekt für jede Aktion, die der Server ausführt. Darüber hinaus stimmen die Zeitstempel in den Nachrichten, die gesendet und empfangen werden, mit den Zeitstempeln in der Logdatei überein. Daher ist diese alternative Permutation gültig.
+
+\end{document}

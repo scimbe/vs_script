@@ -1,0 +1,62 @@
+@startuml
+participant Node1
+participant Node2
+participant Node3
+participant Node4
+
+Node1 -> Node2: a [1,0,0,0]
+note right of Node1: Node1's clock: [1,0,0,0]
+Node1 -> Node3: b [2,0,0,0]
+note right of Node1: Node1's clock: [2,0,0,0]
+Node1 -> Node4: c [3,0,0,0]
+note right of Node1: Node1's clock: [3,0,0,0]
+Node2 -> Node1: d [3,1,0,0]
+note left of Node2: Node2's clock: [0,1,0,0]
+Node3 -> Node1: e [3,1,1,0]
+note left of Node3: Node3's clock: [0,0,1,0]
+Node4 -> Node1: f [4,1,1,1]
+note left of Node4: Node4's clock: [0,0,0,1]
+
+Node1 -> Node2: g [5,1,1,1]
+note right of Node1: Node1's clock: [5,1,1,1]
+Node1 -> Node3: h [6,1,1,1]
+note right of Node1: Node1's clock: [6,1,1,1]
+Node1 -> Node4: i [7,1,1,1]
+note right of Node1: Node1's clock: [7,1,1,1]
+
+
+Node2 -> Node1: j [7,2,1,1]
+note left of Node2: Node2's clock: [0,2,0,0]
+Node3 -> Node2: k [7,3,1,1]
+note left of Node3: Node3's clock: [0,0,2,0]
+Node4 -> Node3: l [7,3,2,1]
+note left of Node4: Node4's clock: [0,0,0,2]
+Node1 -> Node4: m [8,3,2,1]
+note right of Node1: Node1's clock: [8,1,1,1]
+Node2 -> Node3: n [8,4,2,1]
+note left of Node2: Node2's clock: [0,3,0,0]
+Node3 -> Node4: p [8,4,3,1]
+note left of Node3: Node3's clock: [0,0,3,0]
+Node4 -> Node1: q [9,4,3,2]
+note left of Node4: Node4's clock: [0,0,0,3]
+Node1 -> Node2: r [10,4,3,2]
+note right of Node1: Node1's clock: [10,1,1,1]
+Node2 -> Node4: t [10,5,3,2]
+note left of Node2: Node2's clock: [0,4,0,0]
+
+
+Node4 -> Node3: s [10,5,4,2]
+note right of Node4: Node4's clock: [0,0,0,4]
+Node3 -> Node2: u [10,6,4,2]
+note left of Node3: Node3's clock: [0,0,4,0]
+Node2 -> Node1: v [11,6,4,2]
+note left of Node2: Node2's clock: [0,5,0,0]
+Node1 -> Node4: w [12,6,4,2]
+note right of Node1: Node1's clock: [12,1,1,1]
+Node4 -> Node3: x [12,6,5,2]
+note right of Node4: Node4's clock: [0,0,0,5]
+Node3 -> Node2: y [12,7,5,2]
+note left of Node3: Node3's clock: [0,0,5,0]
+Node2 -> Node1: z [13,7,5,2]
+note left of Node2: Node2's clock: [0,6,0,0]
+@enduml

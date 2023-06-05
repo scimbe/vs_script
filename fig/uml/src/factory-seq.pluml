@@ -1,0 +1,15 @@
+@startuml
+participant Client
+participant ProductFactory
+participant Product
+
+Client -> ProductFactory: createProduct("A")
+ProductFactory -> ConcreteProductA: new()
+ProductFactory -> Client: return productA
+Client -> Product: operation()
+
+Client -> ProductFactory: createProduct("B")
+ProductFactory -> ConcreteProductB: new()
+ProductFactory -> Client: return productB
+Client -> Product: operation()
+@enduml

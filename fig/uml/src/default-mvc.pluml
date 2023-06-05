@@ -1,0 +1,21 @@
+@startuml
+
+class Model {
+  +data: Object
+}
+
+class View {
+  +update()
+}
+
+class Controller {
+  +handleRequest()
+}
+
+
+Model <-l- View : data
+Model ..|> View : notify
+Controller -> Model : data
+Controller <|.. View :   notify
+Controller -> View : data
+@enduml

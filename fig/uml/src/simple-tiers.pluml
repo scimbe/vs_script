@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+
+package "Client Tier" {
+  class Client {
+    +displayForm()
+    +handleInput()
+    +showResults()
+  }
+}
+
+package "Application Tier" {
+  class ApplicationServer {
+    +validateUser()
+    +performOperation()
+    +generateReport()
+  }
+}
+
+package "Database Tier" {
+  class DatabaseServer {
+    +saveData()
+    +getData()
+  }
+}
+
+Client <-> ApplicationServer : Req
+ApplicationServer <-> DatabaseServer : Q 
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+actor User
+participant Pi
+participant Lampe
+
+
+User -> Pi : Turn on
+Pi -> Lampe : addObserver(Observer)
+Lampe -> Lampe : Register Observer
+Lampe --> Pi : Acknowledge
+Pi --> User : Confirmation
+
+@enduml

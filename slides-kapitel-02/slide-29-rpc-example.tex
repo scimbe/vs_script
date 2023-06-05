@@ -1,0 +1,223 @@
+%\section{Einleitung}
+\subsection{Remote Procedure Call}
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Idee}
+  \begin{itemize}
+    \item Ein Kommunikationsmodell
+    \item Prozeduraufrufe zwischen Prozessen auf unterschiedlichen Systemen oder Maschinen
+    \item Entfernte Funktionen oder Methoden aufrufen wie lokale
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Ablauf}
+  \begin{enumerate} 
+  \item Der Client ruft die entfernte Prozedur über den Client Stub auf, als wäre es eine lokale Funktion.
+  \item Der Client Stub wandelt die Parameter der Anfrage in ein standardisiertes Format um (Marshalling) und sendet die Anfrage über das Kommunikationsprotokoll an den Server.
+  \item Der Server Stub empfängt die Anfrage, demarshalled die Parameter und ruft die entsprechende Funktion auf dem Server auf.
+  \item Die Funktion wird auf dem Server ausgeführt, und das Ergebnis wird an den Server Stub zurückgegeben.
+  \item Der Server Stub marshallt das Ergebnis und sendet es über das Kommunikationsprotokoll an den Client Stub zurück.
+  \item Der Client Stub empfängt die Antwort, demarshalled das Ergebnis und gibt es an den Client zurück.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Naiver Entwurf}
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.55\textwidth]{fig/uml/rpc-simple.png}
+    \caption{Erster Ansatz einer RPC Architektur}
+    \label{fig:simple-rpc}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Naiver Code I}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={RPC Interface},captionpos=b,label={lst:rpc-interface}]
+  public interface Lamp {
+      void controlLamp(Boolean b);
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Naiver Code II}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={RPC Remote Implementation},captionpos=b,label={lst:rpc-remote}]
+  public class LampRemote implements Lamp {
+      @Override
+      public void controlLamp(boolean b){
+        List<Boolean> list = new ArrayList<Boolean>(); 
+          Collections.addAll(list, b);
+          Middleware.invoke("controlLamp", list);
+      }
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Naiver Code III}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={Application Stub mit Factory Pattern},captionpos=b,label={lst:rpc-factory}]
+  public class LampFactory {
+      public static Lamp createLamp() {
+          // Hier koennte die Middleware-Verbindung hergestellt werden.
+          // In diesem Beispiel verwenden wir eine einfache lokale Implementierung.
+          return new LampRemote();
+      }
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Naiver Code IV}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={Controller ruft Middleware},captionpos=b,label={lst:rpc-controller}]
+  public class LampController {
+    public static void main(String[] args) {
+          // Erstelle eine Lampe ueber die Factory-Methode (Application-Stub)
+          Lamp lamp = LampFactory.createLamp();
+
+          // Verwende die Lampe in der Anwendung
+          lamp.controlLamp(true);
+      }
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Marshalling Process - Beispiel}
+  \begin{itemize} 
+  \item Konvertierung Parameter (z.B. String und Integer) in ein plattformunabhängiges Format, z. B. Byte-Arrays.
+  \item Hinzufügen von Metadaten, wie Typinformationen, zur Identifizierung der Parameter auf der Empfängerseite.
+  \item Zusammenpacken der Byte-Arrays und Metadaten in einer Nachricht, die über das Netzwerk gesendet werden kann
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Copy in, Copy out}
+  \begin{itemize} 
+  \item Semantik zur Übergabe von Parametern 
+  \item Kopiert Parameter in eine Nachricht (Ohne Kenntnis der Daten)
+  \item Benötigt ein generisches Regelwerk für Datentypen
+  \item Alternative: Call by Reference - Direkter Speicherzugriff fremder Systeme
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Copy in, Copy out Optimierung}
+  \begin{itemize} 
+  \item Datenkompression
+  \item Effiziente Serialisierungsformate (Beispiel MessagePack)
+  \item Selektive Übertragung
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{ Interface Definition Language (IDL)}
+  \begin{itemize} 
+  \item IDL beschreibt die Signatur der entfernten Funktionen
+  \item Generierung des Stub- und Skeleton-Code aus der IDL-Definition
+  \item Kann mit Code-Generator verbunden werden.
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{IDL Example}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={IDL Example},captionpos=b,label={lst:idl-example}]
+  interface MathService {
+    int add(in int a, in int b);
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{RPC IDL Service Impl}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={RPC IDL Service Impl},captionpos=b,label={lst:idl-impl}]
+  class MathServiceImpl(MathService):
+      def add(self, a, b):
+          return a + b
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{RPC IDL Service Impl}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={RPC IDL Service Impl},captionpos=b,label={lst:idl-impl-service}]
+  math math_service_client = MathServiceStub(server_address)
+  result = math_service_client.add(5, 7)
+  print("Result of 5 + 7:", result)
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Framework Beispiele}
+  \begin{itemize} 
+  \item XML-RPC \url{http://xmlrpc.com/}
+  \item JSON-RPC \url{https://www.jsonrpc.org/}
+  \item gRPC \url{https://grpc.io/}
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Beispiele XML-RPC}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={XML-RPC in Python},captionpos=b,label={lst:xmp-rpc-python}]
+  from xmlrpc.server import SimpleXMLRPCServer
+
+  def add(a, b):
+      return a + b
+
+  server = SimpleXMLRPCServer(("localhost", 8080))
+  server.register_function(add, "add")
+  server.serve_forever()
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Remote Procedure Call}
+  \framesubtitle{Server-Stub, Skeleton und Server-Proxy}
+  \begin{itemize} 
+  \item Skeleton ist die reine Funktion
+  \item Server-Stub ist das Skeleton aus der IDL abgleitet
+  \item Server-Proxy übernimmt weitere Aufgaben wie diskutiert
+  \end{itemize} 
+\end{frame}
+\subsection{Remote Method Invocation}
+\begin{frame}
+  \frametitle{Remote Method Invocation (RMI) }
+  \framesubtitle{Idee}
+  \begin{itemize} 
+  \item Speziell für eine Objekt-orientierte Programmiersprache 
+  \item Properitäte Protokolle
+  \item In Java ist RMI eingebettet (Beispiel Script)
+  \end{itemize} 
+\end{frame}

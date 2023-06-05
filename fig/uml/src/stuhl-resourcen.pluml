@@ -1,0 +1,16 @@
+@startuml
+entity Sitz {
+  + SitzID : int
+}
+
+entity Bein {
+  + BeinID : int
+}
+
+entity Lehne {
+  + LehneID : int
+}
+
+Bein }|..|| Sitz
+Lehne ||..|| Sitz
+@enduml

@@ -1,0 +1,206 @@
+section\section{Koordination: Konsens, Synchronisation und Fehler}
+\subsection{Koordination}
+\begin{frame}
+  \frametitle{Koordination}
+  \framesubtitle{Prozess mit verschiedenen Zielen}
+  \begin{itemize}
+    \item Kooperation
+    \item Informationsaustausch
+    \item Konsistentes Verhalten 
+    \item Kohärentes Verhalten
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Koordination}
+  \framesubtitle{Anforderungen}
+  \begin{itemize}
+    \item Einigung (Konsensbildung)
+    \item Synchronisation (Globale Ordnung)
+    \item Fehlerhandling und Recovery
+  \end{itemize}
+\end{frame}
+
+\subsection{Konsens}
+\begin{frame}
+  \frametitle{Konsens}
+  \framesubtitle{Idee}
+  \begin{itemize}
+    \item Gleiche Sicht auf die Daten
+    \item Selbst Licht zu langsam (Rechnung im Script)
+    \item Nicht endgültig lösbar
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{CAP Theorem}
+  \framesubtitle{Idee}
+  \begin{itemize}
+    \item Konsistenz (C)
+    \item Verfügbarkeit (A)
+    \item Partitionstoleranz (P)
+    \item Herausforderung: C vs A
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsensmodelle}
+  \framesubtitle{Ideen Umsetzung}
+  \begin{itemize}
+    \item Tunable Consistency
+    \item Quorum-Systeme
+    \item CRDTs 
+    \item Hybride Ansätze
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsensmodelle}
+  \framesubtitle{Ideen Definition}
+  \begin{itemize}
+    \item Keine feste Definition, eher eine Orientierung
+    \item Datenzentrische Konsistenzmodelle
+    \item Client-zentrische Konsistenzmodelle
+    \item Alternative Konsistenzmodelle
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Konsensmodelle}
+  \framesubtitle{Datenzentrische Konsistenzmodelle}
+  \begin{itemize}
+    \item Strong Consistency (Traum)
+    \item Linearizability Consistency (Realisitisch?)
+    \item Sequential Consistency 
+    \item Causal Consistency
+    \item Eventual Consistency
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Datenzentrische Konsistenzmodelle}
+  \framesubtitle{Atomare Konsistenz}
+  \begin{itemize}
+    \item Gleich Linearizability Consistency, manchmal als Strong Consistency interpretiert
+    \item Protokolle:  Paxos, Raft oder Zab
+    \item Grundidee: Definition eines Zyklus 
+    \item Beispiel der Anwendung ist Finanztransaktionssystemen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Datenzentrische Konsistenzmodelle}
+  \framesubtitle{Sequentielle Konsistenz}
+  \begin{itemize}
+    \item Operationen in der gleichen Reihenfolge 
+    \item Synchronisation der Knoten kann verzögert erfolgen
+    \item Ausgewogene Mischung aus Konsistenz und Leistung  
+    \item Keine Kausalität
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Datenzentrische Konsistenzmodelle}
+  \framesubtitle{Kausale Konsistenz}
+  \begin{itemize}
+    \item Kausalen Beziehungen zwischen Operationen
+    \item Nur kausale Beziehung bei Operationen mit Abhängigkeit
+    \item Beispiel Tweet mit Kommentaren und alternativer Tweet 
+    \item Kausaler Konsistenz basiert in Implementierung gerne auf logische Uhren
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Datenzentrische Konsistenzmodelle}
+  \framesubtitle{Eventual Consistency}
+  \begin{itemize}
+    \item Daten vorübergehend inkonsistent (Nicht als eventuell übersetzen)
+    \item Fokus auf höherer Verfügbarkeit (C)
+    \item Beispielhaft umgesetzt in DynamoDB
+    \item Immer höhere Verbreitung
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Client-zentrische Konsistenzmodelle}
+  \framesubtitle{Monotonic Reads}
+  \begin{itemize}
+    \item Liest niemals ältere Daten, die er zuvor gelesen hat 
+    \item Liest gleiche oder neuere Daten unabhängig seiner Position
+    \item Beispielhaft Zeitstempel oder Versionsnummer bei Read
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Client-zentrische Konsistenzmodelle}
+  \framesubtitle{Monotonic Writes}
+  \begin{itemize}
+    \item Schreibvorgänge in der Reihenfolge des Clients
+    \item Beispielhaft: Zeitstempeln oder Versionsnummern bei Write 
+    \item Beispiel Banktransaktionen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Client-zentrische Konsistenzmodelle}
+  \framesubtitle{Read your Writes}
+  \begin{itemize}
+    \item Benutzer sieht immer seine Änderungen
+    \item Beispielhaft eitstempeln oder Versionsnummern bei Wrtie 
+    \item Beispiel Statusaktualisierungen bei sozialen Netzen
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Client-zentrische Konsistenzmodelle}
+  \framesubtitle{Writes follow Reads}
+  \begin{itemize}
+    \item Kausale Konsistenz und das „Writes follow Reads“-Prinzip sind eng verbunden
+    \item  Schreiboperationen, die auf Leseoperationen basieren, sind in logischer konsistenter Reihenfolge
+    \item Beispiel ist Cassandra 
+    \item Google Docs verwendet das Operational Transformation (OT) Framework 
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Konsistensmodell}
+  \framesubtitle{Alternativen}
+  \begin{itemize}
+    \item Abweichung ACID-Eigenschaften (Atomicity, Consistency, Isolation, Durability)
+    \item BASE (Basically Available, Soft state, Eventually consistent)
+    \item PACELC (Partition-tolerance, Availability, Consistency, Eventual consistency, Latency, and Consistency trade-offs) 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsistensmodell}
+  \framesubtitle{Alternativen}
+  \begin{itemize}
+    \item Continuous Consistency 
+    \begin{itemize}
+      \item CONIT-Modell
+    \end{itemize}
+    \item Fork Consistency
+    \item Multidimensional Consistency
+    \item Adaptable Consistency
+    \item View Consistency
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsistenssichten}
+  \framesubtitle{Write Write Conflicts}
+  \begin{itemize}
+    \item Option 1: Sperren und Transaktionen
+    \item Option 2: Optimistische Nebenläufigkeitskontrolle
+    \item Option 3: Versionskontrolle und Zusammenführungsstrategien
+  \end{itemize}
+\end{frame}

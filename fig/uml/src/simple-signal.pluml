@@ -1,0 +1,4 @@
+@startuml
+participant Sender
+Sender ->] : Signal senden
+@enduml

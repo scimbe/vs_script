@@ -1,0 +1,309 @@
+%\section{Einleitung}
+\subsection{Virtualisierung}
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Motivation}
+  \begin{itemize}
+    \item Isolation und Sicherheit 
+    \item Optimaler Resourcen-Nutzung
+    \item Flexibilität und Skalierbarkeit
+    \item Logische Einheiten (VM)
+    \item Einfach erstellt, gelöscht, migriert oder skaliert
+    \item Schnelles Hinzufügen oder Entfernen von Ressourcen
+    \item Einfache Verwaltung, Wartung und Testbarkeit
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Geschichte}
+  \begin{itemize}
+    \item Wurzel in den frühen Jahren der modernen Informatik (1960)
+    \item Erste IBM Virtualisierungsplattform: CP-40-System
+    \item Time-Sharing und Multi-User-Betriebssysteme
+    \item Einführung von Netzwerken in den 1980 ermöglichte neue Verteilung
+    \item 1990 WWW enabler für heutige Struktur und Kommunikationstechnologien
+    \item Virtualisierung in den 2000er durch VMware und Xen
+    \item Containertechnologien wie Docker in den 2010er
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Fokus}
+  \begin{itemize}
+    \item Hardware-Virtualisierung
+    \item Betriebssystem-Virtualisierung
+    \item Anwendungs-Virtualisierung
+    \item Speicher- und Netzwerkvirtualisierung
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Hardware-Virtualisierung }
+  \begin{itemize}
+    \item Hardware in virtuelle Instanzen aufgeteilt
+    \item Effiziente Nutzung von Ressourcen und die Isolierung
+    \item Verschiedener Systeme und Anwendungen auf der gleichen physischen Hardware
+    \item Nutzt Funktionen der CPU und anderer Komponenten für HW-Unterstützung
+    \item Zentrale Herausforderung Leistung
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Hardware-Virtualisierung Herausforderungen}
+  \begin{itemize}
+    \item Teilung der Resourcen und Isolation
+    \item Management von Input/Output (I/O)-Operationen\\Technologien wie I/O-Virtualisierung und Direct Memory Access (DMA)-Remapping sollen Effekte mindern
+    \item Kompatibilität\\
+    Besonderer Fokus auf Hypervisor
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Hypervisor}
+  \begin{itemize}
+    \item Typ 1-Hypervisoren (auch Bare-Metal-Hypervisoren)\\ 
+    Typ 1-Hypervisoren sind VMware ESXi und Microsoft Hyper-V
+    \item Typ 2-Hypervisoren \\
+    VMware Workstation und Oracle VirtualBox
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Hardware-Virtualisierung Ansätze}
+  \begin{itemize}
+    \item Vollvirtualisierung 
+    \item Paravirtualisierung
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Betriebssystemvirtualisierung}
+  \begin{itemize}
+    \item Logischen Einheiten Container 
+    \item Gleicher Kernel und gleiche Systembibliotheken
+    \item Basis ist gleiche Betriebssystem API
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Betriebssystemvirtualisierung Isolation}
+  \begin{itemize}
+    \item Herausforderung Isolierung der Container
+    \item Trennung nicht so stark wie bei VM
+    \item Ansätze durch AppArmor, SELinux und Seccomp 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Vor- und Nachteile}
+  \begin{itemize}
+    \item V: Leistung
+    \item V: Skalierbarkeit
+    \item V: Kosteneffizienz
+    \item N: Sicherheit
+    \item N: Kompatibilität 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Betriebssystemvirtualisierung Beispieltechnologien}
+  \begin{itemize}
+    \item Kubernetes
+    \item Docker
+    \item OpenStack
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Kubernetes}
+  \begin{itemize}
+    \item Open-Source-Orchestrierungssystem/ Cluster-Management-System
+    \item Automatisierung der Bereitstellung, Skalierung und Verwaltung
+    \item Ursprünglich von Google entwickelt 
+    \item Kubernetes unterstützt z.B. Containerd und CRI-O (nicht  Docker-Daemons, Container Runtime Interface (CRI) unterstützt docker images)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Docker}
+  \begin{itemize}
+    \item Open-Source-Plattform für die Containerisierung
+    \item Der Ursprung vieler Entwicklungen
+    \item Bietet eine leichtgewichtige Virtualisierung
+    \item Docker-Container sind plattformübergreifend
+    \item Der Begriff docker ist mehrdeutig (Docker-Daemon, Docker-CLI, Docker-Image)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Docker Alternativen}
+  \begin{itemize}
+    \item Podman
+    \item Buildah
+    \item LXC (Linux Containers)
+    \item rkt (ausgesprochen "Rocket" - obsolate) 
+    \item containerd
+    \item CRI-O
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{OpenStack}
+  \begin{itemize}
+    \item Open-Source-Cloud-Computing-Plattform, die Infrastruktur als Service (IaaS) bietet
+    \item Eigene Cloud-Infrastruktur mit verschiedenen Komponenten
+    \item Kann in kubernetes eingesetzt werden
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Speichervirtualisierung}
+  \begin{itemize}
+    \item Physische Speicherressourcen in einem logischen Pool 
+    \item Dynamisch und flexibel Nutzern zuweisbar
+    \item Einfachere Verwaltung von Speicherressourcen 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Speichervirtualisierung - SAN}
+  \begin{itemize}
+    \item Storage Area Networks (SANs)
+    \item SAN ist ein dediziertes Hochgeschwindigkeitsnetzwerk
+    \item Einfachere Verwaltung von Speicherressourcen 
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Netzwerkvirtualisierung}
+  \begin{itemize}
+    \item Physische Netzwerkressourcen in logische Einheiten abstrahiert
+    \item Aufbau virtueller Netzwerke
+    \item Beispiel für Netzwerkvirtualisierung ist SDN
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Desktopvirtualisierung}
+  \begin{itemize}
+    \item VDI-Lösungen wie VMware Horizon oder Windows 365
+    \item Verbesserte Verwaltung und Wartung von Desktop-Betriebssystemen
+    \item Desktops zentral verwaltet
+    \item Bisher relativ hohe Kosten
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Virtualisierung als Dienst}
+  \begin{itemize}
+    \item Software as a Service (SaaS)
+    \item Platform as a Service (PaaS)
+    \item Infrastructure as a Service (IaaS)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Virtualisierung als Dienst - Vorteile}
+  \begin{itemize}
+    \item Einfachere Bereitstellung und Skalierung
+    \item Kosteneffizienz
+    \item Fokus auf Kernkompetenzen
+    \item Globale Präsenz und Leistung
+    \item Erleichterte Integration und Zusammenarbeit
+    \item Erhöhte Sicherheit und Compliance
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Virtualisierung als Dienst - Bietet}
+  \begin{itemize}
+    \item Investition
+    \item Sicherheit und Datenschutz
+    \item Optimierung der Anwendungsleistung
+    \item Kundensupport und Service Level Agreements
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Virtualisierung als Dienst - Schwierigkeiten}
+  \begin{itemize}
+    \item Kosten
+    \item Technische Kompatibilität
+    \item Datenmigration
+    \item Fehlende Regulierung
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Virtualisierung als Dienst - Beispiel Netflix Deployment}
+  \begin{itemize}
+    \item Frontend und API
+    \item Microservices
+    \item Container-Orchestrierung
+    \item Datenbanken und Caching
+    \item Datenspeicherung
+    \item Content Delivery
+    \item Big Data und Analyse
+    \item Monitoring und Logging
+    \item Sicherheit
+    \item Automatisierung und Infrastruktur als Code
+    \item CI/CD (Continuous Integration und Continuous Deployment)
+    \item Resilienz und Fehlertoleranz
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Virtualisierung als Dienst - Beispiel Netflix Software}
+  \begin{itemize}
+    \item Netflix OSS (Open Source Software) ist eine Sammlung von Open-Source-Projekten
+    \item Eureka: Ein Service-Discovery-System
+    \item Hystrix: Eine Latenz- und Fehler-Toleranz-Bibliothek
+    \item Chaos Monkey: Ein Tool zur Überprüfung der Fehlertoleranz 
+    \item Dynomite: Eine hochverfügbare, verteilte und skalierbare Datenbank-Engine
+  \end{itemize}
+\end{frame}
+
+ \begin{frame}
+  \frametitle{Virtualisierung}
+  \framesubtitle{Virtualisierung als Dienst - Beispiel Netflix Software}
+  \begin{itemize}   
+    \item Cassandra: Eine hochverfügbare, verteilte NoSQL-Datenbank
+    \item Spinnaker: Eine Multi-Cloud-Continuous-Delivery-Plattform
+    \item Atlas: Ein skalierbares und erweiterbares Monitoring-System
+    \item Lemur: Ein Tool zur Verwaltung von TLS-Zertifikaten
+    \item Titus: Netflix' hauseigener Container-Orchestrierungs-Service
+    \item Genie: Eine Plattform für die Verwaltung und Ausführung von Big Data-Jobs
+    \item Weiter Client-Bibliotheken und SDKs
+  \end{itemize}
+\end{frame}
+
+

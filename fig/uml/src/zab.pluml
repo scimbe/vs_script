@@ -1,0 +1,25 @@
+@startuml
+participant "Server1" as S1
+participant "Server2" as S2
+participant "Server3" as S3
+
+S1 -> S2: Propose (Epoch number, Server ID)
+S1 -> S3: Propose (Epoch number, Server ID)
+
+S2 --> S1: Acknowledge
+S3 --> S1: Acknowledge
+
+note over S1: S1 becomes Leader
+
+S1 -> S2: Synchronize (State)
+S1 -> S3: Synchronize (State)
+
+S2 --> S1: Acknowledge
+S3 --> S1: Acknowledge
+
+S1 -> S2: Broadcast (Proposal with transaction ID)
+S1 -> S3: Broadcast (Proposal with transaction ID)
+
+S2 --> S1: Acknowledge
+S3 --> S1: Acknowledge
+@enduml

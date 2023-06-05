@@ -1,0 +1,405 @@
+\section{Konsensbildung und Fehlertoleranz}
+\subsection{Konsensbildung}
+\begin{frame}
+  \frametitle{Konsensbildung}
+  \framesubtitle{Herausforderungen}
+  \begin{itemize}
+    \item Fehlertoleranz
+    \item Kommunikationslatenz
+    \item Sicherheit und Integrität
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsensbildung}
+  \framesubtitle{Einsatz}
+  \begin{itemize}
+    \item Datenbanken und verteilte Speichersysteme
+    \item Blockchain-Technologie
+    \item Verteilte Rechensysteme
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsensbildung}
+  \framesubtitle{Eine Basis: Quorumsabstimmung}
+  \begin{itemize}
+    \item Methode zur Erzielung von Konsens
+    \item Braucht minimale Anzahl von Knoten, die an einer Abstimmung teilnehmen
+    \item Zustimmung von mehr als $N/2$
+    \item Kompromiss zwischen Leistung und Zuverlässigkeit
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsensbildung}
+  \framesubtitle{Grundidee: Quorumsabstimmung}
+ \begin{itemize}
+  \item Der Koordinator sendet eine Anfrage an alle anderen Knoten, um eine Abstimmung zu initiieren. Diese Anfrage enthält die Informationen, über die abgestimmt werden soll.
+  \item Jeder Knoten verarbeitet die Anfrage und sendet seine Stimme zurück an den Koordinator.
+  \item Der Koordinator sammelt alle Stimmen. Wenn die Mehrheit der Stimmen eine Zustimmung ist (d.h., das Quorum erreicht ist), wird die Operation ausgeführt und das Ergebnis an alle Knoten kommuniziert.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsensbildung}
+  \framesubtitle{Zentral vs dezentral}
+ \begin{itemize}
+  \item Zentral: 
+  \begin{itemize}
+    \item Braucht häufig \enquote{Koordinator} oder \enquote{Leader} 
+   \end{itemize}
+   \item Dezentral
+    \begin{itemize}
+    \item Komplexer zu implementieren, aber sehr robust
+   \end{itemize}
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsensbildung}
+  \framesubtitle{Zentral: ZAB}
+ \begin{itemize}
+    \item ZooKeeper Atomic Broadcast (ZAB) ist ein Konsensprotokoll
+    \item ZAB ist ein Crash-Recovery-Protokoll
+    \item Entdeckungsphase wählen die Knoten einen Anführer
+    \item Broadcastphase werden Follower informiert
+    \item Verteilte Konfigurationsmanagement (recht träge für viele Daten)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Konsensbildung}
+  \framesubtitle{De-zentral: Blockchain}
+ \begin{itemize}
+    \item Blockchain ist wie ein digitales Kassenbuch
+    \item Transaktion werden Teilnehmern zur Prüfung vorgelegt
+    \item Falls gültige Transaktion, wird sie als \enquote{Block} gespeichert 
+    \item Integrität der Kette muss geschützt werden (Konsensmechanismus)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Blockchain}
+  \framesubtitle{Konsensmechanismus}
+ \begin{itemize}
+    \item Proof-of-Work (PoW) (komplexe kryptografische Rätsel)
+    \item Proof-of-Stake (PoS) (ökonomische Anreize)  
+    \item Proof-of-Authority (PoA):
+    \item Practical Byzantine Fault Tolerance (PBFT)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Blockchain}
+  \framesubtitle{Probleme 2023}
+ \begin{itemize}
+    \item Skalierbarkeit - Ansatz Shim Layer
+    \item Energieverbrauch - (Abkehr von PoW)
+    \item 51\%-Angriffe
+    \item Datenunveränderlichkeit
+    \item Komplexität und Benutzerfreundlichkeit
+  \end{itemize}    
+\end{frame}
+
+\subsection{Fehlertoleranz}
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Idee}
+ \begin{itemize}
+    \item Fehlersituation nicht als Ausnahme ansehen
+    \item Fehlersituation ein zu erwartendes Ereignis
+    \item Incident Management
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Techniken}
+ \begin{itemize}
+    \item Redundanz
+    \item Replikation
+    \item Wiederherstellung
+    \item Byzantinische Fehlertoleranz (BFT)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Fehlerarten}
+ \begin{itemize}
+    \item Hardware-Fehler
+    \item Software-Fehler
+    \item Kommunikationsfehler
+    \item Byzantinische Fehler
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Fehlerbegriff}
+ \begin{itemize}
+    \item Fault (Fehler)
+    \item Error (Fehlzustand)
+    \item Failure (Ausfall)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Fehlermodelle}
+ \begin{itemize}
+    \item Verfügbarkeit
+    \item Zuverlässigkeit
+    \item Sicherheit
+    \item Wartbarkeit
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Fehlermodelle}
+ \begin{itemize}
+    \item Crash failure
+    \item Omission failure (Auslassungsfehler)
+    \item Receive omission
+    \item Send omission
+    \item Timing failure
+    \item Response failure
+    \item Value failure
+    \item State-transition failure
+    \item Arbitrary failure
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Beispiel: Eigenschaften von Halting-Fehler oder Crash-Fehler}
+ \begin{itemize}
+    \item Dauer des Ausfalls
+    \item Ursache des Ausfalls
+    \item Reichweite des Ausfalls
+    \item Vorhersehbarkeit des Ausfalls
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Synchron}
+ \begin{itemize}
+    \item Strenge Timing-Anforderungen
+    \item Kann Timeout implementieren
+    \item Zusätzliche Probleme mit Synchronisation
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Asynchron}
+ \begin{itemize}
+    \item Keine Timing-Anforderungen
+    \item Techniken wie Sequenznummern oder Quittungen notwendig
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Verhaltensweisen und Auswirkungen bei Fehler}
+ \begin{itemize}
+    \item Fail-Stop-Fehler
+    \item Fail-Noisy-Fehler
+    \item Fail-Silent-Fehler (Halteproblem?)
+    \item Fail-Safe-Fehler
+    \item Fail-Arbitrary-Fehler (Übel!)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Redundanz}
+ \begin{itemize}
+    \item Datenredundanz
+    \item Rechenredundanz
+    \item Kommunikationsredundanz
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Resilienz}
+ \begin{itemize}
+    \item Replikation
+    \item Überwachung
+    \item Wiederherstellung
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Replikation}
+ \begin{itemize}
+    \item Daten und Dienste duplizieren
+    \item Erhöht Verfügbarkeit (Rechenredundanz)
+    \item Erhöht die Leistung (Load-sharing)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Replikationsstrategie}
+ \begin{itemize}
+    \item Permanente Replikation
+    \item Serverinitiierte Replikation
+    \item Clientinitiierte Replikation
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Replikationsansätze}
+ \begin{itemize}
+    \item Passive Replikation (auch Primär-Backup-Replikation oder Master-Slave-Replikation)
+    \item Replikation Replikation (auch Multi-Master- oder State-Machine-Replikation)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Grad der Verfügbarkeit}
+ \begin{itemize}
+    \item Cold
+    \item Warm 
+    \item Hot
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Absicherung}
+ \begin{itemize}
+    \item $2k$ Replikation (Crash-Fehler/ fail-stop-Fehler)
+    \item $2k+1$ Replikation (Crash-Fehler und Omission-Fehler)
+    \item $3k+1$ Replikation (byzantinische Fehler)
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Erasure Coding}
+ \begin{itemize}
+    \item Technik zur Datenredundanz und Fehlerkorrektur
+    \item Arbeitet mit Paritätsinformationen und Datenaufteilung
+    \item Keine $1:1$ Daten-Kopien/Replikationen
+    \item Erhöhte Komplexität bei Operationen auf Daten
+    \item Kann $n-k$ Verluste tolerieren
+  \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Erasure Coding - Beispiel k = 4}
+   \begin{itemize}
+  \item Fragment 1: \enquote{AB}
+  \item Fragment 2: \enquote{CD}
+  \item Fragment 3: \enquote{EF}
+  \item Fragment 4: \enquote{GH}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Erasure Coding - Beispiel n = 6}
+   \begin{itemize}
+  \item Zwei zusätzliche Paritätsfragmente (n-k=2)
+  \item Hier XOR-Verfahren für Paritätsfragmente
+  \end{itemize}
+  \begin{itemize}
+  \item Paritätsfragment 1: Fragment 1 XOR Fragment 2\\ = \enquote{AB} XOR \enquote{CD} = \enquote{P1}
+  \item Paritätsfragment 2: Fragment 3 XOR Fragment 4\\ = \enquote{EF} XOR \enquote{GH} = \enquote{P2}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Erasure Coding - Beispiel 6 Fragmente}
+  \begin{itemize}
+  \item Fragment 1: \enquote{AB}
+  \item Fragment 2: \enquote{CD}
+  \item Fragment 3: \enquote{EF}
+  \item Fragment 4: \enquote{GH}
+  \item Paritätsfragment 1: \enquote{P1}
+  \item Paritätsfragment 2: \enquote{P2}
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Erasure Coding - 1 + 2 Verloren}
+  \begin{itemize}
+  \item Fragment 1: Paritätsfragment 1 XOR Fragment 2 = \enquote{P1} XOR \enquote{CD} = \enquote{AB}
+  \item Fragment 2: Paritätsfragment 1 XOR Fragment 1 = \enquote{P1} XOR \enquote{AB} = \enquote{CD}
+  \end{itemize}  
+  Ursprüngliche Datei \enquote{ABCDEFGH} 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Wiederherstellung}
+  \begin{itemize}
+    \item Ziel: In einen korrekten Zustand zurückzukehren
+    \item Systemausfälle erkennen und reagieren
+    \item Verschiedenen Ebenen: Prozess, Knoten oder System
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Wiederherstellungstechniken}
+  \begin{itemize}
+    \item Checkpointing
+    \item Nachrichtenprotokollierung
+    \item Rollback-Recovery
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Kommunikationsprotokolle}
+  \begin{itemize}
+    \item Timeout-basierte Protokolle 
+    \item Bestätigungsbasierte Protokolle
+    \item Protokolle für den Umgang mit Netzwerkpartitionen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Lastverteilung}
+  \begin{itemize}
+    \item Effiziente Nutzung der Ressourcen
+    \item Gleichen Daten und/oder Prozesse auf verschiedenen Knoten
+    \item Statische Lastverteilung und dynamische Lastverteilung.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Anti-Entropy}
+  \begin{itemize}
+    \item Konsistenz gewährleisten
+    \item Zwang Repliken zu synchronisieren
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fehlertoleranz}
+  \framesubtitle{Anti-Entropy-Repair}
+  \begin{itemize}
+    \item Auch Anti-Entropy-Synchronisation
+    \item Paare von Repliken vergleichen Daten
+    \item Periodisch oder auf Anforderung 
+    \item Herausforderung auf skalierenden Systemen
+    \item Nicht sofortige Konsistenz (eventual consistency)
+    \item Konflikte (?)
+  \end{itemize}
+\end{frame}

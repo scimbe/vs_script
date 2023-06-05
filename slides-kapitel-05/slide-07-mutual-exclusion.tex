@@ -1,0 +1,37 @@
+%\section{Einleitung}
+\subsection{Mutual Exclusion}
+\begin{frame}
+  \frametitle{Algorithmen}
+  \framesubtitle{Mutual Exclusion}
+  \begin{itemize}
+    \item Mutual Exclusion, oder wechselseitiger Ausschluss zum Schutz von kritischen Bereichen
+    \item Notwendig in VS zur Sicherung der Datenkonsistenz und -integrität in Mehrprozess- oder Mehrfadenanwendungen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Mutual Exclusion}
+  \framesubtitle{Ansätze}
+  \begin{itemize}
+    \item Ricart-Agrawala-Algorithmus (Hohe Kommunikation)
+    \item Raymond's Tree-Based Algorithmus (Hohe Netzstabilität)
+    \item Agrawal-El Abbadi-Algorithmus (Schnelle und stabile Netze)
+    \item Peterson's Algorithmus (Akademischer Ansatz zur Lehre)
+    \item Bakery Algorithmus (Problem bei vielen Teilnehmern)
+    \item Fischer's Test-Set-and-Set-Lock Algorithmus (Bei geringen Einsätzen)
+    \item  Queue-Locks (Lamport Clocks, Multicast mit Acks)
+  \end{itemize}
+\end{frame}
+
+\subsection{Barriers}
+\begin{frame}
+  \frametitle{Algorithmen}
+  \framesubtitle{Mutual Exclusion}
+  Klassisches Warten auf andere Ablauffäden
+  \begin{itemize}
+    \item Sense-Reversing Barrier (Einfacher Counter)
+    \item Combining Tree Barrier  (Baumstruktur)
+    \item Tournament Barrier      (Unstrukturiert mit Paaren)
+    \item Dissemination Barriers  (Gossip-ähnlich, Runden-basiert)
+  \end{itemize}
+\end{frame}

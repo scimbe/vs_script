@@ -1,0 +1,103 @@
+@startuml
+participant Node1
+participant Node2
+participant Node3
+participant Node4
+
+Node1 -> Node2: a [1]
+note right of Node1: Node1's clock: 1
+note right of Node2: Node2's clock: 2
+Node1 -> Node3: b [2]
+note right of Node1: Node1's clock: 2
+note right of Node3: Node3's clock: 3
+Node1 -> Node4: c [3]
+note right of Node1: Node1's clock: 3
+note right of Node4: Node4's clock: 4
+
+
+Node2 -> Node1: d [3]
+note left of Node1: Node1's clock: 4
+note left of Node2: Node2's clock: 3
+
+Node3 -> Node1: e [4]
+note left of Node1: Node1's clock: 5
+note left of Node3: Node3's clock: 4
+
+Node4 -> Node1: f [5]
+note left of Node4: Node4's clock: 5
+note left of Node1: Node1's clock: 6
+
+Node1 -> Node2: g [7]
+note right of Node1: Node1's clock: 7
+note right of Node2: Node2's clock: 8
+
+Node1 -> Node3: h [8]
+note right of Node1: Node1's clock: 8
+note right of Node3: Node3's clock: 9
+
+Node1 -> Node4: i [9]
+note right of Node1: Node1's clock: 9
+note right of Node3: Node3's clock: 10
+
+Node2 -> Node1: j [9]
+note left of Node2: Node2's clock: 9
+note right of Node1: Node1's clock: 10
+
+Node3 -> Node2: k [10]
+note left of Node2: Node2's clock: 11
+note right of Node3: Node3's clock: 10
+
+Node4 -> Node3: l [11]
+note left of Node3: Node3's clock: 12
+note left of Node2: Node4's clock: 11
+
+
+Node1 -> Node4: m [11]
+note right of Node1: Node1's clock:11
+note right of Node4: Node4's clock:12
+
+Node2 -> Node3: n [12]
+note left of Node2: Node2's clock: 12
+note left of Node3: Node3's clock: 13
+
+Node3 -> Node4: p [14]
+note left of Node3: Node3's clock: 14
+note left of Node4: Node4s's clock: 15
+
+Node4 -> Node1: q [16]
+note left of Node4: Node4's clock: 16
+note left of Node1: Node1's clock: 17
+
+Node1 -> Node2: r [18]
+note right of Node1: Node1's clock: 18
+note right of Node2: Node2's clock: 19
+
+Node2 -> Node4: t [20]
+note left of Node2: Node2's clock: 20
+note left of Node4: Node4's clock: 21
+
+Node4 -> Node3: s [22]
+note right of Node4: Node4's clock: 22
+note right of Node3: Node3's clock: 23
+
+Node3 -> Node2: u [24]
+note left of Node3: Node3's clock: 24
+note left of Node2: Node2's clock: 25
+
+Node2 -> Node1: v [26]
+note left of Node2: Node2's clock: 26
+note left of Node1: Node1's clock: 27
+Node1 -> Node4: w [28]
+note right of Node1: Node1's clock: 28
+note right of Node4: Node4's clock: 29
+
+Node4 -> Node3: x [30]
+note right of Node4: Node4's clock: 30
+note right of Node3: Node3's clock: 31
+Node3 -> Node2: y [32]
+note left of Node3: Node3's clock: 32
+note left of Node2: Node2's clock: 33
+Node2 -> Node1: z [34]
+note left of Node2: Node2's clock: 34
+note left of Node1: Node1's clock: 35
+@enduml

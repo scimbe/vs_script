@@ -1,0 +1,6 @@
+@startuml
+participant "Controller" as Pi
+participant "Lamp" as Lampe
+
+Pi -> Lampe : controlLamp(true)
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+interface Interceptor {
+    + processMessage(Message msg): void
+}
+
+class Message {
+    - payload: string
+    + getPayload(): string
+}
+
+class Component {
+    - interceptors: Interceptor[]
+    + sendMessage(Message msg): void
+    + addInterceptor(Interceptor interceptor): void
+    + removeInterceptor(Interceptor interceptor): void
+}
+
+class Client {
+    + sendRequest(Component component, Message msg): void
+}
+
+Component -> Interceptor
+Component --> Message
+Client -> Component
+@enduml
+    

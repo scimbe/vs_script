@@ -1,0 +1,24 @@
+%\section{Einleitung}
+\subsection{Garbage}
+\begin{frame}
+  \frametitle{Algorithmen}
+  \framesubtitle{Garbage}
+  \begin{itemize}
+    \item Objekte über verschiedene Knoten hinweg verteilt
+    \item Kommunikation zwischen den Knoten für gemeinsamen Status des Objektes
+    \item Verschiedene Ansätze interessant. \\Ansätze zeigen wie auf Anforderungen des Netzes oder die Applikation eingegangen werden kann.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Garbage}
+  \framesubtitle{Ansätze}
+  \begin{itemize}
+    \item Referenzzählung (Keine Zyklischen Referenzen)
+    \item Verteilte Mark-and-Sweep (Kommunikation über eine Baumstruktur)
+    \item Garbage Collection mit Leases (Gültigkeit über Zeit - bedingt zuverlässige Kommunikation oder Fehlertoleranz)
+    \item  Verteilte Garbage Collection durch Tracing (Mehr Kommunikation als Mark and Sweep)
+    \item Generational Garbage Collection (Bedingt bekannte Code Base, sonst Speicherleaks)
+  \end{itemize}
+\end{frame}

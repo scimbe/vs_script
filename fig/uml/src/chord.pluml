@@ -1,0 +1,22 @@
+@startuml
+
+!define CHORD_NODE 7C8282
+!define KEY_COLOR C16E6A
+
+skinparam component {
+  backgroundColor CHORD_NODE
+  borderColor Transparent
+  ArrowColor Black
+}
+
+actor User
+component [Node 1 (0)] as Node1
+component [Node 2 (3)] as Node2
+component [Node 3 (6)] as Node3
+}
+
+User --> Node1 : Request(Key 7)
+Node1 --> Node2
+Node2 --> Node3
+
+@enduml

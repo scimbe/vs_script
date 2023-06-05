@@ -1,0 +1,7 @@
+@startuml
+state "Ausgeschaltet" as off
+state "Eingeschaltet" as on
+
+off --> on : Einschalten
+on --> off : Ausschalten
+@enduml

@@ -1,0 +1,177 @@
+%\section{Einleitung}
+\subsection{Synchronisation}
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Globaler Zustand}
+  \begin{itemize}
+    \item Herausforderungen der Koordination
+    \item Bestimmung von Ordnung
+    \item Bestimmung von Autorität
+    \item NIEMALS ZURÜCK STELLEN!
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Protokolle}
+  \begin{itemize}
+    \item Remote-write protocols
+     \begin{itemize}
+      \item Auch konfliktfrei möglich; z.B Jounal
+     \end{itemize}
+    \item Local-write protocols
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Lösungsstrategien}
+  \begin{itemize}
+  \item Physikalische Uhren
+  \item Logische Uhren
+  \item Locking
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Physikalische Uhren}
+  \begin{itemize}
+  \item Drift Problem
+  \item Präzise und akkurat
+  \item Basis häufig Universal Time Coordinated (UTC)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Physikalische Uhren}
+  \framesubtitle{Globale Zeitstempel}
+  \begin{itemize}
+    \item Network Time Protocol (NTP) 
+    \item Precision Time Protocol (PTP) (HW)
+    \item Cristian's Algorithm
+    \item Berkeley Algorithm
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Physikalische Uhren}
+  \framesubtitle{Network Time Protocol (NTP)}
+\[ D = (t4 - t1) - (t3 - t2) \]
+\[ \theta = \frac{(t2 - t1) + (t3 - t4)}{2} \]
+\end{frame}
+
+\subsection{Logische Uhren}
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{happens-before}
+  \begin{itemize}
+    \item $e_1$ und $e_2$ sind Ereignisse im selben Prozess, und $e_1$ tritt vor $e_2$ auf.
+    \item $e_1$ ist das Senden einer Nachricht, und $e_2$ ist das Empfangen dieser Nachricht.
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Logische Uhren}
+  \begin{itemize}
+    \item Für jeden Prozess $P_i$ wird die logische Uhr $C_i$ bei jedem Ereignis, das innerhalb von $P_i$ auftritt, inkrementiert: $C_i := C_i + 1$.
+    \item Bei jedem Nachrichtenaustausch zwischen zwei Prozessen $P_i$ und $P_j$ (wobei $P_i$ die Nachricht sendet und $P_j$ sie empfängt) gelten die folgenden Regeln:
+      \begin{itemize}
+      \item Die Uhr des sendenden Prozesses $P_i$ wird vor dem Senden der Nachricht inkrementiert: $C_i := C_i + 1$.
+      \item Die Uhr des empfangenden Prozesses $P_j$ wird auf das Maximum der eigenen Uhr und des empfangenen Zeitstempels (plus eins) gesetzt: $C_j := \max(C_j, C_i + 1)$.
+    \end{itemize}    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Lamport Clock}
+  \begin{itemize}
+  \item Jeder Prozess $P_j$ im verteilten System führt eine logische Uhr $C_j$ mit. Jedes Mal, wenn ein Prozess eine Transaktion initiiert, wird die logische Uhr $C_j$ inkrementiert, und der Transaktion $T_i$ wird der Zeitstempel $C_j(T_i)$ zugeordnet.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Lamport Clock}
+  \begin{itemize}
+  \item Wenn ein Prozess $P_j$ eine Transaktion $T_i$ an einen anderen Prozess $P_k$ sendet, wird die logische Uhr $C_j$ inkrementiert und zusammen mit der Transaktion an $P_k$ gesendet. Bei Empfang der Transaktion wird die logische Uhr $C_k$ des empfangenden Prozesses auf das Maximum von $C_k$ und dem empfangenen Zeitstempel (plus eins) gesetzt: $C_k := \max(C_k, C_j(T_i) + 1)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Lamport Clock}
+  \begin{itemize}
+  \item Bei der Ausführung von Transaktionen werden die zugeordneten Zeitstempel verwendet, um die relative Ordnung der Transaktionen zu bestimmen und mögliche Konflikte aufzulösen. Zum Beispiel kann ein Konflikt in Form eines schreibgeschützten oder schreibgeschützten Zugriffs auf dieselben Daten auftreten. In solchen Fällen kann der Zeitstempel verwendet werden, um die Transaktionen konsistent zu ordnen, indem die Transaktion mit dem kleineren Zeitstempel vor der Transaktion mit dem größeren Zeitstempel ausgeführt wird.
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Vector Clock}
+  \begin{itemize}
+  \item Jeder Prozess $P_i$ im verteilten System führt eine Vektoruhr $V_i$ mit der Länge $n$ (Anzahl der Prozesse im System) und initialisiert alle Komponenten auf Null.
+  \item Bei jedem internen Ereignis, das innerhalb von $P_i$ auftritt, wird die Komponente $V_i[i]$ der Vektoruhr inkrementiert: $V_i[i] := V_i[i] + 1$.
+  \item Bei jedem Nachrichtenaustausch zwischen zwei Prozessen $P_i$ und $P_j$ (wobei $P_i$ die Nachricht sendet und $P_j$ sie empfängt) gelten die folgenden Regeln:
+  \begin{itemize}
+  \item Die Komponente $V_i[i]$ der sendenden Vektoruhr wird vor dem Senden der Nachricht inkrementiert: $V_i[i] := V_i[i] + 1$.
+  \item Die Vektoruhr des empfangenden Prozesses $P_j$ wird auf das Elementweises Maximum der eigenen Vektoruhr und der empfangenen Vektoruhr gesetzt: $V_j[k] := \max(V_j[k], V_i[k])$, für $k = 1, 2, \dots, n$.
+  \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vector Clock}
+  \framesubtitle{Ordnung}
+  \begin{itemize}
+  \item $E_1 \to E_2$ (happens-before): Wenn für alle $k$, $V_1[k] \leq V_2[k]$ und für mindestens ein $k$, $V_1[k] < V_2[k]$ gilt.
+  \item $E_1 \parallel E_2$ (konkurrierend): Wenn für mindestens ein $k$, $V_1[k] < V_2[k]$ und für mindestens ein $k$, $V_2[k] < V_1[k]$ gilt.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ordnung}
+  \framesubtitle{Allgemein}
+  \begin{itemize}
+    \item Teilweise Ordnung (oder partielle Ordnung) 
+    \item Totale Ordnung 
+    \item Kausale Ordnung 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Conflict-Free Replicated Data Types}
+  \begin{itemize}
+    \item Verteilte Datenstruktur
+    \item Replikationen von Daten (Algorithmisch)
+    \item Beispiele:  Grow-only Counter (G-Counter) oder 2P-Set (Zwei-Phasen-Set)
+   \end{itemize}
+\end{frame}  
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Locking}
+  \begin{itemize}
+    \item Ressourcen sperren
+    \item \textit{Shared Locks} und \textit{Exclusive Locks}
+    \item Zentrale (Koordinator) oder De-Zentral (Algorithmisch)
+    \item Probleme von Deadlocks
+   \end{itemize}
+\end{frame}  
+
+\begin{frame}
+  \frametitle{Synchronisation}
+  \framesubtitle{Philosophenproblem}
+    \begin{itemize}
+    \item Deadlocks: Wenn jeder Philosoph gleichzeitig eine Gabel aufnimmt und auf die andere wartet, entsteht ein Deadlock. Kein Philosoph kann mit dem Essen fortfahren, da jeder auf die Freigabe der anderen Gabel wartet.
+    \item Verhungern (Starvation): Ein Philosoph könnte verhungern, wenn er immer wieder von anderen Philosophen überstimmt wird, die die Gabeln ergreifen, bevor er sie erreichen kann. In solchen Fällen kommt der betroffene Philosoph möglicherweise nie zum Essen.
+    \item Leistungsprobleme: Die Leistung des Systems kann beeinträchtigt werden, wenn Philosophen zu lange auf den Zugriff auf Gabeln warten müssen oder wenn ineffiziente Synchronisationsstrategien eingesetzt werden.
+    \end{itemize}
+\end{frame} 

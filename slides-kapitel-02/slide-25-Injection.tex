@@ -1,0 +1,91 @@
+%\section{Einleitung}
+\subsection{Dependency Injection}
+\begin{frame}
+  \frametitle{Dependency Injection}
+  \framesubtitle{Idee}
+  \begin{itemize}
+    \item Abhängigkeiten eines Objekts wird von außen bereitgestellt
+    \item Code wird modularer, testbarer und wartbarer
+    \item Gleichen Vorteile wie das Factory Pattern
+    \item Führt zusätzliche Komplexität ein 
+    \item Leistung kann reduziert werden, wenn Abhängigkeiten über das Netzwerk transportiert werden muss
+    \item Kann Sicherheitsprobleme einführen
+    \item Problematisch im Debugging
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Dependency Injection}
+  \framesubtitle{Umsetzung in Code I}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={Schnittstelle für die Abhängigkeit},captionpos=b,label={lst:di-interface}]
+  public interface BulbService {
+      void doLight();
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Dependency Injection}
+  \framesubtitle{Umsetzung in Code II}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={Schnittstellenimplementierung},captionpos=b,label={lst:di-interface-implementation}]
+
+  public class Bulb implements BulbService {
+      public void doLight() {
+          System.out.println("Do cool Stuff");
+      }
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Dependency Injection}
+  \framesubtitle{Umsetzung in Code III}
+  \begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={Dependency},captionpos=b,label={lst:di-dependency}]
+
+  public class ControllerOnPI {
+      private BulbService service;
+      
+      public ControllerOnPI(BulbService service) {
+          this.service = service;
+      }
+      
+      public void doControl() {
+          service.doLight();
+      }
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Dependency Injection}
+  \framesubtitle{Umsetzung in Code IV}
+  \noindent\begin{minipage}{\textwidth}
+  \begin{lstlisting}[caption={Die DI Main},captionpos=b,label={lst:di-main}]
+  public class Main {
+      public static void main(String[] args) {
+          BulbService bulb = new Bulb();
+          ControllerOnPI c = new ControllerOnPI(bulb);
+          
+          c.doControl();
+      }
+  }
+  \end{lstlisting}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Dependency Injection}
+  \framesubtitle{Reflection}
+  \begin{itemize}
+    \item Dependency Injection (DI) wird häufig mit Reflection umgesetzt
+    \item Struktur und Verhalten zur Laufzeit analysieren
+    \item Eigenschaften und Funktionalitäten können zur Laufzeit verändert werden
+    \item In vielen Programmiersprachen unterstützt, z. B. in Java, C\#, Python und JavaScript
+  \end{itemize}
+\end{frame}

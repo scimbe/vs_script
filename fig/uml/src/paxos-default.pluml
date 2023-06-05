@@ -1,0 +1,23 @@
+@startuml
+participant "Proposer" as P
+participant "Acceptor1" as A1
+participant "Acceptor2" as A2
+participant "Acceptor3" as A3
+
+P -> A1: Prepare(1)
+P -> A2: Prepare(1)
+P -> A3: Prepare(1)
+
+A1 --> P: Promise(1, null)
+A2 --> P: Promise(1, null)
+A3 --> P: Promise(1, null)
+
+P -> A1: Accept(1, Value)
+P -> A2: Accept(1, Value)
+P -> A3: Accept(1, Value)
+
+A1 --> P: Accepted(1, Value)
+A2 --> P: Accepted(1, Value)
+A3 --> P: Accepted(1, Value)
+
+@enduml

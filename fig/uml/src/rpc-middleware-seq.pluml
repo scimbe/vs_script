@@ -1,0 +1,16 @@
+@startuml
+
+participant "Client Stub" as Client_Stub
+participant "Network" as Network
+participant "Server Stub" as Server_Stub
+
+
+-> Client_Stub : Call remote procedure
+Client_Stub -> Network : send request
+Network -> Server_Stub : Deliver request
+Server_Stub ->  :  call local procedure
+Server_Stub <-  : Return result
+Server_Stub -> Network : send response
+Network -> Client_Stub : Deliver response
+<- Client_Stub :  return result
+@enduml

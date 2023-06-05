@@ -1,0 +1,33 @@
+@startuml
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v15.0/dist
+!includeurl AWSPuml/AWSCommon.puml
+!includeurl AWSPuml/Compute/all.puml
+
+actor Client
+actor Server
+
+rectangle "TCP/IP\nSchichtenmodell" {
+  package "Anwendungsschicht" {
+    Client --> (Anwendungsprotokoll)
+    Server --> (Anwendungsprotokoll)
+  }
+
+  package "Transportschicht" {
+    (Anwendungsprotokoll) --> (TCP/UDP)
+    (TCP/UDP) --> Client
+    (TCP/UDP) --> Server
+  }
+
+  package "Internetschicht" {
+    (TCP/UDP) --> (IP)
+    (IP) --> Client
+    (IP) --> Server
+  }
+
+  package "Netzzugangsschicht" {
+    (IP) --> (Ethernet)
+    (Ethernet) --> Client
+    (Ethernet) --> Server
+  }
+}
+@enduml

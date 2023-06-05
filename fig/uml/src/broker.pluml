@@ -1,0 +1,35 @@
+@startuml
+package "Client" {
+    class Client
+    interface ServiceInterface {
+        +service1(): void
+        +service2(): void
+    }
+    Client -> ServiceInterface
+}
+
+package "Broker" {
+    class Broker
+    class BrokerRegistry
+    interface BrokerInterface {
+        +getService(name: String): ServiceInterface
+    }
+    Broker -up-> BrokerInterface
+    BrokerRegistry -up-> BrokerInterface
+    Client -> BrokerInterface
+}
+
+package "ServiceProviders" {
+    class ServiceProvider1 {
+        +service1(): void
+    }
+    class ServiceProvider2 {
+        +service2(): void
+    }
+    ServiceProvider1 .up.|> ServiceInterface
+    ServiceProvider2 .up.|> ServiceInterface
+    Broker -> ServiceProvider1
+    Broker -> ServiceProvider2
+}
+
+@enduml

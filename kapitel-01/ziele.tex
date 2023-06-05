@@ -1,0 +1,51 @@
+\subsection{Ziele der Verteilten Systeme}
+Für die weitere Diskussion soll zunächst angenommen werden, dass ein verteiltes System aus verschiedenen Komponenten besteht, aber mindestens zwei, die nicht über einen gemeinsamen Speicher verfügen. Weiter soll angenommen werden, dass für die Entwicklung verteilter Systeme zunächst die gleichen generischen Ziele gelten wie für ein nicht-verteiltes System. Typische Ziele, die in diesem Kontext gerne genannt werden, sollen im Folgenden nochmal aufgeführt werden.
+\begin{itemize}
+\item Funktionalität: Die Software sollte die vom Benutzer erwarteten Funktionen bereitstellen und eine positive Benutzererfahrung bieten.
+\item Zuverlässigkeit: Die Software sollte zuverlässig sein und in verschiedenen Umgebungen stabil laufen, ohne Fehler zu verursachen oder unerwartet zu crashen.
+\item Skalierbarkeit: Die Software sollte in der Lage sein, sich an veränderte Anforderungen und eine wachsende Benutzerzahl anzupassen, ohne dass es zu Engpässen kommt.
+\item Leistung: Die Software sollte schnell und effizient arbeiten und eine gute Leistung bieten, auch bei großen Datenmengen.
+\item Sicherheit: Die Software sollte sicher sein und vertrauliche Daten schützen, indem sie Verschlüsselung, Zugriffskontrolle und andere Sicherheitsmaßnahmen implementiert.
+\item Wartbarkeit: Die Software sollte einfach zu warten und zu aktualisieren sein, indem sie gut strukturiert und kommentiert ist und eine gute Dokumentation bereitstellt.
+\item Portabilität: Die Software sollte auf verschiedenen Plattformen und Betriebssystemen laufen und kompatibel mit anderen Systemen und APIs sein.
+\item Benutzerfreundlichkeit: Die Software sollte einfach zu bedienen und zu verstehen sein und eine gute Benutzererfahrung bieten.
+\item Anpassbarkeit: Die Software sollte anpassbar sein und es Benutzern und Entwicklern ermöglichen, Funktionen hinzuzufügen oder zu ändern, um ihre Anforderungen zu erfüllen.
+\item Kompatibilität: Die Software sollte mit anderen Systemen und Anwendungen kompatibel sein, um die Integration und den Datenaustausch zu erleichtern.
+\end{itemize}   
+Die genannten Ziele in der Softwareentwicklung sind wichtig, weil sie dazu beitragen, sicherzustellen, dass die Software eine hohe Qualität und eine positive Benutzererfahrung bietet. Die Kriterien können auch entsprechend den Anforderungen an die Software erweitert oder auch unterschiedlich gewichtet werden. 
+
+Eine Software, die nicht die erwartete Funktionalität bereitstellt oder unzuverlässig ist, kann dazu führen, dass Benutzer frustriert sind und das Vertrauen in die Software verlieren, dies gilt natürlich für verteilte Systeme im gleichen Maße. Eine Software, die langsam oder ineffizient arbeitet, kann die Produktivität der Benutzer beeinträchtigen und zu einem Verlust an Zeit und Geld führen.
+\\\\
+Wartbarkeit und Anpassbarkeit sind ebenfalls wichtige Ziele, da Software oft aktualisiert oder erweitert werden muss, um mit den sich ändernden Anforderungen und Technologien Schritt zu halten. Eine schlecht strukturierte oder dokumentierte Software kann die Wartung und Erweiterung erschweren und die Kosten für das Unternehmen erhöhen. Für den Aufbau eines Verteilten Systems ist dies essenziell, insbesondere die Anpassbarkeit da verschiedene unterschiedliche Systeme mitunter kooperativ zur Problemlösung beitragen müssen. 
+\\\\
+Benutzerfreundlichkeit und Anpassbarkeit tragen ebenfalls zur Zufriedenheit der Benutzer bei und können die Akzeptanz und Nutzung der Software erhöhen. Dass dies auch für ein verteiltes System notwendig ist, kann nicht bestritten werden. 
+\\\\
+Diese Ziele sollten im Prozess der Anforderungsanlyse auch das Gespräch mit den Stakeholdern bestimmen. Ein Stakeholder im Entwicklungsprozess ist eine Person oder Gruppe, die von der Entwicklung und dem Einsatz der Software betroffen ist oder davon beeinflusst wird. 
+Es ist zu diesem Zeitpunkt wichtig verstanden zu haben, das Stakeholder unterschiedliche Interessen und Anforderungen an das System haben und auch die Ziele unterschiedlich gewichten und beschreiben. Diese Herausforderung soll im folgenden an der Ausfallsicherheit  verdeutlicht werden:
+\\\\
+Unbestritten ist, Ausfallsicherheit kann ein wichtiges Ziel für ein System sein. Typischerweise werden Anforderungen an Ausfallsicherheit in der Anforderungsbeschreibung der Anwendung, der Geschäfts- und/oder Service-Level-Vereinbar-ungen (SLAs) festgehalten. Zu bemerken ist hier bereits, dass in einem Verteilten System unterschiedliche Stakeholder mit unterschiedlichen Komponenten mit unterschiedlichen Vereinbarungen bestehen können. Die folgende Aufzählung soll nur einen beispielhaften Eindruck vermitteln: 
+
+\begin{itemize}
+\item Mission-critical Anwendungen: Für Anwendungen, die entscheidend für das Überleben von Organisationen oder Systemen sind, wird eine hohe Ausfallsicherheit gefordert. Hier sind hohe Verfügbarkeit, Redundanz, Lastverteilung, Fehlererkennung und -behebung von größter Bedeutung. Ein Ausfall kann zu hohen Verlusten oder sogar zu gefährlichen Situationen führen.
+
+\item Hochverfügbare Anwendungen: Hochverfügbare Anwendungen benötigen zwar keine 100\% ige Verfügbarkeit, jedoch müssen sie in der Lage sein, in kürzester Zeit wieder online zu gehen. Hier ist eine schnelle Fehlererkennung und -behebung sowie die Verwendung von Lastverteilung und Redundanztechniken entscheidend.
+
+\item Business-kritische Anwendungen: Für Anwendungen, die wichtige Geschäftsprozesse unterstützen, ist eine hohe Verfügbarkeit und Ausfallsicherheit erforderlich. Hier sind redundante Systeme, Backups, Failover-Systeme und ein schnelles Wiederherstellungsverfahren wichtig, um eine schnelle Wiederherstellung von Daten und Anwendungen nach einem Ausfall zu gewährleisten.
+
+\item Nicht-kritische Anwendungen: Für Anwendungen, die nicht kritisch sind, können die Anforderungen an die Ausfallsicherheit geringer sein. Hier können manuelle Backups, geringere Redundanz und längere Wiederherstellungszeiten akzeptabel sein.
+\end{itemize}	
+
+Je kritischer die Anwendung, desto höher sind die Anforderungen an die Ausfallsicherheit und desto stärker müssen Redundanz- und Wiederherstellungsstrategien auch in einem verteilten System implementiert werden. Dennoch ist noch nichts im eigentlichen Sinne über den Grad der Ausfallsicherheit gesagt. Erst wenn quantifizierbare, überprüfbare Kriterien formuliert werden, die Hülsenworte wie \enquote{hoch}, \enquote{schnell} und \enquote{wichtig} ersetzen, bekommen die Vereinbarungen einen Wert. Während bei einer Komponente eine schnelle Wiederherstellung mit 200 Millisekunden verbunden ist, kann bei einer anderen Komponente oder Technologie eine schnelle Wiederherstellung mit zwei Tagen verbunden sein. Auch \enquote{wichtig} kann eine kritische Formulierung sein, wenn es nicht genug Resourcen, wie zum Beispiel dem Personal, gibt um alle Systeme mit der gleichen Priorisierung - \enquote{wichtig} - zu bearbeiten. Schwierige und harte Diskussionen können diese Detailfragen in sich tragen. In der Entwicklung der Verteilten Systeme muss man sich über die unterschiedlichen Dimensionen bewusst sein und die Stakeholder durch den Prozess begleiten. 
+
+Diese Diskussion kann noch weitergetrieben und mit Methoden und Werkzeugen bereichert werden, soll aber im ersten Schritt ausreichen, um die Anforderungen an den Prozess der Anforderungsanalyse zu verdeutlichen. Weiterhin ist nochmals darauf hingewiesen, dass die gleiche oder eine sehr ähnliche Diskussion auch für jedes weitere Ziel beschrieben werden kann.
+\\\\
+Sicherheit ist in Verteilten Systemen ebenfalls von sehr großer Bedeutung, da vertrauliche Daten und Informationen durch fehlerhafte oder unsichere Software gefährdet werden können. Es ist wichtig, sicherzustellen, dass die Software alle erforderlichen Sicherheitsmaßnahmen implementiert, um den Schutz der Daten zu gewährleisten, dass dies eine besondere Herausforderung in einem verteilten System darstellen kann, wurde bereits ausgeführt und sollte in seiner Anforderung nicht unterschätzt werden. Auch wenn die Bedeutung nicht stark genug motiviert werden kann, ist es nicht Teil dieser Ausarbeitung und wird weiterführenden Modulen überlassen.
+\\\\
+Zu diesem Zeitpunkt möchten wir uns in diesem Dokument auf die Ziele konzentrieren, die nochmals eine besondere Bedeutung im Kontext der verteilten Systeme erhalten. Etabliert in diesem Kontext haben sich die Ziele von~\cite{tanenbaum2017distributed}, die im folgenden snochmals genauer diskutiert werden.
+%\begin{itemize}
+%\item Ressourcen-Sharing: Die Möglichkeit, Ressourcen wie Hardware, Software und Daten über ein Netzwerk hinweg gemeinsam zu nutzen, ist ein wichtiges Ziel für verteilte Systeme. Dies kann dazu beitragen, die Kosten für den Erwerb und Betrieb von Ressourcen zu senken und die Effizienz von Organisationen zu steigern.
+%\item Offenheit: Verteilte Systeme sollen offen für verschiedene Arten von Hardware, Software und Netzwerkarchitekturen sein. Durch die Verwendung offener Standards und Protokolle können Systeme von verschiedenen Anbietern miteinander kommunizieren und interoperabel sein.
+%\item Skalierbarkeit: Verteilte Systeme sollen in der Lage sein, sich an eine wachsende Anzahl von Benutzern und Ressourcen anzupassen und dabei eine gute Leistung zu bieten. Hierfür sind Skalierungstechniken wie Lastverteilung und Replikation notwendig.
+%\item Transparenz: Dieses Ziel bezieht sich hier auf die Fähigkeit, dem Benutzer die Komplexität des Systems zu verbergen und ihm das Gefühl zu geben, als ob er auf ein einziges, zusammenhängendes System zugreift.
+%\end{itemize}	
+

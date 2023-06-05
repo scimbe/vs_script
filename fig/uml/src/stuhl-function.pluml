@@ -1,0 +1,11 @@
+@startuml
+interface Stuhl{
+  + sitzen(): void
+}
+class EleganterStuhl implements Stuhl {
+  + sitzen(): void
+}
+class Bierkiste implements Stuhl {
+  + sitzen(): void
+}
+@enduml

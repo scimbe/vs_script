@@ -1,0 +1,34 @@
+@startuml
+participant "Candidate" as C
+participant "Follower1" as F1
+participant "Follower2" as F2
+participant "Follower3" as F3
+
+C -> F1: RequestVote
+C -> F2: RequestVote
+C -> F3: RequestVote
+
+F1 --> C: Vote
+F2 --> C: Vote
+F3 --> C: Vote
+
+note over C: C becomes Leader
+
+C -> F1: AppendEntries
+C -> F2: AppendEntries
+C -> F3: AppendEntries
+
+F1 --> C: Acknowledge
+F2 --> C: Acknowledge
+F3 --> C: Acknowledge
+
+note over C: Entries are committed
+
+C -> F1: AppendEntries (with commit index)
+C -> F2: AppendEntries (with commit index)
+C -> F3: AppendEntries (with commit index)
+
+F1 --> C: Acknowledge
+F2 --> C: Acknowledge
+F3 --> C: Acknowledge
+@enduml

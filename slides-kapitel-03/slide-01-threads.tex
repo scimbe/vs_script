@@ -1,0 +1,262 @@
+\subsection{Threads}
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Motivation für VS}
+  \begin{itemize}
+    \item Parallelität
+    \item Effiziente Ressourcennutzung
+    \item Reaktionsfähigkeit
+    \item Einfachere Kommunikation und Synchronisation 
+    \item Granularität
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Herausforderung für VS}
+  \begin{itemize}
+    \item Deadlocks
+    \item Race Conditions
+    \item Verteilung/Skalierung über nodes
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Thread Modelle}
+  \begin{itemize}
+    \item Many-to-One (User Thread)
+    \item One-to-One-Thread-Modell (Kernel Thread)
+    \item N:M-Thread-Modell (Nicht so üblich)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{VS Anwendung Threadpool}
+  \begin{itemize}
+    \item Effiziente Ressourcennutzung
+    \item Einfache Verwaltung
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Threads}
+  \framesubtitle{VS Anwendung Threadpool}
+\begin{lstlisting}[caption={ExecutorService-Klasse I},captionpos=b,label={lst:executorI}]
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolExample {
+    public static void main(String[] args) {
+        int numThreads = 5;
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
+
+        for (int i = 0; i < 10; i++) {
+            Runnable task = new ExampleTask(i);
+            executor.execute(task);
+        }
+
+        executor.shutdown();
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Threads}
+  \framesubtitle{VS Anwendung Threadpool}
+  \begin{lstlisting}[caption={ExecutorService-Klasse II},captionpos=b,label={lst:executorII}]
+
+  import java.util.concurrent.ExecutorService;
+  import java.util.concurrent.Executors;
+
+  public class ThreadPoolExample {
+      public static void main(String[] args) {
+          int numThreads = 5;
+          ExecutorService executor = Executors.newFixedThreadPool(numThreads);
+
+          for (int i = 0; i < 10; i++) {
+              Runnable task = new ExampleTask(i);
+              executor.execute(task);
+          }
+
+          executor.shutdown();
+      }
+  }
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Threads}
+  \framesubtitle{VS Anwendung Threadpool}
+  \begin{lstlisting}[caption={ExecutorService-Klasse III},captionpos=b,label={lst:executorIII}]  
+  class ExampleTask implements Runnable {
+      private int taskId;
+
+      public ExampleTask(int taskId) {
+          this.taskId = taskId;
+      }
+
+      @Override
+      public void run() {
+          System.out.println("Task " + taskId + " is running on thread: " + Thread.currentThread().getName());
+      }
+  }
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{VS Anwendung Threadpool}
+  \begin{itemize}
+    \item Im besten Fall Umsetzung mit Tasks und Interface Strukturen 
+    \item Anzahl Threads maximal gleich der Anzahl der verfügbaren Prozessorkerne bei rechenintensiven Aufgaben
+    \item Mehr Threads als Prozessorkerne nur sinnvoll bei blockierenden Strukturen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Threadpool Task}
+  \begin{itemize}
+    \item Modularität 
+    \item Kapselung
+    \item Idempotenz
+    \item Zustandslosigkeit
+    \item Fehlertoleranz
+    \item Skalierbarkeit
+    \item Kommunikation
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Multithreaded Clients}
+  \begin{itemize}
+    \item Oft mit verschiedenen Arten von Aufgaben konfrontiert
+    \item Aufgaben unabhängig voneinander und gleichzeitig
+    \item Verwendung von Threads typischerweise zur Organisation
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Multithreaded Clients}
+  \begin{itemize}
+    \item Reaktionsfähigkeit
+    \item Modularität und Wartbarkeit
+    \item Bessere Ressourcennutzung
+    \item Vereinfachte Kommunikation
+    \item Beispiel Browser: Surfen und gleichzeitiger Datei-Download
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Thread-Level-Parallelism (TLP)}
+  \begin{itemize}
+    \item Maß dafür, wie viele Threads in einer Anwendung gleichzeitig ausgeführt werden können
+    \item Berechnung basiert auf Speedup
+  \end{itemize}
+  \begin{equation}
+    TLP = \frac{Speedup}{p} = \frac{\frac{T_1}{T_p}}{p}
+  \end{equation}
+  \begin{itemize}
+    \item Beispiel TLP von 1,5 -2 bedeuted 1,5 bis 2 Threads gleichzeitig auszuführen.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Single Threaded Process}
+  \begin{itemize}
+    \item Nur ein einzigen Ausführungsstrang (Thread)
+    \item Eine Aufgabe zur Zeit abgearbeitet
+    \item Daher sequenziellen Reihenfolge der Aufgaben
+    \item Beispiel nodejs
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Single Threaded Process}
+  \begin{itemize}
+    \item Einfachheit
+    \item Skalierbarkeit
+    \item Geringerer Ressourcenverbrauch
+    \item Nutzt Rechenleistung von Mehrkernprozessoren nicht voll aus
+    \item Gut im Cluster-Betrieb für Single-Node Architekturen
+    \item Notwendig: Blocking mit Timeout oder Non-Blocking IO
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Threads}
+  \framesubtitle{Single Threaded Process}
+  \begin{lstlisting}[caption={Node.js Single Threaded},captionpos=b,label={lst:single}]
+  const http = require("http");
+
+  const server = http.createServer((req, res) => {
+    console.log("Anfrage empfangen");
+
+    // Simuliere eine zeitaufwaendige Operation
+    setTimeout(() => {
+      res.writeHead(200, { "Content-Type": "text/plain" });
+      res.end("Hallo Welt!");
+    }, 1000);
+  });
+
+  server.listen(3000, () => {
+    console.log("Server laeuft auf Port 3000");
+  });
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Non-Blocking I/O}
+  \begin{itemize}
+    \item Asynchrone I/O (AIO)
+    \item I/O-Multiplexing (auch bekannt als Event-Driven I/O)
+    \item Non-Blocking Sockets
+    \item Beispiel für NIO ist java.nio.channels (Beispiel Script)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Server}
+  \begin{itemize}
+    \item Iterativ
+    \item Nebenläufig
+    \item Beispielimplementierungen im Script
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Iterativer Server}
+  \begin{itemize}
+    \item Einfache Implementierung
+    \item Geringerer Ressourcenverbrauch
+    \item Herausforderung: Skalierbarkeit über Kerne
+    \item Herausforderung: Reaktionsfähigkeit
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Threads}
+  \framesubtitle{Nebenläufiger Server}
+  \begin{itemize}
+    \item Reaktionsfähigkeit
+    \item Skalierbarkeit über Kerne
+    \item Herausforderung: Komplexität
+    \item Herausforderung: Ressourcenverbrauch
+  \end{itemize}
+\end{frame}

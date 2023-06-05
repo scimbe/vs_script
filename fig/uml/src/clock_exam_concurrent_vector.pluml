@@ -1,0 +1,35 @@
+@startuml
+participant Node1
+participant Node2
+participant Node3
+participant Node4
+
+Node1 -> Node2: a (1,1,0,0)
+Node1 -> Node3: b (2,0,1,0)
+Node1 -> Node4: c (3,0,0,1)
+Node2 -> Node1: d (4,2,0,0)
+Node3 -> Node1: e (5,2,2,0)
+Node4 -> Node1: f (6,2,2,2)
+Node1 -> Node2: g (7,3,2,2)
+Node1 -> Node3: h (8,2,3,1)
+Node1 -> Node4: i (2,2,3,2)
+
+Node2 -> Node1: j (3,2,3,2)
+Node3 -> Node2: k (3,3,3,2)
+Node4 -> Node3: l (3,3,4,2)
+Node1 -> Node4: m (3,3,4,3)
+Node2 -> Node3: n (3,4,4,3)
+Node3 -> Node4: p (3,4,5,3)
+Node4 -> Node1: q (4,4,5,3)
+Node1 -> Node2: r (4,5,5,3)
+Node2 -> Node4: t (4,5,5,4)
+
+
+Node4 -> Node3: s (4,5,6,4)
+Node3 -> Node2: u (4,6,6,4)
+Node2 -> Node1: v (5,6,6,4)
+Node1 -> Node4: w (5,6,6,5)
+Node4 -> Node3: x (5,6,7,5)
+Node3 -> Node2: y (5,7,7,5)
+Node2 -> Node1: z (6,7,7,5)
+@enduml
