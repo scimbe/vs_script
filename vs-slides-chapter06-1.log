@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.2)  5 JUN 2023 11:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.2)  5 JUN 2023 11:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**vs-slides-chapter06-1.tex
-(./vs-slides-chapter06-1.tex
+**.//vs-slides-chapter06-1.tex
+(.//.//vs-slides-chapter06-1.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24>
 (/usr/local/texlive/2022/texmf-dist/tex/latex/beamer/beamer.cls
@@ -1215,7 +1215,7 @@ Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'french'.
 
-(./vs-slides-chapter06-1.aux)
+(.//vs-slides-chapter06-1.aux)
 \openout1 = `vs-slides-chapter06-1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
@@ -1310,7 +1310,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 110.
 LaTeX Info: Redefining \pageref on input line 110.
 LaTeX Info: Redefining \nameref on input line 110.
- (./vs-slides-chapter06-1.out) (./vs-slides-chapter06-1.out)
+ (.//vs-slides-chapter06-1.out) (.//vs-slides-chapter06-1.out)
 \@outlinefile=\write7
 \openout7 = `vs-slides-chapter06-1.out'.
 
@@ -1377,7 +1377,7 @@ Package newfloat Info: float type `listing'=8 on input line 110.
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-(./vs-slides-chapter06-1.nav) [1
+(.//vs-slides-chapter06-1.nav) [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 \tf@nav=\write8
@@ -1389,24 +1389,24 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 \tf@snm=\write10
 \openout10 = `vs-slides-chapter06-1.snm'.
 
- (./vs-slides-chapter06-1.aux)
+ (.//vs-slides-chapter06-1.aux)
 Package rerunfilecheck Info: File `vs-slides-chapter06-1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 43073 strings out of 478268
- 992296 string characters out of 5846348
+ 43075 strings out of 478268
+ 992341 string characters out of 5846348
  1522440 words of memory out of 5000000
  60466 multiletter control sequences out of 15000+600000
  474576 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,15n,122p,717b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,15n,122p,720b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></
 usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></us
 r/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/
 local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
-Output written on vs-slides-chapter06-1.pdf (1 page, 71874 bytes).
+Output written on .//vs-slides-chapter06-1.pdf (1 page, 71874 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  47 compressed objects within 1 object stream

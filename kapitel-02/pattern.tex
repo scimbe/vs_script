@@ -4,30 +4,30 @@ Entwurfsmuster und Architekturmuster sind zwei wichtige Konzepte in der Software
 \\\\
 Entwurfsmuster sind wiederverwendbare Lösungen für häufig auftretende Probleme auf der Ebene von Klassen und Objekten. In der deutschen Sprache setzt sich auch häufig der englische Begriff Patterns durch. Sie sind in der Regel kleiner und detaillierter als Architekturmuster und bieten Best Practices für bestimmte Designprobleme. Entwurfsmuster sind in der Regel unabhängig von einer bestimmten Programmiersprache und können in verschiedenen Projekten und Systemen eingesetzt werden.
 \\\\
-Einige bekannte Entwurfsmuster, die auch für verteilte Systeme eine Rolle spielen sind:
+Einige bekannte Entwurfsmuster, die auch für verteilte Systeme und in diesem Script eine Rolle spielen sind:
 \begin{itemize}
-\item Singleton: Stellt sicher, dass eine Klasse nur ein einziges Objektinstanz hat und stellt einen globalen Zugriffspunkt dafür bereit. Beispiel: Eine zentrale Konfigurationsklasse, die von verschiedenen Teilen einer Anwendung gemeinsam genutzt wird.
-\item Observer: Ermöglicht einem Objekt (Subject), seinen Zustand automatisch an abhängige Objekte (Observer) zu übermitteln, wenn Änderungen eintreten. Beispiel: Ein Event-Listener-System, das Benachrichtigungen an Abonnenten sendet, wenn bestimmte Ereignisse eintreten.
-\item Factory Method: Definiert eine Schnittstelle zum Erstellen von Objekten in einer Superklasse, während Unterklassen die genaue Klasse der zu erzeugenden Objekte bestimmen. Beispiel: Ein Framework für die Erstellung verschiedener Arten von Diagrammen, bei dem jede Diagrammklasse ihre eigenen Erstellungsregeln hat.
-\item Adapter: Ermöglicht es, die Schnittstelle einer bestehenden Klasse so anzupassen, dass sie mit einer anderen Klasse kompatibel ist, ohne den Quellcode der beiden Klassen zu ändern. Beispiel: Eine Anwendung, die verschiedene Zahlungsschnittstellen unterstützt, verwendet Adapter, um die unterschiedlichen Schnittstellen in eine einheitliche API umzuwandeln.
+\item \textbf{Singleton}: Stellt sicher, dass eine Klasse nur ein einziges Objektinstanz hat und stellt einen globalen Zugriffspunkt dafür bereit. Beispiel: Eine zentrale Konfigurationsklasse, die von verschiedenen Teilen einer Anwendung gemeinsam genutzt wird.
+\item \textbf{Observer}: Ermöglicht einem Objekt (Subject), seinen Zustand automatisch an abhängige Objekte (Observer) zu übermitteln, wenn Änderungen eintreten. Beispiel: Ein Event-Listener-System, das Benachrichtigungen an Abonnenten sendet, wenn bestimmte Ereignisse eintreten.
+\item \textbf{Factory Method}: Definiert eine Schnittstelle zum Erstellen von Objekten in einer Superklasse, während Unterklassen die genaue Klasse der zu erzeugenden Objekte bestimmen. Beispiel: Ein Framework für die Erstellung verschiedener Arten von Diagrammen, bei dem jede Diagrammklasse ihre eigenen Erstellungsregeln hat.
+\item \textbf{Adapter}: Ermöglicht es, die Schnittstelle einer bestehenden Klasse so anzupassen, dass sie mit einer anderen Klasse kompatibel ist, ohne den Quellcode der beiden Klassen zu ändern. Beispiel: Eine Anwendung, die verschiedene Zahlungsschnittstellen unterstützt, verwendet Adapter, um die unterschiedlichen Schnittstellen in eine einheitliche API umzuwandeln.
 \end{itemize}
 Architekturmuster sind wiederum Best Practices für den Entwurf der Gesamtstruktur einer Softwareanwendung oder eines Systems. Sie befassen sich mit der Organisation von Code, Komponenten und deren Kommunikation auf einer höheren Abstraktionsebene. Architekturmuster bieten Lösungen für übergreifende Anliegen wie Skalierbarkeit, Flexibilität, Wartbarkeit und Testbarkeit.
 \\\\
 Einige bekannte Architekturmuster sind:
 \begin{itemize}
-\item Schichtenarchitektur (Layered Architecture): Das Architekturmuster unterteilt eine Anwendung in Schichten, wobei jede Schicht eine bestimmte Funktion hat, wie z.B. Präsentation, Geschäftslogik oder Datenzugriff. Dies ist sehr stark verbunden mit der Zerlegung des Teilproblems.
-\item Model-View-Controller (MVC): Trennt eine Anwendung in drei Hauptkomponenten - das Modell (Daten und Geschäftslogik), die Ansicht (Präsentation und Benutzerinteraktion) und den Controller (Steuerung der Datenverarbeitung und Aktualisierung der Ansicht). Beispiel: Ein Content-Management-System, das Daten speichert, Benutzerinhalte anzeigt und Benutzeraktionen verarbeitet.
+\item \textbf{Schichtenarchitektur} (Layered Architecture): Das Architekturmuster unterteilt eine Anwendung in Schichten, wobei jede Schicht eine bestimmte Funktion hat, wie z.B. Präsentation, Geschäftslogik oder Datenzugriff. Dies ist sehr stark verbunden mit der Zerlegung des Teilproblems.
+\item \textbf{Model-View-Controller} (MVC): Trennt eine Anwendung in drei Hauptkomponenten - das Modell (Daten und Geschäftslogik), die Ansicht (Präsentation und Benutzerinteraktion) und den Controller (Steuerung der Datenverarbeitung und Aktualisierung der Ansicht). Beispiel: Ein Content-Management-System, das Daten speichert, Benutzerinhalte anzeigt und Benutzeraktionen verarbeitet.
 \end{itemize}
-Um beispielhaft die Bedeutung und die Anwendung des MVC-Musters deutlich zu machen, soll ein Fallbeispiel erarbeitet werden, das dieses Muster verwendet. Es ist zwar möglich, das Beispiel auch mit anderen bekannten Architekturmuster umzusetzen, jedoch liegt hier nicht der Fokus. Es soll aber vor der Diskussion kurz darauf hingewiesen werden, das in der Praxis  weitere Begriffe wie das Model-View-Presenter-, das Model-View-ViewModel- oder das Model-View-Adapter-Muster oder auch weit komplexere Bilder etabliert haben. Alle gemein haben sie, das sie versuchen, spezifische Varianten des MVC-Musters genauer zu beschreiben.
+Um beispielhaft die Bedeutung und die Anwendung des MVC-Musters deutlich zu machen, soll ein Fallbeispiel erarbeitet werden, das dieses Muster verwendet. Es ist zwar möglich, das Beispiel auch mit anderen bekannten Architekturmuster umzusetzen, jedoch liegt hier nicht der Fokus. Es soll aber vor der Diskussion kurz darauf hingewiesen werden, das sich in der Praxis  weitere Begriffe wie das Model-View-Presenter-, das Model-View-ViewModel- oder das Model-View-Adapter-Muster oder auch weit komplexere Ansätze etabliert haben. Alle gemein haben sie, das sie versuchen, spezifische Varianten des MVC-Musters genauer zu beschreiben.
 
 \subsubsection{Model Viewer Controller}
 Zunächst konzentrieren wir uns auf die wesentlichsten Eigenschaften des MVC Patterns. Die erste ist im Zweifel direkt eine eher verwirrende. Das MVC-Pattern kann sowohl ein Entwufsmuster, also ein grober Designentwurf sein, als auch ein Architekturpattern mit einem konkreten Vorschlag der Implementierung. Wichtig festzustellen ist, auch wenn man andere Quellen zur Recherche nutzt, auf welcher Ebene das Pattern addressiert wird.  Hier konzentriert sich diese Ausführung im weiteren auf das MVC-Architekturmuster, da die Diskussion des MVC-Entwurfsmusters im grundlegenden Ansatz bereits bei der Unterscheidung von Schichten und Tiers erörtert wurde. Das MVC-Entwurfsmuster kann aus der Tier Diskussion als Three-Tier-Architektur Entwurf verstanden werden und braucht daher für das grundlegende Verständnis keine weitere Erklärung.
 \\\\
 In dem Diagramm~\ref{fig:default-mvc} repräsentieren die Klassen Model, View und Controller die drei Hauptkomponenten des MVC-Architekturmusters:
 \begin{itemize}
-\item Model (Modell): Kapselt Daten und Geschäftslogik. Es enthält Methoden, um Beobachter hinzuzufügen, zu entfernen und zu benachrichtigen.
-\item View (Ansicht): Implementiert meist das Observer-Interface und ist für die Präsentation und Benutzerinteraktion verantwortlich. Die \enquote{update()} Methode wird aufgerufen, wenn das Modell Änderungen benachrichtigt.
-\item Controller (Controller): Steuert die Datenverarbeitung und aktualisiert die Ansicht basierend auf Benutzeraktionen und Modelländerungen.
+\item \textbf{Model} (Modell): Kapselt Daten und Geschäftslogik. Es enthält Methoden, um Beobachter hinzuzufügen, zu entfernen und zu benachrichtigen.
+\item \textbf{View} (Ansicht): Implementiert meist das Observer-Interface und ist für die Präsentation und Benutzerinteraktion verantwortlich. Die \enquote{update()} Methode wird aufgerufen, wenn das Modell Änderungen benachrichtigt.
+\item \textbf{Controller} (Controller): Steuert die Datenverarbeitung und aktualisiert die Ansicht basierend auf Benutzeraktionen und Modelländerungen.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -307,27 +307,13 @@ Hier ist eine Beschreibung der Schlüsselelemente des Callback-Patterns:
 \item Asynchrone Programmierung: Das Callback-Pattern wird häufig in der asynchronen Programmierung verwendet, um den Programmfluss nicht zu blockieren. Wenn eine zeitintensive Operation ausgeführt wird, kann die Callback-Funktion bei Abschluss dieser Operation aufgerufen werden, sodass der restliche Code ohne Verzögerung weiterlaufen kann.
 \item Ereignisgesteuert: Das Callback-Pattern eignet sich gut für ereignisgesteuerte Programmierung, bei der bestimmte Aktionen aufgrund von Ereignissen oder Benutzerinteraktionen ausgeführt werden sollen. Die Callback-Funktionen dienen als Reaktionen auf diese Ereignisse und werden ausgeführt, wenn das Ereignis eintritt.
 \end{itemize}
-
+In dem Diagrammen ~\ref{fig:callback-class} und ~\ref{fig:callback-seq} wird das Callback-Pattern über die Callback-Schnittstelle, die Task-Klasse und die Main-Klasse dargestellt. Die Callback-Schnittstelle definiert die Methode onEvent(), die später als Callback-Funktion verwendet wird. Die Task-Klasse enthält die execute()-Methode, die die Callback-Funktion aufruft, wenn eine bestimmte Aktion oder ein bestimmtes Ereignis eintritt. Schließlich erstellt die Main-Klasse sowohl ein Task-Objekt als auch eine Implementierung der Callback-Schnittstelle und stellt die Kommunikation zwischen diesen beiden Elementen her.\\\\
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.50\textwidth]{fig/uml/callback-seq.png}
   \caption{Callback Pattern Sequenz}
   \label{fig:callback-seq}
 \end{figure}
-
-In dem Diagrammen ~\ref{fig:callback-class} und ~\ref{fig:callback-seq} wird das Callback-Pattern über die Callback-Schnittstelle, die Task-Klasse und die Main-Klasse dargestellt. Die Callback-Schnittstelle definiert die Methode onEvent(), die später als Callback-Funktion verwendet wird. Die Task-Klasse enthält die execute()-Methode, die die Callback-Funktion aufruft, wenn eine bestimmte Aktion oder ein bestimmtes Ereignis eintritt. Schließlich erstellt die Main-Klasse sowohl ein Task-Objekt als auch eine Implementierung der Callback-Schnittstelle und stellt die Kommunikation zwischen diesen beiden Elementen her.
-\\\\
-Obwohl Callback Pattern und Observer Pattern beide Techniken zur Implementierung von ereignisgesteuerten Kommunikationen zwischen Objekten sind, gibt es einige wichtige Unterschiede zwischen ihnen.
-
-\begin{itemize}
-\item Im Callback Pattern wird eine Funktion (Callback-Funktion) als Parameter an ein anderes Objekt oder eine Funktion übergeben.
-\item Die aufgerufene Funktion oder das aufgerufene Objekt führt die übergebene Callback-Funktion unter bestimmten Bedingungen aus (z.B. nachdem eine bestimmte Aktion abgeschlossen ist).
-\item Das Callback Pattern ermöglicht eine einfache, unidirektionale Kommunikation zwischen zwei Objekten oder Funktionen.
-\item Das Callback Pattern eignet sich gut für einfache und direkte Kommunikationsanforderungen, bei denen nur eine geringe Anzahl von Funktionen oder Objekten beteiligt ist.
-\end{itemize}
-
-
-
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Callback Pattern},captionpos=b,label={lst:callback}]
 // Callback-Interface
@@ -359,15 +345,24 @@ public class Main {
 }
 \end{lstlisting}
 \end{minipage}
+Obwohl Callback Pattern und Observer Pattern beide Techniken zur Implementierung von ereignisgesteuerten Kommunikationen zwischen Objekten sind, gibt es einige wichtige Unterschiede zwischen ihnen.
 
+\begin{itemize}
+\item Im Callback Pattern wird eine Funktion (Callback-Funktion) als Parameter an ein anderes Objekt oder eine Funktion übergeben.
+\item Die aufgerufene Funktion oder das aufgerufene Objekt führt die übergebene Callback-Funktion unter bestimmten Bedingungen aus (z.B. nachdem eine bestimmte Aktion abgeschlossen ist).
+\item Das Callback Pattern ermöglicht eine einfache, unidirektionale Kommunikation zwischen zwei Objekten oder Funktionen.
+\item Das Callback Pattern eignet sich gut für einfache und direkte Kommunikationsanforderungen, bei denen nur eine geringe Anzahl von Funktionen oder Objekten beteiligt ist.
+\end{itemize}
 \begin{itemize}
 \item Im Observer Pattern (auch bekannt als \enquote{Publish-Subscribe Pattern}) gibt es ein \enquote{Subject} (oder \enquote{Publisher}) und mehrere \enquote{Observer} (oder \enquote{Subscriber}).
 \item Die Observer registrieren sich beim Subject, um über Änderungen oder Ereignisse informiert zu werden.
 \item Wenn ein Ereignis beim Subject eintritt, benachrichtigt es alle registrierten Observer, indem es eine spezielle Methode in den Observer-Objekten aufruft.
 \item Das Observer Pattern ermöglicht eine lose Kopplung zwischen Objekten und ist skalierbar, da eine beliebige Anzahl von Observern benachrichtigt werden kann, ohne dass das Subject deren Implementierung
 \end{itemize}
+Im Listing~\ref{lst:callback} und Listing~\ref{lst:observer-I},~\ref{lst:observer-II} ist zu sehen, wie das Callback Pattern und das Observer Pattern in Java-Code implementiert werden. Im Callback Pattern wird eine Funktion direkt an die ausführende Klasse (Task) übergeben, während im Observer Pattern die Observer sich beim Subject (auch Task in diesem Beispiel) registrieren, um Benachrichtigungen zu erhalten.
 
-\noindent\begin{minipage}{\textwidth}
+Für Verteilte Systeme ist sowohl für das Observer Pattern als auch das Callback Pattern die Referenzen des Callbacks bzw. des Observers eine Herausforderung. Da Verteilte Systeme sich keinen gemeinsamen Speicher teilen, muss ein Ersatz für die Adressierung der Referenz gefunden werden, dies soll zu einem späteren Zeitpunkt diskutiert werden. \\\\
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Observer Pattern - ConcreteSubject},captionpos=b,label={lst:observer-I}]
 import java.util.ArrayList;
 import java.util.List;
@@ -417,6 +412,10 @@ class Task implements Subject {
 \end{lstlisting}
 \end{minipage}
 
+
+Wenn die fehlende Adressierung gelöst ist, sollte insgesamt das Callback-Pattern in Betracht gezogen werden, wenn die Anforderungen an die Kommunikation zwischen den beteiligten Funktionen oder Objekten weniger komplex sind und eine einfachere, unidirektionale Kommunikation ausreicht. Wenn jedoch mehrere Objekte auf das gleiche Ereignis reagieren müssen oder eine losere Kopplung zwischen den beteiligten Objekten erforderlich ist, ist das Observer-Pattern besser geeignet.
+
+Neben der Kommunikation der Komponenten die zudem noch in eine Uni- oder Mulitcast Kommunikation unterschieden werden kann, muss auch die Initialisierung für verteilte Systeme diskutiert werden. In diesem Script sollen neben den Singleton und den Factory Pattern auch die Initialisierung mit Dependency Injection besprochen werden.\\\\
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Observer Pattern - Concrete Observer},captionpos=b,label={lst:observer-II}]
 // ConcreteObserver
@@ -452,14 +451,6 @@ public class Main {
 }
 \end{lstlisting}
 \end{minipage}
-
-Im Listing~\ref{lst:callback} und Listing~\ref{lst:observer-I},~\ref{lst:observer-II} ist zu sehen, wie das Callback Pattern und das Observer Pattern in Java-Code implementiert werden. Im Callback Pattern wird eine Funktion direkt an die ausführende Klasse (Task) übergeben, während im Observer Pattern die Observer sich beim Subject (auch Task in diesem Beispiel) registrieren, um Benachrichtigungen zu erhalten.
-
-Für Verteilte Systeme ist sowohl für das Observer Pattern als auch das Callback Pattern die Referenzen des Callbacks bzw. des Observers eine Herausforderung. Da Verteilte Systeme sich keinen gemeinsamen Speicher teilen, muss ein Ersatz für die Adressierung der Referenz gefunden werden, dies soll zu einem späteren Zeitpunkt diskutiert werden. 
-
-Wenn die fehlende Adressierung gelöst ist, sollte insgesamt das Callback-Pattern in Betracht gezogen werden, wenn die Anforderungen an die Kommunikation zwischen den beteiligten Funktionen oder Objekten weniger komplex sind und eine einfachere, unidirektionale Kommunikation ausreicht. Wenn jedoch mehrere Objekte auf das gleiche Ereignis reagieren müssen oder eine losere Kopplung zwischen den beteiligten Objekten erforderlich ist, ist das Observer-Pattern besser geeignet.
-
-Neben der Kommunikation der Komponenten die zudem noch in eine Uni- oder Mulitcast Kommunikation unterschieden werden kann, muss auch die Initialisierung für verteilte Systeme diskutiert werden. In diesem Script sollen neben den Singleton und den Factory Pattern auch die Initialisierung mit Dependency Injection besprochen werden.
 
 \subsubsection{Singleton Pattern}
 
@@ -596,7 +587,7 @@ public class ControllerOnPI {
 \end{minipage}
 Hier haben wir eine Konstruktor-basierte Dependency Injection verwendet, um die Abhängigkeit von MessageService in MyApplication zu injizieren.
 \\\
-Schließlich können wir unser Beispiel in der Main-Methode verwenden:\\
+Schließlich können wir unser Beispiel in der Main-Methode verwenden:\\\\
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Die DI Main},captionpos=b,label={lst:di-main}]
 public class Main {
