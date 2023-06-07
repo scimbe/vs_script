@@ -1,0 +1,18 @@
+image: blang/latex:ctanfull
+
+before_script:
+  - apt-get update
+  - apt-get install -y biber
+
+build:
+  only:
+    - tags
+  script:
+    - pdflatex -interaction=nonstopmode "vs-script-first-v01.tex"
+    - biber "vs-script-first-v01"
+    - pdflatex -interaction=nonstopmode "<vs-script-first-v01.tex"
+    - pdflatex -interaction=nonstopmode "<vs-script-first-v01.tex"
+  artifacts:
+    paths:
+      - "*.pdf"
+
