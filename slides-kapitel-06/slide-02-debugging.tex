@@ -1,0 +1,95 @@
+\section{Debugging}
+%\subsection{Einleitung}
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Distributed Debugging}
+  \begin{itemize}
+    \item Speziell dafür entwickelt
+    \item Funktionen für das Setzen von Breakpoints, das Durchlaufen von Code und das Überwachen des Systemzustands
+    \item Nicht selten ein Bundle 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Minimum}
+  \begin{itemize}
+    \item Tracing-Tools
+    \item Log-Aggregation-Tools
+    \item Fehlerüberwachung und Crash-Reporting-Tools
+    \item Hoher Verbund zum Monitoring
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Beispiel Tracing: Jaeger}
+  \begin{itemize}
+    \item Trace-Erzeugung
+    \item Context Propagation
+    \item Span-Sammlung und Speicherung 
+    \item Trace-Analyse und Visualisierung
+  \end{itemize}
+  Der Einsatz von Jaeger erfordert eine gewisse Anstrengung
+\end{frame}
+
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Techniken}
+  \begin{itemize}
+    \item Snapshot: Zustand eines Systems für die Analyse festhaten
+    \item Replay-Techniken: Wiederholung durch Aufzeichnung und Snapshot
+  \end{itemize}
+  Der Einsatz von Jaeger erfordert eine gewisse Anstrengung
+\end{frame}
+
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Werkzeuge für Techniken}
+  \begin{itemize}
+    \item Record and Replay Frameworks (Beispiel: Mozilla's rr)
+    \item Distributed Snapshot Frameworks (Beispiel: Flockport)
+    \item Event Logging und Distributed Tracing Tools (Beispiel: Zipkin)
+  \end{itemize}
+  Der Einsatz von Jaeger erfordert eine gewisse Anstrengung
+\end{frame}
+
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Fehlerinjektion}
+  \begin{itemize}
+    \item Absichtlich Fehler
+    \item Beispiele Gremlin oder Chaos Monkey
+    \item Nicht selten Live Betrieb
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Fehlerinjektion}
+  \begin{itemize}
+    \item Hardware-Fehlerinjektion
+    \item Software-Fehlerinjektion
+    \item Netzwerk-Fehlerinjektion
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Häufigste Problem-Sektoren}
+  \begin{itemize}
+    \item Performance
+    \item Konfiguration
+    \item Netzwerk
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Debugging}
+  \framesubtitle{Werkzeuge für Problem-Sektoren}
+  \begin{itemize}
+    \item Profiling-Werkzeuge (Performance)
+    \item  Konfigurationsmanagement-Werkzeuge wie Ansible oder Puppet (Kontrolle über Config)
+    \item Netzwerksimulationswerkzeuge
+  \end{itemize}
+\end{frame}

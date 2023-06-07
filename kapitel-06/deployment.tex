@@ -1,10 +1,8 @@
 \subsection{Deployment}
 
-
 In der Welt der verteilten Systeme spielen Deployment-Strategien eine wesentliche Rolle bei der erfolgreichen Bereitstellung von Anwendungen. Deployment bezieht sich auf den Prozess, bei dem eine Software oder eine Anwendung von einer Entwicklungsumgebung in eine produktive Umgebung übertragen und dort betriebsbereit gemacht wird. Die Auswahl einer geeigneten Deployment-Strategie ist von entscheidender Bedeutung, um eine reibungslose und effiziente Bereitstellung zu gewährleisten.
-
+\\\\
 Eine breite Palette von Deployment-Strategien steht zur Verfügung, um den unterschiedlichen Anforderungen und Herausforderungen verteilter Systeme gerecht zu werden. Im Folgenden werden einige Beispiele für solche Strategien aufgeführt:
-
 \begin{itemize} 
 \item \textbf{Rolling Deployment} (Schrittweises Deployment):
 Rolling Deployment ist eine Methode zur Aktualisierung oder Implementierung von Software, die minimale Ausfallzeiten (Downtime) gewährleistet. Dies wird erreicht, indem Änderungen inkrementell auf Knotenpunkten oder Servern innerhalb eines Systems implementiert werden, anstatt das gesamte System gleichzeitig zu aktualisieren.
@@ -18,19 +16,19 @@ Hier ist eine detailliertere Beschreibung des Rolling Deployment-Prozesses:
 \item Fortlaufende Aktualisierung: Wenn die aktualisierten Knoten ordnungsgemäß funktionieren, wiederholen Sie den Prozess mit den nächsten Knoten. Fahren Sie fort, bis alle Knoten aktualisiert sind.
 \end{itemize} 
 Ein großer Vorteil des Rolling Deployment ist, dass es die Risiken im Zusammenhang mit einer Aktualisierung minimiert. Wenn ein Problem mit der neuen Softwareversion auftritt, wird es nur einen Teil Ihrer Infrastruktur betreffen, anstatt das gesamte System lahmzulegen.
-
-Ein bekanntes Beispiel für ein Unternehmen, das Rolling Deployment verwendet, ist Netflix. Netflix verfügt über ein umfangreiches verteiltes System, um den Millionen von Nutzern, die gleichzeitig streamen, gerecht zu werden. Sie verwenden eine Methode namens "Red/Black Deployment", die eine spezielle Form des Rolling Deployment ist. Dabei wird eine vollständige Kopie der Produktionsinfrastruktur erstellt (die "rote" Infrastruktur), auf der die neue Softwareversion getestet wird. Die "schwarze" Infrastruktur bleibt in der Zwischenzeit live. Sobald die neue Version stabil ist, wird der Datenverkehr allmählich auf die rote Infrastruktur umgeleitet. Wenn Probleme auftreten, kann der Datenverkehr schnell auf die schwarze Infrastruktur zurückgeleitet werden. Eine Variante die eine konsequentere Umschaltung verlangt ist das Blue-Green Deployment.
+\\\\
+Ein bekanntes Beispiel für ein Unternehmen, das Rolling Deployment verwendet, ist Netflix. Netflix verfügt über ein umfangreiches verteiltes System, um den Millionen von Nutzern, die gleichzeitig streamen, gerecht zu werden. Sie verwenden eine Methode namens \enquote{\textbf{Red/Black}\index{Red/Black} Deployment}, die eine spezielle Form des Rolling Deployment ist. Dabei wird eine vollständige Kopie der Produktionsinfrastruktur erstellt (die "rote" Infrastruktur), auf der die neue Softwareversion getestet wird. Die "schwarze" Infrastruktur bleibt in der Zwischenzeit live. Sobald die neue Version stabil ist, wird der Datenverkehr allmählich auf die rote Infrastruktur umgeleitet. Wenn Probleme auftreten, kann der Datenverkehr schnell auf die schwarze Infrastruktur zurückgeleitet werden. Eine Variante die eine konsequentere Umschaltung verlangt ist das Blue-Green Deployment.
 \item \textbf{Blue-Green Deployment} (Blau-Grün-Deployment):
 Bei dieser Methode werden zwei identische Produktionsumgebungen bereitgestellt, die als "blau" und "grün" bezeichnet werden. Während die blaue Umgebung die aktive Produktionsumgebung ist, wird das Update in der grünen Umgebung bereitgestellt. Wenn die grüne Umgebung vollständig getestet und für bereit befunden wurde, wird der Verkehr von der blauen Umgebung auf die grüne Umgebung umgeleitet. Dies ermöglicht nahezu null Ausfallzeiten und eine schnelle Rückkehr zur vorherigen Version, wenn Probleme auftreten.
-
+\\\\
 Rolling Deployment: Bei dieser Methode wird das Update schrittweise auf das System angewendet. Anstatt das Update auf alle Instanzen gleichzeitig anzuwenden, wird es auf eine Untergruppe von Instanzen angewendet, während der Rest des Systems normal weiterläuft. Sobald das Update in der Untergruppe erfolgreich war, wird es auf eine weitere Untergruppe angewendet, und so weiter, bis das gesamte System aktualisiert ist. Dies minimiert die Ausfallzeit und reduziert das Risiko, dass ein problematisches Update das gesamte System beeinträchtigt.
-
+\\\\
 A/B-Tests (auch als Split-Tests bekannt): Bei dieser Methode wird das Update einer kleinen Gruppe von Benutzern (Gruppe A) zur Verfügung gestellt, während der Rest der Benutzer (Gruppe B) die aktuelle Version der Software verwendet. Dies ermöglicht es, die Auswirkungen des Updates zu testen und Feedback zu sammeln, bevor es auf den Rest der Benutzer ausgerollt wird.
-
+\\\\
 Schattenbereitstellung (Shadow Deployment): Bei dieser Methode wird das Update in einer "Schatten"-Umgebung bereitgestellt, die den Produktionsverkehr spiegelt. Dies ermöglicht es, das Verhalten des Updates unter realen Bedingungen zu testen, ohne die Benutzer zu beeinträchtigen.
 \item \textbf{Canary Deployment} (Kanarienvogel-Deployment):
 Bei dieser Strategie werden neue Anwendungs- oder Systemversionen zunächst auf eine begrenzte Benutzer- oder Servergruppe (die "Kanarienvögel") ausgerollt, bevor sie auf das gesamte System ausgeweitet werden. Diese Methode wird oft genutzt, um das Risiko einer neuen Software-Version zu minimieren, indem deren Auswirkungen auf eine begrenzte Gruppe getestet werden, bevor sie breiter ausgerollt wird.
-
+\\\\
 Hier ist eine detailliertere Beschreibung des Canary Deployment-Prozesses:
 \begin{itemize} 
 \item Bereitstellung der neuen Version auf einer begrenzten Gruppe: Die neue Version der Software wird auf einem Teil der Server oder für eine ausgewählte Benutzergruppe bereitgestellt.
@@ -42,7 +40,7 @@ Ein bekanntes Unternehmen, das Canary Deployments verwendet, ist Facebook. Sie s
 \end{itemize} 
 Diese Beispiele stellen nur eine Auswahl der verfügbaren Deployment-Strategien in verteilten Systemen dar. Jede Strategie hat ihre eigenen Vor- und Nachteile, und die Wahl der richtigen Strategie hängt von den spezifischen Anforderungen des Systems, der Risikobereitschaft und den Geschäftsanforderungen ab und ist auch nicht selten von der Update-Strategie eines Unternehmes abhängig. Gerade bei sicherheitsrelevanten und kritischen Systemen erfordert dies besondere Überlegungen. 
 Die hier insbesondere adressierten Systeme können von medizinischen Geräten über Flugverkehrskontrollsysteme bis hin zu industriellen Kontrollsystemen reichen. 
-
+\\\\
 Fehler in solchen Systemen können schwerwiegende Folgen haben, einschließlich der Gefährdung von Menschenleben, erheblicher finanzieller Verluste oder bedeutender Betriebsunterbrechungen. Daher müssen die Updates sehr sorgfältig und methodisch durchgeführt werden.
 
 Hier sind einige Strategien, die bei der Aktualisierung von sicherheitsrelevanten und kritischen Systemen häufig verwendet werden:
@@ -60,11 +58,11 @@ Hier sind einige Strategien, die bei der Aktualisierung von sicherheitsrelevante
 Ein gutes Beispiel für ein sicherheitskritisches System, das sorgfältige Aktualisierungsstrategien erfordert, ist das Steuerungssystem eines Kernkraftwerks. Solche Systeme werden oft redundant ausgeführt und mit sorgfältigen Tests und Notfallplänen aktualisiert, um sicherzustellen, dass das Risiko eines Ausfalls oder eines Sicherheitsvorfalls minimiert wird. 
 \\\\ 
 An dieser Diskussion erkennt man aber auch, das nicht nur das Deployment, von der Update-Strategie abhängig ist, sondern die Update Strategie von der Test-Strategie. Die Art und Weise, wie ein Unternehmen seine Software testet, hat einen direkten Einfluss auf die Aktualisierungsstrategie. Wenn beispielsweise automatisierte Tests eingesetzt werden, die eine hohe Code-Abdeckung und Vertrauen in die Softwarequalität gewährleisten, können die Updates mit höherer Frequenz und mit geringerem Risiko durchgeführt werden. Andererseits, wenn das Testen manuell oder mit geringer Abdeckung durchgeführt wird, könnten die Updates seltener und vorsichtiger sein, um Risiken zu minimieren.
-
+\\\\
 Eine gängige Praxis in modernen Teststrategien ist der Einsatz von verschiedenen Arten von Tests - von Unit-Tests, die einzelne Komponenten der Software isoliert testen, bis hin zu Integrationstests, die das Zusammenspiel zwischen den Komponenten überprüfen, und Akzeptanztests, die die Software aus der Benutzersicht überprüfen.
 Hier können auch besondere Strategien eine besondere Rolle spielen. Continuous Delivery (CD) soll als eine ausgewählte in diesem Zusammenhang diskutiert werden. CD ist ein Ansatz, bei dem Software in kurzen Zyklen entwickelt, getestet und bereitgestellt wird, mit dem Ziel, Softwareupdates mit minimaler Verzögerung zur Verfügung zu stellen. CD kann dazu führen, dass Updates öfter und in kleineren Inkrementen durchgeführt werden, da jede Änderung schnell durch den Entwicklungs- und Testprozess geht und bereitgestellt wird, sobald sie fertig ist.
-
-Continuous Delivery kann auch dazu beitragen, das Risiko von Updates zu minimieren. Da Änderungen in kleineren Inkrementen durchgeführt werden, ist es leichter, Probleme zu erkennen und zu beheben, und das Risiko, dass eine einzelne Änderung das gesamte System stört, ist geringer. CD widerrum wird nicht selten mit einer weiteren Stragie verbunden, dem Continuous Integration (CI). CI ist ein Softwareentwicklungsprozess, bei dem Entwickler regelmäßig (oft täglich) ihre Änderungen in einem gemeinsamen Repository integrieren. Nach jeder Integration werden automatische Builds und Tests durchgeführt, um frühzeitig Probleme zu erkennen. CI hat ähnliche Ziele wie CD, nur konzentriert es sich mehr auf den Entwicklungsprozess und weniger auf die tatsächliche Bereitstellung von Software in der Produktionsumgebung. 
+\\\\
+Continuous Delivery kann auch dazu beitragen, das Risiko von Updates zu minimieren. Da Änderungen in kleineren Inkrementen durchgeführt werden, ist es leichter, Probleme zu erkennen und zu beheben, und das Risiko, dass eine einzelne Änderung das gesamte System stört, ist geringer. CD widerrum wird nicht selten mit einer weiteren Stragie verbunden, dem \textbf{Continuous Integration} (CI). CI ist ein Softwareentwicklungsprozess, bei dem Entwickler regelmäßig (oft täglich) ihre Änderungen in einem gemeinsamen Repository integrieren. Nach jeder Integration werden automatische Builds und Tests durchgeführt, um frühzeitig Probleme zu erkennen. CI hat ähnliche Ziele wie CD, nur konzentriert es sich mehr auf den Entwicklungsprozess und weniger auf die tatsächliche Bereitstellung von Software in der Produktionsumgebung. 
 \\\\ 
 In diesem Kontext könnten aber auch andere Strategien am Beispiel des Waterfall-Modells, anderen agilen Methoden oder auch DevOps besprochen werden. Häufig ist die Umsetzung in einem großen verteilten System, auch in keiner vollständigen Reinform vorzufinden.
 \\\\
@@ -84,16 +82,16 @@ Es gibt eine Vielzahl von Deployment-Management-Tools zur Auswahl, und die beste
 \item Chef: Chef ist ein weit verbreitetes Open-Source-Tool für das Konfigurationsmanagement, das auf Ruby basiert. Es hilft beim Automatisieren des Prozesses der Infrastrukturkonfiguration und -verwaltung, von der Bereitstellung von Servern bis hin zur Installation und Aktualisierung von Softwarepaketen. Es wurde entwickelt, um die Herausforderungen der Skalierbarkeit und Komplexität in großen IT-Umgebungen zu bewältigen.
 \end{itemize} 
 Jedes dieser Tools hat seine Stärken und kann in verschiedenen Situationen nützlich sein. Wenn zu Beginn eines Projektes steht, ist es vielleicht am besten zunächst eine oder zwei Werkzeuge auszuwählen, da die Werkzeuge eine durchaus vorhandene Komplexität in sich tragen. Es ist auch hilfreich, die Grundlagen der Containerisierung und der Infrastruktur als Code zu verstehen, da diese Konzepte in vielen modernen Deployment-Management-Tools eine zentrale Rolle spielen.
-
+\\\\
 Infrastruktur als Code (IaC) ist ein Ansatz zur Infrastrukturautomatisierung, der auf denselben Prinzipien basiert, die für die Softwareentwicklung gelten. Bei IaC wird die gesamte IT-Infrastruktur in Codeform definiert und verwaltet, was zu einer effizienteren und zuverlässigeren Infrastruktur führt.
-
+\\\\
 Bei traditionellen Infrastrukturmanagementansätzen kann die Einrichtung und Verwaltung von Servern, Datenbanken und Netzwerken viel manuelle Arbeit erfordern. Diese Prozesse können zeitaufwendig und fehleranfällig sein, und es kann schwierig sein, die Konsistenz über verschiedene Umgebungen und Projekte hinweg sicherzustellen.
 \\\\
 IaC adressiert diese Probleme, indem es eine hoch automatisierte und konsistente Methode zur Bereitstellung und Verwaltung von Infrastrukturen bietet. Mit IaC können Administratoren Infrastrukturen auf die gleiche Weise behandeln wie Anwendungscode: Sie können Versionen verwalten, Tests durchführen, Wiederverwendung und Modularität fördern und kontinuierliche Integration und Bereitstellung (CI/CD) implementieren.
 Die Cloud-spezifischen Dienste, wie AWS CloudFormation und Google Cloud Deployment Manager, erweitern hier nochmal das bisher besprochene Angebot von Terraform, Ansible, Puppet oder Chef.
 \\\\ 
 Am Ende sollen nochmal die wesentlichen Punkte in diesem Script unter dem Aspekt des Betriebsmanagement zusammengefasst werden. Ziel des Betriebsmanagement ist es, die Systemressourcen effektiv zu nutzen und Dienste auf optimale Weise bereitzustellen.
-
+\\\
 Hier sind einige der wichtigsten Techniken und Konzepte, die im Betriebsmanagement von verteilten Systemen verwendet werden:
 \begin{itemize} 
 \item Lastausgleich (Load Balancing): Dies ist eine Methode, um die Arbeitslast gleichmäßig über die Knoten im Netzwerk zu verteilen, um optimale Ressourcennutzung, maximalen Durchsatz, minimale Reaktionszeit und Vermeidung von Überlastung zu erreichen.
