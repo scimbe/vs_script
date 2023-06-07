@@ -4,15 +4,20 @@ before_script:
   - apt-get update
   - apt-get install -y biber
 
-build:
+stages:
+  - workflow-protection
+
+do-some-latex:
+  stage: workflow-protection
   only:
     - tags
+
   script:
     - pdflatex -interaction=nonstopmode "vs-script-first-v01.tex"
     - biber "vs-script-first-v01"
     - pdflatex -interaction=nonstopmode "<vs-script-first-v01.tex"
     - pdflatex -interaction=nonstopmode "<vs-script-first-v01.tex"
+    - echo "${CI_JOB_NAME}"
   artifacts:
     paths:
       - "*.pdf"
-
