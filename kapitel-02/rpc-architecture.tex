@@ -117,7 +117,7 @@ Als erstes muss man festhalten, dass aus der naiven Ansicht häufig ein Verhalte
 Ist die Beschreibung des Verhaltens in der Architektur das Ziel, muss nochmals auf die Nutzung des Schichtenmodells hingewiesen werden. Jede Schicht kapselt die Sequenzen nach der zugeordneten Verantwortlichkeit.
 Somit beschreiben die Sequenzen in der Applikationsschicht die der Applikation und die Sequenzen der Middleware die der Middleware. Was nicht geschehen sollte, ist eine Vermischung beider Schichten. So wäre eine gültige Sequenz der Applikation beschrieben in Diagramm~\ref{fig:rpc-app-seq-rpc} und eine der Middleware im Diagramm~\ref{fig:rpc-middleware-seq-rpc}. An der Sequenz in der Applikation selbst sollte man nicht ohne weiteres erkennen, dass es sich um einen entfernen Funktionsaufruf handelt. Diese Aufgabe wird von der Middleware übernommen.
 \\\\
-Es ist wichtig zu verstehen, dass die Sequenz der Applikation aus einer spezifischen Verarbeitung des Anwendungsfalls getrieben ist, wohingegen die Sequenz der Middleware eine generische Umsetzung repräsentiert, die von jeglichen Aufruf aus der Applikation heraus genutzt werden kann. So kann man naiv die Beziehung zwischen einem entfernten Funktionsaufruf und der Middleware auch als eine 0:n- Beziehung beschreiben, wobei die Middleware  in diesem Fall eine generische Funktion für einen synchronen Funktionsaufruf repräsentiert. 
+Es ist wichtig zu verstehen, dass die Sequenz der Applikation aus einer spezifischen Verarbeitung des Anwendungsfalls getrieben ist, wohingegen die Sequenz der Middleware eine generische Umsetzung repräsentiert, die von jeglichem Aufruf aus der Applikation heraus genutzt werden kann. So kann man naiv die Beziehung zwischen einem entfernten Funktionsaufruf und der Middleware auch als eine 0:n- Beziehung beschreiben, wobei die Middleware  in diesem Fall eine generische Funktion für einen synchronen Funktionsaufruf repräsentiert. 
 
 
  \begin{figure}[!ht]
@@ -139,7 +139,7 @@ Um die Middleware möglichst transparent und wiederverwendbar zu gestalten, soll
 
 Der Marshalling-Prozess und die Serialisierung sind Begriffe, die oft im Zusammenhang mit der Remote Procedure Call (RPC) Architektur verwendet werden. Beide Prozesse sind zwar miteinander verknüpft, es gibt jedoch grundlegende Unterschiede zwischen ihnen.
 \\\\
-Der Marshalling-Prozess ist ein Verfahren, bei dem Daten und Parameter in einer Form gewandelt werden, die über das Netzwerk gesendet und auf der anderen Seite wieder zusammengesetzt werden kann. Kurz: aus einem Funktiosnaufruf wird eine Nachricht generiert. Dieser Prozess ist in der RPC-Architektur besonders wichtig, da er es ermöglicht, entfernte Prozeduraufrufe zwischen verschiedenen Systemen auszuführen, die unterschiedliche Datenformate, Speicherlayouts oder sogar Programmiersprachen verwenden können.
+Der Marshalling-Prozess ist ein Verfahren, bei dem Daten und Parameter in einer Form gewandelt werden, die über das Netzwerk gesendet und auf der anderen Seite wieder zusammengesetzt werden kann. Kurz: aus einem Funktionsaufruf wird eine Nachricht generiert. Dieser Prozess ist in der RPC-Architektur besonders wichtig, da er es ermöglicht, entfernte Prozeduraufrufe zwischen verschiedenen Systemen auszuführen, die unterschiedliche Datenformate, Speicherlayouts oder sogar Programmiersprachen verwenden können.
 \\\\
 Der Marshalling-Prozess besteht aus mehreren Schritten:
 \begin{itemize} 
