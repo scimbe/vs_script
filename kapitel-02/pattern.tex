@@ -223,13 +223,13 @@ Das Observer Pattern besteht aus einem Subjekt, das eine Liste von Beobachtern h
 \end{figure}
 
 Das Observer Pattern ermöglicht eine flexible und erweiterbare Architektur, da Subjekte und Beobachter unabhängig voneinander implementiert werden können. Subjekte können Beobachter hinzufügen oder entfernen, ohne dass dies Auswirkungen auf den Rest des Systems hat. Beobachter können ebenfalls hinzugefügt oder entfernt werden, ohne dass Änderungen an anderen Teilen des Systems vorgenommen werden müssen.
-
+\\\\
 Die Abbildung~\ref{fig:default-observer} zeigt das Observer Pattern mit drei Komponenten: Subject, Observer und ConcreteSubject. Das Subject ist eine Schnittstelle, die von den Subjekten implementiert wird, die beobachtet werden sollen. Es definiert Methoden zum Hinzufügen, Entfernen und Benachrichtigen von Beobachtern. Der Observer ist eine Schnittstelle, die von allen Beobachtern implementiert wird, und definiert eine Methode zum Aktualisieren des Beobachters, wenn sich der Zustand des Subjekts ändert.
 
 Der ConcreteSubject ist das Subjekt, das beobachtet werden soll. Es hält eine Liste von Beobachtern und implementiert die Methoden zum Hinzufügen, Entfernen und Benachrichtigen von Beobachtern. Der ConcreteObserver ist ein Beobachter, der den Zustand des Subjekts aktualisiert, wenn sich dieser ändert.
 \\\\
 Das Observer Pattern ermöglicht eine lose Kopplung zwischen Subjekten und Beobachtern, da Subjekte nicht von spezifischen Beobachtern abhängig sind und Beobachter nicht von spezifischen Subjekten. Man beachte, dass eine lose Kopplung zwischen den Komponenten gelingt, aber eine enge Kopplung bei der Kommunikation unterstützt wird. 
-
+\\\\
 Für unser Anwendungsbeispiel angepasst, soll das Oberver-Pattern zwischen der KundenApp (View) und der Lampe (Model) etabliert werden. Eine vereinfachte Architektur könnte wie in Abbildung~\ref{fig:mvc-observer} aufgebaut werden. 
 
 \begin{figure}[ht]
@@ -239,25 +239,25 @@ Für unser Anwendungsbeispiel angepasst, soll das Oberver-Pattern zwischen der K
   \label{fig:mvc-observer}
 \end{figure}
 
-Natürlich ist ein Architektur-Modell nicht ausreichend, um das gesamte Design zu beschreiben, das MVC Architektur-Modell braucht weitere Informationen für das vollständige System. Eine wichtige zusätzliche Information ist das Verhalten der Architektur. Auch für dieses Verhalten bestehen \enquote{Best Practise} Ansätze, die wir als Verhaltensmuster (Behavioral Patterns) beschreiben. 
-
-Verhaltensmuster genannt, sind Entwurfsmuster in der Softwareentwicklung, die sich mit der Organisation und Steuerung von Objekten und deren Interaktionen beschäftigen. Sie beschreiben, wie verschiedene Objekte zusammenarbeiten und wie sie Verhaltensweisen und Aufgaben koordinieren.
-
+Natürlich ist ein Architektur-Modell nicht ausreichend, um das gesamte Design zu beschreiben, auch das MVC Architektur-Modell braucht weitere Informationen für das vollständige System. Eine wichtige zusätzliche Information ist das Verhalten der Architektur. Auch für dieses Verhalten bestehen \enquote{Best Practise} Ansätze, die wir als Verhaltensmuster (Behavioral Patterns) beschreiben. 
+\\\\
+\textbf{Verhaltensmuster} (Behavioral Patterns) sind Entwurfsmuster in der Softwareentwicklung, die sich mit der Organisation und Steuerung von Objekten und deren Interaktionen beschäftigen. Sie beschreiben, wie verschiedene Objekte zusammenarbeiten und wie sie Verhaltensweisen und Aufgaben koordinieren.
+\\\\
 Behavioral Patterns beschreiben das Verhalten von Objekten in bestimmten Situationen und stellen somit Lösungen für wiederkehrende Probleme bereit, wie z.B. die Steuerung von Abläufen, die Verwaltung von Zuständen oder die Behandlung von Fehlern. Es gibt verschiedene Arten von Behavioral Patterns, die je nach Art der Aufgabe, die sie lösen sollen, in verschiedene Kategorien unterteilt werden können:
 \begin{itemize}
-\item Klassifizierungsmuster (Classification Patterns): Diese Muster beschreiben, wie Objekte in Klassen und Kategorien organisiert werden können, um eine effektive Klassifizierung und Strukturierung von Objekten zu ermöglichen. Ein Beispiel für ein solches Muster ist das Strategy Pattern.
-\item Kommunikationsmuster (Communication Patterns): Diese Muster beschreiben, wie Objekte miteinander kommunizieren und wie Nachrichten oder Daten zwischen ihnen ausgetauscht werden können. Ein Beispiel für ein solches Muster ist das Observer Pattern.
-\item Kontrollmuster (Control Patterns): Diese Muster beschreiben, wie Objekte kontrolliert und gesteuert werden können, um eine effektive Durchführung von Abläufen und Prozessen zu ermöglichen. Ein Beispiel für ein solches Muster ist das Command Pattern.
-\item Datenmuster (Data Patterns): Diese Muster beschreiben, wie Daten zwischen Objekten ausgetauscht und gespeichert werden können. Ein Beispiel für ein solches Muster ist das Iterator Pattern.
+\item \textbf{Klassifizierungsmuster} (Classification Patterns): Diese Muster beschreiben, wie Objekte in Klassen und Kategorien organisiert werden können, um eine effektive Klassifizierung und Strukturierung von Objekten zu ermöglichen. Ein Beispiel für ein solches Muster ist das Strategy Pattern.
+\item \textbf{Kommunikationsmuster} (Communication Patterns): Diese Muster beschreiben, wie Objekte miteinander kommunizieren und wie Nachrichten oder Daten zwischen ihnen ausgetauscht werden können. Ein Beispiel für ein solches Muster ist das Observer Pattern.
+\item \textbf{Kontrollmuster} (Control Patterns): Diese Muster beschreiben, wie Objekte kontrolliert und gesteuert werden können, um eine effektive Durchführung von Abläufen und Prozessen zu ermöglichen. Ein Beispiel für ein solches Muster ist das Command Pattern.
+\item \textbf{Datenmuster} (Data Patterns): Diese Muster beschreiben, wie Daten zwischen Objekten ausgetauscht und gespeichert werden können. Ein Beispiel für ein solches Muster ist das Iterator Pattern.
 \end{itemize}
 Es ergibt sich natürlich, dass die Kommunikationsmuster eine besondere Bedeutung in dem Design eines verteilten Systems einnehmen. 
 \\\\
 Für die Beschreibung von Behavioral Patterns eignen sich in UML (Unified Modeling Language) vor allem die folgenden Diagrammtypen:
 \begin{itemize}
-\item Aktivitätsdiagramme (Activity Diagrams): Diese Diagramme werden verwendet, um die Abläufe und Prozesse in einem System oder einer Anwendung zu beschreiben. Aktivitätsdiagramme können verwendet werden, um die Interaktionen zwischen verschiedenen Objekten in einem Behavioral Pattern darzustellen.
-\item Sequenzdiagramme (Sequence Diagrams): Diese Diagramme werden verwendet, um die Interaktionen zwischen verschiedenen Objekten in einer bestimmten Sequenz darzustellen. Sequenzdiagramme können verwendet werden, um die Kommunikationsmuster in einem Behavioral Pattern zu beschreiben.
+\item \textbf{Aktivitätsdiagramme} (Activity Diagrams): Diese Diagramme werden verwendet, um die Abläufe und Prozesse in einem System oder einer Anwendung zu beschreiben. Aktivitätsdiagramme können verwendet werden, um die Interaktionen zwischen verschiedenen Objekten in einem Behavioral Pattern darzustellen.
+\item \textbf{Sequenzdiagramme} (Sequence Diagrams): Diese Diagramme werden verwendet, um die Interaktionen zwischen verschiedenen Objekten in einer bestimmten Sequenz darzustellen. Sequenzdiagramme können verwendet werden, um die Kommunikationsmuster in einem Behavioral Pattern zu beschreiben.
 \item Zustandsdiagramme (State Diagrams): Diese Diagramme werden verwendet, um den Zustand eines Objekts und die Übergänge zwischen verschiedenen Zuständen zu beschreiben. Zustandsdiagramme können verwendet werden, um die Kontrollmuster in einem Behavioral Pattern zu beschreiben.
-\item Interaktionsübersichtsdiagramme (Interaction Overview Diagrams): Diese Diagramme werden verwendet, um die Interaktionen zwischen verschiedenen Objekten und deren Kommunikationsmuster in einem System oder einer Anwendung zu beschreiben. Interaktionsübersichtsdiagramme können verwendet werden, um eine Übersicht über die Interaktionen in einem Behavioral Pattern zu geben.
+\item \textbf{Interaktionsübersichtsdiagramme} (Interaction Overview Diagrams): Diese Diagramme werden verwendet, um die Interaktionen zwischen verschiedenen Objekten und deren Kommunikationsmuster in einem System oder einer Anwendung zu beschreiben. Interaktionsübersichtsdiagramme können verwendet werden, um eine Übersicht über die Interaktionen in einem Behavioral Pattern zu geben.
 \end{itemize}
 Durch die Verwendung dieser Diagrammtypen können Behavioral Patterns effektiv beschrieben und visualisiert werden, was zu einer verbesserten Verständlichkeit und Kommunikation der Konzepte und Strukturen innerhalb des Patterns führt.
 \\\\
@@ -282,6 +282,7 @@ Dieses Sequenzdiagramm zeigt die Interaktionen zwischen Benutzer, Controller, Mo
 \\\\
 Ob das MVC-Pattern mit einer Kopplung über das Observer Pattern gelingt, ist nicht nur ein Design, sondern auch eine Technologie-abhängige Fragestellung. Das Observer Pattern verlangt die Möglichkeit einer unabhängigen uni-direktionalen Kommunikation zwischen dem Subjekt und den Beobachtern, die nur in eine Richtung erfolgt. Dies ist sowohl in einem Programmstack möglich, als auch bei der klassischen Socket-Kommunikation. Beispielhaft ist TCP ein Transportprotokoll auf Layer 4 des ISO-OSI Referenzmodells, welches als Schnittstelle über die Socket-API den Entwicklern bereitgestellt wird. Mit einem Applikations-Protokoll, das diese Eigenschaften nutzt, ist eine Umsetzung des Observer-Patterns eine gute Wahl. 
 \\\\
+% TODO Check spell
 In klassischen Web-Applikationen, selbst wenn sie auf UDP oder TCP basieren, ist dies ohne weiteres nicht der Fall. Als Beispiel kann das HTTP Protokoll herangezogen werden, das auf Basis von TCP ein zustandloses Protokoll anbietet und zudem dem Request-Response-Cycle unterliegt. Insbesondere der Request-Response-Cycle setzt für jede Anfrage eine Antwort voraus und widerspricht der Funktionsweise des Observer Patterns.
 \\\\
 In der Praxis können Techniken wie WebSockets oder Long Polling verwendet werden, um eine Art Zustand und damit unabhängiger Kommunikation zwischen Subjekt und den Beobachtern zu simulieren und das Observer-Pattern zu verwenden, dennoch sind diese Lösungen nicht Teil von älteren HTTP Standards und in Teilen sehr fehleranfällig. Zur Erklärung, bei diesen Lösungen werden Verbindungen zwischen Subjekt und dem Beobachter aufrechterhalten und bei Zustandsänderungen werden die entsprechenden Beobachter benachrichtigt. Allerdings sind diese Techniken mit erhöhtem Aufwand verbunden und haben auch andere Nachteile, wie z.B. eine höhere Netzwerklast und eine höhere Komplexität in der Implementierung. 
@@ -311,12 +312,7 @@ Hier ist eine Beschreibung der Schlüsselelemente des Callback-Patterns:
 \item Ereignisgesteuert: Das Callback-Pattern eignet sich gut für ereignisgesteuerte Programmierung, bei der bestimmte Aktionen aufgrund von Ereignissen oder Benutzerinteraktionen ausgeführt werden sollen. Die Callback-Funktionen dienen als Reaktionen auf diese Ereignisse und werden ausgeführt, wenn das Ereignis eintritt.
 \end{itemize}
 In dem Diagrammen ~\ref{fig:callback-class} und ~\ref{fig:callback-seq} wird das Callback-Pattern über die Callback-Schnittstelle, die Task-Klasse und die Main-Klasse dargestellt. Die Callback-Schnittstelle definiert die Methode onEvent(), die später als Callback-Funktion verwendet wird. Die Task-Klasse enthält die execute()-Methode, die die Callback-Funktion aufruft, wenn eine bestimmte Aktion oder ein bestimmtes Ereignis eintritt. Schließlich erstellt die Main-Klasse sowohl ein Task-Objekt als auch eine Implementierung der Callback-Schnittstelle und stellt die Kommunikation zwischen diesen beiden Elementen her.\\\\
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.50\textwidth]{fig/uml/callback-seq.png}
-  \caption{Callback Pattern Sequenz}
-  \label{fig:callback-seq}
-\end{figure}
+
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Callback Pattern},captionpos=b,label={lst:callback}]
 // Callback-Interface
@@ -356,15 +352,19 @@ Obwohl Callback Pattern und Observer Pattern beide Techniken zur Implementierung
 \item Das Callback Pattern ermöglicht eine einfache, unidirektionale Kommunikation zwischen zwei Objekten oder Funktionen.
 \item Das Callback Pattern eignet sich gut für einfache und direkte Kommunikationsanforderungen, bei denen nur eine geringe Anzahl von Funktionen oder Objekten beteiligt ist.
 \end{itemize}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.50\textwidth]{fig/uml/callback-seq.png}
+  \caption{Callback Pattern Sequenz}
+  \label{fig:callback-seq}
+\end{figure}
 \begin{itemize}
 \item Im Observer Pattern (auch bekannt als \enquote{Publish-Subscribe Pattern}) gibt es ein \enquote{Subject} (oder \enquote{Publisher}) und mehrere \enquote{Observer} (oder \enquote{Subscriber}). Der Code wird im Folgenden diskutiert.
 \item Die Observer registrieren sich beim Subject, um über Änderungen oder Ereignisse informiert zu werden.
 \item Wenn ein Ereignis beim Subject eintritt, benachrichtigt es alle registrierten Observer, indem es eine spezielle Methode in den Observer-Objekten aufruft.
 \item Das Observer Pattern ermöglicht eine lose Kopplung zwischen Objekten und ist skalierbar, da eine beliebige Anzahl von Observern benachrichtigt werden kann, ohne dass das Subject deren Implementierung kennen muss.
 \end{itemize}
-Im Listing~\ref{lst:callback} und Listing~\ref{lst:observer-I},~\ref{lst:observer-II} ist zu sehen, wie das Callback Pattern und das Observer Pattern in Java-Code implementiert werden. Im Callback Pattern wird eine Funktion direkt an die ausführende Klasse (Task) übergeben, während im Observer Pattern die Observer sich beim Subject (auch Task in diesem Beispiel) registrieren, um Benachrichtigungen zu erhalten.
 
-Für Verteilte Systeme ist sowohl für das Observer Pattern als auch das Callback Pattern die Referenzen des Callbacks bzw. des Observers eine Herausforderung. Da Verteilte Systeme sich keinen gemeinsamen Speicher teilen, muss ein Ersatz für die Adressierung der Referenz gefunden werden, dies soll zu einem späteren Zeitpunkt diskutiert werden. \\\\
 \begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Observer Pattern - ConcreteSubject},captionpos=b,label={lst:observer-I}]
 import java.util.ArrayList;
@@ -415,6 +415,9 @@ class Task implements Subject {
 \end{lstlisting}
 \end{minipage}
 
+Im Listing~\ref{lst:callback} und Listing~\ref{lst:observer-I},~\ref{lst:observer-II} ist zu sehen, wie das Callback Pattern und das Observer Pattern in Java-Code implementiert werden. Im Callback Pattern wird eine Funktion direkt an die ausführende Klasse (Task) übergeben, während im Observer Pattern die Observer sich beim Subject (auch Task in diesem Beispiel) registrieren, um Benachrichtigungen zu erhalten.
+
+Für Verteilte Systeme ist sowohl für das Observer Pattern als auch das Callback Pattern die Referenzen des Callbacks bzw. des Observers eine Herausforderung. Da Verteilte Systeme sich keinen gemeinsamen Speicher teilen, muss ein Ersatz für die Adressierung der Referenz gefunden werden, dies soll zu einem späteren Zeitpunkt diskutiert werden. \\
 
 Wenn die fehlende Adressierung gelöst ist, sollte insgesamt das Callback-Pattern in Betracht gezogen werden, wenn die Anforderungen an die Kommunikation zwischen den beteiligten Funktionen oder Objekten weniger komplex sind und eine einfachere, unidirektionale Kommunikation ausreicht. Wenn jedoch mehrere Objekte auf das gleiche Ereignis reagieren müssen oder eine losere Kopplung zwischen den beteiligten Objekten erforderlich ist, ist das Observer-Pattern besser geeignet.
 
