@@ -294,14 +294,12 @@ Das Callback-Pattern ist auch nützlich, wenn es darum geht, den Programmfluss n
 
 \subsubsection{Callback Pattern}
 Das Callback-Pattern ist ein Verhaltensmuster in der Softwareentwicklung, bei dem eine Funktion (auch als Methode oder Prozedur bezeichnet) als Argument an eine andere Funktion übergeben wird. Diese übergebene Funktion, die als Callback-Funktion bezeichnet wird, wird zu einem späteren Zeitpunkt, oft nach Abschluss einer bestimmten Aufgabe oder einem Ereignis, vom aufrufenden Code ausgeführt. Das Callback-Pattern wird häufig verwendet, um asynchrone Programmierung, Ereignisbehandlung oder die Entkopplung von Funktionen zu ermöglichen.
-
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.30\textwidth]{fig/uml/callback-class.png}
   \caption{Callback Pattern}
   \label{fig:callback-class}
 \end{figure}
-
 Hier ist eine Beschreibung der Schlüsselelemente des Callback-Patterns:
 \begin{itemize}
 \item Funktion als Parameter: Im Callback-Pattern wird eine Funktion als Argument an eine andere Funktion übergeben. Die übergebene Funktion ist die Callback-Funktion.
@@ -696,10 +694,6 @@ In verteilten Systemen kann das Fassade Pattern genutzt werden, um die Komplexit
 Das Fassade Pattern besteht aus einer Fassadenklasse, die eine vereinfachte Schnittstelle für den Zugriff auf ein komplexes Subsystem bereitstellt. Die Fassade delegiert dann die Anfragen des Clients an das Subsystem, um die gewünschten Aktionen auszuführen. Die Fassadeklasse kapselt somit das komplexe Subsystem und stellt dem Client nur eine einfachere Schnittstelle zur Verfügung.
 
 Ein Beispiel für die Verwendung des Fassade Patterns in verteilten Systemen könnte die Verwendung einer zentralen Authentifizierungs- und Autorisierungsschicht sein. Eine Fassadenklasse könnte erstellt werden, die als Schnittstelle für den Zugriff auf diese Schicht fungiert. Die Fassadenklasse könnte dann die Anfragen des Clients an das Authentifizierungs- und Autorisierungssystem weiterleiten, um die gewünschten Aktionen auszuführen.
-\\\\
-In diesem Beispiel~\ref{lst:fassade} besteht das komplexe Subsystem aus den Klassen SubsystemA und SubsystemB, die jeweils eine komplexe Logik ausführen. Die Facade-Klasse ist die vereinfachte Schnittstelle für den Client und delegiert die Anfragen des Clients an das Subsystem, um die gewünschten Aktionen auszuführen. In diesem Fall führt die performAction()-Methode der Fassade einfach die Operationen von SubsystemA und SubsystemB aus.
-
-Der Client-Code erstellt eine Instanz der Fassade und ruft die performAction()-Methode auf, um auf das komplexe Subsystem zuzugreifen. Die Fassade kapselt somit das komplexe Subsystem und stellt dem Client nur eine einfachere Schnittstelle zur Verfügung.
 
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Fassade Pattern},captionpos=b,label={lst:fassade}]
@@ -742,6 +736,12 @@ class Client {
 }
 \end{lstlisting}
 \end{minipage}
+
+In diesem Beispiel~\ref{lst:fassade} besteht das komplexe Subsystem aus den Klassen SubsystemA und SubsystemB, die jeweils eine komplexe Logik ausführen. Die Facade-Klasse ist die vereinfachte Schnittstelle für den Client und delegiert die Anfragen des Clients an das Subsystem, um die gewünschten Aktionen auszuführen. In diesem Fall führt die performAction()-Methode der Fassade einfach die Operationen von SubsystemA und SubsystemB aus.
+
+Der Client-Code erstellt eine Instanz der Fassade und ruft die performAction()-Methode auf, um auf das komplexe Subsystem zuzugreifen. Die Fassade kapselt somit das komplexe Subsystem und stellt dem Client nur eine einfachere Schnittstelle zur Verfügung.
+
+
 
 
 \subsubsection{Pipeline Pattern}
