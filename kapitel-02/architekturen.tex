@@ -14,8 +14,8 @@ In den Verteilten Systemen gibt es verschiedene Architekturparadigmen, die besch
 
 \item \textbf{Peer-to-Peer-Architektur} (P2P): Hierbei wird das System in ein Netzwerk von gleichwertigen Teilnehmern unterteilt, die direkt miteinander kommunizieren können, ohne auf einen zentralen Server angewiesen zu sein. Diese Architektur wird oft in Filesharing- und Kryptowährungsanwendungen verwendet.
 \end{itemize}  
-Um Architekturmuster zu verstehen ist es auch wichtig zu hinterfragen, wie die Komponenten und Rechneneinheiten in einem System angeordnet sind. Um diese zu benennen wird häufig der Begriff \enquote{node}~\cite{tanenbaum2017distributed}~(Knoten) eingeführt. \textbf{Mit einem node versteht man ein autonomes Computerelement}, sei es Hardware-Systeme oder Software-Prozesse. 
-Es gibt noch weitere Architekturparadigmen, aber diese sechs sind die in diesem Skript wichtigsten und am häufigsten verwendeten. Bei allen Architekturen darf man die historsche Komponente nicht vergessen. Die meisten Architekturen lassen sich daher auch aus dem Grundtypos einer Schichtenarchitektur erklären. 
+Um Architekturmuster zu verstehen ist es auch wichtig zu hinterfragen, wie die Komponenten und Rechneneinheiten in einem System angeordnet sind. Um diese zu benennen wird häufig der Begriff \enquote{node}~\cite{tanenbaum2017distributed}~(Knoten) eingeführt. \textbf{Unter einer node versteht man ein autonomes Computerelement}, sei es Hardware-Systeme oder Software-Prozesse. 
+Es gibt noch weitere Architekturparadigmen, aber diese sechs sind die in diesem Skript wichtigsten und am häufigsten verwendeten. Bei allen Architekturen darf man die historische Komponente nicht vergessen. Die meisten Architekturen lassen sich daher auch aus dem Grundtypos einer Schichtenarchitektur erklären. 
 
 \subsubsection{Schichtenarchitektur}
 
@@ -23,7 +23,7 @@ Schichtenmodelle spielen eine wichtige Rolle bei der Architektur von verteilten 
 \\\\
 Das Schichtenmodell ist ein durchdachtes Konzept, das auf dem Prinzip von \enquote{Teile und Herrsche} basiert und ein System in mehrere Ebenen unterteilt. Die Bedeutung von Schichtenmodelle für die Architektur von verteilten Systemen besteht darin, dass sie es ermöglichen, komplexe Systeme in kleinere, einfachere Teile zu zerlegen, die unabhängig voneinander entwickelt, getestet und gewartet werden können. Jede Schicht kann als eine separate Komponente oder ein separates Subsystem implementiert werden, das von anderen Schichten isoliert ist und über definierte Schnittstellen kommunizieren kann. Die besondere Bedeutung der Schnittstellen kann für den langfristen Erfolg nicht stark genug herausgestellt werden.
 
-Durch die Verwendung von Schichtenmodellen wird auch die Interoperabilität zwischen verschiedenen Systemen erleichtert, da jeder Hersteller oder Entwickler eine bestimmte Schicht des Modells implementieren und somit sicherstellen kann. So ist das System im besten Falle mit anderen Systemen über die definierten Schnittstellen kompatibel.
+Durch die Verwendung von Schichtenmodellen wird auch die Interoperabilität zwischen verschiedenen Systemen erleichtert. Unabhängige Systeme erlaubt es einen Datenaustausch. Da jeder Hersteller oder Entwickler eine bestimmte Schicht des Modells implementieren und somit sicherstellen kann, ist die Bindung alleine über die Schnittstellen der Schichten zu schaffen. So ist das System im besten Falle mit anderen Systemen über die definierten Schnittstellen immer kompatibel.
 
 Ein weiterer Vorteil bei der Verwendung der Architektur besteht darin, dass sie die Wiederverwendbarkeit von Komponenten und Diensten erleichtert. Da jede Schicht bestimmte Funktionen und Dienste bereitstellt, können sie in verschiedenen Systemen und Anwendungen wiederverwendet werden, ohne dass eine Neuentwicklung erforderlich ist. Schichten können auch dazu beitragen, die Sicherheit von Anwendungen zu verbessern. Durch die Trennung von Funktionen und Verantwortlichkeiten kann die Sicherheit jeder Schicht verbessert werden, ohne dass die Sicherheit des gesamten Systems beeinträchtigt wird. So kann beispielsweise eine Schicht, die für die Authentifizierung und Autorisierung von Benutzern verantwortlich ist, unabhängig von anderen implementiert und gewartet werden, um eine höhere Sicherheit zu gewährleisten.
 
@@ -33,7 +33,7 @@ In den 1980er Jahren wurde das Open Systems Interconnection (OSI)-Referenz-model
 
 Auch andere Organisationen begannen ihre eigenen Schichtenmodelle für Netzwerkprotokolle zu entwickeln. Zum Beispiel verwendete die Digital Equipment Corporation (DEC) ein Schichtenmodell mit fünf Schichten, das DECnet genannt wurde. IBM entwickelte auch ein eigenes, das Systems Network Architecture (SNA) hieß.
 
-In den 1990er Jahren gewannen TCP/IP-basierte Netzwerkprotokolle zunehmend an Bedeutung, und das OSI-Referenzmodell wurde weniger populär. TCP/IP hatte auch ein Schichtenmodell, das dem DoD Modell sehr ähnlich war. 
+In den 1990er Jahren gewannen TCP/IP-basierte Netzwerkprotokolle zunehmend an Bedeutung und das OSI-Referenzmodell wurde weniger populär. TCP/IP hatte auch ein Schichtenmodell, welches dem DoD Modell sehr ähnlich war. 
 \\\\
 In den letzten Jahren haben Schichtenmodelle auch bei der Entwicklung von verteilten Systemen jenseits von Netzwerken an Bedeutung gewonnen. Auch wenn das Modell manchmal recht angestaubt erscheint, wird es zum Beispiel verwendet, um die Architektur von Cloud-basierten Anwendungen oder Microservices zu beschreiben.
 \\\\
@@ -47,9 +47,9 @@ Ein (Software-)\enquote{Layer} beschreibt eine logische Gruppierung von Funktion
   \label{fig:simple-layer}
 \end{figure}
 
-In dem Beispiel \ref{fig:simple-layer} sind drei Layer beschrieben, die jeweils eine Schicht darstellen:
+In der Graphik \ref{fig:simple-layer} sind drei Layer beschrieben, die jeweils eine Schicht darstellen:
 \begin{itemize}
-\item Das \enquote{Presentation Layer} enthält die Klasse "PresentationLayer", die für die Benutzeroberfläche und die Interaktion mit dem Benutzer zuständig ist.
+\item Das \enquote{Presentation Layer} enthält die Klasse \eqnutote{PresentationLayer}, die für die Benutzeroberfläche und die Interaktion mit dem Benutzer zuständig ist.
 
 \item Das \enquote{Business Logic Layer} enthält die Klasse "BusinessLogicLayer", die die Geschäftslogik und die Regeln enthält, die die Anwendung ausführen.
 
@@ -79,18 +79,18 @@ Im Zweifel können Tiers und Layers die gleichen Namen besitzen, obwohl sich Ihr
 \item Bestimmung der Funktionen und die Zuordnung zu logischen Komponenten mit fester Verantwortung und festen Schnittstellen. 
 \item Bessere Wartbarkeit und die Flexibilität bei der Ausgestaltung. Komponenten können ausgetauscht und ersetzt werden, da sie festen Schnittstellendefinitionen genügen.  
 \end{itemize}
-Der Fokus auf die Tiers adressiert mehr die physischen Anforderung an die Architektur des verteilten Systems, diese sollen hier kurz nochmal erwähnt sein:
+Der Fokus auf die Tiers adressiert mehr die Anforderung an die physischen/logische Architektur des verteilten Systems, diese sollen hier kurz nochmal erwähnt sein:
 \begin{itemize}
 \item Bestimmung der möglichen Skalierung auf (logische/virtuelle) Hardware und die generelle Zuweisung der logischen Komponenten.
 \item Bestimmung der (Netzwerk-)Charakteristiken für die Kommunikation zwischen den Komponenten.
 \end{itemize}
-Ein besonderer Architekturtyp ist ein \enquote{Single-Node-Application}, welcher in einem Verteilten System als 1-Tier-Architektur verstanden werden kann.
+Ein besonderer Architekturtyp ist eine \enquote{Single-Node-Application}, welche in einem Verteilten System als 1-Tier-Architektur verstanden werden kann.
 
 \subsubsection{Single Node}
 
-Eine Single-Node-Application ist ein Architekturtyp der das Ziel hat, das Anwendung auf einem einzelnen Knoten in einem verteilten System ausgeführt werden. Im Gegensatz zu einer Anwendung, die auf mehreren Knoten ausgeführt wird, braucht es hier keine Verteilung der Funktionen oder Daten über den logischen/physikalischen Knoten hinaus. Der Knoten kann ein physischer Server oder eine virtuelle Maschine sein.
+Eine Single-Node-Application ist ein Architekturtyp welche das Ziel hat, die Anwendung auf einem einzelnen Knoten in einem verteilten System auszuführen. Im Gegensatz zu einer Anwendung, die auf mehreren Knoten ausgeführt wird, braucht es hier keine Verteilung der Funktionen oder Daten über den logischen/physikalischen Knoten hinaus. Der Knoten kann ein physischer Server oder eine virtuelle Maschine sein.
 \\\\
-Ein Beispiel für eine Single-Node-Application in einem verteilten System könnte eine Anwendung sein, die Daten von verschiedenen Systemen sammelt und verarbeitet. Obwohl die Anwendung nur auf einem Knoten ausgeführt wird, muss sie möglicherweise mit verschiedenen Systemen und Datenquellen kommunizieren, dies ist in der Architektur nicht nur nicht ausgeschlossen, sondern eine erwünschte Eigenschaft.
+Ein Beispiel für eine Single-Node-Application in einem verteilten System könnte eine Anwendung sein, die Daten von verschiedenen Systemen sammelt und verarbeitet. Obwohl die Anwendung nur auf einem Knoten ausgeführt wird, muss sie möglicherweise mit verschiedenen Systemen und Datenquellen kommunizieren, dies ist in der Architektur, nicht nur, nicht ausgeschlossen, sondern eine erwünschte Eigenschaft.
 \\\\
 Obwohl Single-Node-Applications nicht auf mehreren Knoten verteilt sind, können sie immer noch von den Vorteilen einer Verteilung profitieren, wie z.B. Skalierbarkeit, Zuverlässigkeit und Flexibilität. Weiter können
 Single-Node-Applications von Middleware-Technologien wie Message Queues und RPC profitieren, die die Interoperabilität zwischen verschiedenen Anwendungen und Systemen erleichtern. Eine Einschränkung ist, das die Middleware nicht primär für die kooperative Arbeit genutzt wird, sondern für das Sammeln und Aufbereiten der Daten. Diese Überlegungen münden in die Bestrebung der Formulierung eines Best Practice Entwurfmusters (Pattern) des sogenannten Single-Node-Pattern miteinfließen. Das Pattern hat seinen Nutzen bereits in verschiedenen Szenarien aufgezeigt, wie zum Beispiel:
@@ -140,7 +140,7 @@ Ein großer Vorteil ist, das für den Applikationsentwickler nur die Entwicklung
 \item Mit mehreren Betriebssystemen und Hardwaretypen arbeiten: Eine Middleware kann dazu beitragen, die Interoperabilität zwischen Anwendungen zu verbessern, die auf verschiedenen Betriebssystemen und Hardwaretypen ausgeführt werden. Die Middleware kann als eine Abstraktionsschicht dienen, die es den Anwendungen ermöglicht, unabhängig von der zugrunde liegenden Hardware und dem Betriebssystem zu arbeiten.
 \item Mehrere Netzwerkprotokolle unterstützen: Middleware kann verwendet werden, um die Interoperabilität zwischen Anwendungen zu verbessern, die verschiedene Netzwerkprotokolle verwenden. Die Middleware kann als eine Schicht dienen, die es den Anwendungen ermöglicht, Nachrichten in einem bestimmten Protokoll zu senden und zu empfangen, unabhängig davon, welches Protokoll von der anderen Anwendung verwendet wird.
 \end{itemize}
-Um die Kommunikation innerhalb eine Middleware-Schicht zu realisieren ergeben sich unterschiedliche Ansätze für die Kommunikation, die zuächst kurz eingeführt werden sollen. Wichtig für den Lernerfolg ist mitzunehmen, das diese Alternativen auch über die Middleware hinaus Gültigkeit haben.  
+Um die Kommunikation innerhalb einer Middleware-Schicht zu realisieren ergeben sich unterschiedliche Ansätze für die Kommunikation, die zuächst kurz eingeführt werden sollen. Wichtig für den Lernerfolg ist mitzunehmen, das diese Alternativen auch über die Middleware hinaus Gültigkeit haben.  
 \begin{itemize}
 \item \textbf{Point to point}\\
 Die Point-to-Point-Kommunikation kann in einem verteilten System auf verschiedene Arten implementiert werden, wie zum Beispiel durch die Verwendung von Messaging-Systemen oder direkter Socket-Kommunikation. In beiden Fällen muss der Absender die Adresse des Empfängers kennen, um die Nachricht zu senden.
@@ -190,7 +190,7 @@ Ein anderes Beispiel wäre ein System zur Überwachung von Sensoren in einer Fab
 \item Schnellere Verarbeitung: Point-to-Multipoint-Nachrichten können schneller verarbeitet werden als Point-to-Point-Nachrichten, da sie im besten Fall nur einmal gesendet und an den Knoten nur einmalig weitergeltet werden müssen, anstatt an jeden Empfänger einzeln.
 \end{itemize}
 Point-to-Multipoint-Nachrichten sind ein wichtiger Bestandteil von verteilten Systemen und bieten insbesondere im Kontext der Replikation große Vorteile.
-\item \textbf{Event/action}: Diese Art der Kommunikation beschreibt mehr den Mechanismus bei der Kommunikation. So kann man die notwendigen Elemente in 5 Punkte beschreiben:
+\item \textbf{Event/action}: Diese Art der Kommunikation beschreibt mehr den Mechanismus bei der Kommunikation. So kann man die notwendigen Elemente in fünf Punkten beschreiben:
 \begin{itemize}
 \item Ereignisquellen: Ereignisquellen sind Dienste oder Komponenten in einem verteilten System, die Ereignisse, den Event, erzeugen und an das System senden können. Diese Ereignisse können von verschiedenen Arten sein, z.B. Benutzeraktionen, Systemmeldungen oder Datenaktualisierungen.
 \item Ereignisverarbeitung: Ereignisverarbeitung ist der Mechanismus, mit dem Ereignisse im verteilten System erfasst, verarbeitet und in einen Zustand umgewandelt werden, der für die weiteren Aktionen verwendet werden kann. Dies kann beinhalten, die Ereignisse zu filtern, zu transformieren oder zu aggregieren.
@@ -212,7 +212,7 @@ Ein Beispiel für die Verwendung von Publish/Subscribe ist ein System zur Überw
 \\\\
 Wichtig wahrzunehmen ist, dass die Realisierung eines Publish/Subscribe meist selbst ein verteiltes System darstellt und meist über Point-to-Point kommuniziert, obwohl ein Point-to-Multipoint besser geeignet wäre.
 \item \textbf{Client/Server}, Request/Reply\\
-Neben dem später diskutierten Client/Server-Archtekturmuster, existiert auch das Client/Server Kommunikationsmuster. Das Client/Server-Kommunikations-muster ist ein grundlegendes Pattern in der Entwicklung von Netzwerkanwendungen, bei dem eine Anwendung (der Client) eine Verbindung zu einer anderen Anwendung (dem Server) herstellt, um eine bestimmte Aktion oder Dienstleistung anzufordern.
+Neben dem später diskutierten Client/Server-Architekturmuster, existiert auch das Client/Server Kommunikationsmuster. Das Client/Server-Kommunikations-muster ist ein grundlegendes Pattern in der Entwicklung von Netzwerkanwendungen, bei dem eine Anwendung (der Client) eine Verbindung zu einer anderen Anwendung (dem Server) herstellt, um eine bestimmte Aktion oder Dienstleistung anzufordern.
 \\\\
 In diesem Muster sendet der Client eine Anfrage an den Server, die eine bestimmte Aktion oder ein bestimmtes Ergebnis erfordert. Der Server verarbeitet die Anfrage und sendet eine Antwort zurück an den Client, die das Ergebnis der Anfrage enthält.
 \\\\
@@ -224,9 +224,9 @@ Ein Beispiel für die Verwendung des Client/Server-Kommunikationsmusters ist ein
 \\\\
 In diesem Fall wird sogar durch die Nutzung des HTTP Protokolls, das Request/Reply-Muster angewendet, welches eine spezielle Form der Client/Server-Kommunikation beschreibt. In diesem Fall wird immer in einer synchronen Kommunikation eine Anfrage (Request) gestellt und auf die Antwort (Reply/Response) gewartet. Andere Client/Server-Kommunikationsmuster können auch asynchron sein.
 \\\\
-Das Client/Server-Kommunikationsmuster ist eine effektive Möglichkeit, verteilte Anwendungen zu entwickeln, indem es eine einfache Methode zur Kommunikation zwischen verschiedenen Komponenten und Diensten bietet. Basis der Kommunikation kann eine Point-to-Point, Point-to-Multipoint aber auch Publish/Subscribe Kommunikations sein. 
+Das Client/Server-Kommunikationsmuster ist eine effektive Möglichkeit, verteilte Anwendungen zu entwickeln, indem es eine einfache Methode zur Kommunikation zwischen verschiedenen Komponenten und Diensten bietet. Basis der Kommunikation kann eine Point-to-Point, Point-to-Multipoint aber auch Publish/Subscribe Kommunikation sein. 
 
-\item \textbf{Mobile code}\\
+\item \textbf{Mobile Code}\\
 Mobile Code ist ein Konzept in verteilten Systemen, bei dem ein Stück Code von einem Computer zu einem anderen Computer transportiert und auf diesem ausgeführt wird. Der Code wird dabei in der Regel als ausführbare Datei oder Skript über das Netzwerk übertragen.
 
 Mobile Code ermöglicht es, Anwendungen und Dienste zu entwickeln, die auf verteilten Systemen ausgeführt werden können. Ein Beispiel für die Verwendung von Mobile Code ist die Remote-Ausführung von Skripten oder Programmen auf einem Server, der von einem Client-Computer aus gesteuert wird. Ein weiteres Beispiel ist die Verwendung von JavaScript in Webbrowsern, bei denen der Code von einer Website heruntergeladen und auf dem Client-Computer ausgeführt wird.
@@ -236,7 +236,7 @@ Ein aktuelles Beispiel für die Verwendung von Mobile Code ist die Verwendung vo
 Mobile Code birgt jedoch auch Risiken, da er Sicherheitsprobleme wie die Möglichkeit der Einschleusung von Malware oder Viren auf dem Zielcomputer aufgrund fehlender Kontrolle über den ausgeführten Code verursachen kann. Es ist wichtig, geeignete Sicherheitsmechanismen und Überprüfungsverfahren zu implementieren, um diese Risiken zu minimieren.
 
 Für die Übertragung von Mobile Code braucht es wieder rudimentärere Kommunikationsmuster. s
-\item \textbf{Virtual shared} \\
+\item \textbf{Virtual Shared Memory} \\
 Virtual Shared Memory (VSM) ist ein Konzept in verteilten Systemen, dass es mehreren Prozessen ermöglicht, auf gemeinsamen Speicher zuzugreifen, als ob sie physisch auf demselben Computer ausgeführt würden. Dabei wird ein virtueller Adressraum bereitgestellt, der auf mehreren Computern verteilt ist, aber für die Prozesse so aussieht, als ob er auf einem einzigen Computer lokalisiert wäre.
 
 Das VSM-Konzept ermöglicht es, die Kommunikation und den Datenaustausch zwischen verschiedenen Prozessen in einem verteilten System zu optimieren, indem der gemeinsame Speicher für alle Prozesse zugänglich gemacht wird. Dadurch können die Prozesse auf Daten zugreifen und sie teilen, ohne dass explizite Nachrichtenübertragungsprotokolle erforderlich sind.
@@ -247,7 +247,7 @@ Eine weitere Anwendung von VSM könnte in der Cloud-Computing-Umgebung sein, wo 
 
 Die darunterliegende Technologie, kann aber auch wieder als verteiltes System verstanden werden.
 \end{itemize}
-Mit welchen Kommunikationsansatz das verteilte System in der Middleware auch umgesetzt wird, die vielen Vorteile für den Anwendungsentwickler bleiben davon unberührt. Hier sind einige davon:
+Mit welchem Kommunikationsansatz das verteilte System in der Middleware auch umgesetzt wird, die vielen Vorteile für den Anwendungsentwickler bleiben davon unberührt. Hier sind einige davon:
 \begin{itemize}
 \item Abstraktion von Komplexität: Die Middleware abstrahiert die Komplexität der unterliegenden Systeme und Technologien und bietet Entwicklern eine einheitliche Schnittstelle zum Entwickeln von Anwendungen. Dadurch müssen Entwickler nicht jedes Mal neu lernen, wie sie mit verschiedenen Technologien und Systemen arbeiten müssen, sondern können sich auf das Entwickeln der eigentlichen Anwendung konzentrieren.
 
@@ -303,7 +303,7 @@ Die zentrale Verwaltung von Ressourcen und Diensten auf dem Server erleichtert a
 \item E-Mail-Systeme: E-Mail-Clients (z.B., Microsoft Outlook, Apple Mail) stellen Anfragen an E-Mail-Server (z.B., IMAP-, POP3- oder SMTP-Server) zum Senden, Empfangen und Verwalten von E-Mails.
 \item Datenbankanwendungen: Anwendungen (Client) stellen Anfragen an Datenbankserver (Server), um Daten zu lesen, schreiben oder aktualisieren. Die Kommunikation erfolgt über Protokolle wie SQL oder NoSQL.
 \end{itemize}
-Die Client-Server-Architektur und Tiers sind in verteilten Systemen eng miteinander verbunden. Die Client-Server-Architektur bezieht sich auf die Aufteilung der Funktionalität eines Systems zwischen einem Front-End-Client und einem Back-End-Server. In diesem Sinne kann eine Server-Client Architektur auch als Two-Tier-Architektur verstanden werden. Die n-Tier-Architektur erweitert das Konzept, indem sie die Schichten weiter aufteilt und somit noch mehr Flexibilität und Skalierbarkeit ermöglicht. Sie können in verteilten Systemen unterschiedliche Ausprägungen einnehmen.
+Die Client-Server-Architektur und Tiers sind in verteilten Systemen eng miteinander verbunden. Die Client-Server-Architektur bezieht sich auf die Aufteilung der Funktionalität eines Systems zwischen einem Front-End-Client und einem Back-End-Server. In diesem Sinne kann eine Server-Client-Architektur auch als Two-Tier-Architektur verstanden werden. Die n-Tier-Architektur erweitert das Konzept, indem sie die Schichten weiter aufteilt und somit noch mehr Flexibilität und Skalierbarkeit ermöglicht. Sie können in verteilten Systemen unterschiedliche Ausprägungen einnehmen.
 \begin{itemize}
 
 \item Kaskadenartige Kommunikation\\
@@ -348,7 +348,7 @@ In einer Event-Driven Architektur sind folgende Komponenten von zentraler Bedeut
 EDA bietet verschiedene Vorteile, wie z. B. lose Kopplung, Skalierbarkeit und Fehlertoleranz. Allerdings gibt es auch Herausforderungen, wie die Komplexität des Event-Handlings, die Nachverfolgbarkeit von Events und die eventuelle Konsistenz in verteilten Systemen.
 
 \paragraph{Lambda-Architektur}
-In einer Even-Driven-Architektur findet man nicht selten eine Erweiterung um die Lambda-Architektur\index{Lambda}.
+In einer Even-Driven Architektur findet man nicht selten eine Erweiterung um die Lambda-Architektur\index{Lambda}.
 Die Lambda-Architektur ist nicht direkt eine Event-Driven Architektur (EDA), aber sie kann in Kombination mit einer EDA verwendet werden, insbesondere im Kontext von Big-Data- und Echtzeitanalysen. Die Lambda-Architektur ist ein Datenverarbeitungsarchitekturmuster, das entwickelt wurde, um latenzarme und fehlertolerante Analyse- und Verarbeitungssysteme für große Datenmengen zu ermöglichen. Die Lambda-Architektur besteht aus drei Hauptkomponenten:
 \begin{itemize}
 \item Batch-Layer: Diese Schicht ist für die Verarbeitung und Speicherung großer Datenmengen zuständig, typischerweise über Batch-Jobs. Es bietet eine langfristige Speicherung für historische Daten und ermöglicht umfangreiche Analysen und Verarbeitungsaufgaben.
@@ -385,7 +385,7 @@ Allerdings gibt es auch Herausforderungen bei der Implementierung einer Microser
 
 Die Peer-to-Peer-Architektur (P2P) ist ein dezentrales Architekturmuster, bei dem einzelne Knoten (Peers) direkt miteinander kommunizieren, ohne dass zentrale Server oder Vermittler beteiligt sind. In einer P2P-Architektur fungieren die Knoten sowohl als Clients als auch als Server, teilen Ressourcen und tragen gemeinsam zur Leistung und Skalierbarkeit des Netzwerks bei. P2P-Architekturen sind für ihre Robustheit, Skalierbarkeit und Fehlertoleranz bekannt.
 \\\\
-\textbf{Beispiel 1: Dateifreigabe}: Eines der bekanntesten Beispiele für P2P-Architekturen ist die Dateifreigabe. Anwendungen wie BitTorrent ermöglichen es Benutzern, Dateien direkt untereinander auszutauschen, ohne dass zentrale Server für die Speicherung oder Verteilung der Dateien für den Anwendungsfall erforderlich sind. In einem P2P-Dateifrei-gabesystem sind die heruntergeladenen Dateien oft in kleinere Teile zerlegt, die von verschiedenen Peers bezogen werden. Dies erhöht die Geschwindigkeit und Effizienz des Downloads.
+\textbf{Beispiel 1: Dateifreigabe}: Eines der bekanntesten Beispiele für P2P-Architekturen ist die Dateifreigabe. Anwendungen wie BitTorrent ermöglichen es Benutzern, Dateien direkt untereinander auszutauschen, ohne dass zentrale Server für die Speicherung oder Verteilung der Dateien für den Anwendungsfall erforderlich sind. In einem P2P-Dateifreigabesystem sind die heruntergeladenen Dateien oft in kleinere Teile zerlegt, die von verschiedenen Peers bezogen werden. Dies erhöht die Geschwindigkeit und Effizienz des Downloads.
 \\\\
 \textbf{Beispiel 2: Kommunikation und Messaging}: Ein weiteres Beispiel für P2P-Architektur ist die dezentrale Kommunikation und Messaging. Anwendungen wie Signal oder Tox ermöglichen es Benutzern, direkt miteinander zu kommunizieren, ohne auf zentrale Server angewiesen zu sein. Dies bietet Vorteile in Bezug auf Datenschutz, Sicherheit und Netzwerklatenz.
 \\\\

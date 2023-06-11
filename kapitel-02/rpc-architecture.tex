@@ -8,10 +8,10 @@ Aufbau einer RPC-Architektur:
 \item Client Stub: Der Client Stub ist eine lokale Repräsentation der entfernten Prozedur auf der Clientseite. Er ist dafür verantwortlich, die Anfrage des Clients in ein geeignetes Format umzuwandeln, das vom Server verstanden werden kann. Dieser Vorgang wird als \enquote{Marshalling} bezeichnet.
 \item Kommunikationsprotokoll: Ein Kommunikationsprotokoll wird verwendet, um die Anfrage und die Antwort zwischen Client und Server zu übertragen. Dies kann beispielsweise ein TCP/IP- oder UDP-Protokoll sein, je nach den Anforderungen an Zuverlässigkeit, Geschwindigkeit und Latenz.
 \item Server: Der Server ist der Prozess oder die Anwendung, die die angeforderte Funktion oder Methode bereitstellt. Der Server empfängt die Anfrage vom Client, führt die entsprechende Prozedur aus und sendet die Antwort zurück.
-\item Server Stub: Der Server Stub empfängt die Anfrage vom Client, wandelt sie in einen für die Serverumgebung geeigneten Format um (\enquote{Unmarshalling}) und ruft die gewünschte Funktion auf. Anschließend werden die Ergebnisse wieder \enquote{gemarshalled} und an den Client gesendet.
+\item Server Stub: Der Server Stub empfängt die Anfrage vom Client, wandelt sie in ein für die Serverumgebung geeignetes Format um (\enquote{Unmarshalling}) und ruft die gewünschte Funktion auf. Anschließend werden die Ergebnisse wieder \enquote{gemarshalled} und an den Client gesendet.
 \end{itemize}     
 
-Im Folgenden wird der grundsätzliche Ablauf in einer RPC Architektur beschrieben, welcher noch verfeinert werden wird, aber die grundlegende Idee transportiert. 
+Im Folgenden wird der grundsätzliche Ablauf in einer RPC Architektur beschrieben, welcher noch verfeinert werden sollte, aber bereits die grundlegende Idee transportiert. 
 
 \begin{enumerate} 
 \item Der Client ruft die entfernte Prozedur über den Client Stub auf, als wäre es eine lokale Funktion.
@@ -139,7 +139,7 @@ Um die Middleware möglichst transparent und wiederverwendbar zu gestalten, soll
 
 Der Marshalling-Prozess und die Serialisierung sind Begriffe, die oft im Zusammenhang mit der Remote Procedure Call (RPC) Architektur verwendet werden. Beide Prozesse sind zwar miteinander verknüpft, es gibt jedoch grundlegende Unterschiede zwischen ihnen.
 \\\\
-Der Marshalling-Prozess ist ein Verfahren, bei dem Daten und Parameter in einer Form gewandelt werden, die über das Netzwerk gesendet und auf der anderen Seite wieder zusammengesetzt werden kann. Kurz: aus einem Funktionsaufruf wird eine Nachricht generiert. Dieser Prozess ist in der RPC-Architektur besonders wichtig, da er es ermöglicht, entfernte Prozeduraufrufe zwischen verschiedenen Systemen auszuführen, die unterschiedliche Datenformate, Speicherlayouts oder sogar Programmiersprachen verwenden können.
+Der Marshalling-Prozess ist ein Verfahren, bei dem Daten und Parameter in einer Form gewandelt werden, die über das Netzwerk gesendet und auf der anderen Seite wieder zusammengesetzt werden kann. Kurz: aus einem Funktionsaufruf wird eine Nachricht generiert. Dieser Prozess ist in der RPC-Architektur besonders wichtig, da hierdurch entfernte Prozeduraufrufe zwischen verschiedenen Systemen mit unterschiedlichen Datenformaten, Speicherlayouts oder sogar Programmiersprachen umgesetzt werden können.
 \\\\
 Der Marshalling-Prozess besteht aus mehreren Schritten:
 \begin{itemize} 
@@ -193,13 +193,13 @@ Zentrale Komponente ist die  Interface Definition Language (IDL). Eine Interface
 Ein Code-Generator für Interface Definition Language ist ein Software-Tool, das automatisch Code in einer oder mehreren Programmiersprachen auf der Grundlage einer IDL-Definition erstellt. Der Prozess der Codegenerierung aus einer IDL umfasst mehrere Schritte:
 \begin{itemize} 
 \item Analyse der IDL-Datei: Der Code-Generator liest und analysiert die IDL-Datei, die die Schnittstellendefinitionen, Funktionen, Datenstrukturen und Datentypen enthält, die für die Kommunikation zwischen den verschiedenen Komponenten eines verteilten Systems benötigt werden.
-\item Parsen der IDL-Datei: Der Code-Generator verwendet einen Parser, um die IDL-Datei in einen abstrakten Syntaxbaum (AST) oder ein ähnliches internes Format zu zerlegen, das leichter für die Codegenerierung verwendet werden kann.
+\item Parsen der IDL-Datei: Der Code-Generator verwendet einen Parser, um die IDL-Datei in einen abstrakten Syntaxbaum (AST) oder ein ähnliches internes Format zu zerlegen, dass leichter für die Codegenerierung verwendet werden kann.
 \item Code-Generierung: Basierend auf dem internen Format erstellt der Code-Generator automatisch den notwendigen Client- und Server-Code für die Kommunikation über das verteilte System. Dies kann Stub- und Skeleton-Code für verschiedene Programmiersprachen umfassen, die für den Remote Procedure Call verwendet werden.
 \item Sprachspezifische Anpassungen: Der Code-Generator berücksichtigt die Besonderheiten der jeweiligen Zielsprache, um sicherzustellen, dass der generierte Code den Konventionen und Syntaxanforderungen dieser Sprache entspricht. Dies umfasst die Anpassung von Datentypen, Namenskonventionen und anderen sprachspezifischen Details.
 \item Code-Ausgabe: Schließlich gibt der Code-Generator den erstellten Code als Dateien aus, die in das Zielsystem integriert werden können. Dies ermöglicht Entwicklern, die generierten Stubs und Skeletons in ihrem Projekt zu verwenden, um die definierten Schnittstellen über RPC aufzurufen oder bereitzustellen.
 \end{itemize} 
 
-Aus diesen Schritten soll nun ein Beispiel abgeleitet werden, welcher auch den manuellen Aufbau einer Lösung beschreibt. Angenommen, es gibt ein verteiltes System, in dem ein Client eine entfernte Funktion \enquote{add} aufrufen möchte, die zwei Integer-Parameter akzeptiert und einen Integer-Wert zurückgibt.
+Aus diesen Schritten soll nun ein Beispiel abgeleitet werden, welches auch den manuellen Aufbau einer Lösung beschreibt. Angenommen, es gibt ein verteiltes System, in dem ein Client eine entfernte Funktion \enquote{add} aufrufen möchte, die zwei Integer-Parameter akzeptiert und einen Integer-Wert zurückgibt.
 
 Zunächst wird eine Schnittstelle der entfernten Funktion in einer IDL definiert. \\
 \noindent\begin{minipage}{\textwidth}
