@@ -15,7 +15,7 @@ Verteilte Systeme stehen vor einer Vielzahl von Herausforderungen und Problemkla
 
 Insgesamt ist die effektive Bewältigung dieser und anderer Problemklassen in verteilten Systemen eine komplexe Aufgabe, die eine sorgfältige Planung, Design und Implementierung erfordert. Trotzdem bieten die Algorithmen und Techniken, die in der Forschung und Praxis der verteilten Systeme entwickelt wurden, leistungsfähige Werkzeuge zur Lösung oder zumindest Approximation dieser Probleme.
 
-Dieses Kapitel versucht den Fokus weniger auf die Algorithmik zu legen und gibt Einlicke in die grundsätzliche Konstruktion und die damit verbundenen Eigenschaften.
+Dieses Kapitel versucht den Fokus weniger auf die Algorithmik zu legen und gibt Einblicke in die grundsätzliche Konstruktion und die damit verbundenen Eigenschaften.
 
 \subsection{Paralleles Rechnen}
 
@@ -34,7 +34,7 @@ Es gibt viele Algorithmen, die sich gut für eine hohe Parallelisierung eignen, 
 \end{itemize}
 
 Es gibt unterschiedliche Programmiermodelle und Frameworks, die das verteilte Rechnen in besonderer Art unterstützten. 
-MapReduce (Hadoop) und Resilient Distributed Datasets (Spark) sind beides Frameworks zur Verarbeitung großer Datenmengen auf verteilten Systemen, aber sie verwenden unterschiedliche Ansätze und sollen in diesem Script examplarisch besprochen werden.
+MapReduce (Hadoop) und Resilient Distributed Datasets (Spark) sind beides Frameworks zur Verarbeitung großer Datenmengen auf verteilten Systemen, aber sie verwenden unterschiedliche Ansätze und sollen in diesem Skript exemplarisch besprochen werden.
 
 MapReduce ist ein Programmiermodell, das von Google entwickelt und in Apache Hadoop implementiert wurde. Es ist speziell für die Verarbeitung großer Datenmengen in einem verteilten Umfeld ausgelegt. MapReduce besteht aus zwei Hauptphasen: Map und Reduce.
 \begin{itemize}
@@ -52,7 +52,7 @@ Apache Spark unterstützt auch Operationen, die über Map und Reduce hinausgehen
 
 Aber es weiter wichtig zu verstehen, dass nicht alle Algorithmen gut für die Parallelisierung geeignet sind. Einige Probleme, wie das Suchen in einer sortierten Liste, können effizient parallelisiert werden, während andere, wie das Berechnen des größten gemeinsamen Teilers (ggT), nicht so offensichtlich parallelisierbar sind.
 
-Um die Herausforderungen deutlich zu machen, soll an dem Fallbeispiel ggt ein beispielhaftes Vorgehen besprochen werden. Der ggt ist ein sehr klassiches Beispiel für diese Klasse von Herausforderungen. 
+Um die Herausforderungen deutlich zu machen, soll an dem Fallbeispiel ggt ein beispielhaftes Vorgehen besprochen werden. Der ggt ist ein sehr klassisches Beispiel für diese Klasse von Herausforderungen. 
 
 Der ggT von zwei Zahlen ist die größte Zahl, die beide Zahlen ohne Rest teilt. Ein weit verbreiteter Algorithmus zur Berechnung des ggT ist der euklidische Algorithmus, der auf einer Reihe von Divisionen basiert. Dieser Algorithmus ist schwer zu parallelisieren, da jede Division auf dem Ergebnis der vorherigen basiert. Es gibt jedoch einige Ansätze zur Parallelisierung.
 
@@ -159,14 +159,14 @@ Es ist auch wichtig zu beachten, dass Fehlermanagement und Wiederherstellungsstr
 
 Dazu gehört die Überwachung der Knoten, um sicherzustellen, dass sie funktionieren und ihre Aufgaben erfolgreich abschließen. Bei einem Ausfall kann der Master-Knoten die Aufgabe erneut an einen anderen Knoten senden. Außerdem können Checkpoints verwendet werden, um den Fortschritt der Berechnung zu speichern und bei einem Ausfall von diesem Punkt aus fortzufahren.
 
-Im folgenden werden auch die Punkte besprochen, die zur Konsensbildung und Fehlertoleranz in zentralisierten oder dezentralisierten Ansätzen umgesetzt werden können.
+Im Folgenden werden auch die Punkte besprochen, die zur Konsensbildung und Fehlertoleranz in zentralisierten oder dezentralisierten Ansätzen umgesetzt werden können.
 
 Wie auch immer, die Wahl des richtigen Ansatzes zur Parallelisierung kann stark von der Art des Problems, den verfügbaren Ressourcen und der spezifischen Umgebung abhängen. Die Entwicklung und Optimierung paralleler Algorithmen in verteilten Systemen erfordert ein tiefes Verständnis der Algorithmen, der Systemarchitektur und der zugrunde liegenden Technologien.
 
 Letztlich ist das Ziel der Parallelisierung in verteilten Systemen, die Gesamtleistung zu steigern und die Berechnungszeit zu reduzieren. Dies kann erreicht werden, indem Aufgaben aufgeteilt und gleichzeitig auf mehreren Knoten ausgeführt werden. Obwohl dies eine Herausforderung sein kann, bietet es auch eine großartige Gelegenheit, die Leistungsfähigkeit moderner Computer und Netzwerke voll auszuschöpfen.
 
 
-\subsection{Zentralisierte vs dezentralisierte Algorithmen}
+\subsection{Zentralisierte vs. dezentralisierte Algorithmen}
 
 Verteilte Systeme sind Netzwerke von unabhängigen Computern, die unter anderem so konfiguriert sind, dass sie als ein einziges System arbeiten. Die Hauptvorteile verteilter Systeme sind Skalierbarkeit, Fehlertoleranz und Ressourcenfreigabe.
 
@@ -200,7 +200,7 @@ Konsensalgorithmen spielen eine entscheidende Rolle in verteilten Systemen, inde
 
 Im Wesentlichen besteht das Konsensproblem darin, dass eine Gruppe von Prozessen oder Knoten, die möglicherweise fehlerhaft sind oder in einem fehlerhaften Netzwerk operieren, sich auf einen gemeinsamen Wert einigen muss. Das Konsensproblem wird noch komplexer, wenn man bedenkt, dass Knoten gleichzeitig abstimmen und unterschiedliche Informationen haben können. Ein zuverlässiger Konsensalgorithmus muss in der Lage sein, trotz dieser Herausforderungen einen einheitlichen Wert zu ermitteln.
 
-Bevor das geschieht soll ein Anwendungsbeispiel besprochen werden, was die grundsätzliche Herangehensweise bespricht.  In diesem Anwendungsbeispiel handelt es sich um ein verteiltes System von zwei Ampeln, das den Verkehr an einer Baustelle reguliert. Dies ist ein gutes Anwendungsbeispiel für einen verteilten Algorithmus, da jede Ampel autonom arbeitet und gleichzeitig mit der anderen koordiniert werden muss, um einen sicheren Verkehrsfluss zu gewährleisten.
+Bevor das geschieht, soll ein Anwendungsbeispiel besprochen werden, was die grundsätzliche Herangehensweise bespricht.  In diesem Anwendungsbeispiel handelt es sich um ein verteiltes System von zwei Ampeln, das den Verkehr an einer Baustelle reguliert. Dies ist ein gutes Anwendungsbeispiel für einen verteilten Algorithmus, da jede Ampel autonom arbeitet und gleichzeitig mit der anderen koordiniert werden muss, um einen sicheren Verkehrsfluss zu gewährleisten.
 
 Ein geeigneter Algorithmus für diese Situation wäre ein einfacher Konsensalgorithmus. In diesem Szenario könnte der \enquote{Zustand} jeder Ampel (rot oder grün) als eine Art \enquote{Vorschlag} für den nächsten Zustand des Systems betrachtet werden. Jede Ampel könnte dann einen Konsensalgorithmus verwenden, um sicherzustellen, dass beide Ampeln sich auf den gleichen nächsten Zustand einigen (d.h., eine Ampel ist rot und die andere ist grün).
 
@@ -214,7 +214,7 @@ Hier ist, wie der Algorithmus funktionieren könnte:
 In diesem Szenario wäre der Beobachter, der den korrekten Zustand der Ampeln ermittelt, derjenige, der den aktuellen Zustand jeder Ampel und die von jeder Ampel gesendeten Nachrichten berücksichtigt.
 
 Dieser Algorithmus stellt sicher, dass zu keinem Zeitpunkt beide Ampeln gleichzeitig grün sind und dass jede Ampel autonom auf rot umschalten kann, wenn sie dies für notwendig hält. Es ist wichtig zu beachten, dass in der Realität die Ampelsteuerung aufgrund von Faktoren wie Fußgängerüberwegen, mehreren Fahrspuren und so weiter komplexer sein kann, aber dieses einfache Modell dient als eine gute Einführung in die Art und Weise, wie verteilte Algorithmen zur Koordination autonomer Systeme verwendet werden können.
-In diesem Beispiel allerdings verhalten sich alle Teilnehmer korrekt und Fehlerfrei.
+In diesem Beispiel allerdings verhalten sich alle Teilnehmer korrekt und fehlerfrei.
 
 Die grundlegenden Anforderungen für einen Konsensalgorithmus sind:
 \begin{itemize}
@@ -275,7 +275,7 @@ Typische Dienste im Kontext von Zookeeper können sein:
 \item Verteilte Warteschlange
 \end{itemize}
 
-Diese Liste ist nich vollständig, gibt aber einen guten Einblick in die Leisungsfähigkeit. Zookeeper ist nicht geegnet für große Datenmengen. Auch hochfrequente Schreibvorgänge sind ein Problem, wie auch Transiente Zustände (Alle Zustände werden auf Platte persistiert).
+Diese Liste ist nich vollständig, gibt aber einen guten Einblick in die Leistungsfähigkeit. Zookeeper ist nicht geegnet für große Datenmengen. Auch hochfrequente Schreibvorgänge sind ein Problem, wie auch Transiente Zustände (Alle Zustände werden auf Platte persistiert).
 
 
 \subsubsection{Paxos}\footnote{\url{https://www.youtube.com/watch?v=JQss0uQUc6o}, \url{https://www.youtube.com/watch?v=d7nAGI_NZPk}}
@@ -304,7 +304,7 @@ Paxos, obwohl es ein robustes und effizientes Protokoll ist, ist nicht ohne sein
 \item Prozessausfälle: Da Paxos in verteilten Systemen eingesetzt wird, können Prozessausfälle ein ernsthaftes Problem darstellen. Wenn ein Antragsteller oder ein Akzeptor ausfällt, kann das den Fortschritt des Protokolls behindern. Paxos kann zwar Ausfälle tolerieren und sich erholen, aber der Ausfall kann dennoch zu Verzögerungen bei der Erreichung des Konsenses führen.
 \end{itemize}
 
-Um diese Szenarien in einer Sequnez zu illustrieren, können wir das vorherige Diagramm modifizieren, um die Auswirkungen von Netzwerk- und Prozessausfällen zu zeigen:
+Um diese Szenarien in einer Sequenz zu illustrieren, können wir das vorherige Diagramm modifizieren, um die Auswirkungen von Netzwerk- und Prozessausfällen zu zeigen:
 
 
 \begin{figure}[!ht]
@@ -341,7 +341,7 @@ Die wesentlichen Sequenzen in RAFT umfassen folgende Phasen:
 \item Log-Replikation: Nachdem ein Leader gewählt wurde, beginnt der Prozess der Log-Replikation. Der Leader nimmt Anfragen von Clients entgegen, fügt sie seinem Log hinzu und sendet dann AppendEntries-Anfragen an die Follower, um das Log zu replizieren. Die Follower antworten dem Leader, wenn sie die Einträge erfolgreich repliziert haben.
 \item Commit: Sobald der Leader feststellt, dass eine Mehrheit der Follower einen Log-Eintrag repliziert hat, erklärt er den Eintrag für committed und wendet den Eintrag auf seinen Zustand an. Der Leader informiert die Follower über committed Einträge durch nachfolgende AppendEntries-Anfragen.
 \end{itemize}
-Um diese Sequenzen in einr Sequenz zu illustrieren,wurde das Diagramm XY angefertig.In diesem Diagramm wird der Prozess der Leaderwahl, Log-Replikation und Commit in RAFT dargestellt.
+Um diese Sequenzen in einer Sequenz zu illustrieren, wurde  das Diagramm XY angefertigt. In diesem Diagramm wird der Prozess der Leaderwahl, Log-Replikation und Commit in RAFT dargestellt.
 
 
 \subsubsection{ZAB}
@@ -360,9 +360,9 @@ Im ZAB-Protokoll wird ein Leader-basiertes Multicast-Modell verwendet. In diesem
 
 Dieses Modell ist zuverlässig, weil es sicherstellt, dass alle Nachrichten, die vom Leader gesendet werden, von den Followern empfangen werden. Wenn ein Follower eine Nachricht nicht empfängt, wird die Nachricht erneut gesendet, bis der Follower bestätigt, dass er sie empfangen hat.
 
-Zusätzlich zur totalen Ordnung der vom Leader umgestzen nachrichten unterstützt ZAB auch die kausale Ordnung der Operationen auf den Daten. Das bedeutet, dass wenn eine Operation A eine andere Operation B verursacht, Operation A immer vor Operation B in der Sequenz der Operationen auftreten wird.
+Zusätzlich zur totalen Ordnung der vom Leader umgesetzten Nachrichten  unterstützt ZAB auch die kausale Ordnung der Operationen auf den Daten. Das bedeutet, dass wenn eine Operation A eine andere Operation B verursacht, Operation A immer vor Operation B in der Sequenz der Operationen auftreten wird.
 
-In ZooKeeper sind die Garantien, die durch ZAB ermöglicht werden, sequentiell konsistent und atomar im Single Node Image. Das bedeutet, dass jede Operation, die auf einem Knoten ausgeführt wird, genau so aussieht, als ob sie auf einem einzelnen System ausgeführt wurde, und dass sie entweder vollständig ausgeführt wird oder überhaupt nicht.
+In ZooKeeper sind die Garantien, die durch ZAB ermöglicht werden, sequenziell konsistent und atomar im Single Node Image. Das bedeutet, dass jede Operation, die auf einem Knoten ausgeführt wird, genau so aussieht, als ob sie auf einem einzelnen System ausgeführt wurde, und dass sie entweder vollständig ausgeführt wird oder überhaupt nicht.
 
 ZooKeeper ermöglicht auch zeitnahe Operationen, wie das Erstellen, Löschen und Abrufen von Daten, sowie das Abrufen von Kindknoten. Diese Operationen werden in einem hierarchischen Namensraum ausgeführt, der es Entwicklern ermöglicht, Ressourcen auf eine strukturierte und organisierte Weise zu verwalten.
 
@@ -421,7 +421,7 @@ In einem verteilten System kann ein byzantinischer Knoten falsche oder inkonsist
 
 Es wurde gezeigt, dass das Erreichen eines Konsenses in einem verteilten System mit byzantinischen Fehlern nur möglich ist, wenn mehr als zwei Drittel der Knoten korrekt sind. Es gibt verschiedene Algorithmen, die versuchen, dies zu erreichen, einschließlich der ursprünglichen Lösung, die in dem Artikel über die byzantinischen Generäle vorgeschlagen wurde, sowie späterer Algorithmen wie Practical Byzantine Fault Tolerance (PBFT).
 
-Die Fähigkeit, byzantinische Fehler zu tolerieren, ist besonders wichtig in offenen, dezentralisierten Systemen wie Blockchains, in denen Knoten möglicherweise einen Anreiz haben, das System zu betrügen oder zu stören. Daher sind byzantinische Konsensalgorithmen ein aktiver Bereich der Forschung und Entwicklung in solchen Systemen. Neben PBFT werden die geannten Verfahren um Proof of Work oder auch Proof of Stake wieder relevant.  
+Die Fähigkeit, byzantinische Fehler zu tolerieren, ist besonders wichtig in offenen, dezentralisierten Systemen wie Blockchains, in denen Knoten möglicherweise einen Anreiz haben, das System zu betrügen oder zu stören. Daher sind byzantinische Konsensalgorithmen ein aktiver Bereich der Forschung und Entwicklung in solchen Systemen. Neben PBFT werden die genannten Verfahren um Proof of Work oder auch Proof of Stake wieder relevant.  
 
 \subsection{Koordination}
 
@@ -580,7 +580,7 @@ Die IEEE 1394-Spezifikation enthält einen spezifischen Algorithmus zur Leader-E
 
 Der Algorithmus zur Wahl des Bus Managers in IEEE 1394 funktioniert wie folgt:
 \begin{itemize}
-\item Selbstnominierung: Jedes Gerät auf dem Bus, das die Rolle des Bus Managers übernehmen kann und will, sendet eine Selbstevaluierungsnachricht. Diese Nachricht enthält die Fähigkeiten des Geräts, wie z.B. verfügbare Ressourcen und Performance-Indikatoren.
+\item Selbstnominierung: Jedes Gerät auf dem Bus, dass die Rolle des Bus Managers übernehmen kann und will, sendet eine Selbstevaluierungsnachricht. Diese Nachricht enthält die Fähigkeiten des Geräts, wie z.B. verfügbare Ressourcen und Performance-Indikatoren.
 \item Vergleich der Fähigkeiten: Jedes Gerät auf dem Bus vergleicht seine eigenen Fähigkeiten mit den in den Selbstevaluierungsnachrichten der anderen Geräte angegebenen Fähigkeiten.
 \item Wahl des Bus Managers: Das Gerät mit den höchsten Fähigkeiten wird zum Bus Manager gewählt. Bei einem Gleichstand (zwei oder mehr Geräte mit gleichen Fähigkeiten) wird das Gerät mit der höchsten physikalischen Adresse gewählt.
 \item Kommunikation der Wahl: Das gewählte Gerät sendet eine Nachricht an alle anderen Geräte auf dem Bus, um seine Rolle als Bus Manager zu kommunizieren.
@@ -608,7 +608,7 @@ In diesen Netzwerken können verschiedene Algorithmen und Protokolle für vertei
 
 Es ist wichtig zu beachten, dass trotz der Anwesenheit von lokalen Uhren und begrenzten Verzögerungen die Synchronisation von Uhren in solchen Netzwerken immer noch eine Herausforderung sein kann. Die Uhren können aufgrund von Hardwareunterschieden, Temperaturschwankungen und anderen Faktoren voneinander abweichen, und die Verzögerungen beim Senden und Empfangen von Nachrichten können variieren.
 
-Aber selbst für die synchronisation der Netze fern von Uhren gibt es erweiterte Ansätze, die als Synchronizer Algorithmen bekannt geworden sind. 
+Aber selbst für die Synchronisation der Netze fern von Uhren gibt es erweiterte Ansätze, die als Synchronizer Algorithmen bekannt geworden sind. 
 
 Ein Synchronizer ist ein Algorithmus, der verwendet wird, um asynchrone verteilte Systeme zu synchronisieren. Ein asynchrones verteiltes System ist ein Netzwerk von unabhängigen Knoten, die Nachrichten austauschen, um Aufgaben auszuführen, aber es gibt keine globale Uhr oder garantierte Nachrichtenlieferzeiten.
 
@@ -697,7 +697,7 @@ Dissemination & Alle zu allen (über mehrere Runden) & Hoch & Sehr gut & Hoch (m
 \caption{Vergleich von Barrieren-Algorithmen}
 \end{table}
 
-Es sollte beachtet werden, dass der beste Algorithmus von vielen Faktoren abhäng ist, einschließlich der Anzahl der Prozesse, der Netzwerklatenz und anderen Aspekten der spezifischen Anwendung oder Umgebung.
+Es sollte beachtet werden, dass der beste Algorithmus von vielen Faktoren abhängig ist, einschließlich der Anzahl der Prozesse, der Netzwerklatenz und anderen Aspekten der spezifischen Anwendung oder Umgebung.
 
 \subsubsection{Self-Stabilization}
 Die Selbststabilisierung ist ein Konzept in der verteilten Systemtheorie, das es Systemen ermöglicht, sich von beliebigen initialen Zuständen zu erholen und in einen korrekten Zustand zu übergehen, in dem sie korrekt funktionieren. Ein selbststabilisierendes System garantiert, dass es nach einer endlichen Anzahl von Schritten einen korrekten Zustand erreicht, unabhängig vom Anfangszustand.
@@ -716,7 +716,7 @@ Die Bezeichnung \enquote{Ledger-Technologie} oder genauer \enquote{Distributed L
 
 Ein \enquote{Ledger} ist im Grunde ein Protokoll oder eine Datenbank, die eine Liste von Transaktionen enthält. In der Finanzwelt wird ein Ledger traditionell verwendet, um eine Aufzeichnung von Krediten und Debiten oder von Käufen und Verkäufen zu führen. In der Welt der Distributed Ledger Technology enthält ein Ledger jedoch eine Liste von digitalen Transaktionen.
 
-Die bekannteste Form der Distributed Ledger Technology ist die Blockchain. Eine Blockchain ist eine Art von Distributed Ledger, das Transaktionen in Blöcken aufzeichnet und sie in einer Kette von früheren Blockchain-Transaktionen verschlüsselt. Dadurch wird eine permanente und unveränderliche Aufzeichnung aller Transaktionen geschaffen, die auf der Blockchain stattgefunden haben.
+Die bekannteste Form der Distributed Ledger Technology ist die Blockchain. Eine Blockchain ist eine Art von Distributed Ledger, dass Transaktionen in Blöcken aufzeichnet und sie in einer Kette von früheren Blockchain-Transaktionen verschlüsselt. Dadurch wird eine permanente und unveränderliche Aufzeichnung aller Transaktionen geschaffen, die auf der Blockchain stattgefunden haben.
 
 Blockchains sind eine Form der verteilten Ledger-Technologie, die Transaktionen über ein Peer-to-Peer-Netzwerk von Computern (auch als Knoten bezeichnet) protokolliert. Jede Transaktion wird in einem Block aufgezeichnet und jeder Block ist mit dem vorhergehenden Block verbunden, was eine Kette von Blöcken oder  \enquote{Blockchain} bildet. Diese Technologie ist dezentralisiert und transparent, was bedeutet, dass jede Transaktion von jedem Knoten im Netzwerk gesehen und verifiziert werden kann.
 

@@ -25,12 +25,12 @@ Ein anderes Beispiel könnte das Monitoring eines verteilten Dateisystems sein. 
 \\\\
 Ein drittes Beispiel könnte ein Microservices-Architektur-Anwendungssystem sein. In solch einem Szenario kann Monitoring auf verschiedene Aspekte angewendet werden, wie die Leistung und Verfügbarkeit jeder Microservice-Einheit, die Kommunikation und den Datenaustausch zwischen den Microservices, sowie die Orchestrierung und das Management dieser Einheiten. Monitoring hilft dabei, mögliche Engpässe, Fehlfunktionen oder Ineffizienzen zu erkennen und gibt Einblicke, um eine schnellere Fehlerbehebung und eine effizientere Ressourcennutzung zu ermöglichen.
 \\\\
-Monitoring in verteilten Systemen basiert auf einer Reihe von technischen Grundlagen und Metriken, die zuverlässige und aussagekräftige Informationen über das System liefern. Zentral ist eine Erfassung der Daten. Auch wenn die Behauptung fehlleitent ist sollte zunächst der pauschale Ansatz gewählt werden, wenn es nich messbar ist, ist es nicht wichtig. Die Quantifizierung von Kennzahlen in Metriken ist eine wesentliche Herausforderung. Verschiedene Arten von Überwachungswerkzeugen und -software ermöglichen das Sammeln, Speichern und Analysieren von Monitoring-Daten. Diese Tools können speziell für verteilte Systeme entwickelt sein, wie etwa Prometheus, Grafana oder Elasticsearch, Logstash und Kibana (ELK Stack).
+Monitoring in verteilten Systemen basiert auf einer Reihe von technischen Grundlagen und Metriken, die zuverlässige und aussagekräftige Informationen über das System liefern. Zentral ist eine Erfassung der Daten. Auch wenn die Behauptung fehlleitend ist sollte zunächst der pauschale Ansatz gewählt werden, wenn es nicht messbar ist, ist es nicht wichtig. Die Quantifizierung von Kennzahlen in Metriken ist eine wesentliche Herausforderung. Verschiedene Arten von Überwachungswerkzeugen und -software ermöglichen das Sammeln, Speichern und Analysieren von Monitoring-Daten. Diese Tools können speziell für verteilte Systeme entwickelt sein, wie etwa Prometheus, Grafana oder Elasticsearch, Logstash und Kibana (ELK Stack).
 Auch kann es Architekturfragen beeinflussen, wo Monitoring-Agenten in den verteilten Systemen einzubetten sind. Monitoring-Agenten sind Software-Komponenten, die auf Systemknoten installiert sind und Daten  oder Proben sammeln. 
 \\\\
 Ein wichtiges Element des Monitoring ist das Logging und Tracing. Logs enthalten detaillierte Informationen über Systemereignisse und können wertvolle Daten für das Monitoring bereitstellen. Tracing ist eine Technik, bei der individuelle Transaktionen oder Anfragen im System verfolgt werden, um Leistungsprobleme oder Fehler zu diagnostizieren.
 Am Ende ist es notwendig alle Daten zu einem Gesamtbild zusammenzufügen, was zunächst als Datenaggregation und -analyse bezeichnet wird und einen eigenen Zweig der Informatik ausmacht. Die gesammelten Daten müssen aggregiert und analysiert werden, um aussagekräftige Einblicke zu gewinnen. Dies kann durch verschiedene statistische Methoden, maschinelles Lernen oder andere Analysetechniken erfolgen.
-ie Auswahl der zu überwachenden Metriken hängt von den spezifischen Anforderungen und Zielen des verteilten Systems ab. Hier sind einige gängige Metriken, die in verteilten Systemen überwacht werden:
+Die Auswahl der zu überwachenden Metriken hängt von den spezifischen Anforderungen und Zielen des verteilten Systems ab. Hier sind einige gängige Metriken, die in verteilten Systemen überwacht werden:
 \begin{itemize}
 \item Performance-Metriken: Dazu gehören Metriken wie Antwortzeit, Durchsatz, Latenz und andere, die die Leistung des Systems messen.
 \item Ressourcen-Metriken: Diese Metriken messen die Nutzung von Systemressourcen wie CPU, Speicher, Netzwerkbandbreite und Speicherplatz.
@@ -76,7 +76,7 @@ Datenaggregation und -analyse sind zentrale Komponenten jeder Monitoring-Strateg
 \\\\
 Letztendlich sollte eine effektive Monitoring-Strategie in der Lage sein, proaktiv auf Probleme zu reagieren, indem sie Alarme und Benachrichtigungen auslöst, wenn bestimmte Schwellenwerte überschritten werden. Sie sollte auch die Möglichkeit zur automatischen Anpassung und Skalierung bieten, um auf wechselnde Systembedingungen reagieren zu können.
 \\\\
-Insgesamt ist eine effektive Monitoring-Strategie für verteilte Systeme ein kontinuierlicher Prozess, der ständige Überwachung, Anpassung und Verbesserung erfordert, um mit der Entwicklung und Veränderung des Systems Schritt zu halten. Die einzelnen Punkte werden in verschiedenen Modellen unterschiedlich addressiert. 
+Insgesamt ist eine effektive Monitoring-Strategie für verteilte Systeme ein kontinuierlicher Prozess, der ständige Überwachung, Anpassung und Verbesserung erfordert, um mit der Entwicklung und Veränderung des Systems Schritt zu halten. Die einzelnen Punkte werden in verschiedenen Modellen unterschiedlich adressiert. 
 \begin{itemize}
 \item Benchmarks und Performance-Modelle: Diese Methode beinhaltet die Entwicklung von Benchmarks und Modellen, um die Leistung des Systems unter verschiedenen Bedingungen und Arbeitslasten zu analysieren und zu vergleichen. Dies kann helfen, Leistungsengpässe und Optimierungsmöglichkeiten zu identifizieren.
 \\\\
@@ -113,7 +113,7 @@ Formale Methoden können dabei helfen, das korrekte Verhalten der verteilten Dat
 \\\\
 Ein Modellprüfverfahren (Model Checking) könnte dann verwendet werden, um das Verhalten des realen Systems mit dem formalen Modell zu vergleichen. Dies könnte beispielsweise auf Basis von Systemlogs oder anderen Monitoring-Daten geschehen. Wenn Abweichungen festgestellt werden, könnte dies auf ein Problem mit der Datenbank hinweisen, wie zum Beispiel inkonsistente Daten oder ein fehlerhaftes Verhalten des Systems.
 \end{itemize}
-Bestimmte Anwendungssektoren weissen eigene spezifische Anforderungen für das Monitoring auf, wie beispielhaft der Bankensektor hier sind beondere Anforderungen zu berücksichtigen, wie: 
+Bestimmte Anwendungssektoren weisen eigene spezifische Anforderungen für das Monitoring auf, wie beispielhaft der Bankensektor hier sind besondere  Anforderungen zu berücksichtigen, wie: 
 
 \begin{itemize}
 \item Datenschutz und Datensicherheit: Banken müssen strenge Datenschutzvorschriften einhalten, wie z.B. die Datenschutz-Grundverordnung (DSGVO) in der EU oder den Gramm-Leach-Bliley Act in den USA. Diese Gesetze verlangen von den Banken, die persönlichen Daten ihrer Kunden zu schützen und sicherzustellen, dass diese nicht in die falschen Hände geraten. Dies beinhaltet die Verschlüsselung von Daten während der Übertragung und Speicherung sowie den Einsatz von Sicherheitsmaßnahmen wie Firewalls und Intrusion-Detection-Systemen.
@@ -122,7 +122,7 @@ Bestimmte Anwendungssektoren weissen eigene spezifische Anforderungen für das M
 \end{itemize}
 
 Allgemein ist die Einhaltung von Standards und Vorschriften, wesentlich, nicht nur für den Bankensektor. Aber insbesondere für die Banken können branchenspezifische Standards und Vorschriften genannt werden, wie z.B. die Payment Card Industry Data Security Standard (PCI DSS) für Kreditkartentransaktionen und die Basel III Standards für Bankenaufsicht und -regulierung. Diese Standards legen Anforderungen an die Systemarchitektur, Sicherheitsmaßnahmen und operative Verfahren auch für das Monitoring fest. 
-Festzustellen ist, das die Monitoring Modelle zum einen den QoS sicherstellen sollen, aber selbst auch wieder eigene Anforderungen an den QoS stellen. 
+Festzustellen ist, dass die Monitoring Modelle zum einen den QoS sicherstellen sollen, aber selbst auch wieder eigene Anforderungen an den QoS stellen. 
 
 Es gibt eine breite Palette von Werkzeugen und Technologien, die beim Monitoring von verteilten Systemen eingesetzt werden können. Diese können in verschiedene Kategorien eingeteilt werden, je nachdem, welchen Aspekt des Systems sie überwachen oder welche Funktionen sie bereitstellen. Hier sind einige Beispiele:
 \begin{itemize}
@@ -139,11 +139,11 @@ Beispiele: AWS CloudWatch, Google Stackdriver, Azure Monitor
 \item Sicherheitsüberwachung: Diese Werkzeuge konzentrieren sich auf die Überwachung der Systemsicherheit. Sie können dabei helfen, Bedrohungen zu erkennen, Sicherheitsverletzungen zu verhindern und die Einhaltung von Sicherheitsvorschriften zu gewährleisten.\\
 Beispiele: Norton, McAfee, Kaspersky, CrowdStrike
 \end{itemize}
-Jedes dieser Werkzeuge und Technologien bietet unterschiedliche Funktionen und kann bei der Überwachung verschiedener Aspekte von verteilten Systemen hilfreich sein. Die Wahl der richtigen Werkzeuge hängt von den spezifischen Anforderungen und Zielen des zu überwachenden Systems ab. Diese unterschiedlichen Anforderungen sollen an Monitoriing in Cloud und IoT-Architekturen besprochen werden. 
+Jedes dieser Werkzeuge und Technologien bietet unterschiedliche Funktionen und kann bei der Überwachung verschiedener Aspekte von verteilten Systemen hilfreich sein. Die Wahl der richtigen Werkzeuge hängt von den spezifischen Anforderungen und Zielen des zu überwachenden Systems ab. Diese unterschiedlichen Anforderungen sollen an Monitoring in Cloud und IoT-Architekturen besprochen werden. 
 \\\\
 Sowohl das Monitoring in Internet of Things (IoT) -Umgebungen als auch das Monitoring in Cloud-Umgebungen spielt eine entscheidende Rolle bei der Gewährleistung der Betriebsbereitschaft, Leistung und Sicherheit von Systemen. Dennoch gibt es einige wichtige Unterschiede zwischen den beiden, die hauptsächlich auf den einzigartigen Merkmalen und Herausforderungen jeder Umgebung beruhen.
 \\\\
-IoT-Umgebungen bestehen aus einer Vielzahl von verbundenen Geräten, die Daten sammeln und teilen. Diese Geräte, oft als "Dinge" oder "Knoten" bezeichnet, können sehr unterschiedlich sein, von Sensoren und Aktuatoren über Smartphones bis hin zu vernetzten Haushaltsgeräten.
+IoT-Umgebungen bestehen aus einer Vielzahl von verbundenen Geräten, die Daten sammeln und teilen. Diese Geräte, oft als \enquote{Dinge} oder \enquote{Knoten} bezeichnet, können sehr unterschiedlich sein, von Sensoren und Aktuatoren über Smartphones bis hin zu vernetzten Haushaltsgeräten.
 \\\\
 Eine der größten Herausforderungen beim IoT-Monitoring ist die große Vielfalt und Anzahl von Geräten, die überwacht werden müssen. Jedes Gerät kann unterschiedliche Arten von Daten sammeln und teilen, was bedeutet, dass das Monitoring auf mehrere verschiedene Datenformate und Kommunikationsprotokolle abgestimmt werden muss.
 \\\\

@@ -20,7 +20,7 @@ Paxos und Raft sind zwei bekannte Konsensbildungsalgorithmen, die in verteilten 
 
 \item Verteilte Rechensysteme: In verteilten Rechenumgebungen, wie z. B. Cloud-Plattformen oder High-Performance-Computing-Clustern, müssen die Knoten möglicherweise einen Konsens über den Zustand der Aufgaben und Ressourcen erreichen. Algorithmen zur Konsensbildung können verwendet werden, um die Zuweisung von Ressourcen, die Ausführung von Aufgaben und die Wiederherstellung von Fehlern zu koordinieren. Verteilte Dateisysteme, wie z.B. Hadoop Distributed FileSystem (HDFS) oder Google File System (GFS), erfordern einen Konsens über den Zustand der Dateien und Metadaten, um eine konsistente und effiziente Datenverwaltung zu gewährleisten.
 \end{itemize}
-Die Konsensbildung in verteilten Systemen ist eine zentrale Herausforderung, die sowohl theoretische als auch sehr praktische Aspekte umfasst. Algorithmen wie Bully, Paxos und Raft werden in den nächsten Kapiteln besprochen, hier soll zunächst ein grunsätzlicher Blick auf die Umsetzung gerichtet werden.
+Die Konsensbildung in verteilten Systemen ist eine zentrale Herausforderung, die sowohl theoretische als auch sehr praktische Aspekte umfasst. Algorithmen wie Bully, Paxos und Raft werden in den nächsten Kapiteln besprochen, hier soll zunächst ein grundsätzlicher Blick auf die Umsetzung gerichtet werden.
 
 \subsubsection{Quorumsabstimmung}
 Die Quorumsabstimmung ist eine Methode zur Erzielung von Konsens in verteilten Systemen. Ein Quorum bezieht sich auf eine minimale Anzahl von Knoten, die an einer Abstimmung teilnehmen müssen, um eine Entscheidung zu treffen.
@@ -109,7 +109,7 @@ Obwohl Blockchains viele Vorteile bieten, gibt es auch einige Nachteile, die ber
 \begin{itemize}
 \item Skalierbarkeit: Eine der größten Herausforderungen bei Blockchains ist die Skalierbarkeit. Da alle Teilnehmer eine Kopie der gesamten Blockchain besitzen, kann das Netzwerk mit zunehmender Größe und Anzahl der Transaktionen langsamer und weniger effizient werden. Dies kann zu Engpässen und höheren Transaktionskosten führen.
 \item Energieverbrauch: Insbesondere bei Blockchains, die auf dem Proof-of-Work-Konsensmechanismus basieren, wie z.B. Bitcoin, ist der Energieverbrauch erheblich. Die Miner, die Transaktionen validieren und neue Blöcke erstellen, müssen komplexe mathematische Probleme lösen, was enorme Rechenleistung und Energie erfordert. Dies hat Umwelt- und Nachhaltigkeitsbedenken aufgeworfen.
-\item Anfälligkeit für 51\%-Angriffe: Wenn ein Teilnehmer oder eine Gruppe von Teilnehmern die Kontrolle über mehr als 50\% der Rechenleistung eines Blockchain-Netzwerks erlangt, können sie die Integrität der Blockchain beeinträchtigen, indem sie Transaktionen rückgängig machen oder doppelt ausgeben. Obwohl solche Angriffe selten sind, stellen sie ein potentielles Sicherheitsrisiko dar, insbesondere für kleinere und weniger dezentralisierte Blockchains.
+\item Anfälligkeit für 51\%-Angriffe: Wenn ein Teilnehmer oder eine Gruppe von Teilnehmern die Kontrolle über mehr als 50\% der Rechenleistung eines Blockchain-Netzwerks erlangt, können sie die Integrität der Blockchain beeinträchtigen, indem sie Transaktionen rückgängig machen oder doppelt ausgeben. Obwohl solche Angriffe selten sind, stellen sie ein potenzielles  Sicherheitsrisiko dar, insbesondere für kleinere und weniger dezentralisierte Blockchains.
 \item Datenunveränderlichkeit: Einer der Hauptvorteile von Blockchains ist die Unveränderlichkeit der Daten. Dies kann jedoch auch ein Nachteil sein, wenn fehlerhafte oder illegale Informationen in der Blockchain gespeichert werden, da diese Daten nur schwer zu entfernen oder zu ändern sind.
 \item Komplexität und Benutzerfreundlichkeit: Die Technologie hinter Blockchains ist komplex, und für viele Menschen ist das Verständnis und die Nutzung von Blockchain-basierten Anwendungen und Diensten möglicherweise nicht einfach. Dies kann die Akzeptanz und Verbreitung von Blockchains in der breiten Öffentlichkeit einschränken.
 \end{itemize}
@@ -141,7 +141,7 @@ Kommunikationsprobleme und byzantinische Fehler können die Zuverlässigkeit, Ve
 \end{itemize}
 Die Auswahl der richtigen Fehlertoleranztechniken hängt von den spezifischen Anforderungen des verteilten Systems ab, einschließlich der gewünschten Zuverlässigkeit, Verfügbarkeit und Leistung.
 
-Bevor sich den einzelnen Techniken mit mehr Details gewidmet werden soll, soll der Blick zunächst auf die Diskussion eines Fehler gerichtet werden. zunächst muss verstanden werden, das Fehler nicht gleich fehler ist. 
+Bevor sich den einzelnen Techniken mit mehr Details gewidmet werden soll, soll der Blick zunächst auf die Diskussion eines Fehlers gerichtet werden. zunächst muss verstanden werden, das Fehler nicht gleich fehler ist. 
 \subsubsection{Fehlerarten}
 Die Charakterisierung der Fehlerarten hilft dabei, ihre möglichen Auswirkungen auf das System zu erkennen und angemessene Maßnahmen zur Fehlerbehebung und -vermeidung zu ergreifen.
 In verteilten Systemen können Fehlerarten in vier Hauptkategorien eingeteilt werden:
