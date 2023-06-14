@@ -90,7 +90,7 @@ Die Berechnung des größten gemeinsamen Teilers (ggT) für eine große Menge vo
 
 Stattdessen wirt der Map-Schritt verwendet, um die ggT-Berechnung für jedes Paar durchzuführen, und den Reduce-Schritt, um die Ergebnisse zu sammeln. Hier ist ein Pseudocode, der zeigt, wie das gemacht werden könnte:
 
-\begin{lstlisting}[caption={Map- und Reduce},captionpos=b,label={lst:spark}]
+\begin{lstlisting}[caption={Map- und Reduce},captionpos=b,label={lst:map_e}]
 public class GgtBerechnung {
 
   public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
@@ -287,10 +287,10 @@ In der Akzeptanzphase (Accept Phase) sendet der Antragsteller, nachdem er die An
 
 Hier ist eine Sequenz \ref{fig:simple-paxos}, die den Paxos-Algorithmus darstellt:
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.75\textwidth]{fig/uml/paxos-default}
-  \caption{Einfach Paxos}
+\begin{figure}[htp!]
+  %\centering
+  \includegraphics[width=0.55\textwidth]{fig/uml/paxos-default}
+  \caption{Einfach Paxos als Beispielsequenze}
   \label{fig:simple-paxos}
 \end{figure}
 
@@ -309,8 +309,8 @@ Um diese Szenarien in einer Sequenz zu illustrieren, können wir das vorherige D
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.75\textwidth]{fig/uml/paxos-issue}
-  \caption{Einfach Paxos}
+  \includegraphics[width=0.5\textwidth]{fig/uml/paxos-issue}
+  \caption{Komplexeres Paxos Beispiel}
   \label{fig:simple-paxos-issue}
 \end{figure}
 
@@ -320,10 +320,10 @@ In der Realität würde in diesem kritischen Szenario Proposer1 den Konsens nich
 
 Um die Situation zu beheben, könnte Proposer1 eine neue Runde mit einer höheren Vorschlagsnummer starten. Aber das würde zu weiterem Wettbewerb zwischen den Antragstellern führen und könnte das System in einen Zustand des \enquote{Livestreams} versetzen, in dem kein Konsens erreicht wird. Dieses Problem könnte durch den Einsatz eines Koordinators oder durch die Anwendung von Verzögerungen zur Begrenzung der Häufigkeit, mit der Antragsteller neue Runden starten, gemildert werden.
 
-\begin{figure}[!ht]
+\begin{figure}[!htp]
   \centering
   \includegraphics[width=0.65\textwidth]{fig/uml/paxos-issue-solve}
-  \caption{Einfach Paxos}
+  \caption{Korrigiertes Paxos}
   \label{fig:simple-paxos-solve}
 \end{figure}
 

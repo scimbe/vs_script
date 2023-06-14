@@ -762,7 +762,7 @@ Ein einfaches Beispiel für das MapReduce-Paradigma ist die Wortzählung in eine
 Die Map-Funktion liest die Wörter in ihrem zugewiesenen Abschnitt und erstellt ein Key-Value-Paar für jedes Wort, wobei der Schlüssel das Wort selbst ist und der Wert 1. Wenn das Wort \enquote{Hallo} beispielsweise dreimal im Abschnitt erscheint, gibt die Map-Funktion folgende Key-Value-Paare aus:\\\\
 
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={Ausgabe},captionpos=b,label={lst:map}]
+\begin{lstlisting}[caption={Ausgabe},captionpos=b,label={lst:mapI}]
 ("Hallo", 1)
 ("Hallo", 1)
 ("Hallo", 1)
@@ -774,7 +774,7 @@ Die Map-Funktion liest die Wörter in ihrem zugewiesenen Abschnitt und erstellt 
 Die Reduce-Funktion summiert die Werte für jedes Wort, um die endgültige Häufigkeit zu erhalten. Für das Wort \enquote{Hallo} würde die Reduce-Funktion die Werte addieren (1 + 1 + 1) und das endgültige Key-Value-Paar ausgeben: \\\\
 
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={Ausgabe},captionpos=b,label={lst:map}]
+\begin{lstlisting}[caption={Ausgabe},captionpos=b,label={lst:mapII}]
 ("Hallo", 3)
 \end{lstlisting}
 \end{minipage}

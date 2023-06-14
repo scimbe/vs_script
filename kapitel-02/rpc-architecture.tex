@@ -325,7 +325,7 @@ Hier ist ein einfaches Java RMI-Beispiel, das einen Additionsdienst bereitstellt
 Das Remote-Interface definiert die Methoden, die von entfernten Clients aufgerufen werden können. In diesem Fall gibt es eine einzige Methode add, die zwei Ganzzahlen als Parameter akzeptiert und ihre Summe als Ergebnis zurückgibt. Das Interface erweitert java.rmi.Remote, was erforderlich ist, um ein Interface als RMI-fähig zu kennzeichnen.\\\\
 
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={Remote-Interface (Calculator.java)},captionpos=b,label={lst:rmi-server}]
+\begin{lstlisting}[caption={Remote-Interface (Calculator.java)},captionpos=b,label={lst:rmi-serverI}]
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -338,7 +338,7 @@ Implementierung des Remote-Interfaces (CalculatorImpl.java):
 Die CalculatorImpl-Klasse implementiert das Calculator-Interface und erweitert UnicastRemoteObject. Durch das Erweitern von UnicastRemoteObject wird die Implementierung automatisch exportiert, sodass sie von entfernten Clients aufgerufen werden kann.\\\\
 
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={Remote-Interface Implementierung (CalculatorImpl.java.java)},captionpos=b,label={lst:rmi-server}]
+\begin{lstlisting}[caption={Remote-Interface Implementierung (CalculatorImpl.java.java)},captionpos=b,label={lst:rmi-serverII}]
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -356,7 +356,7 @@ public class CalculatorImpl extends UnicastRemoteObject implements Calculator {
 Der RMI-Server ist für die Registrierung und Bereitstellung des entfernten Dienstes verantwortlich. Im Beispiel wird eine CalculatorImpl-Instanz erstellt, und die RMI-Registry wird gestartet, um den Dienst unter dem Namen \enquote{CalculatorService} zu veröffentlichen. Der Server wartet dann auf eingehende Client-Anfragen.
 
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={ RMI-Server (RMIServer.java)},captionpos=b,label={lst:rmi-server}]
+\begin{lstlisting}[caption={ RMI-Server (RMIServer.java)},captionpos=b,label={lst:rmi-serverIII}]
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -379,7 +379,7 @@ Der RMI-Client ist für das Herstellen einer Verbindung zum RMI-Server und das A
 
 Das Beispiel illustriert die grundlegende Funktionsweise von Java RMI in verteilten Systemen. Mit RMI können Entwickler entfernte Objekte und Methodenaufrufe so behandeln, als wären sie lokale Objekte und Methoden, was die Entwicklung von verteilten Anwendungen vereinfacht.\\\\
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={ RMI-Client (RMIClient.java)},captionpos=b,label={lst:rmi-server}]
+\begin{lstlisting}[caption={ RMI-Client (RMIClient.java)},captionpos=b,label={lst:rmi-serverIV}]
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 

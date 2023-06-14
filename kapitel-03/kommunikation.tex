@@ -101,7 +101,7 @@ Host: beispiel.com
 \end{minipage}
 
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={Ressource updaten (Put)},captionpos=b,label={lst:put}]
+\begin{lstlisting}[caption={Ressource updaten (Put)},captionpos=b,label={lst:update}]
 PUT /ressource/1 HTTP/1.1
 Host: beispiel.com
 Content-Type: application/json
@@ -115,7 +115,7 @@ Content-Length: 37
 \end{minipage}
 
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={Ressource löschen (delete)},captionpos=b,label={lst:put}]
+\begin{lstlisting}[caption={Ressource löschen (delete)},captionpos=b,label={lst:delete}]
 DELETE /ressource/1 HTTP/1.1
 Host: beispiel.com
 \end{lstlisting}
@@ -599,7 +599,7 @@ class LampController:
 \end{minipage}
 Schließlich erstellen wir einen Adapter, der den Lampen-Controller verwendet, um die Methoden on() und off() in der REST-API zu nutzen:\\
 \noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={LampController},captionpos=b,label={lst:lamp_c}]
+\begin{lstlisting}[caption={LampAdapter},captionpos=b,label={lst:lamp_a}]
 class LampAdapter(Resource):
     def __init__(self, controller):
         self.controller = controller

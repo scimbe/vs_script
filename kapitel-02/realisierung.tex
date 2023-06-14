@@ -187,7 +187,7 @@ Signal, Event und Nachricht sind drei Begriffe, die oft in der Informatik im Kon
 \begin{itemize}  
 \item (Call-)\textbf{Event}\index{Event}:
 Ein Event ist ein Ereignis, das in einer Anwendung oder einem System auftritt und von einem Benutzer, einem anderen Prozess oder einer anderen Anwendung ausgelöst werden kann. Events können zum Beispiel ein Mausklick, ein Tastendruck, ein Datenbankupdate oder ein Systemalarm sein. Anwendungen können auf diese Ereignisse reagieren, indem sie bestimmte Aktionen ausführen.
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=0.95\textwidth]{fig/uml/simple-event.png}
   \caption{Einfaches Event}
@@ -197,7 +197,7 @@ Während ein Signal ein asynchrones Ereignis ist, ist ein (Call) Event im Allgem
 
 \item \textbf{Signal}\index{Signal}:
 Ein Signal ist ein Ereignis, das von einem Betriebssystem oder einer Anwendung an eine andere Anwendung oder einen Prozess gesendet wird, um eine bestimmte Aktion auszulösen. Signale können zum Beispiel verwendet werden, um einen Prozess zu beenden, ein bestimmtes Verhalten auszulösen oder auf eine bestimmte Situation zu reagieren.
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=0.25\textwidth]{fig/uml/simple-signal.png}
   \caption{Einfaches Signal}
@@ -207,7 +207,7 @@ In der Modellierung der Architektur hat dies eine besondere Bedeutung, da ein Si
 
 \item \textbf{Nachricht}\index{Nachricht}:
 Eine Nachricht ist eine Mitteilung, die von einer Anwendung, einem Prozess oder einem System an eine andere Anwendung, einen Prozess oder ein System gesendet wird. Nachrichten können zum Beispiel verwendet werden, um Daten zwischen verschiedenen Anwendungen oder Systemen auszutauschen, um einen bestimmten Prozess zu starten oder um Informationen über den Status eines Prozesses zu übermitteln. 
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
       \includegraphics[width=0.8\textwidth]{fig/uml/async-message.png}
@@ -248,7 +248,7 @@ Der Kopplungsbegriff ist in verteilten Systemen von entscheidender Bedeutung, da
 \\\\
 Die Wahl der richtigen Kopplungsart kann jedoch auch erhebliche Vorteile bieten. Eine direkte Kopplung kann zu einer höheren Leistung führen und eine bessere Integration von Anwendungen ermöglichen, während eine indirekte Kopplung die Skalierbarkeit und Zuverlässigkeit verbessern kann. Eine losgekoppelte Architektur kann die Flexibilität  und die Ausfallsicherheit erhöhen, während eine strukturelle Kopplung die Zusammenarbeit und Integration von Anwendungen erleichtern kann. Im Detail ist es nochmal in der Tabelle\ref{tab:kopplungsarten} nochmal diskutiert.
 \\\\
-\begin{table}[!h]
+\begin{table}[!ht]
   \centering
   \caption{Kopplungsarten in verteilten Systemen}
   \label{tab:kopplungsarten}

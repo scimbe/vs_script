@@ -355,7 +355,7 @@ public class IterativeServer {
 
 In dem Iterativer Server erkennen wir einen einfachen Echo-Server, der die vom Client gesendeten Nachrichten empfängt und eine Antwort zurücksendet. Der iterative Server verarbeitet die Anfragen nacheinander, während der nebenläufige Server für jede Anfrage einen neuen Thread erstellt, um sie gleichzeitig zu verarbeiten, dies ist im folgenden Beispiel erkennbar.
 
-\begin{lstlisting}[caption={Concurrent Server},captionpos=b,label={lst:iterativ}]
+\begin{lstlisting}[caption={Concurrent Server},captionpos=b,label={lst:concurrent}]
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
