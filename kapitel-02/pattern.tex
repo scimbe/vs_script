@@ -293,23 +293,22 @@ Neben dem Observer Pattern, sieht man in Verteilten Systemen auch immer wieder d
 Das Callback-Pattern ist auch nützlich, wenn es darum geht, den Programmfluss nicht zu blockieren, insbesondere bei asynchronen oder zeitintensiven Operationen. Es ermöglicht die Ausführung anderer Aufgaben, während die lang andauernde Operation im Hintergrund abläuft, und die Callback-Funktion wird aufgerufen, sobald die Operation abgeschlossen ist.
 
 \subsubsection{Callback Pattern}
-Das Callback-Pattern ist ein Verhaltensmuster in der Softwareentwicklung, bei dem eine Funktion (auch als Methode oder Prozedur bezeichnet) als Argument an eine andere Funktion übergeben wird. Diese übergebene Funktion, die als Callback-Funktion bezeichnet wird, wird zu einem späteren Zeitpunkt, oft nach Abschluss einer bestimmten Aufgabe oder einem Ereignis, vom aufrufenden Code ausgeführt. Das Callback-Pattern wird häufig verwendet, um asynchrone Programmierung, Ereignisbehandlung oder die Entkopplung von Funktionen zu ermöglichen.
-\begin{figure}[!ht]
+Das Callback-Pattern ist ein Verhaltensmuster in der Softwareentwicklung, bei dem eine Funktion (auch als Methode oder Prozedur bezeichnet) als Argument an eine andere Funktion übergeben wird. Diese übergebene Funktion, die als Callback-Funktion bezeichnet wird, wird zu einem späteren Zeitpunkt, oft nach Abschluss einer bestimmten Aufgabe oder einem Ereignis, vom aufrufenden Code ausgeführt. Das Callback-Pattern wird häufig verwendet, um asynchrone Programmierung, Ereignisbehandlung oder die Entkopplung von Funktionen zu ermöglichen und eignet sich somit auch für die asynchrone Kommuniaktation in einem verteilten System.
+\begin{figure}[ht!]
   \centering
   \includegraphics[width=0.30\textwidth]{fig/uml/callback-class.png}
   \caption{Callback Pattern}
   \label{fig:callback-class}
 \end{figure}
-Hier ist eine Beschreibung der Schlüsselelemente des Callback-Patterns:
-\begin{itemize}
-\item Funktion als Parameter: Im Callback-Pattern wird eine Funktion als Argument an eine andere Funktion übergeben. Die übergebene Funktion ist die Callback-Funktion.
-\item Rückrufzeitpunkt: Die Callback-Funktion wird zu einem bestimmten Zeitpunkt aufgerufen, beispielsweise nach Abschluss einer Aufgabe oder beim Eintreten eines Ereignisses. Der Zeitpunkt, wann die Callback-Funktion aufgerufen wird, kann variieren und hängt von der Implementierung und den Anforderungen der Anwendung ab.
-\item Entkopplung: Durch die Verwendung des Callback-Patterns können zwei Funktionen entkoppelt werden. Das bedeutet, dass die aufrufende Funktion nicht wissen muss, wie die Callback-Funktion implementiert ist, solange sie das erwartete Verhalten aufweist.
-\item Einfachheit: Das Callback-Pattern ist für einfache Kommunikationsanforderungen zwischen Funktionen oder Objekten geeignet. Es ist besonders nützlich, wenn es nur eine geringe Anzahl von beteiligten Funktionen oder Objekten gibt und die Kommunikation unidirektional ist.
-\item Asynchrone Programmierung: Das Callback-Pattern wird häufig in der asynchronen Programmierung verwendet, um den Programmfluss nicht zu blockieren. Wenn eine zeitintensive Operation ausgeführt wird, kann die Callback-Funktion bei Abschluss dieser Operation aufgerufen werden, sodass der restliche Code ohne Verzögerung weiterlaufen kann.
-\item Ereignisgesteuert: Das Callback-Pattern eignet sich gut für ereignisgesteuerte Programmierung, bei der bestimmte Aktionen aufgrund von Ereignissen oder Benutzerinteraktionen ausgeführt werden sollen. Die Callback-Funktionen dienen als Reaktionen auf diese Ereignisse und werden ausgeführt, wenn das Ereignis eintritt.
-\end{itemize}
-In dem Diagrammen ~\ref{fig:callback-class} und ~\ref{fig:callback-seq} wird das Callback-Pattern über die Callback-Schnittstelle, die Task-Klasse und die Main-Klasse dargestellt. Die Callback-Schnittstelle definiert die Methode onEvent(), die später als Callback-Funktion verwendet wird. Die Task-Klasse enthält die execute()-Methode, die die Callback-Funktion aufruft, wenn eine bestimmte Aktion oder ein bestimmtes Ereignis eintritt. Schließlich erstellt die Main-Klasse sowohl ein Task-Objekt als auch eine Implementierung der Callback-Schnittstelle und stellt die Kommunikation zwischen diesen beiden Elementen her.\\\\
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.50\textwidth]{fig/uml/callback-seq.png}
+  \caption{Callback Pattern Sequenz}
+  \label{fig:callback-seq}
+\end{figure}
+
+In den Diagrammen ~\ref{fig:callback-class} und ~\ref{fig:callback-seq} wird das Callback-Pattern über die Callback-Schnittstelle, die Task-Klasse und die Main-Klasse dargestellt. Die Callback-Schnittstelle definiert die Methode onEvent(), die später als Callback-Funktion verwendet wird. Die Task-Klasse enthält die execute()-Methode, die die Callback-Funktion aufruft, wenn eine bestimmte Aktion oder ein bestimmtes Ereignis eintritt. Schließlich erstellt die Main-Klasse sowohl ein Task-Objekt als auch eine Implementierung der Callback-Schnittstelle und stellt die Kommunikation zwischen diesen beiden Elementen her. Dies ist im folgenden Listing zu erkennen.\\\\
 
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Callback Pattern},captionpos=b,label={lst:callback}]
@@ -342,26 +341,16 @@ public class Main {
 }
 \end{lstlisting}
 \end{minipage}
-Obwohl Callback Pattern und Observer Pattern beide Techniken zur Implementierung von ereignisgesteuerten Kommunikationen zwischen Objekten sind, gibt es einige wichtige Unterschiede zwischen ihnen.
+Obwohl Callback Pattern und Observer Pattern beide Techniken zur Implementierung von ereignisgesteuerten Kommunikationen zwischen Objekten sind, gibt es einige wichtige Unterschiede zwischen ihnen:
 
 \begin{itemize}
-\item Im Callback Pattern wird eine Funktion (Callback-Funktion) als Parameter an ein anderes Objekt oder eine Funktion übergeben.
-\item Die aufgerufene Funktion oder das aufgerufene Objekt führt die übergebene Callback-Funktion unter bestimmten Bedingungen aus (z.B. nachdem eine bestimmte Aktion abgeschlossen ist).
-\item Das Callback Pattern ermöglicht eine einfache, unidirektionale Kommunikation zwischen zwei Objekten oder Funktionen.
-\item Das Callback Pattern eignet sich gut für einfache und direkte Kommunikationsanforderungen, bei denen nur eine geringe Anzahl von Funktionen oder Objekten beteiligt ist.
-\end{itemize}
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.50\textwidth]{fig/uml/callback-seq.png}
-  \caption{Callback Pattern Sequenz}
-  \label{fig:callback-seq}
-\end{figure}
-\begin{itemize}
-\item Im Observer Pattern (auch bekannt als \enquote{Publish-Subscribe Pattern}) gibt es ein \enquote{Subject} (oder \enquote{Publisher}) und mehrere \enquote{Observer} (oder \enquote{Subscriber}). Der Code wird im Folgenden diskutiert.
-\item Die Observer registrieren sich beim Subject, um über Änderungen oder Ereignisse informiert zu werden.
-\item Wenn ein Ereignis beim Subject eintritt, benachrichtigt es alle registrierten Observer, indem es eine spezielle Methode in den Observer-Objekten aufruft.
-\item Das Observer Pattern ermöglicht eine lose Kopplung zwischen Objekten und ist skalierbar, da eine beliebige Anzahl von Observern benachrichtigt werden kann, ohne dass das Subject deren Implementierung kennen muss.
-\end{itemize}
+\item Die aufgerufene Funktion oder das aufgerufene Objekt führt die übergebene Callback-Funktion unter bestimmten Bedingungen aus (z.B. nachdem eine bestimmte Aktion abgeschlossen ist). Ein Observer Pattern informiert über Änderungen oder Ereignisse.
+\item Das Callback Pattern ermöglicht eine einfache, unidirektionale Kommunikation zwischen zwei Objekten oder Funktionen. Die Kommunikationsbeziehung bei Observer Pattern ist $1:n$. 
+\item Das Callback Pattern eignet sich gut für einfache und direkte Kommunikationsanforderungen, bei denen nur eine geringe Anzahl von Funktionen oder Objekten beteiligt ist. Das Observer Pattern ermöglicht eine lose Kopplung zwischen Objekten und ist skalierbar, da eine beliebige Anzahl von Observern benachrichtigt werden kann.
+\end{itemize}\
+Im Listing~\ref{lst:callback} und Listing~\ref{lst:observer-I},~\ref{lst:observer-II} ist zu sehen, wie das Callback Pattern und das Observer Pattern in Java-Code implementiert werden. Im Callback Pattern wird eine Funktion direkt an die ausführende Klasse (Task) übergeben, während im Observer Pattern die Observer sich beim Subject (auch Task in diesem Beispiel) registrieren, um Benachrichtigungen zu erhalten.
+
+Für Verteilte Systeme ist sowohl für das Observer Pattern als auch das Callback Pattern die Referenzen des Callbacks bzw. des Observers eine Herausforderung. Da Verteilte Systeme sich keinen gemeinsamen Speicher teilen, muss ein Ersatz für die Adressierung der Referenz gefunden werden, dies soll zu einem späteren Zeitpunkt diskutiert werden. \\
 
 \begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Observer Pattern - ConcreteSubject},captionpos=b,label={lst:observer-I}]
@@ -413,14 +402,8 @@ class Task implements Subject {
 \end{lstlisting}
 \end{minipage}
 
-Im Listing~\ref{lst:callback} und Listing~\ref{lst:observer-I},~\ref{lst:observer-II} ist zu sehen, wie das Callback Pattern und das Observer Pattern in Java-Code implementiert werden. Im Callback Pattern wird eine Funktion direkt an die ausführende Klasse (Task) übergeben, während im Observer Pattern die Observer sich beim Subject (auch Task in diesem Beispiel) registrieren, um Benachrichtigungen zu erhalten.
-
-Für Verteilte Systeme ist sowohl für das Observer Pattern als auch das Callback Pattern die Referenzen des Callbacks bzw. des Observers eine Herausforderung. Da Verteilte Systeme sich keinen gemeinsamen Speicher teilen, muss ein Ersatz für die Adressierung der Referenz gefunden werden, dies soll zu einem späteren Zeitpunkt diskutiert werden. \\
-
-Wenn die fehlende Adressierung gelöst ist, sollte insgesamt das Callback-Pattern in Betracht gezogen werden, wenn die Anforderungen an die Kommunikation zwischen den beteiligten Funktionen oder Objekten weniger komplex sind und eine einfachere, unidirektionale Kommunikation ausreicht. Wenn jedoch mehrere Objekte auf das gleiche Ereignis reagieren müssen oder eine losere Kopplung zwischen den beteiligten Objekten erforderlich ist, ist das Observer-Pattern besser geeignet.
-
 Neben der Kommunikation der Komponenten, die zudem noch in eine Uni- oder Mulitcast Kommunikation unterschieden werden kann, muss auch die Initialisierung für verteilte Systeme diskutiert werden. In diesem Skript sollen neben den Singleton und den Factory Pattern auch die Initialisierung mit Dependency Injection besprochen werden.\\\\
-\noindent\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Observer Pattern - Concrete Observer},captionpos=b,label={lst:observer-II}]
 // ConcreteObserver
 class TaskObserver implements Observer {
@@ -475,17 +458,17 @@ In dem Diagramm~\ref{fig:singleton} gibt es eine Singleton-Klasse, die das Singl
 Die Anmerkungen im Diagramm verdeutlichen, dass der private Konstruktor die Instanziierung von anderen Klassen verhindert und dass nur eine Instanz der Singleton-Klasse erstellt und über die getInstance()-Methode zugänglich gemacht wird.
 \begin{itemize}
 \item Ressourcenverwaltung: Das Singleton-Pattern kann bei der Verwaltung von Ressourcen, wie zum Beispiel Verbindungen zu Datenbanken oder Diensten, nützlich sein. Es kann dazu beitragen, den Ressourcenverbrauch zu minimieren, indem es verhindert, dass mehrere Verbindungen oder Instanzen erstellt werden, die dieselben Ressourcen verwenden.
-\item Zentrale Steuerung: Ein Singleton kann als zentrale Steuerungs- oder Koordinationskomponente in einem verteilten System dienen, indem es sicherstellt, dass es nur eine einzige Instanz gibt, die den globalen Zustand verwaltet.
+\item Zentrale Steuerung: Ein Singleton kann als zentrale Steuerungs- oder Koordinationskomponente in einem verteilten System dienen, indem es sicherstellt, dass es nur eine einzige Instanz gibt, die den globalen Zustand verwaltet. Ein Singleton-Pattern kann für verschiedene Anforderungen in einem verteilten System unterschiedliche Auswirkungen haben. Einige sollen exemplarisch diskutiert werden.
 \end{itemize}
 \begin{itemize}
 \item Skalierbarkeit: Das Singleton-Pattern kann die Skalierbarkeit eines verteilten Systems beeinträchtigen, da alle Knoten oder Prozesse auf die einzelne Instanz des Singleton-Objekts zugreifen müssen. Dadurch kann es zu Engpässen oder Leistungsproblemen kommen, wenn die Anzahl der Knoten oder Prozesse zunimmt.
 \item Synchronisation: In verteilten Systemen kann die Synchronisation von Singleton-Instanzen eine Herausforderung darstellen. Um sicherzustellen, dass alle Knoten dieselbe Singleton-Instanz verwenden, muss ein Mechanismus implementiert werden, um den globalen Zustand der Instanz konsistent zu halten. Dies kann zusätzliche Komplexität und Overhead verursachen, insbesondere wenn das verteilte System auch fehlertolerant sein muss.
 \item Fehlertoleranz: Ein Singleton-Objekt kann in einem verteilten System zu einem Single Point of Failure (SPOF) werden. Wenn die Singleton-Instanz ausfällt, kann dies das gesamte System beeinträchtigen. Um dieses Problem zu umgehen, sind zusätzliche Maßnahmen wie Replikation oder Clustering erforderlich, die die Komplexität erhöhen und möglicherweise die Vorteile des Singleton-Patterns zunichte machen.
 \end{itemize}
-Die Eignung des Singleton-Patterns hängt in verteilten Systemen von den spezifischen Anforderungen und der Architektur des Systems ab. In einigen Fällen kann das Singleton-Pattern Vorteile bieten, wie das zentrale Verwalten von Ressourcen und die Steuerung des globalen Zustands. In anderen Fällen können die Nachteile, wie eingeschränkte Skalierbarkeit, Synchronisationsprobleme und die Notwendigkeit, Fehlertoleranz zu gewährleisten, dazu führen, dass das Singleton-Pattern für verteilte Systeme weniger geeignet ist.
+Im Kontext dieser Diskussion kann festgestellt werden, das die Eignung des Singleton-Patterns in verteilten Systemen von den spezifischen Anforderungen und der Architektur des Systems abhängt. 
 
 \subsubsection{Factory Pattern}
-Das Factory-Pattern ist ein Entwurfsmuster, das Objekterstellung auf eine separate Factory-Klasse auslagert. Dies ermöglicht die Erstellung von Objekten, ohne dass der Client-Code direkt den Konstruktor der Objekte aufrufen muss. In verteilten Systemen kann das Factory-Pattern einige Vorteile bieten:
+Das Factory-Pattern ist ein Entwurfsmuster, das Objekterstellung auf eine separate Factory-Klasse auslagert. Dies ermöglicht die Erstellung von Objekten, ohne dass der Client-Code direkt den Konstruktor der Objekte aufrufen muss. In verteilten Systemen kann das Factory-Pattern einige Vorteile bieten, welche erneut an einigen Beispielen diskutiert werden soll:
 \begin{itemize}
 \item Abstraktion und Entkopplung: Das Factory-Pattern hilft, den Client-Code von den konkreten Implementierungsdetails der erstellten Objekte zu entkoppeln. In verteilten Systemen kann dies besonders nützlich sein, da Änderungen an den Implementierungen von Diensten oder Komponenten ohne Auswirkungen auf den Client-Code vorgenommen werden können. Dies erleichtert die Wartung und Skalierung des Systems.
 \item Flexibilität bei der Objekterstellung: Das Factory-Pattern ermöglicht es, verschiedene Implementierungen von Objekten zu erstellen, basierend auf der Systemkonfiguration oder den Anforderungen des verteilten Systems. Dies kann dazu beitragen, dass das System einfacher an unterschiedliche Umgebungen oder Anforderungen angepasst werden kann.
@@ -514,9 +497,7 @@ Das Factory-Pattern kapselt die Logik zur Erstellung von Produktobjekten in der 
   \label{fig:factory-seq}
 \end{figure}
 
-Insgesamt bietet das Factory-Pattern in verteilten Systemen eine Reihe von Vorteilen, die dazu beitragen, den Code sauberer und wartbarer zu gestalten, die Skalierbarkeit und Fehlertoleranz zu verbessern und die Verwaltung von Ressourcen zu optimieren. Durch die Abstraktion der Objekterstellung und die zentrale Verwaltung von Ressourcen trägt das Factory-Pattern zur Effizienz und Flexibilität in verteilten Systemen bei.
-
-Obwohl das Factory-Pattern in vielen verteilten Systemen Vorteile bietet, gibt es auch Situationen, in denen Probleme auftreten können:
+Das Factory-Pattern in verteilten Systemen bieter darüber hinaus eine Reihe von Vorteilen, die dazu beitragen, den Code sauberer und wartbarer zu gestalten Wie auch immer, obwohl das Factory-Pattern in vielen verteilten Systemen Vorteile bietet, gibt es auch Situationen, in denen Probleme auftreten können. Einige sind im Folgenden angesprochen:
 \begin{itemize}
 \item Kommunikationslatenz: In verteilten Systemen kann die Kommunikation zwischen den Knoten und den Factory-Instanzen Latenz verursachen. Wenn der Factory-Code auf einem zentralen Knoten gehostet wird, kann dies zu Verzögerungen bei der Objekterstellung führen und die Gesamtleistung des Systems beeinträchtigen.
 \item Synchronisation: In verteilten Systemen kann die Synchronisation der Factory-Instanzen über mehrere Knoten hinweg eine Herausforderung darstellen. Wenn der Factory-Code oder die Konfigurationsinformationen geändert werden, müssen alle Factory-Instanzen im System aktualisiert werden, um konsistent zu bleiben. Dies kann zu zusätzlicher Komplexität und möglichen Inkonsistenzen führen.
@@ -526,20 +507,11 @@ Obwohl das Factory-Pattern in vielen verteilten Systemen Vorteile bietet, gibt e
 \item Overhead: Die Verwendung von Factories in verteilten Systemen kann zusätzlichen Overhead verursachen, insbesondere wenn die Objekterstellung häufig stattfindet oder eine große Anzahl von Knoten beteiligt ist. In solchen Fällen kann der zusätzliche Overhead, der durch die Kommunikation zwischen den Knoten und der Factory entsteht, die Leistung des Systems beeinträchtigen.
 \end{itemize}
 
-Trotz dieser Herausforderungen und Probleme kann das Factory-Pattern eine wichtige Option in der Architektur eines verteilten Systems sein. 
+Trotz dieser Herausforderungen und Probleme ist das Factory-Pattern eine wichtige Option in der Architektur eines verteilten Systems sein. 
 
 \subsubsection{Dependency Injection Pattern}
 
-Das Dependency Injection (DI) Pattern ist ein Entwurfsmuster, bei dem die Abhängigkeiten eines Objekts von außen bereitgestellt werden, anstatt dass das Objekt sie selbst erstellt. Dies kann helfen, den Code modularer, testbarer und wartbarer zu gestalten. In einem verteilten System kann das DI-Pattern folgende Vorteile bieten:
-\begin{itemize}
-\item Entkopplung: DI ermöglicht die Entkopplung von Komponenten in einem verteilten System. Anstatt dass eine Komponente direkt von einer anderen abhängt, werden die Abhängigkeiten injiziert, wodurch die Komponenten unabhängiger voneinander werden. Dies fördert eine saubere Trennung der Zuständigkeiten und macht das System einfacher zu warten und zu erweitern.
-\item Flexibilität: Durch die Verwendung von DI können verschiedene Implementierungen einer Abhängigkeit bereitgestellt werden, ohne dass der Client-Code geändert werden muss. Dies ist besonders nützlich in verteilten Systemen, in denen verschiedene Knoten unterschiedliche Implementierungen oder Konfigurationen benötigen.
-\item Testbarkeit: DI verbessert die Testbarkeit von Komponenten in verteilten Systemen, da Abhängigkeiten leicht durch Mock- oder Stub-Implementierungen ersetzt werden können. Dies ermöglicht das isolierte Testen von Komponenten, ohne dass auf externe Dienste oder Ressourcen zugegriffen werden muß.
-\item Zentrale Verwaltung von Ressourcen: In verteilten Systemen kann das DI-Pattern dazu beitragen, die Erstellung und Verwaltung von Ressourcen wie Datenbankverbindungen oder externen Diensten zu zentralisieren. Dies ermöglicht eine bessere Kontrolle und ein effizienteres Ressourcenmanagement.
-\item Skalierbarkeit und Fehlertoleranz: Durch die Entkopplung von Komponenten und die zentrale Verwaltung von Ressourcen kann das DI-Pattern dazu beitragen, die Skalierbarkeit und Fehlertoleranz von verteilten Systemen zu verbessern. Beispielsweise können Load-Balancing- und Failover-Mechanismen einfacher implementiert werden, wenn Abhängigkeiten zentral verwaltet und injiziert werden.
-\end{itemize}
-
-In einem verteilten System kann das Dependency Injection-Pattern wie folgt angewendet werden:
+Das Dependency Injection (DI) Pattern ist ein Entwurfsmuster, bei dem die Abhängigkeiten eines Objekts von außen bereitgestellt werden, anstatt dass das Objekt sie selbst erstellt. Dies kann helfen, den Code modularer, testbarer und wartbarer zu gestalten. Es kann wie folgt angewendet werden:
 \begin{itemize}
 \item Definieren Sie Schnittstellen oder abstrakte Klassen für die Abhängigkeiten, die von den Komponenten des Systems benötigt werden.
 \item Implementieren Sie die konkreten Klassen, die diese Schnittstellen oder abstrakten Klassen erfüllen.
@@ -547,7 +519,7 @@ In einem verteilten System kann das Dependency Injection-Pattern wie folgt angew
 \item Stellen Sie sicher, dass die Komponenten im System sich nur auf die definierten Schnittstellen oder abstrakten Klassen beziehen, anstatt direkt auf die konkreten Implementierungen zuzugreifen.
 \end{itemize}    
 Wenn das DI-Pattern in einem verteilten System implementiert ist, können verschiedene Knoten unterschiedliche Implementierungen oder Konfigurationen der Abhängigkeiten verwenden, ohne den Code der einzelnen Komponenten ändern zu müssen. Dies ermöglicht eine größere Flexibilität und Anpassungsfähigkeit des Systems an verschiedene Umgebungen und Anforderungen. Ein Beispiel für das Dependency Injection-Pattern in einem verteilten System könnte ein System mit mehreren Microservices sein, die über ein Netzwerk kommunizieren. Jeder Microservice hat seine eigene Aufgabe und benötigt möglicherweise Zugriff auf verschiedene externe Ressourcen oder Dienste. Anstatt dass jeder Microservice direkt auf diese Ressourcen zugreift, werden die Abhängigkeiten über DI bereitgestellt. Dies ermöglicht es, die Ressourcen zentral zu verwalten und bei Bedarf unterschiedliche Implementierungen oder Konfigurationen bereitzustellen.
-
+\\\\
 Um die Funktionsweise des Patterns zu verdeutlichen, soll nochmals das Fallbeispiel mit der Lampe bemüht werden. Der Fokus liegt darauf, dass der Pi (Controller) die Lampe (Model) kontrolliert. 
 \\\\
 Zunächst erstellen wir eine Schnittstelle für die Abhängigkeit:\\
@@ -571,8 +543,7 @@ public class Bulb implements BulbService {
 }
 \end{lstlisting}
 \end{minipage}
-
-Als nächstes erstellen wir die Klasse, die die Abhängigkeit benötigt:\\
+Als nächstes erstellen wir die Klasse, die die Abhängigkeit benötigt:\\\\
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Dependency},captionpos=b,label={lst:di-dependency}]
 
@@ -590,7 +561,7 @@ public class ControllerOnPI {
 \end{lstlisting}
 \end{minipage}
 Hier haben wir eine Konstruktor-basierte Dependency Injection verwendet, um die Abhängigkeit von MessageService in MyApplication zu injizieren.
-\\\
+\\\\
 Schließlich können wir unser Beispiel in der Main-Methode verwenden:\\\\
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Die DI Main},captionpos=b,label={lst:di-main}]
@@ -606,7 +577,7 @@ public class Main {
 \end{minipage}
 
 Dependency Injection (DI) ist ein nützliches Muster für die Entwicklung von Anwendungen. Es hat jedoch auch Nachteile, insbesondere in verteilten Systemen. Einer der Nachteile ist, dass DI in verteilten Systemen eine zusätzliche Komplexität einführen kann, insbesondere wenn viele verschiedene Komponenten vorhanden sind, die miteinander kommunizieren müssen. DI kann auch die Leistung beeinträchtigen, insbesondere wenn die Abhängigkeiten zwischen den Komponenten in einem verteilten System über ein Netzwerk übertragen werden müssen. Ein weiterer Nachteil von DI in verteilten Systemen ist, dass es ein Sicherheitsrisiko darstellen kann, wenn es nicht ordnungsgemäß implementiert wird. Außerdem kann DI die Skalierbarkeit beeinträchtigen, wenn die Komponenten in der Anwendung nicht ordnungsgemäß entkoppelt sind. Schließlich kann DI auch das Debugging erschweren, insbesondere wenn es viele verschiedene Komponenten gibt, die miteinander interagieren. Daher müssen diese Nachteile von Dependency Injection berücksichtigt werden, wenn sie in verteilten Systemen eingesetzt wird, um sicherzustellen, dass die Implementierung angemessen ist und die Anforderungen des Systems erfüllt.
-
+\\\\
 Dependency Injection (DI) wird häufig mit einem Konzept aus der Programmierung verbunden das Reflections (Reflexion) genannt wird. In der Informatik bezieht sich Reflection (Reflexion) auf die Fähigkeit eines Computerprogramms, seine eigene Struktur und sein Verhalten zur Laufzeit zu analysieren und zu manipulieren. Diese Fähigkeit ermöglicht es einem Programm, Informationen über seine eigenen Komponenten, wie Klassen, Methoden, Attribute, etc., zu untersuchen und sogar deren Eigenschaften und Funktionalitäten zu ändern.
 \\\\
 Reflection wird in vielen Programmiersprachen unterstützt, z. B. in Java, C\#, Python und JavaScript. Reflexion kann in verschiedenen Szenarien nützlich sein, wie zum Beispiel:
@@ -628,22 +599,22 @@ Daher ist es wichtig, Reflection nur dann einzusetzen, wenn es wirklich notwendi
 \subsubsection{Adapter und Wrapper Pattern}
 
 Das Adapter Pattern und das Wrapper Pattern sind beide Strukturpattern, die in verteilten Systemen verwendet werden können, um die Interoperabilität zwischen verschiedenen Komponenten zu gewährleisten. Obwohl beide Muster ähnlich sind, gibt es einige Unterschiede, die im Folgenden erläutert werden.
-
+\\\\
 Das Adapter Pattern ermöglicht die Zusammenarbeit von Komponenten mit unterschiedlichen Schnittstellen, indem es eine Zwischenschicht zwischen ihnen einfügt. Das Muster definiert eine Klasse, die die Schnittstelle einer Komponente in die Schnittstelle einer anderen Komponente übersetzt, so dass sie miteinander kommunizieren können. Das Adapter Pattern kann verwendet werden, um zwei Komponenten mit unterschiedlichen Protokollen oder Datenformaten miteinander zu verbinden. Es kann auch verwendet werden, um eine bestehende Komponente an eine neue Schnittstelle anzupassen, ohne den Code der Komponente selbst zu ändern.
-
+\\\\
 Das Wrapper Pattern hingegen definiert eine neue Klasse, die eine vorhandene Komponente umschließt, um ihre Schnittstelle oder ihr Verhalten zu ändern oder zu erweitern. Das Muster ermöglicht es, eine Komponente anzupassen, ohne den Code der Komponente selbst zu ändern. 
-
-Insgesamt sind sowohl das Adapter Pattern als auch das Wrapper Pattern nützliche Muster für die Entwicklung von verteilten Systemen, da sie die Interoperabilität zwischen verschiedenen Komponenten erleichtern und die Wiederverwendbarkeit von vorhandenem Code erhöhen. Die Wahl des geeigneten Musters hängt von den spezifischen Anforderungen des Systems ab.
+\\\\
+Sowohl das Adapter Pattern als auch das Wrapper Pattern sind nützliche Muster für die Entwicklung von verteilten Systemen, da sie die Interoperabilität zwischen verschiedenen Komponenten erleichtern und die Wiederverwendbarkeit von vorhandenem Code erhöhen. Die Wahl des geeigneten Musters hängt von den spezifischen Anforderungen des Systems ab.
 
 
 \subsubsection{Interceptor Pattern}
 Das Interceptor Pattern ist ein Behavioral Pattern, das in verteilten Systemen eingesetzt wird, um die Kommunikation zwischen Komponenten zu steuern. Das Pattern verwendet sogenannte Interceptor- Komponenten, die die eingehenden und ausgehenden Nachrichten der Anwendung abfangen und modifizieren können.
-
+\\\\
 Interceptors werden verwendet, um verschiedene Funktionen auszuführen, wie z.B. Sicherheitsüberprüfungen, Protokollierung, Leistungsüberwachung und Fehlerbehebung. Interceptors können auch verwendet werden, um die Kommunikation zwischen Komponenten zu optimieren, indem sie unerwünschte Nachrichten entfernen oder redundante Nachrichten zusammenfassen.
-
+\\\\
 Das Interceptor Pattern besteht aus einer Kette von Interceptor-Komponenten, die eine eingehende oder ausgehende Nachricht abfangen und modifizieren können, bevor sie an die nächste Komponente weitergeleitet wird. Jeder Interceptor kann die Nachricht bearbeiten oder sie an den nächsten Interceptor in der Kette weitergeben.
 
-\begin{figure}[!ht]
+\begin{figure}[!t]
   \centering
   \includegraphics[width=0.99\textwidth]{fig/uml/intercept-class.png}
   \caption{Interceptor Pattern}
@@ -659,27 +630,22 @@ Die Verwendung des Interceptor Patterns bietet mehrere Vorteile, wie z.B. die M�
   \label{fig:intercept-seq}
 \end{figure}
 
-In diesem Beispiel~\ref{fig:intercept-seq} besteht die Component aus einer Kette von Interceptor-Komponenten (FirstInterceptor, SecondInterceptor und LastInterceptor), die die eingehenden Nachrichten abfangen und modifizieren können. Die Client-Komponente sendet eine Nachricht an die Component, die dann durch die Kette von Interceptor-Komponenten läuft, bevor sie an die Client-Komponente zurückgesendet wird.
+In dem Beispiel der Abbildung~\ref{fig:intercept-seq} besteht die Component aus einer Kette von Interceptor-Komponenten (FirstInterceptor, SecondInterceptor und LastInterceptor), die die eingehenden Nachrichten abfangen und modifizieren können. Die Client-Komponente sendet eine Nachricht an die Component, die dann durch die Kette von Interceptor-Komponenten läuft, bevor sie an die Client-Komponente zurückgesendet wird.
 
 Das Klassendiagramm~\ref{fig:intercept-class} zeigt die verschiedenen Klassen und deren Beziehungen zueinander, während das Sequenzdiagramm zeigt, wie die verschiedenen Komponenten miteinander interagieren. In beiden Diagrammen ist die Verwendung des Interceptor Patterns deutlich zu erkennen.
 
-Insgesamt ist das Interceptor Pattern ein nützliches Pattern für die Entwicklung von verteilten Systemen, da es eine effektive Möglichkeit bietet, die Kommunikation zwischen Komponenten zu steuern und die Funktionalität der Anwendung zu erweitern.
-
-Ein Beispiel für das Interceptor Pattern in einem verteilten System könnte wie folgt aussehen:
-\\\\
-Annahmen:\\
+Ein Beispiel für das Interceptor Pattern in einem verteilten System könnte wie folgt aussehen. Zunächst werden die Annahmen für das Beispiel getroffen. 
 \begin{itemize}   
 \item Es gibt eine Anwendung, die aus mehreren Komponenten besteht, die über ein Netzwerk miteinander kommunizieren.
 \item Eine dieser Komponenten ist für die Ausführung von Finanztransaktionen verantwortlich.
 \end{itemize}   
-Anforderungen:
+Darüber müssen wir uns in dem Beispiel auch klar werden über die Anforderungen an das Pattern.
 \begin{itemize}   
 \item Es ist erforderlich, dass alle eingehenden und ausgehenden Finanztransaktionsnachrichten überwacht werden, um die Sicherheit und Integrität der Transaktionen zu gewährleisten.
 \item Es ist auch erforderlich, dass die Leistung der Finanztransaktionen überwacht wird, um sicherzustellen, dass die Anwendung reibungslos läuft.
 \end{itemize}   
-Implementierung:
+Nicht zu Letzt sind die Aspekte der Implementierung zu diskutieren:
 \begin{itemize}   
-\item Das Interceptor Pattern wird eingesetzt, um eine Kette von Interceptor-Komponenten zu erstellen, die die eingehenden und ausgehenden Finanztransaktionsnachrichten abfangen und modifizieren können.
 \item Der erste Interceptor in der Kette ist für die Überprüfung der Sicherheit der Finanztransaktionsnachrichten verantwortlich. Wenn die Nachricht sicherheitsrelevant ist, wird sie an den nächsten Interceptor weitergeleitet. Wenn die Nachricht jedoch als unsicher eingestuft wird, wird sie abgelehnt.
 \item Der zweite Interceptor in der Kette ist für die Überwachung der Leistung der Finanztransaktionen verantwortlich. Wenn die Nachricht eine Finanztransaktion ist, wird die Leistung der Transaktion gemessen und protokolliert.
 \item Der letzte Interceptor in der Kette ist für das Senden der Finanztransaktionsnachricht an die Zielkomponente verantwortlich.
@@ -737,7 +703,7 @@ class Client {
 \end{lstlisting}
 \end{minipage}
 
-In diesem Beispiel~\ref{lst:fassade} besteht das komplexe Subsystem aus den Klassen SubsystemA und SubsystemB, die jeweils eine komplexe Logik ausführen. Die Facade-Klasse ist die vereinfachte Schnittstelle für den Client und delegiert die Anfragen des Clients an das Subsystem, um die gewünschten Aktionen auszuführen. In diesem Fall führt die performAction()-Methode der Fassade einfach die Operationen von SubsystemA und SubsystemB aus.
+In diesem Beispiel des Listings~\ref{lst:fassade} besteht das komplexe Subsystem aus den Klassen SubsystemA und SubsystemB, die jeweils eine komplexe Logik ausführen. Die Facade-Klasse ist die vereinfachte Schnittstelle für den Client und delegiert die Anfragen des Clients an das Subsystem, um die gewünschten Aktionen auszuführen. In diesem Fall führt die performAction()-Methode der Fassade einfach die Operationen von SubsystemA und SubsystemB aus.
 
 Der Client-Code erstellt eine Instanz der Fassade und ruft die performAction()-Methode auf, um auf das komplexe Subsystem zuzugreifen. Die Fassade kapselt somit das komplexe Subsystem und stellt dem Client nur eine einfachere Schnittstelle zur Verfügung.
 
@@ -745,9 +711,7 @@ Der Client-Code erstellt eine Instanz der Fassade und ruft die performAction()-M
 
 
 \subsubsection{Pipeline Pattern}
-Das Pipeline Pattern ist ein Architekturmuster für verteilte Systeme, das es ermöglicht, komplexe Verarbeitungsprozesse aufzubauen, indem die Verarbeitung in einzelne Schritte aufgeteilt wird, die sequentiell ausgeführt werden. Jeder Schritt wird von einem spezialisierten Modul durchgeführt, das in der Lage ist, einen bestimmten Verarbeitungsschritt auszuführen.
-
-Im Pipeline Pattern gibt es drei grundlegende Komponenten:
+Das Pipeline Pattern ist ein Architekturmuster für verteilte Systeme, das es ermöglicht, komplexe Verarbeitungsprozesse aufzubauen, indem die Verarbeitung in einzelne Schritte aufgeteilt wird, die sequentiell ausgeführt werden. Jeder Schritt wird von einem spezialisierten Modul durchgeführt, das in der Lage ist, einen bestimmten Verarbeitungsschritt auszuführen. Im Pipeline Pattern gibt es drei grundlegende Komponenten:
 \begin{itemize} 
 \item Die Pipeline: eine Abfolge von Verarbeitungsschritten, die in einer bestimmten Reihenfolge ausgeführt werden.
 \item Die Module: spezialisierte Komponenten, die für die Durchführung jedes Verarbeitungsschritts verantwortlich sind.
@@ -771,7 +735,7 @@ Ein wichtiger Aspekt bei der Implementierung des Watchdog Patterns ist die Trenn
 Insgesamt ist das Watchdog Pattern ein leistungsfähiges Entwurfsmuster, das dazu beiträgt, die Robustheit und Zuverlässigkeit von Softwaresystemen zu erhöhen. Durch die frühzeitige Erkennung und Behebung von Problemen kann es dazu beitragen, die Ausfallzeiten und die potenziellen Auswirkungen auf Benutzer und Kunden zu reduzieren.
 
 \subsubsection{Master-Worker Pattern}
-Das Master-Worker Pattern, auch bekannt als Master-Slave Pattern, ist ein grundlegendes Entwurfsmuster in der Informatik, das speziell für verteilte Systeme entwickelt wurde. Es ist eine Methode zur Organisation von Systemen, bei der eine zentrale Einheit (Master) die Kontrolle über mehrere untergeordnete Einheiten (Worker) hat. Das Hauptziel dieses Musters ist es, die Arbeitslast effizient auf mehrere Prozessoren oder Knoten zu verteilen und die Skalierbarkeit und Zuverlässigkeit des Gesamtsystems zu verbessern.
+Das Master-Worker Pattern, auch bekannt als Master-Slave Pattern, ist ein grundlegendes Entwurfsmuster in der Informatik, das nicht speziell für verteilte Systeme entwickelt wurde. Es ist eine Methode zur Organisation von Systemen, bei der eine zentrale Einheit (Master) die Kontrolle über mehrere untergeordnete Einheiten (Worker) hat. Das Hauptziel dieses Musters ist es, die Arbeitslast effizient auf mehrere Prozessoren oder Knoten zu verteilen und die Skalierbarkeit und Zuverlässigkeit des Gesamtsystems zu verbessern.
 
 In verteilten Systemen der Informatik ist das Master-Worker Pattern von großer Bedeutung, da es die folgenden Vorteile bietet:
 \begin{itemize} 
@@ -783,9 +747,9 @@ In verteilten Systemen der Informatik ist das Master-Worker Pattern von großer 
 
 Ein Beispiel für die Verwendung des Master-Worker Patterns ist das MapReduce-Paradigma, das in verteilten Datenverarbeitungssystemen wie Hadoop verwendet wird. Der Master, auch als \enquote{Jobtracker} bezeichnet, teilt die Eingabedaten in kleinere Teile auf und weist diese den Workern, auch als \enquote{Tasktracker} bezeichnet, zur Verarbeitung zu. Die Worker führen ihre zugewiesenen Aufgaben aus und melden ihre Ergebnisse zurück an den Master, der diese dann zu einem einzigen Ergebnis zusammenführt.
 
-Es wurde erstmals von Google im Jahr 2004 eingeführt und ist seitdem zu einem grundlegenden Baustein in der Verarbeitung großer Datenmengen geworden, insbesondere im Bereich des Big Data und der Datenanalyse.
+\paragraph{MapReduce-Paradigma\\\\}
 
-MapReduce besteht aus zwei Hauptphasen: Map und Reduce.
+Das MapReduce-Paradigma wurde erstmals von Google im Jahr 2004 eingeführt und ist seitdem zu einem grundlegenden Baustein in der Verarbeitung großer Datenmengen geworden, insbesondere im Bereich des Big Data und der Datenanalyse. MapReduce besteht aus zwei Hauptphasen: Map und Reduce.
 \begin{itemize}  
 \item Map-Phase: In dieser Phase werden die Eingabedaten in Key-Value-Paare aufgeteilt und anschließend parallel über die verfügbaren Knoten im Cluster verteilt. Die Map-Funktion wird auf jedem dieser Knoten ausgeführt und verarbeitet die zugeordneten Key-Value-Paare. Die Ausgabe der Map-Funktion ist eine Liste von Zwischen-Key-Value-Paaren.
 \item Reduce-Phase: Die Zwischen-Key-Value-Paare aus der Map-Phase werden nach dem Schlüssel gruppiert und an die Reduce-Funktion weitergeleitet. Die Reduce-Funktion wird auf jedem Gruppenschlüssel ausgeführt und fasst die zugehörigen Werte zusammen, um die endgültigen Ergebnisse zu erzeugen.
@@ -795,7 +759,7 @@ Ein einfaches Beispiel für das MapReduce-Paradigma ist die Wortzählung in eine
 \begin{itemize} 
 \item Map-Phase: Zuerst wird der Text in kleinere Abschnitte aufgeteilt und auf verschiedene Knoten im Cluster verteilt. Die Map-Funktion wird auf jedem Knoten ausgeführt, um jedes Wort in den Abschnitten zu verarbeiten.
 
-Die Map-Funktion liest die Wörter in ihrem zugewiesenen Abschnitt und erstellt ein Key-Value-Paar für jedes Wort, wobei der Schlüssel das Wort selbst ist und der Wert 1. Wenn das Wort \enquote{Hallo} beispielsweise dreimal im Abschnitt erscheint, gibt die Map-Funktion folgende Key-Value-Paare aus:
+Die Map-Funktion liest die Wörter in ihrem zugewiesenen Abschnitt und erstellt ein Key-Value-Paar für jedes Wort, wobei der Schlüssel das Wort selbst ist und der Wert 1. Wenn das Wort \enquote{Hallo} beispielsweise dreimal im Abschnitt erscheint, gibt die Map-Funktion folgende Key-Value-Paare aus:\\\\
 
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Ausgabe},captionpos=b,label={lst:map}]
@@ -807,7 +771,8 @@ Die Map-Funktion liest die Wörter in ihrem zugewiesenen Abschnitt und erstellt 
 
 \item Reduce-Phase: Nachdem die Map-Phase abgeschlossen ist, werden die Key-Value-Paare nach dem Schlüssel (Wort) gruppiert und an die Reduce-Funktion gesendet. In diesem Fall hätten wir eine Gruppe für das Wort \enquote{Hallo} mit den Werten [1, 1, 1].
 
-Die Reduce-Funktion summiert die Werte für jedes Wort, um die endgültige Häufigkeit zu erhalten. Für das Wort \enquote{Hallo} würde die Reduce-Funktion die Werte addieren (1 + 1 + 1) und das endgültige Key-Value-Paar ausgeben:
+Die Reduce-Funktion summiert die Werte für jedes Wort, um die endgültige Häufigkeit zu erhalten. Für das Wort \enquote{Hallo} würde die Reduce-Funktion die Werte addieren (1 + 1 + 1) und das endgültige Key-Value-Paar ausgeben: \\\\
+
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Ausgabe},captionpos=b,label={lst:map}]
 ("Hallo", 3)
