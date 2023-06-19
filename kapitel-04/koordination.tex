@@ -2,11 +2,11 @@
 
 In der heutigen vernetzten Welt spielen verteilte Systeme eine entscheidende Rolle bei der Unterstützung von Anwendungen und Diensten, die von Unternehmen und Endbenutzern eingesetzt werden. Die Koordination in verteilten Systemen ist ein zentrales Thema, das es ermöglicht, die Funktionsweise dieser Systeme effektiv und effizient zu verwalten. In dieser Einführung werden wir uns auf die grundlegenden Prinzipien der Koordination konzentrieren.
 
-Ein verteiltes System ist ein Netzwerk von autonomen Computern oder Knoten, die zusammenarbeiten, um einen gemeinsamen Zweck zu erfüllen. Diese Knoten kommunizieren über Nachrichten und teilen Ressourcen, um Aufgaben gemeinsam zu erledigen. Die Koordination in verteilten Systemen bezieht sich auf den Prozess, bei dem verschiedene Komponenten des Systems zusammenarbeiten und Informationen austauschen, um ein konsistentes und kohärentes Verhalten zu erreichen. Das wir das kohärente Verhalten durch die Erreichung der Transparenzeigenschaften erreichen können ist uns bekannt, wie wir den Begriff der Konsistenz zu verstehen haben ist noch zu diskutieren. 
+Ein verteiltes System ist ein Netzwerk von autonomen Computern oder Knoten, die zusammenarbeiten, um einen gemeinsamen Zweck zu erfüllen. Diese Knoten kommunizieren über Nachrichten und teilen Ressourcen, um Aufgaben gemeinsam zu erledigen. Die Koordination in verteilten Systemen bezieht sich auf den Prozess, bei dem verschiedene Komponenten des Systems zusammenarbeiten und Informationen austauschen, um ein konsistentes und kohärentes Verhalten zu erreichen. Das wir das kohärente Verhalten durch die Erreichung der Transparenzeigenschaften erhalten können ist uns bekannt, wie wir den Begriff der Konsistenz zu verstehen haben ist noch zu diskutieren. 
 
 Eine der Hauptanforderungen an die Koordination in verteilten Systemen ist die Synchronisation. Die Synchronisation bezieht sich auf die Notwendigkeit, die Aktivitäten der verschiedenen Knoten im System aufeinander abzustimmen, um korrekte und vorhersehbare Ergebnisse zu erzielen. Hierfür gibt es verschiedene Ansätze, beispielsweise der Einsatz von globalen Uhren, logischen Uhren oder Vektoruhren, um die Reihenfolge der Ereignisse im System zu bestimmen und Konsistenzbedingungen zu erfüllen.
 
-Ein weiterer wichtiger Aspekt der Koordination ist die Einigung (Konsens). In verteilten Systemen müssen Knoten oft auf ein gemeinsames Ergebnis oder eine Entscheidung einigen. Dies kann beispielsweise bei der Wahl eines Leaders oder der Bestätigung einer Transaktion erforderlich sein. Es gibt verschiedene Konsensalgorithmen, wie zum Beispiel Paxos, Raft oder Byzantinischer Generäle, die sicherstellen, dass ein solcher Konsens auch in Anwesenheit von Fehlern und Verzögerungen im System erreicht wird.
+Ein weiterer wichtiger Aspekt der Koordination ist die Einigung (Konsens). In verteilten Systemen müssen Knoten oft auf ein gemeinsames Ergebnis oder eine Entscheidung einigen. Dies kann beispielsweise bei der Wahl eines Leaders oder der Bestätigung einer Transaktion erforderlich sein. Es gibt verschiedene Konsensalgorithmen, wie zum Beispiel Paxos, oder Raft, die sicherstellen, dass ein solcher Konsens auch in Anwesenheit von Fehlern und Verzögerungen im System erreicht wird.
 
 Die Handhabung von Fehlern und Wiederherstellung ist ein weiterer entscheidender Aspekt der Koordination in verteilten Systemen. Knoten können aufgrund von Hardware-, Software- oder Netzwerkfehlern ausfallen, und das System muss in der Lage sein, solche Ausfälle zu erkennen und angemessen darauf zu reagieren. Wiederherstellungsstrategien wie Replikation, Sharding und Checkpointing helfen dabei, die Datenintegrität aufrechtzuerhalten und das System nach einem Ausfall wieder in einen konsistenten Zustand zu bringen.
 
@@ -20,9 +20,9 @@ Insgesamt ist die Koordination in verteilten Systemen eine komplexe und essenzie
 
 \subsection{Konsistenz}
 
-Konsistenz ist ein wichtiges Konzept in verteilten Systemen und bezieht sich darauf, wie Datenänderungen über verschiedene Knoten hinweg sichtbar sind. In einfachen Worten bedeutet Konsistenz, dass alle Knoten im verteilten System immer die gleiche Sicht auf die Daten haben sollten. Es gibt verschiedene Stufen der Konsistenz, von strikter Konsistenz bis hin zu schwacher oder eventual Konsistenz, je nach den Anforderungen der Anwendung und den zugrunde liegenden Mechanismen, die zur Gewährleistung der Konsistenz eingesetzt werden.
+Konsistenz ist ein wichtiges Konzept in verteilten Systemen und bezieht sich darauf, wie Datenänderungen über verschiedene Knoten hinweg sichtbar sind. In einfachen Worten bedeutet Konsistenz, dass alle Knoten im verteilten System immer die gleiche Sicht auf die Daten haben sollten. Es gibt verschiedene Stufen der Konsistenz, von strikter Konsistenz bis hin zu schwacher oder sich annährende Konsistenz, je nach den Anforderungen der Anwendung und den zugrunde liegenden Mechanismen, die zur Gewährleistung der Konsistenz eingesetzt werden.
 
-Strikte Konsistenz ist das stärkste Konsistenzmodell, bei dem alle Knoten im verteilten System sofort die gleichen Daten sehen, sobald eine Änderung vorgenommen wurde. Das bedeutet, wenn ein Knoten eine Aktualisierung vornimmt, sind alle anderen Knoten sofort über diese Aktualisierung informiert, bevor sie weitere Lese- oder Schreiboperationen durchführen. In der Praxis ist es jedoch schwierig, strikte Konsistenz in verteilten Systemen zu erreichen, insbesondere aufgrund der physikalischen Begrenzungen der Informationsübertragung.
+\textbf{Strikte Konsistenz} ist das stärkste Konsistenzmodell, bei dem alle Knoten im verteilten System sofort die gleichen Daten sehen, sobald eine Änderung vorgenommen wurde. Das bedeutet, wenn ein Knoten eine Aktualisierung vornimmt, sind alle anderen Knoten sofort über diese Aktualisierung informiert, bevor sie weitere Lese- oder Schreiboperationen durchführen. In der Praxis ist es jedoch schwierig, strikte Konsistenz in verteilten Systemen zu erreichen, insbesondere aufgrund der physikalischen Begrenzungen der Informationsübertragung.
 
 Licht ist das schnellste Medium, mit dem Informationen übertragen werden können, aber selbst Licht hat eine endliche Geschwindigkeit von etwa 299.792 Kilometern pro Sekunde (km/s) im Vakuum. Diese Geschwindigkeit begrenzt, wie schnell Informationen zwischen verschiedenen Knoten in einem verteilten System ausgetauscht werden können.
 
@@ -36,25 +36,25 @@ t =  0,01 s
 \end{lstlisting}
 In diesem Beispiel würde es also mindestens 0,01 Sekunden dauern, um Informationen über die Datenaktualisierung zwischen den beiden Knoten auszutauschen. Dies ist eine Ewigkeit im Kontext einer Datenbankanwendung, in der wir Lokal in einem Takt von mehreren GHz auf diesen Daten Operationen ausführen. In dieser Zeit wäre das verteilte System inkonsistent, da der zweite Knoten noch keine Kenntnis von der Aktualisierung hätte. Daher ist es praktisch unmöglich, strikte Konsistenz in verteilten Systemen zu erreichen, selbst wenn die Informationsübertragung mit Lichtgeschwindigkeit stattfindet.
 
-In realen verteilten Systemen sind Konsistenzmodelle wie sequentielle Konsistenz, kausale Konsistenz oder eventual Konsistenz häufiger anzutreffen, da sie ein ausgewogenes Verhältnis zwischen Leistung und Konsistenz bieten und besser mit den inhärenten Latenzen und Unwägbarkeiten in verteilten Systemen umgehen können.
+In realen verteilten Systemen sind Konsistenzmodelle wie sequentielle Konsistenz, kausale Konsistenz oder sich annährende Konsistenz häufiger anzutreffen, da sie ein ausgewogenes Verhältnis zwischen Leistung und Konsistenz bieten und besser mit den inhärenten Latenzen und Unwägbarkeiten in verteilten Systemen umgehen können.
 
 Neben physikalischen Größen hält aber bereits die Logik eine Herausforderung für die Konsistenz  bereit. 
 
 \subsection{CAP Theorem}
 Das CAP-Theorem, auch bekannt als Brewer's Theorem, ist ein fundamentales Prinzip, das die inhärenten Trade-offs in verteilten Systemen beschreibt. Es besagt, dass ein verteiltes System nur zwei der folgenden drei Eigenschaften gleichzeitig erfüllen kann: Konsistenz (C), Verfügbarkeit (A) und Partitionstoleranz (P).
 \begin{itemize}
-\item Konsistenz (C): Alle Knoten im System sehen zur gleichen Zeit dieselben Daten.
-\item Verfügbarkeit (A): Alle Knoten sind stets in der Lage, Anfragen von Clients zu bearbeiten und korrekte Antworten zu liefern.
-\item Partitionstoleranz (P): Das System kann trotz Netzwerkpartitionen, bei denen die Kommunikation zwischen Knoten unterbrochen ist, weiterhin korrekt funktionieren.
+\item \textbf{Konsistenz} (C): Alle Knoten im System sehen zur gleichen Zeit dieselben Daten.
+\item \textbf[Verfügbarkeit} (A): Alle Knoten sind stets in der Lage, Anfragen von Clients zu bearbeiten und korrekte Antworten zu liefern.
+\item \textf{Partitionstoleranz} (P): Das System kann trotz Netzwerkpartitionen, bei denen die Kommunikation zwischen Knoten unterbrochen ist, weiterhin korrekt funktionieren.
 \end{itemize}
 
 Das CAP-Theorem impliziert, dass verteilte Systeme in der Praxis immer zwischen Konsistenz und Verfügbarkeit abwägen müssen, da Partitionstoleranz als grundlegende Anforderung für verteilte Systeme angesehen wird.
 
 Der Grund für diesen Trade-off liegt in den Unwägbarkeiten und Latenzen, die in verteilten Systemen vorhanden sind. Netzwerkpartitionen können aufgrund von Hardware-, Software- oder Konfigurationsfehlern auftreten. Wenn ein System auf strikte Konsistenz besteht, kann es während einer Netzwerkpartition nicht verfügbar sein, da es nicht möglich ist, alle Knoten zu synchronisieren, bis die Partition behoben ist. Andererseits, wenn ein System auf hohe Verfügbarkeit besteht, müssen Anfragen auch während einer Netzwerkpartition beantwortet werden, selbst wenn dies bedeutet, dass die Konsistenz beeinträchtigt wird.
-
+\\\\
 In realen Anwendungen ist der Trade-off zwischen Konsistenz und Verfügbarkeit häufig von den spezifischen Anforderungen der Anwendung abhängig. Zum Beispiel sind in einigen Anwendungen, wie Finanztransaktionssystemen, Konsistenz und Datenintegrität von größter Bedeutung. In solchen Fällen wäre ein System, das stärker auf Konsistenz ausgerichtet ist, wie beispielsweise ein System, das auf dem Paxos- oder Raft-Konsensalgorithmus basiert, besser geeignet.
 
-In anderen Anwendungen, wie beispielsweise sozialen Netzwerken oder Content-Delivery-Netzwerken, ist Verfügbarkeit möglicherweise wichtiger als strenge Konsistenz. In solchen Fällen können Systeme, die auf schwacher Konsistenz oder eventual Konsistenz basieren, wie beispielsweise Amazon's Dynamo oder Apache Cassandra, besser geeignet sein, um den Anforderungen gerecht zu werden.
+In anderen Anwendungen, wie beispielsweise sozialen Netzwerken oder Content-Delivery-Netzwerken, ist Verfügbarkeit möglicherweise wichtiger als strenge Konsistenz. In solchen Fällen können Systeme, die auf schwacher Konsistenz oder  sich annährende Konsistenz basieren, wie beispielsweise Amazon's Dynamo oder Apache Cassandra, besser geeignet sein, um den Anforderungen gerecht zu werden.
 
 Insgesamt zeigt das CAP-Theorem die fundamentale Herausforderung bei der Gestaltung von verteilten Systemen auf und betont die Notwendigkeit, den Trade-off zwischen Konsistenz und Verfügbarkeit in Abhängigkeit von den spezifischen Anforderungen und Prioritäten der Anwendung sorgfältig abzuwägen.
 
@@ -68,21 +68,23 @@ Da verteilte Systeme immer häufiger in der modernen Computertechnik eingesetzt 
 \item Hybride Ansätze: In einigen Fällen kann es sinnvoll sein, hybride Ansätze zu verwenden, die verschiedene Konsistenzmodelle und Techniken kombinieren, um den Konsistenz-Verfügbarkeits-Trade-off effektiv zu bewältigen. Ein Beispiel hierfür ist das COPS-System (Clusters of Order-Preserving Servers), das eine Kombination aus sequentieller Konsistenz und eventual Konsistenz verwendet, um Daten über mehrere Rechenzentren hinweg zu replizieren.
 \end{itemize}
 Mit welchen Mitteln man sich auch immer hilft, wichtig ist das/ein Konsistenzmodell zu verstehen, dass die Freiheitsgrade deutlich macht in dem man sich bewegen kann. Konsistenzmodelle beschreiben, wie ein verteiltes System den Zustand seiner Daten unter den verschiedenen Knoten synchronisiert und aufrechterhält. 
-
-Es gibt verschiedene Konsistenzmodell, wie jenes, das von Kyle Kingsbury entwickelt wurde. Das Modell ist allerdings  kein spezifisches Konsistenzmodell, sondern ein Framework zur Analyse und Validierung von verteilten Systemen hinsichtlich ihrer Datenkonsistenz- und Sicherheitseigenschaften, das verschiedene Modelle aufnimmt und sie ordnet. Diese Ordnung ist nicht standardisiert, so dass es in der Praxis Überlappungen und unterschiedliche Interpretationen geben kann. In dieser Ausarbeitung konzentriert sich das Modellkonzept auf die Unterscheidung von Datenzentrische Konsistenzmodelle und Client-zentrische Konsistenzmodelle. Datenzentrische Konsistenzmodelle konzentrieren sich darauf, wie verteilte Systeme den Zustand ihrer Daten unter den verschiedenen Knoten synchronisieren und aufrechterhalten. Sie beschreiben die Konsistenzanforderungen auf Systemebene und betreffen die Sichtbarkeit und Reihenfolge von Lese- und Schreiboperationen auf den Knoten.
-
+\\\\
+Es gibt verschiedene Konsistenzmodell, wie jenes, das von Kyle Kingsbury entwickelt wurde. Das Modell ist allerdings  kein spezifisches Konsistenzmodell, sondern ein Framework zur Analyse und Validierung von verteilten Systemen hinsichtlich ihrer Datenkonsistenz- und Sicherheitseigenschaften, das verschiedene Modelle aufnimmt und sie ordnet. Diese Ordnung ist nicht standardisiert, so dass es in der Praxis Überlappungen und unterschiedliche Interpretationen geben kann. 
+\\\\
+In dieser Ausarbeitung konzentriert sich das Modellkonzept auf die Unterscheidung von Datenzentrische Konsistenzmodelle und Client-zentrische Konsistenzmodelle. Datenzentrische Konsistenzmodelle konzentrieren sich darauf, wie verteilte Systeme den Zustand ihrer Daten unter den verschiedenen Knoten synchronisieren und aufrechterhalten. Sie beschreiben die Konsistenzanforderungen auf Systemebene und betreffen die Sichtbarkeit und Reihenfolge von Lese- und Schreiboperationen auf den Knoten.
+\\\\
 Client-zentrische Konsistenzmodelle hingegen legen den Fokus auf die Sichtbarkeit und Reihenfolge von Lese- und Schreiboperationen aus der Perspektive eines einzelnen Clients. Sie beschreiben, welche Garantien ein verteiltes System in Bezug auf die Konsistenz für einen bestimmten Client oder eine Gruppe von Clients bietet.
-
+\\\\
 Kurz gesagt, datenzentrische Konsistenzmodelle beziehen sich auf die Konsistenz auf der Ebene des verteilten Systems, während client-zentrische Konsistenzmodelle die Konsistenz aus der Perspektive der Clients betrachten. Zunächst konzentriert sich das Skript auf die datenzentrische Sicht. 
 
 \subsection{Datenzentrische Konsistenzmodelle}
 Einige der datenzentrischen Konsistenzmodelle, die im Rahmen der Diskussion analysiert werden sollten, sind:
 \begin{itemize}
-\item Strong Consistency: Eine verteilte Datenbank stellt sicher, dass alle Operationen auf allen Knoten gleichzeitig abgeschlossen werden. Diese Art von Konsistenzmodell stellt sicher, dass jeder Benutzer immer die neuesten Daten sieht.
-\item Linearizability: Linearizability stellt sicher, dass alle Operationen auf allen Knoten in einer einzigen, atomaren Reihenfolge ausgeführt werden, die den Echtzeit-Verhalten entspricht.
-\item Sequential Consistency: In diesem Modell müssen alle Operationen in einer einzigen, globalen Reihenfolge ausgeführt werden, die für alle Knoten gleich ist. Dieses Modell stellt jedoch keine kausale Beziehung zwischen Operationen her.
+\item \textbf{Strong Consistency}: Eine verteilte Datenbank stellt sicher, dass alle Operationen auf allen Knoten gleichzeitig abgeschlossen werden. Diese Art von Konsistenzmodell stellt sicher, dass jeder Benutzer immer die neuesten Daten sieht.
+\item \textbf{Linearizability}: Linearizability stellt sicher, dass alle Operationen auf allen Knoten in einer einzigen, atomaren Reihenfolge ausgeführt werden, die den Echtzeit-Verhalten entspricht.
+\item \textbf{Sequential Consistency}: In diesem Modell müssen alle Operationen in einer einzigen, globalen Reihenfolge ausgeführt werden, die für alle Knoten gleich ist. Dieses Modell stellt jedoch keine kausale Beziehung zwischen Operationen her.
 \item Causal Consistency: Causal Consistency stellt sicher, dass alle Operationen, die kausal voneinander abhängig sind, in der gleichen Reihenfolge auf allen Knoten angewendet werden. Unabhängige Operationen können jedoch in unterschiedlicher Reihenfolge ausgeführt werden.
-\item Eventual Consistency: In diesem Modell werden Änderungen an Daten auf verschiedenen Knoten schließlich synchronisiert, aber nicht sofort. Dadurch kann es zu vorübergehenden Inkonsistenzen kommen, die jedoch im Laufe der Zeit behoben werden.
+\item \textbf{Eventual Consistency}: In diesem Modell werden Änderungen an Daten auf verschiedenen Knoten schließlich synchronisiert, aber nicht sofort. Dadurch kann es zu vorübergehenden Inkonsistenzen kommen, die jedoch im Laufe der Zeit behoben werden.
 \end{itemize}
 
 In diesem Skript wird versucht sich mit systematischen Methoden, um die Konsistenz- und Sicherheitseigenschaften von verteilten Systemen zu nähern um sie entsprechend dem Anwendungsfall analysieren und sicherzustellen zu können. Da wir bereits diskutiert haben das Strong Consistency in einem verteilten System kaum zu erreichen ist, konzentriert man sich auf Modelle mit schwächerer Konsistenz, somit wäre das nächste in der Liste Linearizability. 
