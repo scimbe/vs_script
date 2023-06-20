@@ -3,54 +3,43 @@
 Die Synchronisation in verteilten Systemen ist eine komplexe Herausforderung, da mehrere Prozesse oder Knoten auf gemeinsame Ressourcen zugreifen können, ohne dass eine klare Ordnung oder ein gemeinsames Zeitgefühl vorhanden ist. In einem verteilten System kann es schwierig sein, sicherzustellen, dass die verschiedenen Kopien der Ressourcen konsistent sind und dass die Daten und Aktionen in der richtigen Reihenfolge ausgeführt werden.
 
 Ein Beispiel für eine Herausforderung der Synchronisation in verteilten Systemen ist die Replikation von Daten beispielhaft in einem verteilten Datenbanksystem. Wenn mehrere Kopien einer Datenbank auf verschiedenen Knoten im Netzwerk ausgeführt werden, müssen die Änderungen an den Daten in Echtzeit zwischen den Knoten synchronisiert werden, um die Konsistenz der Daten zu gewährleisten. Da es keine gemeinsame Uhr gibt, die die Zeit auf allen Knoten synchronisiert, kann es schwierig sein, die Reihenfolge der Änderungen zu bestimmen und sicherzustellen, dass alle Knoten die neuesten Daten haben.
-
-Remote-write protocols und Local-write protocols sind zwei Ansätze zur Synchronisation von Schreibzugriffen in verteilten Systemen. Remote-write protocols erlauben es einem Knoten, Schreibzugriffe auf gemeinsame Ressourcen auszuführen, wobei die Änderungen dann an andere Knoten im Netzwerk übertragen werden. Local-write protocols hingegen erlauben nur einem Knoten, Schreibzugriffe auf eine Ressource auszuführen, und synchronisieren dann die Änderungen mit den anderen Knoten im Netzwerk.
+\\\\
+\textbf{Remote-write protocols} und \textbf{Local-write protocols} sind zwei Ansätze zur Synchronisation von Schreibzugriffen in verteilten Systemen. Remote-write protocols erlauben es einem Knoten, Schreibzugriffe auf gemeinsame Ressourcen auszuführen, wobei die Änderungen dann an andere Knoten im Netzwerk übertragen werden. Local-write protocols hingegen erlauben nur einem Knoten, Schreibzugriffe auf eine Ressource auszuführen, und synchronisieren dann die Änderungen mit den anderen Knoten im Netzwerk.
 
 Ein Beispiel für den Einsatz von remote-write protocols ist eine Anwendung, die auf einer verteilten Datenbank aufbaut und gleichzeitige Schreibzugriffe von mehreren Knoten erfordert. Wenn mehrere Knoten gleichzeitig Änderungen an einer Tabelle der Datenbank vornehmen, kann es zu Konflikten kommen, die die Konsistenz der Datenbank beeinträchtigen können. Ein Ansatz zur Vermeidung dieser Konflikte besteht darin, dass jeder Knoten Remote-Schreibzugriffe auf die Datenbank ausführt, um Änderungen auf anderen Knoten im Netzwerk zu aktualisieren. Ein Beispiel für eine solche Anwendung ist ein Echtzeit-Börsensystem, bei dem mehrere Knoten gleichzeitig Trades auf die Datenbank schreiben. Durch die Verwendung von remote-write protocols kann die Konsistenz der Datenbank gewährleistet werden, ohne dass es zu Konflikten oder Inkonsistenzen kommt.
 
-Ein Beispiel für den Einsatz von Local-write protocols ist eine Anwendung, bei der ein Knoten eine hohe Anzahl von Schreibzugriffen auf eine Ressource ausführt. Wenn ein Knoten mehrere Schreibzugriffe hintereinander ausführt, kann die Latenz und Netzwerkbelastung hoch sein, wenn jede Änderung an andere Knoten im Netzwerk übertragen werden muss. Ein Ansatz zur Optimierung dieser Prozesse besteht darin, dass jeder Knoten nur lokale Schreibzugriffe auf seine eigene Kopie der Ressource ausführt und dann Änderungen zwischen den Knoten synchronisiert, um sicherzustellen, dass alle Knoten die gleichen Daten haben. Ein Beispiel für eine solche Anwendung ist ein Produktkatalog, bei dem ein Knoten Produktbeschreibungen und -bilder in die Datenbank schreibt. Durch die Verwendung von Local-write protocols kann die Latenz und Netzwerkbelastung reduziert werden, während gleichzeitig die Konsistenz der Datenbank gewährleistet wird.
-
-In beiden Fällen ist die Wahl zwischen remote-write protocols und Local-write protocols von den spezifischen Anforderungen und Einschränkungen des verteilten Systems abhängig. Wie es auch sei, die Wahl dieser Protokolle schaffen nicht die Herausforderungen der Koordination über die verschiedenen Systemen zu organisieren. 
-
-Es gibt verschiedene weitere Lösungsstrategien für die Synchronisation von verschiedenen nodes in verteilten Systemen, die je nach Anwendungsanforderungen und Systemarchitektur verwendet werden können:
-\begin{itemize}
-\item Physikalische Uhren
-\item Logische Uhren
-\item Locking
-\end{itemize}
-Die folgenden Absätze geben einen detaillierteren Blick in die Ansätze. 
+Ein dem gegenüberstehendes Beispiel für den Einsatz von Local-write protocols ist eine Anwendung, bei der ein Knoten eine hohe Anzahl von Schreibzugriffen auf eine Ressource ausführt. Wenn ein Knoten mehrere Schreibzugriffe hintereinander ausführt, kann die Latenz und Netzwerkbelastung hoch sein, wenn jede Änderung an andere Knoten im Netzwerk übertragen werden muss. Ein Ansatz zur Optimierung dieser Prozesse besteht darin, dass jeder Knoten nur lokale Schreibzugriffe auf seine eigene Kopie der Ressource ausführt und dann Änderungen zwischen den Knoten synchronisiert, um sicherzustellen, dass alle Knoten die gleichen Daten haben. Ein Beispiel für eine solche Anwendung ist ein Produktkatalog, bei dem ein Knoten Produktbeschreibungen und -bilder in die Datenbank schreibt. Durch die Verwendung von Local-write protocols kann die Latenz und Netzwerkbelastung reduziert werden, während gleichzeitig die Konsistenz der Datenbank gewährleistet wird.
+\\\\
+In beiden Fällen ist die Wahl zwischen remote-write protocols und local-write protocols von den spezifischen Anforderungen und Einschränkungen des verteilten Systems abhängig. Wie es auch sei, die Wahl dieser Protokolle negiert nicht die Herausforderungen der Koordination über die verschiedenen Systeme. Daher gibt es verschiedene weitere Lösungsstrategien für die Synchronisation von verschiedenen nodes in verteilten Systemen, die je nach Anwendungsanforderungen und Systemarchitektur verwendet werden können:
+\\\\
+Die folgenden Absätze geben einen detaillierteren Blick in die Ansätze \textbf{Physikalische Uhren}, \textbf{Logische Uhren} und \textbf{Locking}. 
 
 \subsubsection{Physikalische Uhr}
 
-Eine Möglichkeit für einen globalen Zeitstempel ist die physikalische Uhr. Diese bietet eine Basis für eine gemeinsame Zeitbasis, wenn die Uhren selbst synchronisiert sind. Eine physikalische Uhr ist im Wesentlichen ein Gerät oder eine Komponente, die Zeit misst und darstellt, basierend auf einem physikalischen Prozess wie der Schwingung eines Quarzkristalls.
-
-Die Verwendung von physikalischen Uhren in verteilten Systemen kann jedoch komplex sein. Ein Hauptproblem ist die Tatsache, dass physikalische Uhren auf verschiedenen Knoten aufgrund von Unterschieden in den Quarzkristallen oder anderen physikalischen Prozessen, die zur Zeiterfassung verwendet werden, leicht auseinander driften können. Diese Drift kann dazu führen, dass die Uhren auf verschiedenen Knoten unterschiedliche Zeiten anzeigen, was zu Inkonsistenzen in der Reihenfolge von Ereignissen führen kann.
-
-Um dieses Problem zu lösen, verwenden verteilte Systeme häufig Synchronisationsprotokolle, um die Uhren auf den verschiedenen Knoten abzugleichen. Ein bekanntes Beispiel für ein solches Protokoll ist das Network Time Protocol (NTP), das im Internet verwendet wird, um die Uhren auf verschiedenen Computern und Netzwerkgeräten zu synchronisieren. NTP verwendet einen hierarchischen Ansatz, bei dem eine kleine Anzahl von Servern mit sehr genauen Uhren (z. B. Atomuhren) als Referenz für andere Server und Geräte dienen.
-
+Eine Möglichkeit für einen globalen Zeitstempel ist die physikalische Uhr. Diese bietet eine Basis für eine gemeinsame Zeitbasis, wenn die Uhren selbst synchronisiert sind. Eine physikalische Uhr ist im Wesentlichen ein Gerät oder eine Komponente, die Zeit misst und darstellt, basierend auf einem physikalischen Prozess, wie der Schwingung eines Quarzkristalls.
+\\\\
+Die Verwendung von physikalischen Uhren in verteilten Systemen kann jedoch komplex sein. Ein Hauptproblem ist die Tatsache, dass physikalische Uhren auf verschiedenen Knoten aufgrund von Unterschieden in den Quarzkristallen oder anderen physikalischen Prozessen, die zur Zeiterfassung verwendet werden, leicht auseinander driften können. Dieses Drift kann dazu führen, dass die Uhren auf verschiedenen Knoten unterschiedliche Zeiten anzeigen, was zu Inkonsistenzen in der Reihenfolge von Ereignissen führen kann.
+\\\\
+Um dieses Problem zu lösen, verwenden verteilte Systeme häufig Synchronisationsprotokolle, um die Uhren auf den verschiedenen Knoten abzugleichen. Ein bekanntes Beispiel für ein solches Protokoll ist das \textbf{Network Time Protocol} (NTP), das im Internet verwendet wird, um die Uhren auf verschiedenen Computern und Netzwerkgeräten zu synchronisieren. NTP verwendet einen hierarchischen Ansatz, bei dem eine kleine Anzahl von Servern mit sehr genauen Uhren (z. B. Atomuhren) als Referenz für andere Server und Geräte dienen.
+\\\\
 Ein weiteres Beispiel ist das Google TrueTime API, das in Googles Spanner-Datenbanksystem verwendet wird. TrueTime verwendet eine Kombination von GPS und Atomuhren, um eine sehr genaue Zeitbasis für die Synchronisierung von Operationen im Spanner-System zu bieten. Dies ermöglicht Spanner, konsistente Transaktionen über eine globale Skala von Datenzentren hinweg durchzuführen.
-
-
+\\\\
 In der Uhren- und Messtechnik bezieht sich die \textbf{Präzision} auf die Konsistenz von Messungen oder Wiederholbarkeit, während die \textbf{Akkuratesse} (Genauigkeit) sich auf die Nähe von Messungen zum tatsächlichen, wahren Wert bezieht.
-
+\\\\
 Die Präzision ist die Standardabweichung der Messungen. Angenommen, wir haben eine Reihe von Messungen $x_1, x_2, \ldots, x_n$, dann ist die Präzision definiert als:
-
 \begin{equation}
 \sigma = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 \end{equation}
-
 wobei $\bar{x}$ der Durchschnittswert der Messungen ist.
-
+\\\\
 Die Akkuratesse ist der Unterschied zwischen dem Durchschnittswert der Messungen und dem wahren Wert. Wenn $T$ der wahre Wert ist, dann ist die Akkuratesse definiert als:
-
 \begin{equation}
 A = |T - \bar{x}|
 \end{equation}
-
 In einer idealen Situation wäre eine Uhr sowohl präzise als auch akkurat: Sie würde konsequent die gleiche Zeit anzeigen (hohe Präzision) und diese Zeit wäre nahe an der tatsächlichen Zeit (hohe Akkuratesse). In der Praxis gibt es jedoch oft einen Kompromiss zwischen Präzision und Akkuratesse.
+\\\\
 Häufig wird die UTC als Basis für eine präzise und akkurat Uhr gewählt.
-
-Die \textbf{Universal Time Coordinated (UTC)} ist die Zeitstandard, der zur Koordination von Weltzeit verwendet wird. Es handelt sich dabei um eine atomare Zeitskala, die auf International Atomic Time (TAI) mit Sprüngen von einer Sekunde basiert, um sie nahe an der mittleren Sonnenzeit (UT1) zu halten.
+Die \textbf{Universal Time Coordinated (UTC)} ist die Zeitstandard, der zur Koordination von Weltzeit verwendet wird. Es handelt sich dabei um eine atomare Zeitskala, die auf International Atomic Time (TAI), mit Sprüngen von einer Sekunde, basiert, um sie nahe an der mittleren Sonnenzeit (UT1) zu halten.
 
 UTC ist die Zeit, die in allen Bereichen der Wissenschaft und Technik, in der Luft- und Raumfahrt, in der Navigation und in der Datenverarbeitung verwendet wird. Sie ist auch die Zeit, die von Zeitservern im Internet zur Synchronisation von Computern, Mobilgeräten und anderen digitalen Geräten verwendet wird.
 Die Verwendung von UTC als Akronym für Coordinated Universal Time in Englisch oder Temps Universel Coordonné in Französisch ist tatsächlich ein Kompromiss zwischen den beiden Sprachen.
@@ -58,7 +47,7 @@ Die Verwendung von UTC als Akronym für Coordinated Universal Time in Englisch o
 
 \subsubsection{Globale Zeitstempel}
 Globale Zeitstempel sind ein Synchronisationsmechanismus in verteilten Systemen, der auf einer gemeinsamen Uhr basiert. Die Idee besteht darin, dass alle Knoten oder Prozesse in einem verteilten System ihre Uhren synchronisieren und jeder Operation oder jedem Ereignis einen eindeutigen Zeitstempel zuweisen. Diese Zeitstempel ermöglichen es, Ereignisse und Operationen in der richtigen Reihenfolge auszuführen und Inkonsistenzen zu vermeiden. Einige Vorteile von globalen Zeitstempeln sind die einfache Handhabung von Ereignisreihenfolgen und die Möglichkeit, gleichzeitige Ereignisse leicht zu erkennen.
-
+\\\\
 Ein minimales Beispiel für die Verwendung von globalen Zeitstempeln in der Praxis ist ein verteiltes Auktionssystem, bei dem Benutzer Gebote für Artikel abgeben.
 
 Angenommen, wir haben ein verteiltes Auktionssystem mit drei Knoten (A, B und C), die Gebote für verschiedene Artikel speichern und verwalten. In diesem System gibt es zwei Benutzer, Alice und Bob, die Gebote für denselben Artikel abgeben.
@@ -69,28 +58,20 @@ Angenommen, wir haben ein verteiltes Auktionssystem mit drei Knoten (A, B und C)
 \item Die Knoten vergleichen die globalen Zeitstempel der Gebote (T1 und T2), um die Reihenfolge der Gebote zu bestimmen und den Gewinner der Auktion zu ermitteln.
 \end{itemize}
 In diesem Beispiel ermöglichen die globalen Zeitstempel, dass alle Knoten im verteilten Auktionssystem eine einheitliche Sicht auf die Reihenfolge der Gebote haben, wodurch potenzielle Inkonsistenzen vermieden werden. Es ist wichtig, dass die Knoten ihre Uhren regelmäßig synchronisieren, um eine hohe Genauigkeit der globalen Zeitstempel zu gewährleisten.
-
-Um eine gemeinsame Uhr in verteilten Systemen zu etablieren, gibt es verschiedene Algorithmen und Protokolle. Die Hauptziele dieser Ansätze sind die Synchronisation der Uhren der einzelnen Knoten und die Minimierung der Abweichungen zwischen ihnen. Einige gängige Methoden zur Etablierung einer gemeinsamen Uhr sind:
+\\\\
+Um eine gemeinsame Uhr in verteilten Systemen zu etablieren, gibt es neben den beschriebenen Ansätzen weitere Algorithmen und Protokolle um dies zu erlangen. Die Hauptziele dieser Ansätze sind die Synchronisation der Uhren der einzelnen Knoten und die Minimierung der Abweichungen zwischen ihnen, hier spielt der Einsatz zusätlicher Hardware eine Rolle, oder die Abkehr von einen zentralen Zeitgeber, wie einer Atomuhr:
 \begin{itemize}
-\item Network Time Protocol (NTP): NTP ist ein weit verbreitetes Protokoll zur Synchronisation der Systemuhren von Computern über paketvermittelte, variable Latenzzeit-Netzwerke wie das Internet. NTP verwendet hierarchische Strukturen und mehrere Zeitserver, um eine genaue Zeitsynchronisation zu erreichen. Die Knoten im verteilten System stellen eine Verbindung zu einem NTP-Server her und synchronisieren ihre Uhren entsprechend.
-\item Precision Time Protocol (PTP): PTP ist ein anderes Protokoll, das entwickelt wurde, um eine präzise Zeitsynchronisation in verteilten Systemen zu erreichen. Im Gegensatz zu NTP ist PTP speziell für lokale Netzwerke (LANs) entwickelt worden und ermöglicht eine höhere Genauigkeit in der Zeitsynchronisation. PTP verwendet einen sogenannten \enquote{Grandmaster Clock} sowie \enquote{Ordinary Clocks} und \enquote{Boundary Clocks}, um eine präzise Synchronisation über das Netzwerk zu erreichen.
-\item Cristian's Algorithm: Cristian's Algorithm ist ein einfacherer Ansatz zur Uhrensynchronisation in verteilten Systemen, bei dem ein Zeitserver als Referenz dient. Die Knoten stellen regelmäßig Anfragen an den Zeitserver, um ihre Uhren zu synchronisieren. Bei jeder Anfrage berechnet der Knoten die Netzwerkverzögerung und passt seine Uhr entsprechend an.
-\item Berkeley Algorithm: Der Berkeley Algorithm ist ein weiterer Algorithmus zur Synchronisation der Uhren in verteilten Systemen. In diesem Ansatz wird ein Koordinator ausgewählt, der die Zeitinformationen von allen Knoten im System sammelt und einen gewichteten Durchschnitt berechnet. Anschließend verteilt der Koordinator die berechnete Zeit an alle Knoten, die ihre Uhren entsprechend anpassen.
-\item Logische Uhren: Obwohl logische Uhren keine physische Uhrensynchronisation bieten, bieten sie eine Möglichkeit, die Reihenfolge von Ereignissen in einem verteilten System zu bestimmen, ohne eine gemeinsame Uhr zu etablieren. Diese Methode verwendet logische Zähler, die bei jedem Ereignis oder jeder Nachricht inkrementiert werden, um eine partielle Ordnung der Ereignisse zu etablieren.
+\item \textbf{Precision Time Protocol} (PTP): PTP ist ein alterntives Protokoll zu NTP, das entwickelt wurde, um eine präzise Zeitsynchronisation in verteilten Systemen zu erreichen. Im Gegensatz zu NTP ist PTP speziell für lokale Netzwerke (LANs) entwickelt worden und ermöglicht eine höhere Genauigkeit in der Zeitsynchronisation. PTP verwendet einen sogenannten \enquote{Grandmaster Clock} sowie \enquote{Ordinary Clocks} und \enquote{Boundary Clocks}, um eine präzise Synchronisation über das Netzwerk zu erreichen.
+\item \textbf{Cristian's Algorithm}: Cristian's Algorithm ist ein einfacherer Ansatz zur Uhrensynchronisation in verteilten Systemen, bei dem ein Zeitserver als Referenz dient. Die Knoten stellen regelmäßig Anfragen an den Zeitserver, um ihre Uhren zu synchronisieren. Bei jeder Anfrage berechnet der Knoten die Netzwerkverzögerung und passt seine Uhr entsprechend an.
+\item \textbf{Berkeley Algorithm}: Der Berkeley Algorithm ist ein weiterer Algorithmus zur Synchronisation der Uhren in verteilten Systemen. In diesem Ansatz wird ein Koordinator ausgewählt, der die Zeitinformationen von allen Knoten im System sammelt und einen gewichteten Durchschnitt berechnet. Anschließend verteilt der Koordinator die berechnete Zeit an alle Knoten, die ihre Uhren entsprechend anpassen.
+\item \textbf{Logische Uhren}: Obwohl logische Uhren keine physische Uhrensynchronisation bieten, bieten sie eine Möglichkeit, die Reihenfolge von Ereignissen in einem verteilten System zu bestimmen, ohne eine gemeinsame Uhr zu etablieren. Diese Methode verwendet logische Zähler, die bei jedem Ereignis oder jeder Nachricht inkrementiert werden, um eine partielle Ordnung der Ereignisse zu etablieren.
 \end{itemize}
+Alle Verfahren, inklusive insbesondere NTP, sind nur eine Auswahl, aber von solch einem besonderem Interesse, das sie nochmals im Folgenden mit höheren Detailgrad besprochen werden.
 
-Alle Verfahren sind von besonderem Interesse und werden nochmals im Folgenden mit höheren Detailgrad besprochen. Eine goldene Regel bei physischen Uhren soll aber bereits jetzt herausgestellt werden. Physische Uhren werden nicht zurückgestellt. Hier sind einige der Hauptgründe, warum das Zurückstellen von Uhren in einem verteilten System problematisch sein kann:
-\begin{itemize}
-\item Verletzung der Ordnung: Wenn eine Uhr zurückgestellt wird, kann dies dazu führen, dass die Ordnung der Ereignisse und Operationen verletzt wird. In einem verteilten System ist es wichtig, dass die Reihenfolge der Ereignisse und Operationen konsistent ist, um Inkonsistenzen zu vermeiden. Durch das Zurückstellen der Uhr kann es passieren, dass ein Ereignis, das später auftritt, einen älteren Zeitstempel erhält als ein früheres Ereignis, was zu Fehlern und Inkonsistenzen führen kann.
-\item Doppelte Zeitstempel: Das Zurückstellen einer Uhr kann dazu führen, dass mehrere Ereignisse denselben Zeitstempel erhalten. Dies kann es schwierig machen, die tatsächliche Reihenfolge der Ereignisse zu bestimmen und kann zu Inkonsistenzen im verteilten System führen.
-\item Fehler bei der Synchronisation: In verteilten Systemen, die eine Uhrensynchronisation verwenden, kann das Zurückstellen einer Uhr zu Fehlern bei der Synchronisation führen. Wenn eine Uhr zurückgestellt wird, kann dies dazu führen, dass die anderen Knoten im System ihre Uhren falsch synchronisieren, was zu Inkonsistenzen und Fehlern im gesamten System führen kann.
-\item Korrektheitsprobleme: In verteilten Systemen, die auf korrekte zeitliche Abfolgen angewiesen sind, wie beispielsweise verteilte Datenbanken oder Transaktionssysteme, kann das Zurückstellen einer Uhr zu schwerwiegenden Korrektheitsproblemen führen. Beispielsweise können Transaktionen in einer inkorrekten Reihenfolge abgeschlossen werden, was zu Datenverlust oder -korruption führen kann.
-\end{itemize}
-Um diese Probleme zu vermeiden, ist es wichtig, dass die physischen Uhren in verteilten Systemen nicht zurückgestellt werden. Stattdessen sollte eine geeignete Synchronisationsmethode verwendet werden, um sicherzustellen, dass alle Uhren im System konsistent sind und eine korrekte zeitliche Abfolge von Ereignissen und Operationen gewährleistet ist.
 
 \subsubsection{Network Time Protocol (NTP)}
 Das Network Time Protocol (NTP) ist ein weit verbreitetes Protokoll zur Synchronisation der Systemuhren von Computern in einem Netzwerk. Die mathematischen Grundlagen von NTP basieren auf der Schätzung von Netzwerkverzögerungen und der Verwendung von Zeitservern, um eine genaue Zeitsynchronisation zu erreichen.
-
+\\\\
 Um die Netzwerkverzögerung zu schätzen, verwendet NTP vier Zeitstempel:
 
 \begin{enumerate}
@@ -99,73 +80,64 @@ Um die Netzwerkverzögerung zu schätzen, verwendet NTP vier Zeitstempel:
 \item t3: Die Serverzeit, zu der der Server eine Antwort an den Client sendet.
 \item t4: Die lokale Zeit, zu der der Client die Antwort vom Server erhält.
 \end{enumerate}
-
 Mit diesen Zeitstempeln kann NTP die Netzwerkverzögerung und die Offset-Zeit berechnen, die zum Synchronisieren der Uhr des Clients benötigt werden. Die Netzwerkverzögerung (D) und der Offset (\(\theta\)) werden wie folgt berechnet:
 
 \[ D = (t4 - t1) - (t3 - t2) \]
 \[ \theta = \frac{(t2 - t1) + (t3 - t4)}{2} \]
+Die Netzwerkverzögerung ist die Zeit, die benötigt wird, um Nachrichten zwischen Client und Server zu senden und zu empfangen. Der Offset ist die durchschnittliche Zeitdifferenz zwischen dem Client und dem Server. Ob die Annahme für die Berechnung im Internet immer zutrifft, darf aber bezweifelt werden.
 
-Die Netzwerkverzögerung ist die Zeit, die benötigt wird, um Nachrichten zwischen Client und Server zu senden und zu empfangen. Der Offset ist die durchschnittliche Zeitdifferenz zwischen dem Client und dem Server.
-
-Der Offset ist die durchschnittliche Zeitdifferenz zwischen dem Client und dem Server. Nachdem der Offset und die Netzwerkverzögerung berechnet wurden, verwendet der Client diese Informationen, um seine Uhr anzupassen und mit der Serverzeit zu synchronisieren.
-
+Dennoch, der Offset ist die durchschnittliche Zeitdifferenz zwischen dem Client und dem Server. Nachdem der Offset und die Netzwerkverzögerung berechnet wurden, verwendet der Client diese Informationen, um seine Uhr anzupassen und mit der Serverzeit zu synchronisieren.
+\\\\
 NTP ist ein hierarchisches Protokoll, das mehrere Schichten von Zeitservern verwendet, um eine genaue Zeitsynchronisation zu erreichen. An der Spitze der Hierarchie steht der Stratum-1-Server, der direkt mit einer externen Zeitquelle wie einem GPS- oder Atomuhr-Referenzsignal verbunden ist. Die Server der nächsten Schicht (Stratum-2) sind mit Stratum-1-Servern verbunden und so weiter. Clients wählen in der Regel den Server mit der geringsten Verzögerung und dem geringsten Stratum für die Synchronisation aus.
-
+\\\\
 Ein Beispiel für ein Problem bei der Verwendung von NTP ist die mögliche Anfälligkeit für Netzwerkverzögerungsschwankungen. Angenommen, es gibt einen Client und einen NTP-Server, die folgende Zeitstempel haben:
-
 \begin{align*}
 t1 &= 10 \text{ ms} \quad &(\text{Client sendet Anfrage}) \\
 t2 &= 15 \text{ ms} \quad &(\text{Server empfängt Anfrage}) \\
 t3 &= 20 \text{ ms} \quad &(\text{Server sendet Antwort}) \\
 t4 &= 30 \text{ ms} \quad &(\text{Client empfängt Antwort})
 \end{align*}
-
 Die Netzwerkverzögerung (D) und der Offset (\(\theta\)) können wie folgt berechnet werden:
-
 \begin{align*}
 D &= (t4 - t1) - (t3 - t2) = 15 \text{ ms} \\
 \theta &= \frac{(t2 - t1) + (t3 - t4)}{2} = -2.5 \text{ ms}
 \end{align*}
-
 In diesem Fall beträgt die Netzwerkverzögerung 15 ms und der Offset -2,5 ms. Der Client würde seine Uhr um -2,5 ms anpassen, um mit dem Server synchronisiert zu werden. Wenn jedoch die Netzwerkverzögerung während der Synchronisation plötzlich schwankt, kann dies zu Fehlern bei der Uhrenanpassung führen. Beispielsweise könnte die Netzwerkverzögerung bei der nächsten Synchronisation auf 20 ms ansteigen, was zu einer inkorrekten Berechnung des Offsets und möglicherweise zu einer inkorrekten Uhrenanpassung führen würde.
 
 Um solche Probleme zu vermeiden, verwendet NTP verschiedene Techniken wie die Auswahl mehrerer Zeitserver und die Filterung von Zeitstempeln, um die Genauigkeit der Zeitsynchronisation zu erhöhen und die Auswirkungen von Netzwerkverzögerungsschwankungen zu minimieren.
-
+\\\\
 NTP kann eine hohe Genauigkeit beim Abgleich von verteilten Knoten erreichen, wenn es ordnungsgemäß konfiguriert und betrieben wird. Die Genauigkeit von NTP hängt von verschiedenen Faktoren ab, wie der Qualität der Netzwerkverbindungen, der Anzahl und Qualität der Zeitserver, der Latenz und der Stabilität der Verbindungen.
 
 In einem lokalen Netzwerk (LAN) kann NTP eine Genauigkeit von unter 1 Millisekunde erreichen. In einigen Fällen, mit sorgfältiger Konfiguration und unter idealen Bedingungen, kann die Genauigkeit sogar im Bereich von Mikrosekunden liegen. Bei Verwendung von NTP über das Internet kann die Genauigkeit je nach Netzwerkbedingungen und Serverqualität auf 1 bis 50 Millisekunden variieren.
-
-Es ist wichtig zu beachten, dass NTP nicht für Echtzeitanwendungen oder Anwendungen entwickelt wurde, die extrem präzise Zeitsynchronisation erfordern, wie beispielsweise Finanztransaktionen oder wissenschaftliche Experimente. In solchen Fällen kann das Precision Time Protocol (PTP) verwendet werden, das Genauigkeiten im Nanosekundenbereich bieten kann.
+\\\\
+Es ist wichtig zu beachten, dass NTP nicht für (harte) Echtzeitanwendungen oder Anwendungen entwickelt wurde, die extrem präzise Zeitsynchronisation erfordern, wie beispielsweise Finanztransaktionen oder wissenschaftliche Experimente. In solchen Fällen kann das Precision Time Protocol (PTP) verwendet werden, das Genauigkeiten im Nanosekundenbereich bieten kann.
 
 \subsubsection{Precision Time Protocol (PTP)}
 
 Das Precision Time Protocol (PTP), definiert in IEEE 1588, ist ein Protokoll zur Zeitsynchronisation von Computern in einem Netzwerk, das höhere Genauigkeit als NTP bietet. PTP wird häufig in Anwendungen eingesetzt, die eine extrem präzise Zeitsynchronisation erfordern, wie beispielsweise Finanztransaktionen oder wissenschaftliche Experimente.
-
+\\\\
 PTP verwendet das Master-Slave-Modell für die Zeitsynchronisation, bei dem ein Master-Zeitgeber eine Zeitskala bereitstellt, die von Slave-Zeitgebern im Netzwerk synchronisiert wird. Das Protokoll verwendet Nachrichten wie Sync, Follow\_Up, Delay\_Request und Delay\_Response, um die Synchronisation durchzuführen.
 Nachdem der Offset und die Netzwerkverzögerung berechnet wurden, verwendet der Slave-Zeitgeber diese Informationen, um seine Uhr anzupassen und mit der Master-Zeit zu synchronisieren. PTP implementiert auch verschiedene Techniken, um die Genauigkeit zu erhöhen, wie beispielsweise die Verwendung von Hardware-Zeitstempeln und die Best-Master-Clock-Algorithmus zur Auswahl des besten Master-Zeitgebers im Netzwerk.
 
 PTP kann in verschiedenen Topologien und Netzwerken eingesetzt werden, einschließlich LANs, WANs und drahtlosen Netzwerken. PTP unterstützt zwei Profile: das Default Profile und das Power Profile. Das Default Profile ist für allgemeine Anwendungen geeignet, während das Power Profile speziell für den Einsatz in der Energieversorgung optimiert ist.
-
+\\\\
 Ein wichtiger Aspekt von PTP ist die Qualität der Taktquelle, die als Taktgenauigkeit bezeichnet wird. Die Taktgenauigkeit wird in Stufen oder Strata klassifiziert, wobei Stratum 1 die höchste Genauigkeit aufweist. PTP verwendet den Best-Master-Clock-Algorithmus (BMCA), um den besten verfügbaren Master im Netzwerk auszuwählen. Der BMCA vergleicht die Taktgenauigkeit, das Stratum und andere Faktoren, um den besten Master auszuwählen. Wenn sich die Taktquelle im Laufe der Zeit ändert, kann der BMCA dynamisch einen neuen Master auswählen, um die Zeitsynchronisation im Netzwerk aufrechtzuerhalten.
 
 Die Fähigkeit von PTP, Genauigkeiten im Nanosekundenbereich zu erreichen, macht es zu einer idealen Lösung für Anwendungen, die eine sehr präzise Zeitsynchronisation erfordern. Allerdings erfordert PTP im Allgemeinen spezielle Hardware-Unterstützung, wie beispielsweise PTP-fähige Netzwerkgeräte und Taktgeneratoren, um seine volle Leistungsfähigkeit auszuschöpfen. Darüber hinaus kann die Implementierung und Konfiguration von PTP komplexer sein als die von NTP.
-
-Insgesamt bietet PTP eine hochpräzise Zeitsynchronisation, die in vielen anspruchsvollen Anwendungen, wie der Finanzindustrie, der Telekommunikation und der Energieversorgung, eingesetzt werden kann. Durch die Kombination von Hardware-Unterstützung, präzisen Algorithmen und flexiblen Topologien bietet PTP eine leistungsstarke Lösung für die Synchronisation verteilter Systeme.
-
-PTP erzielt seine hohe Genauigkeit durch den Einsatz von Hardware-Zeitstempeln und speziellen Netzwerkgeräten, die PTP-fähig sind. Dies bedeutet, dass PTP-Implementierungen tendenziell teurer und komplexer sind als NTP-Implementierungen. NTP hingegen ist ein softwarebasiertes Protokoll und erfordert keine spezielle Hardware-Unterstützung.
-TP kann auch ohne Hardwareunterstützung betrieben werden, indem es auf Software-Zeitstempel und Standard-Netzwerkgeräte zurückgreift. Allerdings hat dies einige Konsequenzen:
+\\\\
+Wie besprochen, erzielt PTP seine hohe Genauigkeit durch den Einsatz von Hardware-Zeitstempeln und speziellen Netzwerkgeräten. Dies bedeutet, dass PTP-Implementierungen tendenziell teurer und komplexer sind als NTP-Implementierungen. NTP spielt hier sehr häufig sein Vorteile als ein softwarebasiertes Protokoll aus, da häufig die Genauigkeit hinsichtlich des Preises an Bedeutung verliert.
+Sicher, PTP kann auch ohne Hardwareunterstützung betrieben werden, indem es auf Software-Zeitstempel und Standard-Netzwerkgeräte zurückgreift. Allerdings hat dies einige Konsequenzen:
 \begin{itemize}
 \item Reduzierte Genauigkeit: Ohne Hardwareunterstützung kann PTP nicht die extrem hohe Genauigkeit im Mikro- bis Nanosekundenbereich erreichen, die es normalerweise bietet. Stattdessen wird die Genauigkeit eher im Mikro- bis Millisekundenbereich liegen, abhängig von den spezifischen Netzwerkbedingungen und der Qualität der Zeitstempel, die von der Software bereitgestellt werden.
 \item Größere Empfindlichkeit gegenüber Netzwerklatenz: Bei der Verwendung von Software-Zeitstempeln ist PTP anfälliger für Schwankungen in der Netzwerklatenz und kann daher weniger präzise sein, wenn es darum geht, die tatsächliche Netzwerkverzögerung zu berücksichtigen.
 \item Höhere CPU-Auslastung: Da Software-Zeitstempel von der CPU verarbeitet werden, kann die Verwendung von PTP ohne Hardwareunterstützung zu einer höheren CPU-Auslastung führen, insbesondere bei hohen Paketraten oder in großen Netzwerken.
 \end{itemize}
-Obwohl PTP ohne Hardwareunterstützung betrieben werden kann, ist es in solchen Fällen weniger effektiv und möglicherweise nicht geeignet für Anwendungen, die eine extrem präzise Zeitsynchronisation erfordern. Wenn eine hohe Genauigkeit erforderlich ist, wird empfohlen, PTP-fähige Hardware wie spezielle Taktgeneratoren und Netzwerkgeräte zu verwenden, um die bestmögliche Leistung zu erzielen. In Situationen, in denen die Genauigkeitsanforderungen weniger streng sind, kann NTP eine einfachere und kostengünstigere Alternative darstellen.
+In solchen Fällen ist PTP weniger effektiv und sehr häufig nicht besser als NTP geeignet für Anwendungen.
 
 \subsubsection{Cristian's Algorithm}
-Cristian's Algorithmus ist ein Zeit-Synchronisationsprotokoll, das entwickelt wurde, um die Zeitabweichung zwischen einem Zeitserver und einem Client in einem verteilten System zu reduzieren. Der Algorithmus basiert auf der Kommunikation zwischen dem Client und dem Zeitserver, um die Netzwerkverzögerung zu schätzen und die Client-Uhr entsprechend anzupassen.
-
+Cristian's Algorithmus ist ein Zeit-Synchronisationsprotokoll, welcher entwickelt wurde, um die Zeitabweichung zwischen einem Zeitserver und einem Client in einem verteilten System zu reduzieren. Der Algorithmus basiert auf der Kommunikation zwischen dem Client und dem Zeitserver, um die Netzwerkverzögerung zu schätzen und die Client-Uhr entsprechend anzupassen.
+\\\\
 Der Ablauf des Cristian's Algorithmus ist wie folgt:
-
 \begin{enumerate}
 \item Der Client sendet eine Anfrage an den Zeitserver, um die aktuelle Zeit zu erfahren.
 \item Der Zeitserver empfängt die Anfrage und speichert den aktuellen Zeitstempel T1.
@@ -173,83 +145,70 @@ Der Ablauf des Cristian's Algorithmus ist wie folgt:
 \item Der Client empfängt die Antwort und speichert den aktuellen Zeitstempel T2.
 \item Der Client schätzt die Netzwerkverzögerung und passt seine Uhr entsprechend an.
 \end{enumerate}
-
 Um die Netzwerkverzögerung zu schätzen, berechnet der Client die Round-Trip-Time (RTT) und teilt sie durch zwei:
-
 \begin{align*}
 \text{RTT} &= T2 - T0 \\
 \text{Netzwerkverzögerung} &= \frac{\text{RTT}}{2}
 \end{align*}
-
 Dann wird der Client seine Uhr auf die empfangene Serverzeit T1 plus die geschätzte Netzwerkverzögerung einstellen:
-
 \begin{align*}
 \text{Neue Client-Zeit} &= T1 + \text{Netzwerkverzögerung}
 \end{align*}
-
 Angenommen, ein Client möchte seine Uhr mit einem Zeitserver synchronisieren. Die folgenden Zeitstempel werden während des Prozesses aufgezeichnet:
-
 \begin{itemize}
 \item T0 (Anfrage vom Client gesendet): 10:00:00,000
 \item T1 (Anfrage vom Server empfangen): 10:00:01,000
 \item T2 (Antwort vom Server empfangen): 10:00:01,500
 \end{itemize}
-
 Die RTT beträgt:
-
 \begin{align*}
 \text{RTT} &= T2 - T0 \
 &= 10:00:01,500 - 10:00:00,000 \
 &= 1,5\text{ Sekunden}
 \end{align*}
-
 Die geschätzte Netzwerkverzögerung beträgt:
-
 \begin{align*}
 \text{Netzwerkverzögerung} &= \frac{\text{RTT}}{2} \\
 &= \frac{1,5}{2} \\
 &= 0,75\text{ Sekunden}
 \end{align*}
-
 Die neue Client-Zeit wird auf 10:00:01,000 + 0,75 = 10:00:01,750 eingestellt.
 Cristian's Algorithmus ist ein einfaches Protokoll zur Zeit-Synchronisation, das aufgrund seiner Einfachheit und Leistungsfähigkeit in vielen Anwendungen eingesetzt werden kann. Es ist jedoch nicht das präziseste Protokoll und wird oft durch fortschrittlichere Protokolle wie NTP oder PTP ersetzt, insbesondere wenn eine höhere Genauigkeit erforderlich ist.
-
+\\\\
 Ein Problem bei der Verwendung von Cristian's Algorithmus ist, dass es anfällig für unvorhergesehene Netzwerkverzögerungen und Jitter sein kann, insbesondere wenn das Netzwerk überlastet oder überlastet ist. Dies kann zu inkonsistenten Ergebnissen führen und die Genauigkeit der Zeit-Synchronisation beeinträchtigen.
-
+\\\\
 Ein Beispiel, in dem Cristian's Algorithmus in der Praxis eingesetzt wird, ist in der Telekommunikationsindustrie zu finden. Hier werden häufig mehrere Netzwerk-Knoten verwendet, um die Übertragung von Sprach- und Datensignalen zu synchronisieren. Cristian's Algorithmus kann verwendet werden, um die Uhrzeit auf diesen Knoten zu synchronisieren und so eine genaue Übertragung von Signalen zu gewährleisten. Allerdings ist es in einigen Fällen möglicherweise nicht genau genug, um den hohen Anforderungen dieser Anwendungen gerecht zu werden, insbesondere wenn die Netzwerkverzögerung schwankt.
 
 \subsubsection{Berkeley Algorithm}
 
-Der Berkeley-Algorithmus, benannt nach der University of California, Berkeley, wo er entwickelt wurde, ist ein verteiltes Zeitsynchronisationsprotokoll, das in Netzwerken eingesetzt wird, um die Uhrzeiten von Computern oder anderen Knoten zu synchronisieren.  Der Berkeley-Algorithmus unterscheidet sich von anderen Zeitsynchronisationsprotokollen wie dem Network Time Protocol (NTP) dadurch, dass er auf einem Master-Slave-Modell basiert und keine Hierarchie von Zeitservern erfordert.
-
+Der Berkeley-Algorithmus, benannt nach der University of California, Berkeley, wo er entwickelt wurde, ist ein verteiltes Zeitsynchronisationsprotokoll, welcher in Netzwerken eingesetzt wird, um die Uhrzeiten von Computern oder anderen Knoten zu synchronisieren.  Der Berkeley-Algorithmus unterscheidet sich von anderen Zeitsynchronisationsprotokollen wie dem Network Time Protocol (NTP) dadurch, dass er auf einem Master-Slave-Modell basiert und keine Hierarchie von Zeitservern erfordert.
+\\\\
 Der Berkeley-Algorithmus beruht auf dem grundlegenden Prinzip, dass ein ausgewählter Knoten im Netzwerk, der sogenannte \enquote{Master}, für die Zeitsynchronisation verantwortlich ist. Die anderen Knoten, die als \enquote{Slaves} bezeichnet werden, stellen ihre Uhrzeiten anhand der vom Master bereitgestellten Informationen ein. Der Algorithmus läuft in mehreren Schritten ab, die im Folgenden erläutert werden.
 
 Zunächst wählt der Master zufällig oder auf Grundlage bestimmter Kriterien, wie beispielsweise der Zuverlässigkeit, aus den Knoten im Netzwerk aus. Sobald ein Master festgelegt ist, sendet er eine Anfrage an alle Slave-Knoten, um deren aktuelle Uhrzeiten zu ermitteln. Die Slaves antworten mit ihren jeweiligen Uhrzeiten, und der Master sammelt diese Informationen.
 
 Anschließend berechnet der Master den mittleren Zeitwert der gesammelten Uhrzeiten, wobei er auch seine eigene Uhrzeit berücksichtigt. Der resultierende Mittelwert stellt die referenzierte Synchronisationszeit dar, die an alle Slave-Knoten im Netzwerk weitergegeben wird. Die Slaves aktualisieren daraufhin ihre Uhrzeiten entsprechend der empfangenen Synchronisationszeit.
-
+\\\\
 Ein praxisnahes Beispiel für die Anwendung des Berkeley-Algorithmus könnte ein verteiltes System sein, das aus mehreren Sensoren besteht, die in einer industriellen Anlage Umgebungsdaten wie Temperatur, Druck und Feuchtigkeit erfassen. In einem solchen Szenario ist es wichtig, dass die Sensoren ihre Daten zeitlich korrekt protokollieren, um eine präzise Überwachung und Steuerung der Anlage zu ermöglichen.
 Ein Sensor könnte in diesem Fall als Master fungieren und regelmäßig Anfragen an die anderen Sensoren im Netzwerk senden, um deren Uhrzeiten zu ermitteln. Nachdem der Master die Uhrzeiten der anderen Sensoren erhalten und den Mittelwert berechnet hat, teilt er diesen Wert mit den Slave-Sensoren, die daraufhin ihre Uhrzeiten entsprechend aktualisieren. Durch diesen Prozess wird sichergestellt, dass alle Sensoren im Netzwerk synchronisiert sind und die erfassten Daten korrekt zeitlich abgestimmt sind.
 
-Der Berkeley-Algorithmus bietet eine effiziente und einfache Methode zur Zeitsynchronisation in verteilten Systemen. Er eignet sich insbesondere für Anwendungen, bei denen eine hohe Genauigkeit der Zeitsynchronisation nicht unbedingt erforderlich ist, da der Algorithmus aufgrund von Netzwerklatenzen und Uhrzeitabweichungen möglicherweise keine extrem präzise Synchronisation erreicht. Dennoch erfüllt der Berkeley-Algorithmus in vielen Fällen die Anforderungen an eine angemessene Zeitsynchronisation und kann die Koordination von Aktionen und die Konsistenz von Daten in verteilten Systemen effektiv gewährleisten.
-
+Mitnehmen kann man, das dieser Ansatz eine effiziente und einfache Methode zur Zeitsynchronisation bietet. Er eignet sich insbesondere für Anwendungen, bei denen eine hohe Genauigkeit der Zeitsynchronisation nicht unbedingt erforderlich ist, da der Algorithmus aufgrund von Netzwerklatenzen und Uhrzeitabweichungen möglicherweise keine extrem präzise Synchronisation erreicht. Dennoch erfüllt der Berkeley-Algorithmus in vielen Fällen die Anforderungen an eine angemessene Zeitsynchronisation und kann die Koordination von Aktionen und die Konsistenz von Daten in verteilten Systemen effektiv gewährleisten.
+\\\\
 Ein weiteres praxisnahes Beispiel für den Einsatz des Berkeley-Algorithmus könnte ein verteiltes System von Computern in einem Unternehmen sein, das gemeinsam an der Verarbeitung von Transaktionen oder der Durchführung von Analysen arbeitet. In diesem Fall wäre es wichtig, dass alle Computer ihre Aufgaben in einer synchronisierten Weise ausführen, um Inkonsistenzen oder Verzögerungen bei der Bearbeitung von Aufgaben zu vermeiden.
 
 Ein zentraler Computer oder Server könnte als Master ausgewählt werden und regelmäßig Zeitabfragen an die anderen Computer im Netzwerk senden. Nachdem der Master die Uhrzeiten der anderen Computer gesammelt hat und den Mittelwert berechnet hat, teilt er die Synchronisationszeit mit den Slave-Computern. Diese passen daraufhin ihre Uhrzeiten entsprechend an, wodurch ein synchronisiertes Verhalten im Netzwerk ermöglicht wird.
-
-Es ist wichtig zu beachten, dass der Berkeley-Algorithmus, obwohl er in vielen Situationen nützlich ist, nicht immer die optimale Lösung für Zeitsynchronisationsprobleme darstellt. In Szenarien, in denen eine extrem präzise Zeitsynchronisation erforderlich ist oder in denen die Latenzzeiten im Netzwerk erheblich variieren, könnte der Einsatz anderer Synchronisationsprotokolle wie dem Network Time Protocol (NTP) oder dem Precision Time Protocol (PTP) angebracht sein. In diesen Fällen bieten diese Protokolle eine höhere Genauigkeit und Zuverlässigkeit bei der Zeitsynchronisation.
-
-Die Genauigkeit des Berkeley-Algorithmus hängt von verschiedenen Faktoren ab, wie zum Beispiel der Netzwerklatenz, der Anzahl der Knoten im Netzwerk und der Häufigkeit, mit der die Synchronisationsanfragen durchgeführt werden. Eine exakte Angabe der Genauigkeit des Algorithmus ist daher schwierig, da sie von den spezifischen Bedingungen des jeweiligen Systems abhängt.
-
-Die Netzwerklatenz beeinflusst die Genauigkeit des Algorithmus maßgeblich, da sie die Zeitdifferenz zwischen dem Senden und Empfangen von Nachrichten im Netzwerk darstellt. In Systemen mit hohen oder stark variierenden Latenzen kann der Berkeley-Algorithmus Schwierigkeiten haben, eine hohe Genauigkeit bei der Zeitsynchronisation zu erreichen. Die durch Latenz bedingte Ungenauigkeit kann minimiert werden, indem man die Latenzzeit bei der Berechnung der mittleren Uhrzeit berücksichtigt. Allerdings bleibt eine gewisse Ungenauigkeit bestehen, insbesondere in Netzwerken mit stark variierenden Latenzzeiten.
-
-Die Konvergenzzeit des Berkeley-Algorithmus, also die Zeit, die benötigt wird, um eine stabile Synchronisation der Uhrzeiten in einem Netzwerk zu erreichen, hängt von der Häufigkeit ab, mit der der Master Synchronisationsanfragen an die Slaves sendet. Wenn der Master beispielsweise alle 10 Sekunden eine Synchronisationsanfrage sendet, würde es bei einem synchronisierten System möglicherweise mehrere Zyklen von 10 Sekunden dauern, um eine stabile Synchronisation zu erreichen. 
-
-Es ist wichtig zu beachten, dass der Berkeley-Algorithmus nicht notwendigerweise auf einer kontinuierlichen Synchronisation basiert. Stattdessen kann die Synchronisation in bestimmten Intervallen oder als Reaktion auf bestimmte Ereignisse stattfinden. In solchen Fällen hängt die Konvergenzzeit von der Häufigkeit dieser Intervalle oder Ereignisse ab
+\\\\
+Obwohl er in vielen Situationen nützlich ist, muss man beachten, dass er nicht immer die optimale Lösung für Zeitsynchronisationsprobleme darstellt. In Szenarien, in denen eine extrem präzise Zeitsynchronisation erforderlich ist oder in denen die Latenzzeiten im Netzwerk erheblich variieren, könnte der Einsatz anderer Synchronisationsprotokolle wie dem Network Time Protocol (NTP) oder dem Precision Time Protocol (PTP) angebracht sein. In diesen Fällen bieten diese Protokolle eine höhere Genauigkeit und Zuverlässigkeit bei der Zeitsynchronisation.
+\\\\
+Die Genauigkeit hängt von verschiedenen Faktoren ab, wie zum Beispiel der Netzwerklatenz, der Anzahl der Knoten im Netzwerk und der Häufigkeit, mit der die Synchronisationsanfragen durchgeführt werden. Eine exakte Angabe der Genauigkeit des Algorithmus ist daher schwierig, da sie von den spezifischen Bedingungen des jeweiligen Systems abhängt. Insbesonde die Netzwerklatenz beeinflusst die Genauigkeit des Algorithmus maßgeblich, da sie die Zeitdifferenz zwischen dem Senden und Empfangen von Nachrichten im Netzwerk darstellt. In Systemen mit hohen oder stark variierenden Latenzen kann der Berkeley-Algorithmus Schwierigkeiten haben, eine hohe Genauigkeit bei der Zeitsynchronisation zu erreichen. Die durch Latenz bedingte Ungenauigkeit kann minimiert werden, indem man die Latenzzeit bei der Berechnung der mittleren Uhrzeit berücksichtigt. Allerdings bleibt eine gewisse Ungenauigkeit bestehen, insbesondere in Netzwerken mit stark variierenden Latenzzeiten.
+\\\\
+Auch die Konvergenzzeit, also die Zeit, die benötigt wird, um eine stabile Synchronisation der Uhrzeiten in einem Netzwerk zu erreichen, hat hier Abhängigkeiten.  Insbonsere hängt diese von der Häufigkeit ab, mit der der Master Synchronisationsanfragen an die Slaves sendet. Wenn der Master beispielsweise alle 10 Sekunden eine Synchronisationsanfrage sendet, würde es bei einem synchronisierten System möglicherweise mehrere Zyklen von 10 Sekunden dauern, um eine stabile Synchronisation zu erreichen. 
+\\\\
+Interessant ist noch wahrzunehmen, dass der Berkeley-Algorithmus nicht notwendigerweise auf einer kontinuierlichen Synchronisation basiert. Stattdessen kann die Synchronisation in bestimmten Intervallen oder als Reaktion auf bestimmte Ereignisse stattfinden. In solchen Fällen hängt die Konvergenzzeit von der Häufigkeit dieser Intervalle oder Ereignisse ab
 
 \subsection{Logische Uhren}
 Logische Uhren stellen einen grundlegenden Ansatz zur Ordnung von Ereignissen in verteilten Systemen dar, der unabhängig von der tatsächlichen, physischen Zeit funktioniert. Sie wurden 1978 von Leslie Lamport eingeführt und ermöglichen es, eine konsistente, globale Ordnung von Ereignissen in einem verteilten System zu etablieren. Im Gegensatz zu physischen Uhren, die auf einer gemeinsamen Zeitbasis beruhen, basieren logische Uhren auf kausalen Beziehungen zwischen Ereignissen.
-
+\\\\
 Mathematisch gesehen repräsentieren logische Uhren eine Funktion $C$ (auch als \enquote{Lamport-Uhr} bezeichnet), die jedem Ereignis $e$ in einem verteilten System einen eindeutigen Zeitstempel $C(e)$ zuweist. Die logischen Zeitstempel sind ganzzahlige Werte, die in einer streng monotonen Weise fortschreiten. Für jeden Prozess $P_i$ in einem verteilten System wird eine separate logische Uhr $C_i$ verwendet, und die Uhr wird bei jedem internen Ereignis inkrementiert.
 
 Die grundlegenden Regeln für logische Uhren sind:
@@ -280,8 +239,16 @@ Ein Beispiel für die Verwendung von logischen Uhren in einem verteilten System 
 \end{itemize}  
 
 In diesem Beispiel ist das Ereignis 3 kausal vor dem Ereignis 4, da die Nachricht von $P_1$ an $P_2$ gesendet wird. Die logischen Uhren reflektieren diese kausale Ordnung korrekt, da $C(e_3) < C(e_4)$ gilt. Allerdings kann aus den logischen Uhren allein keine vollständige Ordnung der Ereignisse abgeleitet werden, da beispielsweise die Ereignisse 1 und 2 unabhängig voneinander sind und keine direkte kausale Beziehung besteht.
+\paragraph{Ordnungsbegriffe\\\\}
+In der Theorie der verteilten Systeme werden die Begriffe \enquote{teilweise Ordnung}, \enquote{totale Ordnung} und \enquote{kausale Ordnung} häufig verwendet, um die Beziehungen zwischen Ereignissen in solchen Systemen zu beschreiben.
+\\\\
+\textbf{Teilweise Ordnung} (oder partielle Ordnung) ist ein Ordnungsprinzip, bei dem nicht alle Elemente verglichen werden müssen. In einem verteilten System bedeutet dies, dass einige Ereignisse nicht direkt miteinander in Beziehung stehen. Zum Beispiel, wenn Ereignisse A und B  in verschiedenen Prozessen geschehen und es gibt keine Kommunikation zwischen diesen Prozessen, dann haben A und B keine bestimmte Ordnung zueinander - sie sind in Bezug aufeinander nicht geordnet.
+\\\\
+\textbf{Totale Ordnung} hingegen ist ein Ordnungsprinzip, bei dem jedes Paar von Elementen in Beziehung zueinander steht. In einem verteilten System bedeutet dies, dass jedes Ereignis in Bezug auf jedes andere Ereignis geordnet werden kann. Beispielsweise, wenn wir eine globale Uhr hätten, die alle Ereignisse in einem verteilten System markiert, könnten wir eine totale Ordnung aller Ereignisse entsprechend den Zeitstempeln dieser globalen Uhr erstellen.
+\\\\
+\textbf{Kausale Ordnung} ist eine spezielle Art von teilweiser Ordnung, die die kausalen Beziehungen zwischen den Ereignissen in einem verteilten System darstellt. In einer kausalen Ordnung, wenn ein Ereignis A ein Ereignis B verursacht (direkt oder indirekt), dann wird A immer vor B geordnet. Kausale Ordnung ist besonders wichtig in verteilten Systemen, da sie hilft, die korrekte Ausführung von Operationen in solchen Systemen zu gewährleisten.
 
-Um die Einschränkungen von Lamports logischen Uhren zu überwinden und eine vollständige Ordnung der Ereignisse in einem verteilten System zu ermöglichen, wurden sogenannte vektorielle Uhren eingeführt. Vektorielle Uhren sind Erweiterungen der logischen Uhren, bei denen jeder Prozess einen Vektor von Zeitstempeln für alle Prozesse im System speichert. Die vektoriellen Uhren können nicht nur die kausale Ordnung, sondern auch die vollständige Ordnung der Ereignisse in einem verteilten System abbilden.
+Sowohl Lamport-Uhren als auch Vektoruhren sind Mechanismen zur Erfassung dieser kausalen Ordnung in verteilten Systemen. Lamport-Uhren können eine kausale Ordnung erstellen, aber sie können keine konkurrierenden Ereignisse erkennen - Ereignisse, die in Bezug aufeinander nicht geordnet sind. Vektoruhren hingegen können sowohl eine kausale Ordnung erstellen als auch konkurrierende Ereignisse erkennen.
 
 \subsubsection{Lamport Clock}
 In einem Transaktionskonzept können Lamport-Uhren verwendet werden, um eine konsistente, globale Ordnung der Transaktionen in einem verteilten System zu etablieren und somit mögliche Konflikte zu erkennen und aufzulösen. Zeitstempel, die auf Lamport-Uhren basieren, werden dabei den Transaktionen zugeordnet, um ihre relative Ordnung im System zu bestimmen.
@@ -296,7 +263,7 @@ Betrachten wir ein verteiltes System mit mehreren Prozessen, die Transaktionen a
 \end{itemize}
 
 Ein praktisches Beispiel für die Anwendung von Lamport-Uhren in einem Transaktionskonzept ist die Google Spanner-Datenbank. Spanner ist eine globale, verteilte Datenbank, die konsistente und konfliktfreie Transaktionen über mehrere Rechenzentren hinweg gewährleistet. Obwohl Spanner in seiner Implementierung nicht ausschließlich auf Lamport-Uhren basiert, verwendet es ein ähnliches Konzept, das als TrueTime bezeichnet wird. TrueTime ermöglicht es, eine globale Ordnung von Ereignissen und Transaktionen in der Spanner-Datenbank herzustellen, indem jedem Ereignis ein Zeitstempel zugeordnet wird, der sowohl aus einer logischen als auch aus einer physischen Komponente besteht.
-
+\\\\
 Die Implementierung von Lamport-Uhren in verteilten Systemen bringt einige Herausforderungen mit sich. Einige der wesentlichen Schwierigkeiten sind:
 \begin{itemize}
 \item Skalierbarkeit: Lamport-Uhren funktionieren gut in kleinen verteilten Systemen, können jedoch bei einer großen Anzahl von Prozessen oder Knoten zu einer erhöhten Kommunikationslast führen. Dies liegt daran, dass jeder Prozess bei der Kommunikation sowohl seinen eigenen Zeitstempel als auch den des empfangenen Ereignisses aktualisieren muss.
@@ -308,10 +275,9 @@ Die Implementierung von Lamport-Uhren in verteilten Systemen bringt einige Herau
 Um einige dieser Herausforderungen zu bewältigen, wurden alternative Ansätze wie vektorielle Uhren entwickelt. Vektorielle Uhren sind eine Erweiterung von Lamport-Uhren und bieten eine vollständige Ordnung der Ereignisse in verteilten Systemen. Sie verwenden einen Vektor von Zeitstempeln anstelle einer einzelnen logischen Uhr, wodurch sie die Ordnung der Ereignisse präziser abbilden können
 
 \subsubsection{Vector Clock}
-Vektoruhren sind eine Erweiterung der Lamport-Uhren, die zur Ordnung von Ereignissen in verteilten Systemen verwendet werden. Im Gegensatz zu Lamport-Uhren, die nur eine partielle Ordnung der Ereignisse ermöglichen, können Vektoruhren eine vollständige Ordnung der Ereignisse in einem verteilten System herstellen, indem sie kausale Beziehungen und Konkurrenz zwischen Ereignissen präzise erfassen.
-
+Vektoruhren sind eine Erweiterung der Lamport-Uhren, die zur Ordnung von Ereignissen in verteilten Systemen verwendet werden. Im Gegensatz zu Lamport-Uhren, die nur eine partielle Ordnung der Ereignisse ermöglichen, können Vektoruhren eine partielle Ordnungsrelation  über die Ereignisse herstellen, indem sie kausale Beziehungen und Konkurrenz zwischen Ereignissen präzise erfassen. Somit sind, anders als bei der Lamport Uhr, die kausalen Ordnungen auch umkehrbar.
+\\\\
 Mathematisch gesehen besteht eine Vektoruhr aus einem Vektor von Zeitstempeln, wobei jede Komponente des Vektors die Uhr eines bestimmten Prozesses im verteilten System repräsentiert. Wir bezeichnen den Vektor der logischen Uhren für einen Prozess $P_i$ als $V_i$, und die Komponente $V_i[j]$ repräsentiert die logische Uhr von $P_i$ für Prozess $P_j$. Die Vektoruhren folgen den folgenden Regeln:
-
 \begin{itemize}
 \item Jeder Prozess $P_i$ im verteilten System führt eine Vektoruhr $V_i$ mit der Länge $n$ (Anzahl der Prozesse im System) und initialisiert alle Komponenten auf Null.
 
@@ -323,7 +289,6 @@ Mathematisch gesehen besteht eine Vektoruhr aus einem Vektor von Zeitstempeln, w
 \item Die Vektoruhr des empfangenden Prozesses $P_j$ wird auf das Elementweises Maximum der eigenen Vektoruhr und der empfangenen Vektoruhr gesetzt: $V_j[k] := \max(V_j[k], V_i[k])$, für $k = 1, 2, \dots, n$.
 \end{itemize}
 \end{itemize}	
-
 Die Ordnung der Ereignisse in einem verteilten System mit Vektoruhren kann durch die folgenden Relationen definiert werden:
 \begin{itemize}
 \item $E_1 \to E_2$ (happens-before): Wenn für alle $k$, $V_1[k] \leq V_2[k]$ und für mindestens ein $k$, $V_1[k] < V_2[k]$ gilt.
@@ -335,50 +300,40 @@ Um Vektoruhren in einem Transaktionskonzept zu integrieren, können wir die folg
 \item Bei der Kommunikation zwischen Prozessen zur Koordination von Transaktionen (z. B. zum Sperren von Ressourcen oder zur Synchronisation) werden die Vektoruhren der beteiligten Prozesse entsprechend den oben beschriebenen Regeln aktualisiert.
 \item Bei der Ausführung von Transaktionen werden die zugeordneten Vektorzeitstempel verwendet, um die relative Ordnung der Transaktionen zu bestimmen und mögliche Konflikte aufzulösen. Zum Beispiel kann ein Konflikt in Form eines schreibgeschützten oder schreibgeschützten Zugriffs auf dieselben Daten auftreten. In solchen Fällen kann der Vektorzeitstempel verwendet werden, um die Transaktionen konsistent zu ordnen, indem die Transaktion, die gemäß der \enquote{happens-before} Relation früher stattfindet, vor der anderen Transaktion ausgeführt wird.
 \end{itemize}
-
 Ein praktisches Beispiel für die Anwendung von Vektoruhren in einem Transaktionskonzept ist die Implementierung von verteilten Datenbanksystemen, die konsistente und konfliktfreie Transaktionen über mehrere Knoten hinweg gewährleisten müssen. Vektoruhren können dazu verwendet werden, eine globale Ordnung von Ereignissen und Transaktionen in der Datenbank herzustellen und dabei sowohl kausale Beziehungen als auch Konkurrenzverhältnisse präzise abzubilden. Dies ermöglicht es, die Datenbank auf einem konsistenten Zustand zu halten und mögliche Anomalien oder Inkonsistenzen in den verarbeiteten Transaktionen zu vermeiden.
 
-In der Theorie der verteilten Systeme werden die Begriffe \enquote{teilweise Ordnung}, \enquote{totale Ordnung} und \enquote{kausale Ordnung} häufig verwendet, um die Beziehungen zwischen Ereignissen in solchen Systemen zu beschreiben.
-
-Teilweise Ordnung (oder partielle Ordnung) ist ein Ordnungsprinzip, bei dem nicht alle Elemente verglichen werden müssen. In einem verteilten System bedeutet dies, dass einige Ereignisse nicht direkt miteinander in Beziehung stehen. Zum Beispiel, wenn Ereignisse A und B  in verschiedenen Prozessen geschehen und es gibt keine Kommunikation zwischen diesen Prozessen, dann haben A und B keine bestimmte Ordnung zueinander - sie sind in Bezug aufeinander nicht geordnet.
-
-Totale Ordnung hingegen ist ein Ordnungsprinzip, bei dem jedes Paar von Elementen in Beziehung zueinander steht. In einem verteilten System bedeutet dies, dass jedes Ereignis in Bezug auf jedes andere Ereignis geordnet werden kann. Beispielsweise, wenn wir eine globale Uhr hätten, die alle Ereignisse in einem verteilten System markiert, könnten wir eine totale Ordnung aller Ereignisse entsprechend den Zeitstempeln dieser globalen Uhr erstellen.
-
-Kausale Ordnung ist eine spezielle Art von teilweiser Ordnung, die die kausalen Beziehungen zwischen den Ereignissen in einem verteilten System darstellt. In einer kausalen Ordnung, wenn ein Ereignis A ein Ereignis B verursacht (direkt oder indirekt), dann wird A immer vor B geordnet. Kausale Ordnung ist besonders wichtig in verteilten Systemen, da sie hilft, die korrekte Ausführung von Operationen in solchen Systemen zu gewährleisten.
-
-Sowohl Lamport-Uhren als auch Vektoruhren sind Mechanismen zur Erfassung dieser kausalen Ordnung in verteilten Systemen. Lamport-Uhren können eine kausale Ordnung erstellen, aber sie können keine konkurrierenden Ereignisse erkennen - Ereignisse, die in Bezug aufeinander nicht geordnet sind. Vektoruhren hingegen können sowohl eine kausale Ordnung erstellen als auch konkurrierende Ereignisse erkennen.
 
 \subsubsection{Conflict-Free Replicated Data Types}
 Conflict-Free Replicated Data Types (CRDTs) sind eine Klasse von verteilten Datenstrukturen, die es ermöglichen, Replikationen von Daten in verteilten Systemen auf einfache Weise und ohne Koordination zu aktualisieren und zu synchronisieren. Sie sind besonders nützlich in Anwendungen, in denen es schwierig oder unpraktisch ist, eine globale Synchronisation oder Locking-Strategie einzusetzen. CRDTs bieten eine starke Eventualkonsistenz, was bedeutet, dass alle Replikationen des Datenbestands letztendlich den gleichen Zustand erreichen, solange keine weiteren Updates durchgeführt werden.
-
+\\\\
 Der mathematische Unterbau von CRDTs basiert auf den Konzepten der Halbgruppen, Monoiden und Gittern. Diese algebraischen Strukturen ermöglichen es, CRDTs durch ihre Operationen und Verknüpfungen zu definieren und deren Konvergenz- und Konsistenz-Eigenschaften zu untersuchen.
 
 Eine Halbgruppe ist eine algebraische Struktur $(S, \cdot)$, bei der $S$ eine Menge und $\cdot$ eine assoziative binäre Operation ist, die zwei Elemente aus $S$ zu einem weiteren Element aus $S$ verknüpft. Eine Halbgruppe wird zu einem Monoid, wenn es ein neutrales Element in $S$ gibt, so dass die Verknüpfung jedes Elements aus $S$ mit dem neutralen Element das ursprüngliche Element unverändert lässt.
 
 Ein Gitter ist eine algebraische Struktur $(L, \wedge, \vee)$, wobei $L$ eine Menge und $\wedge$, $\vee$ zwei binäre Operationen sind, die die Verknüpfung in Form von \enquote{meet} (min) und \enquote{join} (max) darstellen. Ein Gitter erfüllt die Idempotenz-, Kommutativ- und Assoziativgesetze sowie das Absorptionsgesetz.
-
+\\\\
 CRDTs können in zwei grundlegende Kategorien eingeteilt werden: operation-basierte CRDTs (CmRDTs) und zustandsbasierte CRDTs (CvRDTs). Bei CmRDTs werden die Operationen auf den Replikationen ausgeführt und die entsprechenden Operationen an die anderen Replikationen weitergegeben. Bei CvRDTs hingegen wird der vollständige Zustand der Replikation übertragen und durch die Verwendung von Lattice-basierten Merge-Funktionen vereinigt.
-
+\\\\
 Ein grundlegender CvRDT ist der Grow-only Counter (G-Counter). Sein Zustand kann als Monoid $(\mathbb{N}, +, 0)$ dargestellt werden, wobei $\mathbb{N}$ die Menge der natürlichen Zahlen, $+$ die Addition und $0$ das neutrale Element ist. Die G-Counter-Operationen umfassen das Inkrementieren und das Abrufen
 des Wertes. Um den G-Counter zu inkrementieren, wird die lokale Replikation des betreffenden Knotens um eins erhöht. Um den Wert des G-Counters abzurufen, werden die Werte aller Replikationen summiert.
-
+\\\\
 Ein weiteres Beispiel für einen CvRDT ist der 2P-Set (Zwei-Phasen-Set), der das Hinzufügen und Entfernen von Elementen in einem verteilten Set ermöglicht. Der Zustand des 2P-Set kann als Paar von Monoiden dargestellt werden, wobei das erste Monoid $(A, \cup, \emptyset)$ das Hinzufügen von Elementen und das zweite Monoid $(R, \cup, \emptyset)$ das Entfernen von Elementen repräsentiert. Hierbei ist $A$ das \enquote{add}-Set, $R$ das \enquote{remove}-Set, $\cup$ die Vereinigungsmenge und $\emptyset$ die leere Menge als neutrales Element.
 
 Um ein Element $x$ zu einem 2P-Set hinzuzufügen, fügt man es dem \enquote{add}-Set $A$ hinzu. Um ein Element $x$ aus einem 2P-Set zu entfernen, fügt man es dem \enquote{remove}-Set $R$ hinzu. Um den aktuellen Zustand des Sets abzurufen, berechnet man die Differenz zwischen dem \enquote{add}-Set $A$ und dem \enquote{remove}-Set $R$, das heißt $A \setminus R$. Dabei ist es wichtig zu beachten, dass ein entferntes Element nicht erneut hinzugefügt werden kann, da es sich bereits im \enquote{remove}-Set befindet.
-
+\\\\
 Die Konvergenzeigenschaften von CRDTs ergeben sich aus den algebraischen Strukturen, auf denen sie basieren. Da sowohl Monoiden als auch Gitter Idempotenz-, Kommutativ- und Assoziativgesetze erfüllen, können Updates auf CRDTs in beliebiger Reihenfolge angewendet werden, ohne die Konsistenz der Daten zu beeinträchtigen. Solange alle Updates schließlich auf allen Replikationen angewendet werden, wird das verteilte System einen konsistenten Zustand erreichen.
-
+\\\\
 CRDTs und logische Uhren können gemeinsam verwendet werden, um verteilte Datenstrukturen zu entwickeln, die sowohl zeitliche Kausalität als auch Eventualkonsistenz gewährleisten. Eine Möglichkeit, logische Uhren in CRDTs zu integrieren, besteht darin, die Zustandsinformationen der CRDTs mit Version Vektoren oder Lamport-Zeitstempeln zu versehen.
 Ein Version Vektor ist eine Datenstruktur, die für jeden Knoten im verteilten System einen Zähler enthält. Diese Zähler werden bei jedem Update des Knotens inkrementiert und ermöglichen es, die Kausalitätsbeziehungen zwischen den Ereignissen im verteilten System zu bestimmen. Lamport-Zeitstempel sind ähnlich, aber sie verwenden einzelne Zähler für das gesamte System und erhöhen den Zähler bei jedem Ereignis, das auftritt.
-
+\\\\
 Durch die Verwendung von logischen Uhren in Kombination mit CRDTs kann man verteilte Datenstrukturen entwickeln, die sowohl kausale Konsistenz als auch Eventualkonsistenz gewährleisten. Ein Beispiel dafür ist das Dot-Context Labeling Schema, das CRDTs mit logischen Uhren verbindet, um kausale verteilte Datenstrukturen zu erstellen, die Ereignisse im verteilten System in der richtigen zeitlichen Reihenfolge betrachten und dabei dennoch eine Eventualkonsistenz aufrechterhalten.
-
+\\\\
 Das Dot-Context Labeling Schema wurde entwickelt, um die Schwierigkeiten bei der Verwaltung von verteilten Datenstrukturen zu bewältigen, die sowohl kausale Konsistenz als auch Eventualkonsistenz erfordern. Ein Dot besteht aus einem Paar (i, c), wobei i die ID des Knotens im verteilten System und c der logische Zeitstempel des Knotens zum Zeitpunkt der Erstellung des Elements ist.
-
+\\\\
 Die Verwendung von Dots ermöglicht es, den kausalen Zusammenhang zwischen den Elementen in der verteilten Datenstruktur zu bestimmen, indem man ihre Labels vergleicht. Wenn zwei Elemente denselben Dot haben, sind sie identisch. Wenn zwei Elemente unterschiedliche Dots haben und die logischen Zeitstempel ihrer Dots in einer kausalen Beziehung stehen, können sie in der richtigen zeitlichen Reihenfolge betrachtet werden.
-
+\\\\
 Um die Eventualkonsistenz aufrechtzuerhalten, verwendet das Dot-Context Labeling Schema auch CRDTs, um die Zustände der verteilten Datenstrukturen zu verwalten und Updates ohne Koordination durchzuführen. Updates auf der Datenstruktur werden durchgeführt, indem die Labels der beteiligten Elemente modifiziert oder die Elemente selbst hinzugefügt oder entfernt werden. Da die Labels der Elemente ihre Kausalitätsbeziehungen widerspiegeln, können diese Updates in beliebiger Reihenfolge angewendet werden, ohne die Konsistenz der Datenstruktur zu beeinträchtigen.
-
+\\\\
 Ein praktisches Beispiel, bei dem das Dot-Context Labeling Schema verwendet werden kann, ist ein verteiltes Texteditor-System, bei dem mehrere Benutzer gleichzeitig an einem gemeinsamen Textdokument arbeiten. Ziel ist es, Änderungen an dem Dokument, wie das Hinzufügen oder Entfernen von Text, auf eine kausale und eventual konsistente Weise zu verwalten.
 \begin{itemize}
 \item Zunächst initialisieren wir das verteilte System mit mehreren Knoten (Benutzern), die jeweils eine Replikation des Textdokuments haben.
@@ -393,13 +348,13 @@ Das Dot-Context Labeling Schema ermöglicht es in diesem Beispiel, Textänderung
 
 \subsubsection{Locking}
 In verteilten Systemen ist die Koordination von Zugriffen auf gemeinsam genutzte Ressourcen eine wichtige Aufgabe, um Datenkonsistenz und Integrität zu gewährleisten. Eine weit verbreitete Technik zur Koordination solcher Zugriffe ist das \textit{Locking}. Dabei werden Ressourcen gesperrt, um gleichzeitige Zugriffe und damit verbundene Inkonsistenzen zu vermeiden. In diesem Abschnitt geben wir eine Einführung in Locking-Verfahren in verteilten Systemen und diskutieren grundlegende Konzepte und Herausforderungen.
-
+\\\\
 Ein Locking-Verfahren in verteilten Systemen basiert auf der Idee, dass ein Prozess, der auf eine gemeinsame Ressource zugreifen möchte, zunächst eine Erlaubnis (einen \textit{Lock}) anfordert und erhält. Während ein Prozess einen Lock auf einer Ressource hält, sind andere Prozesse daran gehindert, auf dieselbe Ressource zuzugreifen. Nach Abschluss der Operation gibt der Prozess den Lock wieder frei, sodass andere Prozesse darauf zugreifen können. Es gibt verschiedene Locking-Verfahren, die je nach Anwendungsfall eingesetzt werden, wie beispielsweise \textit{Shared Locks} und \textit{Exclusive Locks}.
-
-Ein Shared Lock, auch bekannt als Lese-Sperre, erlaubt es mehreren Prozessen oder Threads, gleichzeitig auf eine bestimmte Ressource zuzugreifen, solange sie diese nur lesen und nicht verändern. Dies ist sinnvoll, wenn die Daten von mehreren Prozessen gleichzeitig gelesen werden müssen und es nicht wichtig ist, ob die Daten während des Lesevorgangs verändert werden. Shared Locks erhöhen die Konkurrenz und verbessern die Leistung, da sie den gleichzeitigen Zugriff auf Ressourcen erlauben, solange keine Änderungen vorgenommen werden.
-
-Ein Exclusive Lock, auch bekannt als Schreib-Sperre, erlaubt es dagegen nur einem einzigen Prozess oder Thread, auf eine bestimmte Ressource zuzugreifen. Dieser Lock wird verwendet, wenn ein Prozess oder Thread die Daten verändern muss. Während ein Exclusive Lock gehalten wird, können keine anderen Prozesse oder Threads, auch nicht solche, die nur lesen wollen, auf die Ressource zugreifen. Dies stellt sicher, dass die Daten konsistent bleiben und keine Konflikte oder unerwarteten Zustände auftreten.
-
+\\\\
+Ein \textbf{Shared Lock}, auch bekannt als Lese-Sperre, erlaubt es mehreren Prozessen oder Threads, gleichzeitig auf eine bestimmte Ressource zuzugreifen, solange sie diese nur lesen und nicht verändern. Dies ist sinnvoll, wenn die Daten von mehreren Prozessen gleichzeitig gelesen werden müssen und es nicht wichtig ist, ob die Daten während des Lesevorgangs verändert werden. Shared Locks erhöhen die Konkurrenz und verbessern die Leistung, da sie den gleichzeitigen Zugriff auf Ressourcen erlauben, solange keine Änderungen vorgenommen werden.
+\\\\
+Ein \textbf{Exclusive Lock}, auch bekannt als Schreib-Sperre, erlaubt es dagegen nur einem einzigen Prozess oder Thread, auf eine bestimmte Ressource zuzugreifen. Dieser Lock wird verwendet, wenn ein Prozess oder Thread die Daten verändern muss. Während ein Exclusive Lock gehalten wird, können keine anderen Prozesse oder Threads, auch nicht solche, die nur lesen wollen, auf die Ressource zugreifen. Dies stellt sicher, dass die Daten konsistent bleiben und keine Konflikte oder unerwarteten Zustände auftreten.
+\\\\
 In verteilten Systemen ist die Implementierung von Locking-Verfahren komplexer als in zentralisierten Systemen, da Prozesse und Ressourcen über mehrere Knoten verteilt sind. Eine der Herausforderungen besteht darin, einen globalen Zustand der Locks im gesamten verteilten System zu verwalten. Um dies zu erreichen, können zentrale oder dezentrale Koordinatoren verwendet werden. Zentrale Koordinatoren stellen einen einzelnen Anlaufpunkt für Lock-Anforderungen dar, was zu einem Engpass führen kann, während dezentrale Koordinatoren eine bessere Skalierbarkeit ermöglichen, aber auch eine höhere Komplexität aufweisen.
 
 Ein weiteres Problem in verteilten Locking-Systemen ist die Vermeidung von Deadlocks, bei denen zwei oder mehr Prozesse in einem Zustand verharren, in dem jeder auf die Freigabe eines Locks wartet, der von einem anderen gehalten wird. Um Deadlocks zu verhindern oder aufzulösen, können verschiedene Strategien angewendet werden, wie zum Beispiel das Timeout-basierte Abbrechen von Lock-Anforderungen, das Erkennen von Deadlocks und das geordnete Anfordern von Locks.
@@ -407,18 +362,18 @@ Ein weiteres Problem in verteilten Locking-Systemen ist die Vermeidung von Deadl
 Trotz der Herausforderungen bieten Locking-Verfahren in verteilten Systemen eine wichtige Möglichkeit, die Konsistenz und Integrität von Daten in solchen Systemen zu gewährleisten. Durch den Einsatz geeigneter Locking-Strategien und die Berücksichtigung von Skalierbarkeit, Deadlock-Vermeidung und Koordinationsmechanismen können verteilte Systeme effektiv koordiniert und verwaltet werden.
 
 In verteilten Systemen können verschiedene Locking-Ansätze eingesetzt werden, um den Zugriff auf gemeinsam genutzte Ressourcen zu koordinieren. Im Folgenden werden zwei praktische Beispiele für Locking-Implementierungen in verteilten Systemen vorgestellt.
-
-
-In einem verteilten System kann ein zentraler Lock-Manager implementiert werden, der für die Verwaltung und Zuweisung von Locks für gemeinsam genutzte Ressourcen verantwortlich ist. In einem verteilten Datenbankmanagementsystem kann beispielsweise ein zentraler Lock-Manager die Zugriffe auf Tabellen oder Zeilen in der Datenbank koordinieren.
+\\\\
+Der zentrale Lock-Manager ist die einfachere Lösung, der für die Verwaltung und Zuweisung von Locks für gemeinsam genutzte Ressourcen verantwortlich sein kann. In einem verteilten Datenbankmanagementsystem kann beispielsweise ein zentraler Lock-Manager die Zugriffe auf Tabellen oder Zeilen in der Datenbank koordinieren.
 
 Angenommen, mehrere Transaktionen möchten gleichzeitig auf eine bestimmte Zeile in einer verteilten Datenbank zugreifen. In diesem Fall senden die Transaktionen Lock-Anforderungen an den zentralen Lock-Manager. Der Lock-Manager entscheidet, welcher Transaktion der Zugriff gewährt wird, und sendet eine entsprechende Antwort zurück. Die anderen Transaktionen müssen warten, bis der Lock freigegeben wird. Sobald die Transaktion, die den Lock hält, ihre Arbeit abgeschlossen hat, gibt sie den Lock frei und informiert den zentralen Lock-Manager, der den Lock dann an eine wartende Transaktion weitergibt.
-
-Das Zweiphasen-Locking-Protokoll (2PL) ist eine gängige Technik zur Sicherstellung der Serialisierbarkeit von Transaktionen in Datenbanksystemen. Es kann auch in verteilten Systemen eingesetzt werden, um die Konsistenz der gemeinsam genutzten Ressourcen zu gewährleisten. Beim zweiphasigen Locking gibt es zwei Phasen: die Lock-Phase, in der Transaktionen Locks auf Ressourcen anfordern, und die Unlock-Phase, in der die Locks freigegeben werden.
-
+\\\\
+Das \textbf{Zweiphasen-Locking-Protokoll} (2PL) ist eine gängige Technik zur Sicherstellung der Serialisierbarkeit von Transaktionen in Datenbanksystemen. Es kann auch in verteilten Systemen eingesetzt werden, um die Konsistenz der gemeinsam genutzten Ressourcen zu gewährleisten. Beim zweiphasigen Locking gibt es zwei Phasen: die Lock-Phase, in der Transaktionen Locks auf Ressourcen anfordern, und die Unlock-Phase, in der die Locks freigegeben werden.
+\\\\
 Angenommen, mehrere Transaktionen möchten in einem verteilten System auf verschiedene Ressourcen zugreifen. Jede Transaktion führt die folgenden Schritte aus:
-a. Lock-Phase: Die Transaktion fordert Locks auf den benötigten Ressourcen an. Sie kann entweder Shared Locks (für Lesezugriff) oder Exclusive Locks (für Schreibzugriff) anfordern. Solange die Transaktion weitere Ressourcen benötigt, bleibt sie in der Lock-Phase.
-b. Unlock-Phase: Nachdem die Transaktion alle benötigten Ressourcen gesperrt hat, führt sie ihre Operationen aus und gibt anschließend die Locks in der Reihenfolge ihres Erwerbs frei.
-
+\begin{itemize}
+\item Lock-Phase: Die Transaktion fordert Locks auf den benötigten Ressourcen an. Sie kann entweder Shared Locks (für Lesezugriff) oder Exclusive Locks (für Schreibzugriff) anfordern. Solange die Transaktion weitere Ressourcen benötigt, bleibt sie in der Lock-Phase.
+\item Unlock-Phase: Nachdem die Transaktion alle benötigten Ressourcen gesperrt hat, führt sie ihre Operationen aus und gibt anschließend die Locks in der Reihenfolge ihres Erwerbs frei.
+\end{itemize}
 2PL ist nicht auf einen  zentralen Lock-Manager angewiesen, macht die Implementierung aber bei Weitem einfacher. 
 
 Locking in verteilten Systemen kann eine Reihe von Problemen verursachen, die die Leistung, Skalierbarkeit und Konsistenz des Systems beeinträchtigen können. Hier sind einige der häufigsten Probleme und mögliche Lösungsansätze:
@@ -449,9 +404,9 @@ Locking in verteilten Systemen kann eine Reihe von Problemen verursachen, die di
 \item Batch-Verarbeitung: Anstatt für jede Ressource einzeln Locks anzufragen, können Prozesse Lock-Anforderungen für mehrere Ressourcen gleichzeitig senden, um die Netzwerkbelastung zu reduzieren.
 \end{itemize}
 \end{itemize}
-
+\paragraph{Philosophenproblem\\\\}
 Das Philosophenproblem, ursprünglich von Edsger Dijkstra formuliert, ist ein klassisches Problem in der Informatik, das sich auf die Synchronisation und das Deadlock-Management in parallelen und verteilten Systemen konzentriert. Im Folgenden wird das Problem beschrieben und auf verteilte Systeme bezogen.
-
+\\\\
 Das Problem besteht aus fünf Philosophen, die um einen runden Tisch sitzen. Jeder Philosoph verbringt seine Zeit entweder damit, über philosophische Fragen nachzudenken oder Nudeln zu essen. Zwischen jedem Paar von benachbarten Philosophen liegt eine Gabel. Um Nudeln zu essen, benötigt ein Philosoph zwei Gabeln - die zu seiner Linken und die zu seiner Rechten. Ein Philosoph kann jedoch immer nur eine Gabel zur Verfügung haben, bevor er die andere ergreifen kann. Philosophen dürfen die Gabeln nur aufnehmen, wenn sie verfügbar sind, und müssen sie ablegen, wenn sie mit dem Essen fertig sind.
 
 In verteilten Systemen stellt das Philosophenproblem eine Analogie zu konkurrierenden Prozessen oder Threads dar, die um den Zugriff auf gemeinsame Ressourcen (in diesem Fall Gabeln) konkurrieren. Das Problem veranschaulicht die Herausforderungen bei der Koordination und Synchronisation dieser Prozesse, um Deadlocks, Verhungern (Starvation) und Leistungsprobleme zu vermeiden.
@@ -481,6 +436,14 @@ In Java können Sie auch für diesen Ansatz separate Tasks für jeden Philosophe
 
 Die Wahl des geeigneten Lösungsansatzes für das Philosophenproblem in verteilten Systemen hängt von den spezifischen Anforderungen des Systems und den damit verbundenen Herausforderungen ab. Einige Systeme können von zentralisierten Lösungen profitieren, während andere dezentrale oder quorum-basierte Ansätze bevorzugen. In jedem Fall sollte die Lösung sorgfältig abgewogen und an die Bedürfnisse des Systems angepasst werden, dieses Script bietet im nächsten Kapitel algorithmische Lösungsstrategien an.
 
-
+\paragraph{Goldene Regel\\\\}
+Eine goldene Regel bei physischen Uhren soll aber bereits jetzt herausgestellt werden. Physische Uhren werden nicht zurückgestellt. Hier sind einige der Hauptgründe, warum das Zurückstellen von Uhren in einem verteilten System problematisch sein kann:
+\begin{itemize}
+\item Verletzung der Ordnung: Wenn eine Uhr zurückgestellt wird, kann dies dazu führen, dass die Ordnung der Ereignisse und Operationen verletzt wird. In einem verteilten System ist es wichtig, dass die Reihenfolge der Ereignisse und Operationen konsistent ist, um Inkonsistenzen zu vermeiden. Durch das Zurückstellen der Uhr kann es passieren, dass ein Ereignis, das später auftritt, einen älteren Zeitstempel erhält als ein früheres Ereignis, was zu Fehlern und Inkonsistenzen führen kann.
+\item Doppelte Zeitstempel: Das Zurückstellen einer Uhr kann dazu führen, dass mehrere Ereignisse denselben Zeitstempel erhalten. Dies kann es schwierig machen, die tatsächliche Reihenfolge der Ereignisse zu bestimmen und kann zu Inkonsistenzen im verteilten System führen.
+\item Fehler bei der Synchronisation: In verteilten Systemen, die eine Uhrensynchronisation verwenden, kann das Zurückstellen einer Uhr zu Fehlern bei der Synchronisation führen. Wenn eine Uhr zurückgestellt wird, kann dies dazu führen, dass die anderen Knoten im System ihre Uhren falsch synchronisieren, was zu Inkonsistenzen und Fehlern im gesamten System führen kann.
+\item Korrektheitsprobleme: In verteilten Systemen, die auf korrekte zeitliche Abfolgen angewiesen sind, wie beispielsweise verteilte Datenbanken oder Transaktionssysteme, kann das Zurückstellen einer Uhr zu schwerwiegenden Korrektheitsproblemen führen. Beispielsweise können Transaktionen in einer inkorrekten Reihenfolge abgeschlossen werden, was zu Datenverlust oder -korruption führen kann.
+\end{itemize}
+Um diese Probleme zu vermeiden, ist es wichtig, dass die Uhren in verteilten Systemen nicht zurückgestellt werden. Stattdessen sollte eine geeignete Synchronisationsmethode verwendet werden, um sicherzustellen, dass alle Uhren im System konsistent sind und eine korrekte zeitliche Abfolge von Ereignissen und Operationen gewährleistet ist.
 
 
