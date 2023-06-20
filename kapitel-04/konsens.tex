@@ -101,9 +101,9 @@ Proof-of-Stake (PoS) ist ein alternativer Konsensmechanismus, der entwickelt wur
 
 Neben PoW und PoS gibt es auch andere konsensbasierte Mechanismen, die in verschiedenen Blockchain-Systemen eingesetzt werden. Einige Beispiele sind:
 \begin{itemize}
-\item Delegated Proof-of-Stake (DPoS): Hier wählen die Netzwerkteilnehmer Delegierte, die in ihrem Namen am Konsensprozess teilnehmen. Dies ermöglicht eine höhere Skalierbarkeit und Effizienz, kann jedoch zu einer gewissen Zentralisierung führen.
-\item Proof-of-Authority (PoA): In PoA-Systemen sind vertrauenswürdige und identifizierbare Validatoren für den Konsens verantwortlich. Dies führt zu einer schnellen und effizienten Blockvalidierung, setzt jedoch voraus, dass den ausgewählten Validatoren vertraut wird.
-\item Practical Byzantine Fault Tolerance (PBFT): PBFT ist ein Konsensalgorithmus, der darauf abzielt, Fehlertoleranz gegenüber byzantinischen Fehlern in verteilten Systemen zu bieten. PBFT wird in einigen permissioned oder privaten Blockchain-Systemen eingesetzt, in denen die Teilnehmerzahl begrenzt ist und Vertrauen zwischen ihnen besteht.
+\item Delegated \textbf{Proof-of-Stake} (DPoS): Hier wählen die Netzwerkteilnehmer Delegierte, die in ihrem Namen am Konsensprozess teilnehmen. Dies ermöglicht eine höhere Skalierbarkeit und Effizienz, kann jedoch zu einer gewissen Zentralisierung führen.
+\item \textbf{Proof-of-Authority} (PoA): In PoA-Systemen sind vertrauenswürdige und identifizierbare Validatoren für den Konsens verantwortlich. Dies führt zu einer schnellen und effizienten Blockvalidierung, setzt jedoch voraus, dass den ausgewählten Validatoren vertraut wird.
+\item \textbf{Practical Byzantine Fault Tolerance} (PBFT): PBFT ist ein Konsensalgorithmus, der darauf abzielt, Fehlertoleranz gegenüber byzantinischen Fehlern in verteilten Systemen zu bieten. PBFT wird in einigen permissioned oder privaten Blockchain-Systemen eingesetzt, in denen die Teilnehmerzahl begrenzt ist und Vertrauen zwischen ihnen besteht.
 \end{itemize}
 Obwohl Blockchains viele Vorteile bieten, gibt es auch einige Nachteile, die berücksichtigt werden müssen:
 \begin{itemize}
@@ -153,9 +153,9 @@ In verteilten Systemen können Fehlerarten in vier Hauptkategorien eingeteilt we
 \end{itemize}
 In der Literatur zu verteilten Systemen werden die Begriffe \enquote{failure}, \enquote{error} und \enquote{fault} oft verwendet, um unterschiedliche Aspekte von Fehlern und ihren Auswirkungen auf das System zu beschreiben. Es ist wichtig, diese Begriffe korrekt zu verwenden, um Missverständnisse zu vermeiden. Hier ist eine Differenzierung der Begriffe für verteilte Systeme:
 \begin{itemize}
-\item Fault (Fehler): Ein Fehler ist die zugrundeliegende Ursache für ein inkorrektes Verhalten in einem System. In verteilten Systemen kann ein Fehler aufgrund von Hardware-, Software- oder Kommunikationsproblemen auftreten. Fehler können auch auf menschliche Faktoren wie Fehlkonfiguration oder böswillige Handlungen zurückzuführen sein. Fehler sind der Beginn einer Kette von Ereignissen, die zu einem Ausfall führen können, und sie können auch latente Fehler sein, die erst später im System auftreten.
-\item Error (Fehlzustand): Ein Fehlerzustand ist der Teil des Systemzustands, der direkt auf einen Fehler zurückzuführen ist. Wenn ein Fehler auftritt, kann dies dazu führen, dass das System in einen inkonsistenten oder unerwarteten Zustand übergeht. Fehlerzustände sind nicht immer offensichtlich oder sofort erkennbar und können sich im Laufe der Zeit im System ausbreiten oder zu weiteren Fehlern führen.
-\item Failure (Ausfall): Ein Ausfall ist das beobachtbare Ergebnis eines Fehlers und tritt auf, wenn das System aufgrund eines Fehlers oder einer Folge von Fehlern nicht in der Lage ist, eine bestimmte Funktion oder Leistung zu erbringen. In verteilten Systemen kann ein Ausfall beispielsweise darin bestehen, dass ein Knoten nicht mehr reagiert, Daten verloren gehen oder inkonsistent sind, oder das gesamte System nicht mehr verfügbar ist.
+\item \textbf{Fault} (Fehler): Ein Fehler ist die zugrundeliegende Ursache für ein inkorrektes Verhalten in einem System. In verteilten Systemen kann ein Fehler aufgrund von Hardware-, Software- oder Kommunikationsproblemen auftreten. Fehler können auch auf menschliche Faktoren wie Fehlkonfiguration oder böswillige Handlungen zurückzuführen sein. Fehler sind der Beginn einer Kette von Ereignissen, die zu einem Ausfall führen können, und sie können auch latente Fehler sein, die erst später im System auftreten.
+\item \textbf{Error} (Fehlzustand): Ein Fehlerzustand ist der Teil des Systemzustands, der direkt auf einen Fehler zurückzuführen ist. Wenn ein Fehler auftritt, kann dies dazu führen, dass das System in einen inkonsistenten oder unerwarteten Zustand übergeht. Fehlerzustände sind nicht immer offensichtlich oder sofort erkennbar und können sich im Laufe der Zeit im System ausbreiten oder zu weiteren Fehlern führen.
+\item \textbf{Failure} (Ausfall): Ein Ausfall ist das beobachtbare Ergebnis eines Fehlers und tritt auf, wenn das System aufgrund eines Fehlers oder einer Folge von Fehlern nicht in der Lage ist, eine bestimmte Funktion oder Leistung zu erbringen. In verteilten Systemen kann ein Ausfall beispielsweise darin bestehen, dass ein Knoten nicht mehr reagiert, Daten verloren gehen oder inkonsistent sind, oder das gesamte System nicht mehr verfügbar ist.
 \end{itemize}
 In der Diskussion über verteilte Systeme ist es entscheidend, diese Begriffe klar zu differenzieren, um die verschiedenen Aspekte von Fehlern, ihren Ursachen und Auswirkungen besser zu verstehen und geeignete Fehlertoleranztechniken zu entwickeln, um die Zuverlässigkeit, Verfügbarkeit und Leistung des Systems zu gewährleisten.
 
@@ -165,32 +165,23 @@ In der Diskussion über verteilte Systeme ist es entscheidend, diese Begriffe kl
 In verteilten Systemen sind die Begriffe Verfügbarkeit, Zuverlässigkeit, Sicherheit und Wartbarkeit von zentraler Bedeutung und unterscheiden sich in ihren spezifischen Anforderungen und Eigenschaften.
 
 Die Verfügbarkeit bezieht sich auf die Fähigkeit eines Systems, zu jedem gewünschten Zeitpunkt betriebsbereit und zugänglich zu sein. Verfügbarkeit ist besonders wichtig in Systemen, die kontinuierlichen Betrieb erfordern, wie etwa in Online-Handelsplattformen oder Flugverkehrskontrollsystemen. Verfügbarkeit wird oft in Prozentzahlen ausgedrückt, wobei ein \enquote{Five-Nines} System (99,999\% verfügbar) als hochverfügbar gilt.
-
+\\\\
 Die Zuverlässigkeit hingegen beschäftigt sich mit der Fähigkeit eines Systems, korrekte und konsistente Ergebnisse zu liefern. Ein zuverlässiges System ist eines, das im Laufe der Zeit konsequent und vorhersehbar funktioniert, ohne unerwartete Ausfälle oder Fehlfunktionen. Es ist entscheidend, dass das System bei der Ausführung seiner Aufgaben korrekt und ohne Fehler arbeitet.
-
+\\\\
 Sicherheit bezieht sich auf den Schutz eines Systems vor böswilligen Angriffen oder unbeabsichtigten Schäden. Dies kann den Schutz von Daten vor unbefugtem Zugriff, die Vermeidung von Dienstunterbrechungen durch Angriffe und die Gewährleistung der Integrität von Transaktionen und Daten umfassen. Sicherheit ist in verteilten Systemen eine besondere Herausforderung, da die Daten über mehrere Standorte und möglicherweise über öffentliche Netzwerke hinweg verteilt sind.
-
+\\\\
 Die Wartbarkeit schließlich bezieht sich auf die Fähigkeit, Änderungen an einem System vorzunehmen, sei es zur Behebung von Fehlern, zur Verbesserung der Funktion oder zur Anpassung an neue Anforderungen. Ein gut wartbares System ist eines, das so konzipiert ist, dass es einfach zu verstehen, zu modifizieren und zu verbessern ist. Dies kann durch gute Software-Design-Praktiken, ausführliche Dokumentation und die Verwendung von Standards und Konventionen erreicht werden.
-
-
-Ein \enquote{Crash failure} tritt auf, wenn ein System plötzlich und ohne Vorwarnung aufhört zu funktionieren, bis zu diesem Zeitpunkt jedoch korrekt gearbeitet hat. Ein Beispiel dafür könnte ein Webserver sein, der plötzlich aufhört, Anfragen zu bearbeiten, möglicherweise aufgrund eines Hardware-Ausfalls oder eines schwerwiegenden Softwarefehlers.
-
-Ein \enquote{Omission failure} tritt auf, wenn ein System nicht auf eingehende Anfragen reagiert. Ein Beispiel hierfür könnte ein E-Mail-Server sein, der aufhört, eingehende E-Mails zu akzeptieren, aber weiterhin ausgehende E-Mails sendet.
-
-Ein \enquote{Receive omission} tritt auf, wenn ein System eingehende Nachrichten nicht empfängt. Ein praktisches Beispiel hierfür könnte ein Chat-Server sein, der aufgrund eines Netzwerkproblems keine Nachrichten von Benutzern empfängt.
-
-Ein \enquote{Send omission} tritt auf, wenn ein System keine Nachrichten sendet. In einem verteilten Datenbanksystem könnte ein solcher Fehler auftreten, wenn ein Knoten aufgrund eines Fehlers im Netzwerkprotokoll oder einer Fehlfunktion der Netzwerkhardware aufhört, Aktualisierungen an andere Knoten zu senden.
-
-Ein \enquote{Timing failure}  tritt auf, wenn eine Antwort außerhalb eines festgelegten Zeitintervalls liegt. Ein Beispiel hierfür wäre ein Online-Auktionshaus, bei dem Gebote, die nach Ablauf der Auktionszeit eintreffen, nicht berücksichtigt werden.
-
-Ein \enquote{Response failure} tritt auf, wenn die Antwort inkorrekt ist. Dies könnte in einem verteilten Berechnungssystem auftreten, wenn ein Knoten fehlerhafte Berechnungen durchführt und falsche Ergebnisse zurückgibt.
-
-Ein \enquote{Value failure}  tritt auf, wenn der Wert der Antwort falsch ist. Ein Beispiel hierfür könnte ein Währungsumrechnungsservice sein, der falsche Umrechnungsraten liefert.
-
-Ein \enquote{State-transition failure} tritt auf, wenn das System vom korrekten Ablauf der Steuerung abweicht. Ein Beispiel hierfür könnte ein verteiltes Workflow-System sein, in dem eine Aufgabe ausgelassen oder in der falschen Reihenfolge ausgeführt wird.
-
-Ein \enquote{Arbitrary failure} tritt auf, wenn das System in einer Weise versagt, die nicht durch die anderen Fehlermodelle erfasst wird. Dies könnte alles umfassen, von unvorhersehbarem Verhalten aufgrund von Software-Bugs bis hin zu unerwarteten Effekten aufgrund von Hardware-Ausfällen. Ein Beispiel für einen beliebigen Fehler könnte ein verteiltes File-Sharing-System sein, das aufgrund eines unerwarteten Datenkorruptionsproblems beginnt, beschädigte Dateien zu verteilen.
-
+\begin{itemize}
+\item \textbf{Crash failure} tritt auf, wenn ein System plötzlich und ohne Vorwarnung aufhört zu funktionieren, bis zu diesem Zeitpunkt jedoch korrekt gearbeitet hat. Ein Beispiel dafür könnte ein Webserver sein, der plötzlich aufhört, Anfragen zu bearbeiten, möglicherweise aufgrund eines Hardware-Ausfalls oder eines schwerwiegenden Softwarefehlers.
+\item \textbf{Omission failure} tritt auf, wenn ein System nicht auf eingehende Anfragen reagiert. Ein Beispiel hierfür könnte ein E-Mail-Server sein, der aufhört, eingehende E-Mails zu akzeptieren, aber weiterhin ausgehende E-Mails sendet.
+\item  \textbf{Receive omission} tritt auf, wenn ein System eingehende Nachrichten nicht empfängt. Ein praktisches Beispiel hierfür könnte ein Chat-Server sein, der aufgrund eines Netzwerkproblems keine Nachrichten von Benutzern empfängt.
+\item \textbf{Send omission} tritt auf, wenn ein System keine Nachrichten sendet. In einem verteilten Datenbanksystem könnte ein solcher Fehler auftreten, wenn ein Knoten aufgrund eines Fehlers im Netzwerkprotokoll oder einer Fehlfunktion der Netzwerkhardware aufhört, Aktualisierungen an andere Knoten zu senden.
+\item \textbf{Timing failure}  tritt auf, wenn eine Antwort außerhalb eines festgelegten Zeitintervalls liegt. Ein Beispiel hierfür wäre ein Online-Auktionshaus, bei dem Gebote, die nach Ablauf der Auktionszeit eintreffen, nicht berücksichtigt werden.
+\item \textbf{Response failure} tritt auf, wenn die Antwort inkorrekt ist. Dies könnte in einem verteilten Berechnungssystem auftreten, wenn ein Knoten fehlerhafte Berechnungen durchführt und falsche Ergebnisse zurückgibt.
+\item \textbf{Value failure}  tritt auf, wenn der Wert der Antwort falsch ist. Ein Beispiel hierfür könnte ein Währungsumrechnungsservice sein, der falsche Umrechnungsraten liefert.
+\item \textbf{State-transition failure} tritt auf, wenn das System vom korrekten Ablauf der Steuerung abweicht. Ein Beispiel hierfür könnte ein verteiltes Workflow-System sein, in dem eine Aufgabe ausgelassen oder in der falschen Reihenfolge ausgeführt wird.
+\item \textbf{Arbitrary failure} tritt auf, wenn das System in einer Weise versagt, die nicht durch die anderen Fehlermodelle erfasst wird. Dies könnte alles umfassen, von unvorhersehbarem Verhalten aufgrund von Software-Bugs bis hin zu unerwarteten Effekten aufgrund von Hardware-Ausfällen. Ein Beispiel für einen beliebigen Fehler könnte ein verteiltes File-Sharing-System sein, das aufgrund eines unerwarteten Datenkorruptionsproblems beginnt, beschädigte Dateien zu verteilen.
+\end{itemize}
 Die Fehlersemantik bei der Nachrichtenübertragung in asynchronen und synchronen Systemen kann sich aufgrund der unterschiedlichen Charakteristika und Anforderungen dieser Systeme erheblich unterscheiden.
 
 In einem synchronen System gibt es strenge Timing-Anforderungen, und Nachrichten müssen innerhalb einer bestimmten Zeit übertragen und verarbeitet werden. Fehler können hier zum Beispiel auftreten, wenn eine Nachricht nicht innerhalb des erwarteten Zeitintervalls ankommt oder wenn die Verarbeitung einer Nachricht zu lange dauert. In solchen Fällen kann das System ein Timeout implementieren, bei dem es einen Fehler meldet, wenn eine Nachricht nicht innerhalb einer bestimmten Zeit ankommt oder verarbeitet wird. Des Weiteren können Fehler bei der Synchronisation auftreten, wenn beispielsweise die Uhrzeiten der Systemkomponenten nicht korrekt synchronisiert sind.
@@ -206,7 +197,6 @@ Halting-Fehler oder Crash-Fehler in verteilten Systemen treten auf, wenn ein Kno
 \item Reichweite des Ausfalls: Ein Einzelpunktfehler tritt auf, wenn nur ein einzelner Knoten im System ausfällt. Bei einem koordinierten Ausfall fallen mehrere Knoten gleichzeitig aus, möglicherweise aufgrund eines gemeinsamen Problems wie eines Stromausfalls oder eines Netzwerkausfalls. Ein nicht-koordinierter Ausfall tritt auf, wenn mehrere Knoten unabhängig voneinander ausfallen.
 \item Vorhersehbarkeit des Ausfalls: Ein deterministischer Ausfall tritt auf, wenn der Ausfall vorhersehbar ist, beispielsweise wenn ein Knoten aufgrund von bekannten Hardware-Problemen oder Software-Bugs ausfällt. Ein nicht-deterministischer Ausfall tritt auf, wenn der Ausfall nicht vorhersehbar ist, beispielsweise aufgrund von zufälligen Hardware-Fehlern oder unvorhergesehenen Software-Problemen.
 \end{itemize} 
-
 Diese Fehlerarten in einem System können jeweils durch unterschiedliche Verhaltensweisen und Auswirkungen gekennzeichnet sein.
 \begin{itemize}
 \item Ein Fail-Stop-Fehler tritt auf, wenn ein System bei einem Fehler aufhört zu funktionieren und diesen Zustand deutlich signalisiert. Andere Komponenten im System können diesen Ausfall erkennen und darauf reagieren. Ein Beispiel könnte ein Server sein, der bei einem Hardware-Fehler abstürzt und eine Fehlermeldung an ein Überwachungssystem sendet.
@@ -243,43 +233,43 @@ Die Implementierung von Prozessresilienz in verteilten Systemen kann jedoch auch
 \subsubsection{Replikation}
 
 Replikation ist eine grundlegende Technik in verteilten Systemen, die darauf abzielt, Daten und Dienste auf mehreren Knoten oder Komponenten zu duplizieren. Dies trägt dazu bei, die Zuverlässigkeit, Verfügbarkeit und Skalierbarkeit des Systems zu verbessern. Durch die Anwendung von Replikation in verteilten Systemen können verschiedene Vorteile erzielt werden.
-
+\\\\
 Zunächst erhöht die Replikation die Verfügbarkeit von Daten und Diensten. Indem mehrere Kopien von Daten und Diensten auf verschiedenen Knoten im System gespeichert werden, können Benutzer auch bei Ausfällen einzelner Knoten oder Netzwerkverbindungen weiterhin auf die benötigten Ressourcen zugreifen.
 
 Ein weiterer Vorteil der Replikation besteht darin, dass sie die Zuverlässigkeit des verteilten Systems verbessert. Durch das Vorhandensein mehrerer Kopien von Daten und Diensten können Hardwarefehler oder Kommunikationsprobleme besser aufgefangen werden. Das System kann weiterhin funktionieren, indem es einfach auf eine andere, funktionierende Kopie der benötigten Daten oder Dienste zugreift.
-
+\\\\
 Die Skalierbarkeit von verteilten Systemen kann ebenfalls durch Replikation verbessert werden. Durch das Duplizieren von Daten und Diensten auf mehreren Knoten kann das System Leistungsengpässe vermeiden und eine größere Anzahl von Benutzeranfragen verarbeiten. Dies geschieht durch Lastverteilung, bei der Anfragen auf verschiedene Knoten verteilt werden, um die Arbeitslast effektiv zu bewältigen.
 
 Schließlich ermöglicht Replikation auch eine schnellere Wiederherstellung nach Ausfällen. Wenn ein Knoten ausfällt, kann das System seine Daten und Dienste aus einer der anderen Repliken wiederherstellen und so die Ausfallzeit und den Datenverlust minimieren.
-
+\\\\
 Eine Möglichkeit, die Replikation umzusetzen, besteht darin, permanent Kopien der Daten auf mehreren Knoten im System zu halten. Dies stellt sicher, dass alle Replikate immer auf dem neuesten Stand sind und die Datenverfügbarkeit maximiert wird.
-
-Eine weitere Möglichkeit ist die serverinitiierte Replikation, bei der der Server eine Aktualisierung der Daten auf alle Knoten im System überträgt. Dies ist nützlich, wenn es eine zentrale Datenquelle gibt, von der aus alle Knoten aktualisiert werden müssen. Die serverinitiierte Replikation kann auch dazu beitragen, die Netzwerkbelastung zu reduzieren, da die Übertragung von Daten von einem zentralen Ort ausgeht.
-
-Clientinitiierte Replikation ist ein weiterer Ansatz, bei dem Clients selbstständig Änderungen an einer Kopie der Daten vornehmen und diese Änderungen an andere Knoten im System übertragen. Dies ist nützlich, wenn es viele Clients gibt, die auf die Daten zugreifen und Änderungen vornehmen müssen.
+\\\\
+Eine weitere Möglichkeit ist die \textbf{serverinitiierte Replikation}, bei der der Server eine Aktualisierung der Daten auf alle Knoten im System überträgt. Dies ist nützlich, wenn es eine zentrale Datenquelle gibt, von der aus alle Knoten aktualisiert werden müssen. Die serverinitiierte Replikation kann auch dazu beitragen, die Netzwerkbelastung zu reduzieren, da die Übertragung von Daten von einem zentralen Ort ausgeht.
+\\\\
+\textbf{Clientinitiierte Replikation} ist ein weiterer Ansatz, bei dem Clients selbstständig Änderungen an einer Kopie der Daten vornehmen und diese Änderungen an andere Knoten im System übertragen. Dies ist nützlich, wenn es viele Clients gibt, die auf die Daten zugreifen und Änderungen vornehmen müssen.
 
 Anwendungsbeispiele für Replikation sind vielfältig und umfassen die Datenspeicherung in der Cloud, verteilte Datenbanken, Webanwendungen, Peer-to-Peer-Netzwerke und viele andere Anwendungen. Zum Beispiel kann eine verteilte Datenbank mithilfe von Replikation eine höhere Verfügbarkeit und Zuverlässigkeit erreichen, indem sie Kopien der Daten auf mehrere Knoten im System hält. Wenn ein Knoten ausfällt oder nicht erreichbar ist, können andere Knoten die Arbeit fortsetzen und auf die Daten zugreifen.
+\\\\
+Passive und aktive Replikation sind zwei weitere Ansätze, um Daten und Dienste in verteilten Systemen zu duplizieren. Beide haben unterschiedliche Vorteile und Herausforderungen.
 
-Insgesamt ermöglicht die Replikation eine höhere Fehlertoleranz, Verfügbarkeit und Skalierbarkeit in verteilten Systemen. Die Wahl des richtigen Replikationsansatzes hängt von den Anforderungen des Systems, der Art der Daten und der Netzwerkumgebung ab.
+\textbf{Passive Replikation}, auch als Primär-Backup-Replikation oder Master-Slave-Replikation bezeichnet, besteht darin, dass ein einziger Knoten, der Primärknoten, alle eingehenden Anfragen bearbeitet und die Änderungen auf die Daten anwendet. Die anderen Knoten, die sogenannten Backup-Knoten, halten Kopien der Daten und warten auf Aktualisierungen vom Primärknoten. Im Falle eines Ausfalls des Primärknotens wird einer der Backup-Knoten zum neuen Primärknoten. Der Hauptvorteil der passiven Replikation besteht darin, dass sie eine einfachere Konsistenzverwaltung ermöglicht, da alle Änderungen an den Daten durch den Primärknoten gesteuert werden. Allerdings kann dies auch zu einem Engpass in der Leistung führen, da alle Anfragen vom Primärknoten bearbeitet werden müssen.
 
-Passive und aktive Replikation sind zwei Ansätze, um Daten und Dienste in verteilten Systemen zu duplizieren. Beide haben unterschiedliche Vorteile und Herausforderungen.
-
-Passive Replikation, auch als Primär-Backup-Replikation oder Master-Slave-Replikation bezeichnet, besteht darin, dass ein einziger Knoten, der Primärknoten, alle eingehenden Anfragen bearbeitet und die Änderungen auf die Daten anwendet. Die anderen Knoten, die sogenannten Backup-Knoten, halten Kopien der Daten und warten auf Aktualisierungen vom Primärknoten. Im Falle eines Ausfalls des Primärknotens wird einer der Backup-Knoten zum neuen Primärknoten. Der Hauptvorteil der passiven Replikation besteht darin, dass sie eine einfachere Konsistenzverwaltung ermöglicht, da alle Änderungen an den Daten durch den Primärknoten gesteuert werden. Allerdings kann dies auch zu einem Engpass in der Leistung führen, da alle Anfragen vom Primärknoten bearbeitet werden müssen.
-
-Aktive Replikation, auch als Multi-Master- oder State-Machine-Replikation bezeichnet, bedeutet, dass alle Knoten im System gleichzeitig eingehende Anfragen bearbeiten und Änderungen auf ihren Daten vornehmen können. In diesem Ansatz muss das System sicherstellen, dass die Änderungen auf allen Knoten konsistent sind, was eine sorgfältige Koordination und Konsistenzverwaltung erfordert. Der Hauptvorteil der aktiven Replikation besteht darin, dass sie eine bessere Skalierbarkeit und Leistung bietet, da Anfragen auf mehrere Knoten verteilt werden können. Allerdings ist die Konsistenzverwaltung in diesem Ansatz komplexer und erfordert den Einsatz von Konsensalgorithmen und anderen Mechanismen, um die Konsistenz der Daten auf allen Knoten aufrechtzuerhalten.
-
-Cold, Warm und Hot Replikation sind Begriffe, die verwendet werden, um unterschiedliche Grade der Verfügbarkeit und Aktualität von replizierten Daten und Diensten in verteilten Systemen zu beschreiben. Diese Begriffe helfen dabei, die verschiedenen Replikationsstrategien hinsichtlich ihrer Leistung und Auswirkungen auf die Wiederherstellung nach Ausfällen besser zu verstehen.
+\textbf{Aktive Replikation}, auch als Multi-Master- oder State-Machine-Replikation bezeichnet, bedeutet, dass alle Knoten im System gleichzeitig eingehende Anfragen bearbeiten und Änderungen auf ihren Daten vornehmen können. In diesem Ansatz muss das System sicherstellen, dass die Änderungen auf allen Knoten konsistent sind, was eine sorgfältige Koordination und Konsistenzverwaltung erfordert. Der Hauptvorteil der aktiven Replikation besteht darin, dass sie eine bessere Skalierbarkeit und Leistung bietet, da Anfragen auf mehrere Knoten verteilt werden können. Allerdings ist die Konsistenzverwaltung in diesem Ansatz komplexer und erfordert den Einsatz von Konsensalgorithmen und anderen Mechanismen, um die Konsistenz der Daten auf allen Knoten aufrechtzuerhalten.
+\\\\
+\textbf{Cold}, \textbf{Warm} und \textbf{Hot} Replikation sind Begriffe, die verwendet werden, um unterschiedliche Grade der Verfügbarkeit und Aktualität von replizierten Daten und Diensten in verteilten Systemen zu beschreiben. Diese Begriffe helfen dabei, die verschiedenen Replikationsstrategien hinsichtlich ihrer Leistung und Auswirkungen auf die Wiederherstellung nach Ausfällen besser zu verstehen.
 \begin{itemize}
 \item Cold Replikation (kalte Replikation): Bei der Cold Replikation werden die Daten in regelmäßigen Abständen, aber nicht in Echtzeit, zwischen dem Primärknoten und den Backup-Knoten synchronisiert. Kalte Replikation ist die am wenigsten aktuelle Form der Replikation und wird häufig für Backup- und Archivierungszwecke eingesetzt. Im Falle eines Ausfalls kann die Wiederherstellung der Daten aus einer Cold-Replikation mehr Zeit in Anspruch nehmen, da die Daten möglicherweise nicht auf dem neuesten Stand sind und zusätzliche Schritte erforderlich sind, um den Backup-Knoten in Betrieb zu nehmen.
 \item Warm Replikation (warme Replikation): Warme Replikation ist ein Zwischenansatz, bei dem die Daten in relativ kurzen Intervallen, aber immer noch nicht in Echtzeit, zwischen den Knoten synchronisiert werden. Warme Replikation bietet eine höhere Verfügbarkeit als kalte Replikation und ist schneller bei der Wiederherstellung nach einem Ausfall. In diesem Szenario sind die Backup-Knoten in der Regel besser vorbereitet, um die Last des ausgefallenen Knotens zu übernehmen, und es besteht eine geringere Wahrscheinlichkeit, dass Datenverluste auftreten.
 \item Hot Replikation (heiße Replikation): Bei der Hot Replikation werden die Daten nahezu in Echtzeit zwischen den Knoten synchronisiert, wodurch eine hohe Verfügbarkeit und Aktualität der replizierten Daten gewährleistet wird. Bei einem Ausfall kann ein Backup-Knoten sofort die Last des ausgefallenen Knotens übernehmen, wodurch die Ausfallzeit minimiert wird. Hot Replikation ist die anspruchsvollste Form der Replikation und erfordert eine engmaschige Koordination zwischen den Knoten, um die Konsistenz der Daten aufrechtzuerhalten.
 \end{itemize}
+
+\paragraph{Replilkation zum Mittel der Redundanz\\\\}
 Replilkation ist neben Leistungssteigerung (Load Balancing) und zum Mittel der Redundanz auch geeignet mit Fehlersituation optimierter zu verfahren.
 Die Anzahl der erforderlichen Replikationen hängt dann von der Art des Fehlers und den Anforderungen an die Zuverlässigkeit und Fehlertoleranz des verteilten Systems ab. Im Allgemeinen gilt: 
 \begin{itemize}
-\item $2k$ Replikationen: Diese Anzahl von Replikationen ist typischerweise ausreichend für Systeme, die lediglich Crash-Fehler (auch Absturzfehler oder fail-stop-Fehler genannt) tolerieren müssen. Crash-Fehler treten auf, wenn ein Knoten plötzlich ausfällt und nicht mehr reagiert, aber keine inkorrekten Ergebnisse oder Informationen liefert. In einem System, das gegen k Crash-Fehler geschützt ist, sind $2k$ Replikationen ausreichend, um weiterhin korrekt zu funktionieren.
-\item $2k+1$ Replikationen: Für Systeme, die nicht nur Crash-Fehler, sondern auch sogenannte Omission-Fehler (Auslassungsfehler) tolerieren müssen, sind 2k+1 Replikationen erforderlich. Bei Omission-Fehlern liefert ein Knoten möglicherweise keine Informationen, auch wenn er dazu aufgefordert wird. Mit 2k+1 Replikationen kann das System in der Regel eine Mehrheitsentscheidung treffen und trotz $k$ fehlerhafter Knoten korrekt arbeiten.
-\item $3k+1$ Replikationen: Um byzantinische Fehler tolerieren zu können, bei denen ein Knoten unvorhersehbare, inkonsistente oder bösartige Informationen liefert, sind $3k+1$ Replikationen erforderlich. Dies ermöglicht eine Mehrheitsentscheidung (zwei Drittel der Knoten) und stellt sicher, dass das System auch bei einer Anzahl von bis zu k fehlerhaften Knoten korrekt funktioniert.
+\item \textbf{$2k$} Replikationen: Diese Anzahl von Replikationen ist typischerweise ausreichend für Systeme, die lediglich Crash-Fehler (auch Absturzfehler oder fail-stop-Fehler genannt) tolerieren müssen. Crash-Fehler treten auf, wenn ein Knoten plötzlich ausfällt und nicht mehr reagiert, aber keine inkorrekten Ergebnisse oder Informationen liefert. In einem System, das gegen k Crash-Fehler geschützt ist, sind $2k$ Replikationen ausreichend, um weiterhin korrekt zu funktionieren.
+\item \textbf{$2k+1$} Replikationen: Für Systeme, die nicht nur Crash-Fehler, sondern auch sogenannte Omission-Fehler (Auslassungsfehler) tolerieren müssen, sind 2k+1 Replikationen erforderlich. Bei Omission-Fehlern liefert ein Knoten möglicherweise keine Informationen, auch wenn er dazu aufgefordert wird. Mit 2k+1 Replikationen kann das System in der Regel eine Mehrheitsentscheidung treffen und trotz $k$ fehlerhafter Knoten korrekt arbeiten.
+\item \textbf{$3k+1$} Replikationen: Um byzantinische Fehler tolerieren zu können, bei denen ein Knoten unvorhersehbare, inkonsistente oder bösartige Informationen liefert, sind $3k+1$ Replikationen erforderlich. Dies ermöglicht eine Mehrheitsentscheidung (zwei Drittel der Knoten) und stellt sicher, dass das System auch bei einer Anzahl von bis zu k fehlerhaften Knoten korrekt funktioniert.
 \end{itemize}
 Die genaue Anzahl der erforderlichen Replikationen hängt von den spezifischen Anforderungen und der Fehlerart ab, gegen die das verteilte System abgesichert werden soll. Im Allgemeinen benötigen Systeme, die byzantinische Fehler tolerieren müssen, mehr Replikationen als solche, die nur Crash- oder Omission-Fehler berücksichtigen.
 
@@ -287,24 +277,22 @@ Die genaue Anzahl der erforderlichen Replikationen hängt von den spezifischen A
 Erasure Coding ist eine Technik zur Datenredundanz und Fehlerkorrektur, die in verteilten Systemen und Speichersystemen eingesetzt wird. Im Gegensatz zur Replikation, bei der vollständige Kopien von Daten auf verschiedenen Knoten gespeichert werden, teilt Erasure Coding die Daten in kleinere Fragmente auf und erstellt zusätzliche kodierte Fragmente, die sogenannten Paritätsinformationen. Diese Fragmente werden dann auf verschiedene Knoten verteilt. Der Hauptvorteil von Erasure Coding besteht darin, dass es eine höhere Speichereffizienz und Widerstandsfähigkeit gegen Ausfälle bietet als herkömmliche Replikationsmethoden, da weniger Redundanz benötigt wird, um die gleiche Fehlertoleranz zu erreichen.
 
 Ein Erasure Coding-Schema wird üblicherweise als (n, k)-Schema bezeichnet, wobei k die Anzahl der ursprünglichen Datenfragmente und n die Anzahl der insgesamt erstellten Fragmente (einschließlich der Paritätsfragmente) ist. Um die ursprünglichen Daten wiederherzustellen, sind mindestens k der n Fragmente erforderlich. Dies bedeutet, dass das System den Verlust von bis zu n-k Fragmenten tolerieren kann, ohne dass Datenverlust auftritt.
-
+\\\\
 Ein einfaches Anwendungsbeispiel für Erasure Coding ist ein verteiltes Speichersystem, das große Dateien speichert. Nehmen wir an, wir haben eine große Datei, die in vier Datenfragmente (k = 4) aufgeteilt wird. Anschließend erstellen wir zwei Paritätsfragmente (n-k = 2) mithilfe eines Erasure Coding-Verfahrens. Die Datei besteht nun aus insgesamt sechs Fragmenten (n = 6). Diese Fragmente werden auf sechs verschiedene Knoten in unserem verteilten Speichersystem verteilt.
 
 Wenn nun einer oder sogar zwei der Knoten ausfallen, können wir die ursprüngliche Datei immer noch aus den verbleibenden vier Fragmenten rekonstruieren. Dies bietet eine höhere Speichereffizienz und Fehlertoleranz als eine vollständige Replikation der Datei auf mehreren Knoten, bei der mehr Speicherplatz und Bandbreite benötigt würden.
 
 Erasure Coding wird häufig in verteilten Speichersystemen wie Hadoop HDFS, Ceph und verschiedenen Cloud-Speicherdiensten wie Amazon S3 und Google Cloud Storage eingesetzt, um eine effiziente Datenredundanz und Fehlertoleranz zu gewährleisten.
-
+\\\\
 Erasure Coding bietet verschiedene Vorteile gegenüber traditionellen Replikationsmethoden, insbesondere in Bezug auf Speichereffizienz und Widerstandsfähigkeit gegen Ausfälle. In Anbetracht der wachsenden Datenmengen und der steigenden Anforderungen an verteilte Systeme ist es wichtig, effiziente und fehlertolerante Speichertechniken zu nutzen, um eine hohe Verfügbarkeit und Zuverlässigkeit zu gewährleisten.
 
 Es gibt verschiedene Erasure Coding-Verfahren, die auf unterschiedlichen mathematischen Grundlagen basieren. Zu den bekanntesten zählen Reed-Solomon-Codes, Cauchy-Reed-Solomon-Codes und Tornado-Codes. Die Wahl des richtigen Erasure Coding-Verfahrens hängt von den spezifischen Anforderungen des verteilten Systems und den Leistungszielen ab.
-
+\\\\
 Ein wichtiger Aspekt bei der Anwendung von Erasure Coding ist die fragmentierte Datenverarbeitung, insbesondere wenn es darum geht, Operationen wie Updates oder Lesezugriffe auf die Daten durchzuführen. Da die Daten in Fragmente aufgeteilt und verteilt gespeichert werden, müssen verteilte Systeme diese Fragmentierung berücksichtigen und Operationen entsprechend koordinieren. Dies kann zu einer erhöhten Komplexität in der Verarbeitung und Verwaltung von Daten führen, insbesondere in Systemen mit hoher Dynamik und ständig wechselnden Anforderungen.
 
 Ein weiterer wichtiger Aspekt ist die Datenwiederherstellung nach Ausfällen. Obwohl Erasure Coding eine hohe Fehlertoleranz bietet, kann die Wiederherstellung der Daten unter Umständen zeitaufwändiger und rechenintensiver sein als bei traditionellen Replikationsmethoden. Dies liegt daran, dass die Paritätsinformationen zur Rekonstruktion der ursprünglichen Daten verwendet werden müssen, was zusätzliche Rechenressourcen erfordert.
-
-Das folgende Beispiel soll die Funktionsweise verdeutlichen. 
-
-Stellen Sie sich ein verteiltes Speichersystem vor, das eine Datei mit dem Inhalt \enquote{ABCDEFGH} speichern muss. Um Erasure Coding anzuwenden, teilen wir die Datei in vier Datenfragmente auf (k=4):
+\\\\
+Das folgende Beispiel soll die Funktionsweise verdeutlichen. Stellen Sie sich ein verteiltes Speichersystem vor, das eine Datei mit dem Inhalt \enquote{ABCDEFGH} speichern muss. Um Erasure Coding anzuwenden, teilen wir die Datei in vier Datenfragmente auf (k=4):
 \begin{itemize}
 \item Fragment 1: \enquote{AB}
 \item Fragment 2: \enquote{CD}
@@ -325,16 +313,15 @@ Wir haben nun insgesamt sechs Fragmente (n=6):
 \item Paritätsfragment 1: \enquote{P1}
 \item Paritätsfragment 2: \enquote{P2}
 \end{itemize}  
-
 Diese Fragmente werden auf sechs verschiedene Knoten in unserem verteilten Speichersystem verteilt.
-
+\\\\
 Angenommen, Knoten 1 und Knoten 2, die Fragment 1 und Fragment 2 speichern, fallen aus. Trotzdem können wir die ursprüngliche Datei immer noch aus den verbleibenden Fragmenten rekonstruieren:
 \begin{itemize}
 \item Fragment 1: Paritätsfragment 1 XOR Fragment 2 = \enquote{P1} XOR \enquote{CD} = \enquote{AB}
 \item Fragment 2: Paritätsfragment 1 XOR Fragment 1 = \enquote{P1} XOR \enquote{AB} = \enquote{CD}
 \end{itemize}  
 Durch das Kombinieren von Fragment 1, Fragment 2, Fragment 3 und Fragment 4 erhalten wir die ursprüngliche Datei \enquote{ABCDEFGH} zurück.
-
+\\\\xxxx
 Dieses Beispiel zeigt, wie Erasure Coding die ursprünglichen Daten in kleinere Fragmente aufteilt und zusätzliche Paritätsinformationen erstellt, um eine effiziente Datenredundanz und Fehlertoleranz zu ermöglichen. Bitte beachten Sie, dass dies ein stark vereinfachtes Beispiel ist und reale Erasure-Coding-Verfahren wie Reed-Solomon-Codes komplexere mathematische Operationen verwenden, um die Paritätsinformationen zu generieren.
 
 \subsubsection{Fehlertoleranz durch Wiederherstellung}
