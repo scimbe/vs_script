@@ -2,7 +2,7 @@
 
 Debugging in verteilten Systemen stellt eine Herausforderung dar, da es die Koordination und Analyse vieler miteinander verbundener Komponenten erfordert, die über verschiedene Netzwerke und geografische Standorte verteilt sein können. Hierbei spielen mehrere Methoden und Techniken die über das Monitoring hinaus gehen eine entscheidende Rolle:
 \\\\
-Distributed Debugging bezieht sich auf Techniken und Werkzeuge, die speziell dafür entwickelt wurden, um das Debugging in verteilten Systemen zu unterstützen. Dazu können Debugger gehören, die über Netzwerke hinweg funktionieren und das gleichzeitige Debugging von mehreren Prozessen oder Threads auf verschiedenen Maschinen ermöglichen. Diese Werkzeuge können auch Funktionen für das Setzen von Breakpoints, das Durchlaufen von Code und das Überwachen des Systemzustands bieten. Distributed Debuggers können um weitere Werkzeuge erweitert werden. Die folgenden Werkzeuge sollen nur eine Vorstellung über weitere Optionen bieten.
+\textbf{Distributed Debugging} bezieht sich auf Techniken und Werkzeuge, die speziell dafür entwickelt wurden, um das Debugging in verteilten Systemen zu unterstützen. Dazu können Debugger gehören, die über Netzwerke hinweg funktionieren und das gleichzeitige Debugging von mehreren Prozessen oder Threads auf verschiedenen Maschinen ermöglichen. Diese Werkzeuge können auch Funktionen für das Setzen von Breakpoints, das Durchlaufen von Code und das Überwachen des Systemzustands bieten. Distributed Debuggers können um weitere Werkzeuge erweitert werden. Die folgenden Werkzeuge sollen nur eine Vorstellung über weitere Optionen bieten.
 \begin{itemize}
 \item Tracing-Tools: Tracing ist besonders wichtig in verteilten Systemen, da es die Nachverfolgung von Anfragen und Operationen über mehrere Systemkomponenten hinweg ermöglicht. Tools wie Zipkin und Jaeger helfen dabei, Performance-Probleme und Fehlerursachen zu finden, indem sie die Interaktionen zwischen Microservices visualisieren.
 \item Log-Aggregation-Tools: Logs von verteilen Systemen können groß und schwer zu handhaben sein. Log-Aggregation-Tools wie ELK Stack (Elasticsearch, Logstash, Kibana) oder Fluentd helfen dabei, Logs von verschiedenen Quellen zu sammeln, zu filtern und zu analysieren.
@@ -28,7 +28,6 @@ Es ist leicht zu erkennen das hier ein weiteres kleines verteiltes System, mit a
 \textbf{Snapshot-Techniken} dienen dazu, den Zustand eines Systems oder einer Anwendung zu einem bestimmten Zeitpunkt festzuhalten. Diese Snapshots können dann analysiert werden, um den Systemzustand zum Zeitpunkt eines Fehlers zu untersuchen. \textbf{Replay-Technike}n hingegen ermöglichen es, die Ausführung eines Systems oder einer Anwendung auf der Basis eines Snapshots oder einer Aufzeichnung zu wiederholen. Dies kann hilfreich sein, um die Ursache von schwer zu reproduzierenden Fehlern zu finden. Dies kann in einem realen System, in einem emulierten oder simulierten System geschehen. 
 
 Ein Beispiel für die Anwendung von Replay-Techniken könnte ein Szenario in einem verteilten Datenbanksystem sein. Angenommen, eine unerklärliche Inkonsistenz in den Daten wird beobachtet, die vermutlich durch eine Reihe von Transaktionen verursacht wurde, die über verschiedene Knoten in dem verteilten System verteilt waren. Mit Replay-Techniken könnte der genaue Pfad dieser Transaktionen verfolgt und das Problem möglicherweise isoliert werden.
-
 Einige Werkzeuge, die diese Techniken unterstützen, sind:
 \begin{itemize}
 \item Record and Replay Frameworks: Diese Werkzeuge, wie beispielsweise Mozilla's rr oder Pernosco, ermöglichen es, die Ausführung eines Programms aufzuzeichnen, um es später erneut abzuspielen. Sie können nützlich sein, um schwer zu reproduzierende Fehler zu untersuchen.
@@ -49,7 +48,7 @@ Eines der bekanntesten Werkzeuge für die Fehlerinjektion in verteilten Systemen
 \\\\
 Angenommen, es wird ein verteiltes System betrieben, das aus mehreren Microservices besteht, die in einer Kubernetes-Cluster-Umgebung laufen. Zur Überprüfung der Robustheit und Fehlerresistenz dieses Systems wird die Netzwerkfehlerinjektion mit einem Werkzeug wie Gremlin durchgeführt.
 \\\\
-Gremlin ist eine Plattform für Chaos Engineering, die es ermöglicht, verschiedene Arten von Fehlern in verteilten Systemen zu injizieren, einschließlich Netzwerkfehler. Mit Gremlin könnte eine Netzwerklatenz oder ein Paketverlust zwischen bestimmten Services simuliert werden.
+Gremlin ist eine alternative Plattform für Chaos Engineering, die es ermöglicht, verschiedene Arten von Fehlern in verteilten Systemen zu injizieren, einschließlich Netzwerkfehler. Mit Gremlin könnte eine Netzwerklatenz oder ein Paketverlust zwischen bestimmten Services simuliert werden.
 \\\\
 Durch die Beobachtung der Reaktion des Systems auf diese Fehler könnten Schwachstellen in der Fehlerbehandlung und -wiederherstellung des Systems identifiziert und behoben werden. Es könnte festgestellt werden, dass bestimmte Services nicht richtig mit Netzwerkfehlern umgehen oder dass die Ausfallzeiten aufgrund von Fehlern länger sind als erwartet.
 \\\\

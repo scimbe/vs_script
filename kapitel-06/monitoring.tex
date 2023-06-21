@@ -5,31 +5,30 @@ Eine der zentralen Herausforderungen im Betrieb eines verteilten Systems ist das
 \\\\
 Ein weiteres wichtiges Thema im Betrieb von verteilten Systemen ist die Fehlertoleranz. Verteilte Systeme sind anfällig für eine Vielzahl von Ausfällen, von Netzwerkproblemen bis hin zu Hardware- oder Softwarefehlern. Die Entwicklung von Strategien zur Erkennung und Wiederherstellung von solchen Ausfällen ist eine wichtige Aufgabe im Betrieb dieser Systeme.
 \\\\
-Eine Reihe von Tools und Techniken können helfen, den Betrieb von verteilten Systemen zu erleichtern und zu automatisieren. Dazu gehören Konfigurationsmanagement-Tools wie Ansible oder Puppet, Monitoring- und Debugging-Tools wie Prometheus oder Jaeger, und Orchestrierungstools wie Kubernetes oder Docker Swarm, die helfen können, die Bereitstellung und Verwaltung von Anwendungen in einem verteilten System zu automatisieren.
-
+Eine Reihe von Tools und Techniken können helfen, den Betrieb von verteilten Systemen zu erleichtern und zu automatisieren. Dazu gehören Konfigurationsmanagement-Tools wie Ansible oder Puppet, Monitoring- und Debugging-Tools wie Prometheus oder Jaeger, und Orchestrierungstools wie Kubernetes oder Docker Swarm, die helfen können. Die Automatisierung der Prozesse nimmt einen wesentlichen Aspekt in der Diskussion ein.
+\\\\
 Darüber hinaus ist es wichtig, dass die Personen, die ein verteiltes System betreiben, über die notwendigen Fähigkeiten und Kenntnisse verfügen, um das System effektiv zu managen und auf Probleme zu reagieren. Dies kann eine umfassende Kenntnis der Systemarchitektur und -technologien, ein gutes Verständnis der Performance- und Fehlertoleranz-Prinzipien, und die Fähigkeit, effektiv zu debuggen und Probleme zu lösen, einschließen.
 
 \subsection{Monitoring}
 Verteilte Systeme, in denen Rechenressourcen über mehrere Netzwerkknoten verteilt sind, haben durch technologische Fortschritte und die Notwendigkeit, große Datenmengen effizient zu verarbeiten, an Bedeutung gewonnen. Eine kritische Komponente zur Gewährleistung der Zuverlässigkeit und Effizienz solcher Systeme ist das Monitoring. Dieses Kapitel soll eine Definition anbieten und die Bedeutung von Monitoring in verteilten Systemen erläutern, wie eine allgemeine Einführung in das Thema anbieten. 
-
-Die Bedeutung des Monitorings in verteilten Systemen lässt sich anhand von drei Schlüsselaspekten verdeutlichen: Performance-Optimierung, Fehlerdiagnose und Systemintegrität.
+\\\\
+Die Bedeutung des Monitorings in verteilten Systemen lässt sich anhand von drei Schlüsselaspekten verdeutlichen: 
 \begin{itemize}
 \item Performance-Optimierung: Durch das Monitoring können Administratoren feststellen, ob die Ressourcen in einem verteilten System optimal genutzt werden. Überwachungsdaten können Aufschluss über Engpässe oder übermäßige Ressourcennutzung geben und können dazu genutzt werden, die Systemkonfiguration für eine bessere Leistung anzupassen.
 \item Fehlerdiagnose: Im Falle eines Systemausfalls oder einer Fehlfunktion kann das Monitoring dazu beitragen, das Problem zu identifizieren. Dies ist besonders wichtig in verteilten Systemen, in denen ein Fehler in einem Knoten das gesamte System beeinträchtigen kann.
 \item Systemintegrität: Monitoring hilft, die Integrität und Zuverlässigkeit eines verteilten Systems zu gewährleisten. Dies kann durch Überwachung von Metriken wie Latenz, Auslastung, Fehlerraten und mehr erreicht werden.
 \end{itemize}
-
 Ein Beispiel für das Monitoring in verteilten Systemen ist die Überwachung von Servern in einem verteilten Datenbanksystem. Administratoren könnten Metriken wie CPU- und Speicherauslastung, Netzwerklatenz und Anzahl der gleichzeitigen Datenbankverbindungen überwachen. Durch die Analyse dieser Metriken könnten sie feststellen, ob die Serverlast gleichmäßig verteilt ist und ob es notwendig ist, zusätzliche Ressourcen hinzuzufügen oder die Last anders zu verteilen.
 \\\\
 Ein anderes Beispiel könnte das Monitoring eines verteilten Dateisystems sein. Hier könnten Metriken wie die Anzahl der Dateioperationen, die Latenz dieser Operationen und der Speicherplatzverbrauch überwacht werden. Durch die Überwachung dieser Metriken könnten Administratoren erkennen, ob das System effizient funktioniert und ob es notwendig ist, weitere Speicherressourcen hinzuzufügen oder bestimmte Dateioperationen zu optimieren.
 \\\\
-Ein drittes Beispiel könnte ein Microservices-Architektur-Anwendungssystem sein. In solch einem Szenario kann Monitoring auf verschiedene Aspekte angewendet werden, wie die Leistung und Verfügbarkeit jeder Microservice-Einheit, die Kommunikation und den Datenaustausch zwischen den Microservices, sowie die Orchestrierung und das Management dieser Einheiten. Monitoring hilft dabei, mögliche Engpässe, Fehlfunktionen oder Ineffizienzen zu erkennen und gibt Einblicke, um eine schnellere Fehlerbehebung und eine effizientere Ressourcennutzung zu ermöglichen.
+Ein drittes Beispiel um die Breits zu verdeutlichen, könnte ein Microservices-Architektur Anwendungssystem sein. In solch einem Szenario kann Monitoring auf verschiedene Ebenen angewendet werden, wie die Leistung und Verfügbarkeit jeder Microservice-Einheit, die Kommunikation und den Datenaustausch zwischen den Microservices, sowie die Orchestrierung und das Management dieser Einheiten. Monitoring hilft dabei, mögliche Engpässe, Fehlfunktionen oder Ineffizienzen zu erkennen und gibt Einblicke, um eine schnellere Fehlerbehebung und eine effizientere Ressourcennutzung zu ermöglichen.
 \\\\
-Monitoring in verteilten Systemen basiert auf einer Reihe von technischen Grundlagen und Metriken, die zuverlässige und aussagekräftige Informationen über das System liefern. Zentral ist eine Erfassung der Daten. Auch wenn die Behauptung fehlleitend ist sollte zunächst der pauschale Ansatz gewählt werden, wenn es nicht messbar ist, ist es nicht wichtig. Die Quantifizierung von Kennzahlen in Metriken ist eine wesentliche Herausforderung. Verschiedene Arten von Überwachungswerkzeugen und -software ermöglichen das Sammeln, Speichern und Analysieren von Monitoring-Daten. Diese Tools können speziell für verteilte Systeme entwickelt sein, wie etwa Prometheus, Grafana oder Elasticsearch, Logstash und Kibana (ELK Stack).
+Monitoring in verteilten Systemen basiert auf einer Reihe von technischen Grundlagen und Metriken, die zuverlässige und aussagekräftige Informationen über das System liefern. Zentral ist eine Erfassung der Daten. Auch wenn die Behauptung fehlleitend ist sollte zunächst der pauschale Ansatz gewählt werden, wenn es nicht messbar ist, ist es nicht wichtig. Die Quantifizierung von Kennzahlen in Metriken ist eine wesentliche Herausforderung. Verschiedene Arten von Überwachungswerkzeugen und -software ermöglichen das Sammeln, Speichern und Analysieren von Monitoring-Daten. Diese Tools können speziell für verteilte Systeme entwickelt sein, wie etwa Prometheus, Grafana oder \textbf{E}lasticsearch, \textbf{L}ogstash und \textbf{K}ibana (ELK Stack).
 Auch kann es Architekturfragen beeinflussen, wo Monitoring-Agenten in den verteilten Systemen einzubetten sind. Monitoring-Agenten sind Software-Komponenten, die auf Systemknoten installiert sind und Daten  oder Proben sammeln. 
 \\\\
 Ein wichtiges Element des Monitoring ist das Logging und Tracing. Logs enthalten detaillierte Informationen über Systemereignisse und können wertvolle Daten für das Monitoring bereitstellen. Tracing ist eine Technik, bei der individuelle Transaktionen oder Anfragen im System verfolgt werden, um Leistungsprobleme oder Fehler zu diagnostizieren.
-Am Ende ist es notwendig alle Daten zu einem Gesamtbild zusammenzufügen, was zunächst als Datenaggregation und -analyse bezeichnet wird und einen eigenen Zweig der Informatik ausmacht. Die gesammelten Daten müssen aggregiert und analysiert werden, um aussagekräftige Einblicke zu gewinnen. Dies kann durch verschiedene statistische Methoden, maschinelles Lernen oder andere Analysetechniken erfolgen.
+Am Ende ist es notwendig alle Daten zu einem Gesamtbild zusammenzufügen, was zunächst als Datenaggregation und -analyse bezeichnet wird und einen eigenen Zweig der Informatik ausmacht. Einfach gesprochen, die gesammelten Daten müssen aggregiert und analysiert werden, um aussagekräftige Einblicke zu gewinnen. Dies kann durch verschiedene statistische Methoden, maschinelles Lernen oder andere Analysetechniken erfolgen.
 Die Auswahl der zu überwachenden Metriken hängt von den spezifischen Anforderungen und Zielen des verteilten Systems ab. Hier sind einige gängige Metriken, die in verteilten Systemen überwacht werden:
 \begin{itemize}
 \item Performance-Metriken: Dazu gehören Metriken wie Antwortzeit, Durchsatz, Latenz und andere, die die Leistung des Systems messen.
@@ -37,15 +36,15 @@ Die Auswahl der zu überwachenden Metriken hängt von den spezifischen Anforderu
 \item Verfügbarkeits- und Zuverlässigkeitsmetriken: Dazu gehören Metriken wie Uptime, Anzahl der Ausfälle, Mean Time to Failure (MTTF) und Mean Time to Repair (MTTR).
 \item Fehlermetriken: Diese Metriken erfassen Systemfehler und -ausfälle, einschließlich Fehlerzahlen, Fehlerraten und spezifischer Fehlercodes.
 \end{itemize}
-
+\paragraph{Monitoring-Kategorien \\\\}
 System-Monitoring ist eine übergeordnete Kategorie, die sich auf die Überwachung der physischen und virtuellen Ressourcen bezieht, die ein System bereitstellt. Es geht darum, den Zustand und die Leistung der Server, ihrer Betriebssysteme und der zugehörigen Hardware zu überwachen. Dabei wird auf Metriken wie CPU-Auslastung, Arbeitsspeicherbelegung, Speicherplatzverwendung und Betriebssystemprozesse geachtet. Es liefert einen Einblick in die Effizienz und den Status der grundlegenden Infrastruktur, die das System unterstützt.
-\\\\
+
 Netzwerk-Monitoring, eine Subkategorie des System-Monitorings, konzentriert sich auf die Überwachung der Verbindungen zwischen den Komponenten eines Systems. Es beinhaltet die Überwachung von Netzwerkverkehr, Bandbreitennutzung, Latenz, Paketverlust und anderen netzwerkspezifischen Metriken. Netzwerk-Monitoring ist entscheidend, um die Verbindungszustände zwischen verschiedenen Systemkomponenten zu verstehen und Netzwerkengpässe oder -ausfälle zu identifizieren.
-\\\\
+
 Anwendungs-Monitoring konzentriert sich auf die Überwachung der Leistung und Funktionalität von Softwareanwendungen und Diensten, die auf dem System ausgeführt werden. Es beinhaltet die Überwachung von Metriken wie Reaktionszeiten, Fehler- und Ausfallraten und Benutzeraktivität. Anwendungs-Monitoring liefert Einblicke in das Verhalten und die Leistung von Softwareanwendungen, und kann dazu beitragen, Softwareprobleme zu identifizieren und die Nutzererfahrung zu optimieren.
-\\\\
+
 Datenfluss-Monitoring, andererseits, ist auf die Überwachung der Bewegung von Daten innerhalb des Systems fokussiert. Es verfolgt die Pfade, die Daten durch das System nehmen, und misst Metriken wie Durchsatz, Latenz und Datenqualität. Datenfluss-Monitoring ist entscheidend für verteilte Systeme, in denen Daten zwischen vielen verschiedenen Komponenten und Standorten hin- und herbewegt werden. Es hilft dabei, Probleme mit Datenverlust, -verzögerung oder -beschädigung zu erkennen und mit Metriken zu bestimmen.
-\\\\
+\paragraph{Metriken\\\\}
 Bestimmt Metriken können noch relativ leicht erfasst werden, bei anderen Metriken braucht es komplexe Strategien um diese in ein funktionalen Rahmen einzubetten. Beispiele für relative einfache und  spezifische Metriken können sein: 
 \begin{itemize}
 \item Netzwerk-Metriken: In verteilten Systemen spielt die Netzwerkkommunikation eine entscheidende Rolle. Metriken wie Netzwerklatenz, Paketverlust, Jitter und Bandbreitennutzung können Einblicke in die Netzwerkleistung und mögliche Kommunikationsprobleme geben.
@@ -72,11 +71,11 @@ Anschließend ist es wichtig, die richtigen Metriken auszuwählen, die diese Zie
 \\\\
 Die Wahl der richtigen Tools und Technologien ist ein weiterer wichtiger Aspekt einer Monitoring-Strategie. Es gibt eine Vielzahl von Monitoring-Tools auf dem Markt, die sich in Funktionalität, Kosten, Komplexität und Anpassungsfähigkeit unterscheiden. Es ist wichtig, ein Tool zu wählen, das den Anforderungen des verteilten Systems gerecht wird und sich gut in die bestehende Infrastruktur einfügt.
 \\\\
-Datenaggregation und -analyse sind zentrale Komponenten jeder Monitoring-Strategie. Dabei sollten die gesammelten Daten in einer Form aggregiert und dargestellt werden, die sinnvolle Einblicke ermöglicht und die Erkennung von Mustern und Anomalien erleichtert. Dies kann durch die Nutzung von Datenvisualisierung, maschinellem Lernen und anderen Analysetechniken unterstützt werden.
+Die Metriken und damit die  Daten sollen in einer Form aggregiert und dargestellt werden, die sinnvolle Einblicke ermöglicht und die Erkennung von Mustern und Anomalien erleichtert. Dies kann durch die Nutzung von Datenvisualisierung, maschinellem Lernen und anderen Analysetechniken unterstützt werden.
 \\\\
-Letztendlich sollte eine effektive Monitoring-Strategie in der Lage sein, proaktiv auf Probleme zu reagieren, indem sie Alarme und Benachrichtigungen auslöst, wenn bestimmte Schwellenwerte überschritten werden. Sie sollte auch die Möglichkeit zur automatischen Anpassung und Skalierung bieten, um auf wechselnde Systembedingungen reagieren zu können.
+Letztendlich sollte eine effektive Monitoring-Strategie in der Lage sein mit den richtigen Metriken proaktiv auf Probleme zu reagieren, indem sie Alarme und Benachrichtigungen auslöst, wenn bestimmte Schwellenwerte überschritten werden. Sie sollte auch die Möglichkeit zur automatischen Anpassung und Skalierung bieten, um auf wechselnde Systembedingungen reagieren zu können.
 \\\\
-Insgesamt ist eine effektive Monitoring-Strategie für verteilte Systeme ein kontinuierlicher Prozess, der ständige Überwachung, Anpassung und Verbesserung erfordert, um mit der Entwicklung und Veränderung des Systems Schritt zu halten. Die einzelnen Punkte werden in verschiedenen Modellen unterschiedlich adressiert. 
+Es ist ein kontinuierlicher Prozess, der ständige Überwachung, Anpassung und Verbesserung erfordert, um mit der Entwicklung und Veränderung des Systems Schritt zu halten. Die einzelnen Punkte werden in verschiedenen Modellen unterschiedlich adressiert. 
 \begin{itemize}
 \item Benchmarks und Performance-Modelle: Diese Methode beinhaltet die Entwicklung von Benchmarks und Modellen, um die Leistung des Systems unter verschiedenen Bedingungen und Arbeitslasten zu analysieren und zu vergleichen. Dies kann helfen, Leistungsengpässe und Optimierungsmöglichkeiten zu identifizieren.
 \\\\
@@ -114,16 +113,15 @@ Formale Methoden können dabei helfen, das korrekte Verhalten der verteilten Dat
 Ein Modellprüfverfahren (Model Checking) könnte dann verwendet werden, um das Verhalten des realen Systems mit dem formalen Modell zu vergleichen. Dies könnte beispielsweise auf Basis von Systemlogs oder anderen Monitoring-Daten geschehen. Wenn Abweichungen festgestellt werden, könnte dies auf ein Problem mit der Datenbank hinweisen, wie zum Beispiel inkonsistente Daten oder ein fehlerhaftes Verhalten des Systems.
 \end{itemize}
 Bestimmte Anwendungssektoren weisen eigene spezifische Anforderungen für das Monitoring auf, wie beispielhaft der Bankensektor hier sind besondere  Anforderungen zu berücksichtigen, wie: 
-
 \begin{itemize}
 \item Datenschutz und Datensicherheit: Banken müssen strenge Datenschutzvorschriften einhalten, wie z.B. die Datenschutz-Grundverordnung (DSGVO) in der EU oder den Gramm-Leach-Bliley Act in den USA. Diese Gesetze verlangen von den Banken, die persönlichen Daten ihrer Kunden zu schützen und sicherzustellen, dass diese nicht in die falschen Hände geraten. Dies beinhaltet die Verschlüsselung von Daten während der Übertragung und Speicherung sowie den Einsatz von Sicherheitsmaßnahmen wie Firewalls und Intrusion-Detection-Systemen.
 \item Auditierung und Protokollierung: Im Rahmen der Compliance müssen Banken in der Lage sein, Transaktionen zu überprüfen und nachzuverfolgen. Dies erfordert ein umfassendes Protokollierungssystem, das Informationen über alle durchgeführten Transaktionen speichert. Diese Informationen müssen über einen bestimmten Zeitraum aufbewahrt und bei Bedarf den Regulierungsbehörden vorgelegt werden können.
 \item Authentifizierung und Zugriffskontrolle auch für das Monitoring: Um sicherzustellen, dass nur autorisierte Benutzer auf das System zugreifen können, muss ein robustes Authentifizierungs- und Zugriffskontrollsystem implementiert werden. Dies kann Technologien wie Multi-Faktor-Authentifizierung, Rollenbasierte Zugriffskontrolle und regelmäßige Zugriffsüberprüfungen umfassen.
 \end{itemize}
-
-Allgemein ist die Einhaltung von Standards und Vorschriften, wesentlich, nicht nur für den Bankensektor. Aber insbesondere für die Banken können branchenspezifische Standards und Vorschriften genannt werden, wie z.B. die Payment Card Industry Data Security Standard (PCI DSS) für Kreditkartentransaktionen und die Basel III Standards für Bankenaufsicht und -regulierung. Diese Standards legen Anforderungen an die Systemarchitektur, Sicherheitsmaßnahmen und operative Verfahren auch für das Monitoring fest. 
+Allgemein ist die Einhaltung von Standards und Vorschriften, wesentlich, nicht nur für den Bankensektor. Aber insbesondere für die Banken können beispielhaft verscheidene branchenspezifische Standards und Vorschriften genannt werden, wie z.B. die Payment Card Industry Data Security Standard (PCI DSS) für Kreditkartentransaktionen und die Basel III Standards für Bankenaufsicht und -regulierung. Diese Standards legen Anforderungen an die Systemarchitektur, Sicherheitsmaßnahmen und operative Verfahren auch für das Monitoring fest. 
 Festzustellen ist, dass die Monitoring Modelle zum einen den QoS sicherstellen sollen, aber selbst auch wieder eigene Anforderungen an den QoS stellen. 
 
+\paragraph{Werkzeuge und Technologien\\\\}
 Es gibt eine breite Palette von Werkzeugen und Technologien, die beim Monitoring von verteilten Systemen eingesetzt werden können. Diese können in verschiedene Kategorien eingeteilt werden, je nachdem, welchen Aspekt des Systems sie überwachen oder welche Funktionen sie bereitstellen. Hier sind einige Beispiele:
 \begin{itemize}
 \item Infrastrukturüberwachung: Diese Werkzeuge konzentrieren sich auf die Überwachung von Hardware- und Netzwerkressourcen. Sie können dazu verwendet werden, die CPU-Auslastung, den Speicher, die Netzwerkauslastung und andere systemnahe Metriken zu verfolgen.\\
@@ -154,12 +152,12 @@ Cloud-Umgebungen bestehen aus einer Sammlung von Servern und Diensten, die über
 Eine der größten Herausforderungen beim Cloud-Monitoring ist die Skalierbarkeit. Cloud-Umgebungen können sehr groß sein und Tausende von Servern und Diensten umfassen, was bedeutet, dass das Monitoring in der Lage sein muss, eine große Menge von Daten zu sammeln und zu verarbeiten. Darüber hinaus können Cloud-Umgebungen dynamisch sein, mit Servern und Diensten, die je nach Bedarf hinzugefügt oder entfernt werden, was erfordert, dass das Monitoring flexibel und anpassungsfähig ist.
 \\\\
 Sowohl das IoT- als auch das Cloud-Monitoring erfordern eine robuste Infrastruktur zur Datenerfassung, eine leistungsstarke Analyse, um Muster und Probleme zu identifizieren, und Sicherheitsmaßnahmen, um die Daten zu schützen. 
-\\\\
+\paragraph{Self-Healing\\\\}
 Self-Healing Systeme und Monitoring in verteilten Systemen sind zwei Konzepte, die eng miteinander verbunden sind und jeweils einen wichtigen Beitrag zur Gewährleistung der Stabilität und Leistungsfähigkeit von verteilten Systemen leisten.
 \\\\
 Self-Healing oder selbstheilende Systeme sind Systeme, die in der Lage sind, ihre eigenen Fehler oder Defekte zu erkennen und automatisch zu beheben, ohne menschliches Eingreifen. Sie haben das Potenzial, die Zuverlässigkeit und Verfügbarkeit von Systemen zu verbessern, indem sie die Zeit reduzieren, die für die Wiederherstellung von Ausfällen benötigt wird, und indem sie die menschliche Fehleranfälligkeit reduzieren.
 \\\\
-Self-Healing kann durch verschiedene Mechanismen erreicht werden, einschließlich Fehlertoleranz, Redundanz, automatisierter Fehlerbehebung und adaptiven Verhaltensweisen. In verteilten Systemen, in denen Komponenten über verschiedene physische Standorte verteilt sind, sind Self-Healing-Mechanismen besonders wichtig, um die Auswirkungen von Ausfällen und Netzwerkinstabilitäten zu minimieren.
+Das Ziel kann durch verschiedene Mechanismen erreicht werden, einschließlich Fehlertoleranz, Redundanz, automatisierter Fehlerbehebung und adaptiven Verhaltensweisen. In verteilten Systemen, in denen Komponenten über verschiedene physische Standorte verteilt sind, sind Self-Healing-Mechanismen besonders wichtig, um die Auswirkungen von Ausfällen und Netzwerkinstabilitäten zu minimieren.
 \\\\
 Ein gutes Beispiel für den Zusammenhang zwischen Monitoring und Self-Healing kann in der Cloud-Infrastruktur, speziell bei einem Dienst wie Amazon Web Services (AWS), gefunden werden.
 \\\
@@ -179,7 +177,7 @@ Angenommen, es wird eine große Microservice-basierte Anwendung in einer Kuberne
 Gleichzeitig könnte eine andere Regel festgelegt sein, um zu überprüfen, ob dieser spezielle Microservice wiederholt Probleme verursacht. Falls dies der Fall ist, könnte eine komplexere Self-Healing-Regel ausgelöst werden. Beispielsweise könnte ein Rollback auf eine vorherige Version des Microservice ausgelöst werden, falls die aktuelle Version instabil ist. Alternativ könnte ein spezialisierter Fehlerbehebungsservice gestartet werden, um das Problem genauer zu analysieren.
 \\\\
 Darüber hinaus könnte eine Regel zur Überwachung des gesamten Systems bestehen. Falls eine signifikante Anzahl von Microservices instabil wird, könnte dies auf ein tiefer liegendes Problem im Cluster hinweisen. In diesem Fall könnte eine Self-Healing-Regel ausgelöst werden, die zum Beispiel eine Neuverteilung der Workloads auf andere Knoten im Cluster oder sogar die Bereitstellung zusätzlicher Knoten veranlasst.
-\\\\
+\paragraph{Fehlerbehebung\\\\}
 Am wichtigsten ist Monitoring aber für den Entwickler, wenn automatische Regeln nicht mehr greifen. Monitoring spielt eine entscheidende Rolle bei der Fehlerbehebung, auch bekannt als Debugging, insbesondere in verteilten Systemen. Monitoring hilft dabei, den Zustand und das Verhalten des Systems zu verstehen und zu analysieren, was für eine effektive Fehlerbehebung unerlässlich ist.
 \\\\
 Predictive Maintenance, also vorausschauende Wartung, ist eine Methode, die darauf abzielt, den Zustand von Geräten und Systemen kontinuierlich zu überwachen, um die Notwendigkeit von Wartungsarbeiten zu prognostizieren, bevor ein Fehler auftritt. Dies steht im Gegensatz zur reaktiven Wartung (nach einem Fehler) und zur präventiven Wartung (nach einem festgelegten Zeitplan unabhängig vom Zustand des Geräts). Predictive Maintenance basiert auf der Idee, dass effektive Datenanalyse und Modellierung genutzt werden können, um Ausfallzeiten zu minimieren und Wartungsarbeiten effizienter zu planen.
