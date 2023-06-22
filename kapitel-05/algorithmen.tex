@@ -13,7 +13,7 @@ Verteilte Systeme stehen vor einer Vielzahl von Herausforderungen und Problemkla
 \item \textbf{Lastverteilungs- und Ressourcenverwaltungsprobleme}: Verteilte Systeme müssen die Ressourcen, einschließlich Rechenleistung, Speicher und Netzwerkbandbreite, effizient verwalten und verteilen. Dies kann durch Lastverteilungsalgorithmen und Ressourcenverwaltungssysteme erreicht werden.
 \end{itemize}
 
-Die effektive Bewältigung dieser und anderer Problemklassen in verteilten Systemen ist eine komplexe Aufgabe, die eine sorgfältige Planung, ein gutes Design und eine effektive Implementierung erfordert. Dieses Kapitel versucht den Fokus weniger auf die Algorithmik zu legen und gibt daher eher Einblicke in die grundsätzliche Konstruktion und die damit verbundenen Eigenschaften der Algorithmen.
+Die effektive Bewältigung dieser und anderer Problemklassen in verteilten Systemen ist eine komplexe Aufgabe, die eine sorgfältige Planung, ein gutes Design und eine effektive Implementierung erfordert. Dieses Kapitel versucht, den Fokus weniger auf die Algorithmik zu legen und gibt daher eher Einblicke in die grundsätzliche Konstruktion und die damit verbundenen Eigenschaften der Algorithmen.
 
 \subsection{Paralleles Rechnen}
 
@@ -44,7 +44,7 @@ Ein RDD ist eine Sammlung von Elementen, die über die Knoten eines Clusters ver
 
 Apache Spark unterstützt auch Operationen, die über Map und Reduce hinausgehen, wie z.B. Sortieren, Gruppieren und Joinen von Daten. Darüber hinaus bietet es Unterstützung für maschinelles Lernen, Graphverarbeitung und Streamverarbeitung durch zusätzliche Bibliotheken.
 \\\\
-Aber es weiter wichtig zu verstehen, dass nicht alle Algorithmen gut für die Parallelisierung geeignet sind.  So ist die Berechnung des größten gemeinsamen Teilers (ggT), nicht so offensichtlich parallelisierbar. Der ggt ist ein sehr klassisches Beispiel für diese Klasse von Herausforderungen.
+Aber es weiter wichtig zu verstehen, dass nicht alle Algorithmen gut für die Parallelisierung geeignet sind.  So ist die Berechnung des größten gemeinsamen Teilers (ggT), nicht so offensichtlich parallelisierbar. Der ggT ist ein sehr klassisches Beispiel für diese Klasse von Herausforderungen.
 \\\\
 Der ggT von zwei Zahlen ist die größte Zahl, die beide Zahlen ohne Rest teilt. Ein weit verbreiteter Algorithmus zur Berechnung des ggT ist der euklidische Algorithmus, der auf einer Reihe von Divisionen basiert. Dieser Algorithmus ist schwer zu parallelisieren, da jede Division auf dem Ergebnis der vorherigen basiert. Es gibt jedoch einige Ansätze zur Parallelisierung. In diesem Beispiel erfolgt die Parallelisierung auf der Ebene der Paare und nicht auf der Ebene der einzelnen ggT-Berechnung. Es ist wichtig zu beachten, dass die Kommunikation zwischen den Knoten auch Zeit kostet, und diese Zeit sollte bei der Beurteilung der Gesamtleistung des verteilten Systems berücksichtigt werden.
 \\\\
@@ -76,7 +76,7 @@ Der Master-Knoten würde dann die Ergebnisse empfangen und eine Liste der ggT er
 \\\\
 Die Berechnung des größten gemeinsamen Teilers (ggT) für eine große Menge von Zahlpaaren könnte auch mit MapReduce in Hadoop umgesetzt werden. Da die Map- und Reduce-Schritte würden allerdings in diesem Fall nicht auf die traditionelle Weise verwendet, da die ggT-Berechnung nicht leicht in unabhängige Map- und Reduce-Operationen zerlegt werden kann.
 \\\\
-Stattdessen wirt der Map-Schritt verwendet, um die ggT-Berechnung für jedes Paar durchzuführen, und den Reduce-Schritt, um die Ergebnisse zu sammeln. Hier ist ein Pseudocode, der zeigt, wie das gemacht werden könnte:
+Stattdessen wird der Map-Schritt verwendet, um die ggT-Berechnung für jedes Paar durchzuführen, und den Reduce-Schritt, um die Ergebnisse zu sammeln. Hier ist ein Pseudocode, der zeigt, wie das gemacht werden könnte:
 \begin{lstlisting}[caption={Map- und Reduce},captionpos=b,label={lst:map_e}]
 public class GgtBerechnung {
 
@@ -142,7 +142,7 @@ Dazu gehört die Überwachung der Knoten, um sicherzustellen, dass sie funktioni
 
 Im Folgenden werden auch die Punkte besprochen, die zur Konsensbildung und Fehlertoleranz in zentralisierten oder dezentralisierten Ansätzen umgesetzt werden können.
 \\\\
-Wie auch immer, die Wahl des richtigen Ansatzes zur Parallelisierung kann stark von der Art des Problems, den verfügbaren Ressourcen und der spezifischen Umgebung abhängen. Die Entwicklung und Optimierung paralleler Algorithmen in verteilten Systemen erfordert ein tiefes Verständnis der Algorithmen, der Systemarchitektur und der zugrunde liegenden Technologien.
+Die Wahl des richtigen Ansatzes zur Parallelisierung kann stark von der Art des Problems, den verfügbaren Ressourcen und der spezifischen Umgebung abhängen. Die Entwicklung und Optimierung paralleler Algorithmen in verteilten Systemen erfordert ein tiefes Verständnis der Algorithmen, der Systemarchitektur und der zugrunde liegenden Technologien.
 
 Letztlich ist das Ziel der Parallelisierung in verteilten Systemen, die Gesamtleistung zu steigern und die Berechnungszeit zu reduzieren. Dies kann erreicht werden, indem Aufgaben aufgeteilt und gleichzeitig auf mehreren Knoten ausgeführt werden. Obwohl dies eine Herausforderung sein kann, bietet es auch eine großartige Gelegenheit, die Leistungsfähigkeit moderner Computer und Netzwerke voll auszuschöpfen.
 
@@ -199,7 +199,7 @@ Die grundlegenden Anforderungen für einen Konsensalgorithmus sind:
 \item Terminierung: Alle nicht fehlerhaften Knoten müssen schließlich eine Entscheidung treffen.
 \item Validität: Wenn alle Knoten denselben anfänglichen Wert haben, dann müssen sie sich auf diesen Wert einigen.
 \end{itemize}
-Die bekanntesten Konsensalgorithmen sind Paxos, Raft und Zab (ZooKeeper Atomic Broadcast). Paxos, von Leslie Lamport entworfen, ist bekannt für seine Korrektheit, aber auch für seine Komplexität. Raft wurde entwickelt, um einen einfacheren, leichter zu verstehenden Konsensalgorithmus zu bieten, der dennoch die gleiche Leistung und Korrektheit wie Paxos bietet. Zab ist ein Konsensprotokoll, das speziell für ZooKeeper, ein Dienst für verteilte Koordination von Apache, entwickelt wurde.
+Die bekanntesten Konsensalgorithmen sind Paxos, Raft und ZAB (ZooKeeper Atomic Broadcast). Paxos, von Leslie Lamport entworfen, ist bekannt für seine Korrektheit, aber auch für seine Komplexität. Raft wurde entwickelt, um einen einfacheren, leichter zu verstehenden Konsensalgorithmus zu bieten, der dennoch die gleiche Leistung und Korrektheit wie Paxos bietet. ZAB ist ein Konsensprotokoll, das speziell für ZooKeeper, ein Dienst für verteilte Koordination von Apache, entwickelt wurde.
 \\\\
 Bevor Paxos, Raft und Co. im Detail diskutiert werden sind noch ein paar Vorarbeiten mit Algorithmen zu erledigen, die notwendige Wahlen realisieren oder Ordnung etablieren.
 
@@ -233,11 +233,11 @@ Mehr als Raft ist Paxos bekannt für seine Robustheit und Flexibilität. Es wurd
 \\\\
 Es muss einfach nochmal zur Verdeutlichung festgestellt werden muss, Raft erreicht die Einfachheit, indem es einige der Komplexitäten von Paxos beseitigt, wie die Tatsache, dass jeder Knoten sowohl als Antragsteller, Akzeptor und Lerner fungieren kann. In Raft gibt es stattdessen klare Rollenverteilungen: es gibt immer einen Leader, der für die Durchführung der Konsensoperationen verantwortlich ist, und die anderen Knoten sind Follower.
 
-Daher könnte man argumentieren, dass Paxos besser für Szenarien geeignet ist, in denen Robustheit und Flexibilität bei der Bewältigung von Netzwerk- und Knotenausfällen von größter Bedeutung sind. RAFT hingegen könnte in Situationen bevorzugt werden, in denen die Einfachheit der Implementierung und Wartung wichtiger und mit stabilen bekannten Systemen zu rechnen ist.
+Daher könnte man argumentieren, dass Paxos besser für Szenarien geeignet ist, in denen Robustheit und Flexibilität bei der Bewältigung von Netzwerk- und Knotenausfällen von größter Bedeutung sind. Raft hingegen könnte in Situationen bevorzugt werden, in denen die Einfachheit der Implementierung und Wartung wichtiger und mit stabilen bekannten Systemen zu rechnen ist.
 \\\\
 Eine sehr praxisbezogene Lösung ist in diesem Kontext, das bereits eingeführte Protokoll ZAB. ZAB ist wie erwähnt speziell für ZooKeeper entworfen und optimiert. Es ist darauf ausgerichtet, eine zuverlässige und geordnete Zustandsaktualisierung in einer Replikationsgruppe zu gewährleisten. Es ist im Wesentlichen ein Zwei-Phasen-Commit-Protokoll mit einer Führungsfindungsphase, die beim Start oder nach dem Ausfall eines Leaders ausgeführt wird.
 
-ZAB zeigt nochmals was die Optimierung eines Protokolls auf einen Anwendungsfall bewirken kann. Im Gegensatz zu ZAB sind Raft und Paxos allgemeinere Protokolle, welche in einer Vielzahl von Systemen und Anwendungsfällen eingesetzt werden kann. Sie sind flexibler und können in verschiedenen Szenarien arbeiten, in denen Netzwerkkommunikation unzuverlässig und asynchron ist. Zab ist aber für den angestrbten Anwendungsfall besser saklierend und optimiert als Raft oder Paxos.
+ZAB zeigt nochmals was die Optimierung eines Protokolls auf einen Anwendungsfall bewirken kann. Im Gegensatz zu ZAB sind Raft und Paxos allgemeinere Protokolle, welche in einer Vielzahl von Systemen und Anwendungsfällen eingesetzt werden können. Sie sind flexibler und können in verschiedenen Szenarien arbeiten, in denen Netzwerkkommunikation unzuverlässig und asynchron ist. ZAB ist aber für den angestrbten Anwendungsfall besser saklierend und optimiert als Raft oder Paxos.
 
 Der optimierte Anwendungsfall ist Apache ZooKeeper. Apache ZooKeeper ist ein verteiltes Koordinationsdienst-Tool, das dazu dient, verteilte Anwendungen zu verwalten. Es ermöglicht Entwicklern, Prozesse innerhalb verteilter Systeme durch ein einfaches und erprobtes Protokoll zu synchronisieren und zu koordinieren.
 Typische Dienste im Kontext von Zookeeper können sein:
@@ -248,7 +248,7 @@ Typische Dienste im Kontext von Zookeeper können sein:
 \item Leader-Wahl
 \item Verteilte Warteschlange
 \end{itemize}
-Diese Liste ist nich vollständig, gibt aber einen guten Einblick in die Leistungsfähigkeit. Zookeeper ist nicht geegnet für große Datenmengen. Auch hochfrequente Schreibvorgänge sind ein Problem, wie auch Transiente Zustände (Alle Zustände werden auf Platte persistiert).
+Diese Liste ist nich vollständig, gibt aber einen guten Einblick in die Leistungsfähigkeit. Zookeeper ist nicht geegnet für große Datenmengen. Auch hochfrequente Schreibvorgänge sind ein Problem, wie auch transiente Zustände (Alle Zustände werden auf Platte persistiert).
 
 
 \subsubsection{Paxos}\footnote{\url{https://www.youtube.com/watch?v=JQss0uQUc6o}, \url{https://www.youtube.com/watch?v=d7nAGI_NZPk}}
@@ -262,7 +262,7 @@ Hier ist eine vereinfachte Beispielsequenz \ref{fig:simple-paxos}, die den Paxos
 \begin{figure}[htp!]
   \centering
   \includegraphics[width=0.55\textwidth]{fig/uml/paxos-default}
-  \caption{Einfach Paxos als Beispielsequenze}
+  \caption{Einfaches Paxos als Beispielsequenze}
   \label{fig:simple-paxos}
 \end{figure}
 In diesem Diagramm sendet der Antragsteller (Proposer) zuerst eine Prepare-Anfrage an alle Akzeptoren. Die Akzeptoren antworten mit einem Versprechen (Promise). Dann sendet der Antragsteller eine Accept-Anfrage an alle Akzeptoren. Schließlich antworten die Akzeptoren mit einer Accepted-Nachricht, die signalisiert, dass sie den Vorschlag akzeptiert haben.
@@ -295,17 +295,16 @@ In diesem Diagramm startet Proposer1 nach dem Ausfall eine neue Runde mit einer 
 
 
 
-\subsubsection{RAFT}\footnote{\url{https://www.youtube.com/watch?v=ro2fU8_mr2w}}
+\subsubsection{Raft}\footnote{\url{https://www.youtube.com/watch?v=ro2fU8_mr2w}}
+Das Raft-Protokoll ist ein Konsensalgorithmus, der als Alternative zu Paxos entwickelt wurde. Raft wurde entworfen, um die gleiche Funktionalität wie Paxos zu bieten, aber mit einem stärkeren Fokus auf Verständlichkeit und einfacher Implementierung.
 
-Das RAFT-Protokoll ist ein Konsensalgorithmus, der als Alternative zu Paxos entwickelt wurde. RAFT wurde entworfen, um die gleiche Funktionalität wie Paxos zu bieten, aber mit einem stärkeren Fokus auf Verständlichkeit und einfacher Implementierung.
-
-Die wesentlichen Sequenzen in RAFT umfassen folgende Phasen:
+Die wesentlichen Sequenzen in Raft umfassen folgende Phasen:
 \begin{itemize}
-\item Wahl des Leaders: In RAFT gibt es immer einen Leader, der für die Koordination der Replikation verantwortlich ist. Wenn ein Knoten feststellt, dass es keinen Leader gibt (zum Beispiel, weil es keine Heartbeats vom Leader empfängt), beginnt es eine Wahl, indem es eine Anfrage zur Wahl an alle anderen Knoten sendet. Die Knoten stimmen für den ersten Kandidaten, der eine Anfrage sendet, und der Kandidat, der die meisten Stimmen erhält, wird zum neuen Leader.
+\item Wahl des Leaders: In Raft gibt es immer einen Leader, der für die Koordination der Replikation verantwortlich ist. Wenn ein Knoten feststellt, dass es keinen Leader gibt (zum Beispiel, weil es keine Heartbeats vom Leader empfängt), beginnt es eine Wahl, indem es eine Anfrage zur Wahl an alle anderen Knoten sendet. Die Knoten stimmen für den ersten Kandidaten, der eine Anfrage sendet, und der Kandidat, der die meisten Stimmen erhält, wird zum neuen Leader.
 \item Log-Replikation: Nachdem ein Leader gewählt wurde, beginnt der Prozess der Log-Replikation. Der Leader nimmt Anfragen von Clients entgegen, fügt sie seinem Log hinzu und sendet dann AppendEntries-Anfragen an die Follower, um das Log zu replizieren. Die Follower antworten dem Leader, wenn sie die Einträge erfolgreich repliziert haben.
 \item Commit: Sobald der Leader feststellt, dass eine Mehrheit der Follower einen Log-Eintrag repliziert hat, erklärt er den Eintrag für committed und wendet den Eintrag auf seinen Zustand an. Der Leader informiert die Follower über committed Einträge durch nachfolgende AppendEntries-Anfragen.
 \end{itemize}
-Um diese Sequenzen in einer Sequenz zu illustrieren, wurde  das Diagramm XY angefertigt. In diesem Diagramm wird der Prozess der Leaderwahl, Log-Replikation und Commit in RAFT dargestellt.
+%Um diese Sequenzen in einer Sequenz zu illustrieren, wurde  das Diagramm XY angefertigt. In diesem Diagramm wird der Prozess der Leaderwahl, Log-Replikation und Commit in Raft dargestellt.
 
 
 \subsubsection{ZAB}
@@ -327,10 +326,10 @@ In ZooKeeper sind die Garantien, die durch ZAB ermöglicht werden, sequenziell k
 \\\\
 ZooKeeper ermöglicht auch zeitnahe Operationen, wie das Erstellen, Löschen und Abrufen von Daten, sowie das Abrufen von Kindknoten. Diese Operationen werden in einem hierarchischen Namensraum ausgeführt, der es Entwicklern ermöglicht, Ressourcen auf eine strukturierte und organisierte Weise zu verwalten.
 
-ZooKeeper bietet eine Vielzahl von Funktionen, die für verteilte Systeme tels unerlässlich sind, wie z.B.:
+ZooKeeper bietet eine Vielzahl von Funktionen, die für verteilte Systeme teils unerlässlich sind, wie z.B.:
 \begin{itemize}
 \item Locks: ZooKeeper kann verwendet werden, um exklusive Sperren in einem verteilten System zu implementieren. Dies ist nützlich, wenn nur ein Prozess zu einem bestimmten Zeitpunkt eine Ressource verwenden darf.
-\item Leader Election: In einigen verteilten Systemen kann es nötig sein, einen Prozess auszuwählen, der bestimmte Aufgaben ausführt. ZooKeeper kann verwendet werden, um diesen Leader auf einer fairen und transparenten Weise zu wählen.
+\item Leader Election: In einigen verteilten Systemen kann es nötig sein, einen Prozess auszuwählen, der bestimmte Aufgaben ausführt. ZooKeeper kann verwendet werden, um diesen Leader auf eine faire und transparente Weise zu wählen.
 \item Configuration Management: ZooKeeper kann verwendet werden, um Konfigurationsinformationen auf einer zentralen Stelle zu speichern und zu verteilen. Dies ist nützlich, um sicherzustellen, dass alle Prozesse in einem verteilten System die gleiche Konfiguration verwenden.
 \end{itemize}
 Das ZAB-Protokoll spielt dabei eine Schlüsselrolle, da es die konsistente und zuverlässige Ausführung dieser Funktionen ermöglicht. Durch die Verwendung von Leader-basiertem Multicast und der Gewährleistung von totaler und kausaler Ordnung stellt ZAB sicher, dass alle Prozesse in einem verteilten System eine konsistente Sicht auf die Daten haben.
@@ -354,7 +353,7 @@ Die Schlussfolgerungen des FLP-Theorems haben die Forschung in mehrere Richtunge
 \begin{itemize}
 \item Teilsynchrone Systeme: In der Praxis sind Systeme selten völlig asynchron. Es gibt oft zumindest einige Grenzen für die Zeit, die Prozesse und Nachrichten benötigen. Dies hat zur Entwicklung von Konsensalgorithmen für teilsynchrone Systeme geführt, in denen bestimmte zeitliche Einschränkungen gelten, auch wenn sie recht locker sein können.
 \item Randomisierte Algorithmen: Während das FLP-Ergebnis für deterministische Algorithmen gilt, ist es möglich, Konsens in einem asynchronen System zu erreichen, wenn wir Zufallszahlen einsetzen. Ein Beispiel für einen solchen Algorithmus ist der Randomized Consensus Algorithmus.
-\item Praktische Konsensalgorithmen: Trotz des FLP-Unmöglichkeitsergebnisses wurden mehrere praktische Konsensalgorithmen für verteilte Systeme entwickelt, darunter Paxos, Raft und Zab. Diese Algorithmen sind entworfen, um in realen Systemen gut zu funktionieren, auch wenn sie in extrem asynchronen Szenarien oder bei bestimmten Arten von Netzwerkpartitionen scheitern können.
+\item Praktische Konsensalgorithmen: Trotz des FLP-Unmöglichkeitsergebnisses wurden mehrere praktische Konsensalgorithmen für verteilte Systeme entwickelt, darunter Paxos, Raft und ZAB. Diese Algorithmen sind entworfen, um in realen Systemen gut zu funktionieren, auch wenn sie in extrem asynchronen Szenarien oder bei bestimmten Arten von Netzwerkpartitionen scheitern können.
 \end{itemize}
 Es ist wichtig zu beachten, dass das FLP-Unmöglichkeitsergebnis spezifisch für asynchrone, unzuverlässige Systeme gilt. In einem synchronen System, in dem es feste Obergrenzen für die Zeit gibt, die Prozesse und Nachrichten benötigen, ist es möglich, einen Konsens zu erreichen, selbst wenn einige Prozesse abstürzen können. Gleiches gilt für asynchrone Systeme, in denen alle Prozesse zuverlässig sind. Das FLP-Ergebnis zeigt jedoch, dass die Kombination von Asynchronität und Unzuverlässigkeit zu grundlegenden Schwierigkeiten bei der Erzielung eines Konsenses führt.
 \\\\
@@ -387,7 +386,7 @@ Die Fähigkeit, byzantinische Fehler zu tolerieren, ist besonders wichtig in off
 Die Koordination in verteilten Systemen ist eine wichtige Herausforderung, da einzelne Komponenten unabhängig voneinander agieren und Informationen austauschen müssen, um gemeinsame Ziele zu erreichen. Es gibt verschiedene Ansätze und Techniken, um die Koordination zu ermöglichen. Im Folgenden wird eine Einführung in die Koordination mittels Algorithmen geben:
 
 \subsubsection{Waves}
-Wave-Algorithmen sind eine Klasse von Algorithmen in der Graphentheorie und werden oft in verteilten Systemen eingesetzt. Sie zeichnen sich dadurch aus, dass sie Informationen über Graphen (oder Netzwerke) verteilen, ähnlich wie Wellen sich in einem physischen Medium ausbreiten. Diese Algorithmen werden typischerweise zur Lösung von Problemen wie dem Erkennen von Knoten, der Synchronisation von Prozessen, der Suche nach kürzesten Pfaden, der Auffindung von Toten Knoten und der Bestimmung von Grapheneigenschaften eingesetzt.
+Wave-Algorithmen sind eine Klasse von Algorithmen in der Graphentheorie und werden oft in verteilten Systemen eingesetzt. Sie zeichnen sich dadurch aus, dass sie Informationen über Graphen (oder Netzwerke) verteilen, ähnlich wie Wellen sich in einem physischen Medium ausbreiten. Diese Algorithmen werden typischerweise zur Lösung von Problemen wie dem Erkennen von Knoten, der Synchronisation von Prozessen, der Suche nach kürzesten Pfaden, der Auffindung von toten Knoten und der Bestimmung von Grapheneigenschaften eingesetzt.
 
 Die Grundidee bei Wave-Algorithmen ist, dass ein Knoten eine \enquote{Welle} (in Form einer Nachricht) an seine Nachbarn sendet und diese Welle sich dann durch den Graphen ausbreitet, bis alle Knoten erreicht sind. Während dieser Ausbreitung kann jeder Knoten, der die Welle erhält, eine bestimmte Aktion ausführen, wie zum Beispiel seinen Zustand aktualisieren oder Informationen an die Welle anhängen.
 \\\\
@@ -405,7 +404,7 @@ Wave-Algorithmen können in einer Vielzahl von Anwendungen eingesetzt werden, ei
 \\\\
 Traversal-, Tree- und Echo-Algorithmen sind spezielle Klassen von Wave-Algorithmen, die in verteilten Systemen eingesetzt werden, um bestimmte Aufgaben auszuführen. Hier ist eine kurze Beschreibung und ein Vergleich der drei:
 \begin{itemize}
-\item Traversal-Algorithmus (Graph-Durchlauf-Algorithmus): \\Traversal-Algorithmen werden verwendet, um alle Knoten in einem Graphen zu besuchen. Das bekannteste Beispiel für diese Art von Algorithmen sind Tiefensuche (Depth-First Search, DFS) und Breitensuche (Breadth-First Search, BFS). Beide Algorithmen beginnen bei einem bestimmten Knoten und besuchen alle anderen Knoten durch \enquote{Wandern} entlang der Kanten des Graphen. DFS macht dies, indem es so weit wie möglich entlang jeder Verzweigung geht, bevor es zurückkehrt, während BFS alle Nachbarn eines Knotens besucht, bevor es zu den Nachbarn der Nachbarn geht. Diese Algorithmen sind hilfreich bei Aufgaben wie dem Finden eines Pfades zwischen zwei Knoten, dem Testen, ob ein Graph zusammenhängend ist, oder dem Finden von Kreisen in einem Graphen.
+\item Traversal-Algorithmus (Graph-Durchlauf-Algorithmus): \\Traversal-Algorithmen werden verwendet, um alle Knoten in einem Graphen zu besuchen. Die bekanntesten Beispiele für diese Art von Algorithmen sind Tiefensuche (Depth-First Search, DFS) und Breitensuche (Breadth-First Search, BFS). Beide Algorithmen beginnen bei einem bestimmten Knoten und besuchen alle anderen Knoten durch \enquote{Wandern} entlang der Kanten des Graphen. DFS macht dies, indem es so weit wie möglich entlang jeder Verzweigung geht, bevor es zurückkehrt, während BFS alle Nachbarn eines Knotens besucht, bevor es zu den Nachbarn der Nachbarn geht. Diese Algorithmen sind hilfreich bei Aufgaben wie dem Finden eines Pfades zwischen zwei Knoten, dem Testen, ob ein Graph zusammenhängend ist, oder dem Finden von Kreisen in einem Graphen.
 \item Tree-Algorithmus (Baumalgorithmus): \\Tree-Algorithmen sind eine spezielle Klasse von Traversal-Algorithmen, die dazu dienen, einen Spannbaum (einen Baum, der alle Knoten des Graphen verbindet, aber keine Kreise enthält) aus einem Graphen zu erzeugen. Ein bekanntes Beispiel ist der Algorithmus von Prim oder Kruskal, der verwendet wird, um einen minimalen Spannbaum zu erzeugen. Diese Art von Algorithmen kann besonders nützlich sein in Netzwerken, um redundante Verbindungen zu entfernen und dennoch sicherzustellen, dass alle Knoten miteinander verbunden sind.
 \item Echo-Algorithmus: \\Der Echo-Algorithmus ist ein spezieller Wave-Algorithmus, der dazu dient, Informationen über ein verteiltes System zu sammeln und an einen zentralen Knoten zurückzusenden. Ein Knoten sendet eine Anfrage an alle seine Nachbarn und wartet auf deren Antworten. Wenn ein Knoten eine Anfrage erhält, sendet er die Anfrage weiter an alle seine Nachbarn und wartet auf deren Antworten. Sobald ein Knoten alle Antworten von seinen Nachbarn erhalten hat, verarbeitet er die Antworten und sendet eine einzige Antwort an den Knoten, von dem er die ursprüngliche Anfrage erhalten hat. Dieser Algorithmus wird oft verwendet, um Informationen wie die Gesamtzahl der Knoten in einem Netzwerk, den kürzesten Pfad zu einem bestimmten Knoten oder die Verfügbarkeit von Ressourcen zu sammeln.
 \end{itemize}
@@ -439,7 +438,7 @@ Es ist wichtig zu beachten, dass dieser Algorithmus auch sicherstellt, dass der 
 \begin{itemize}
 \item Deadlock-Erkennung: Snapshot-Algorithmen können verwendet werden, um Deadlocks in verteilten Systemen zu erkennen. Durch die Erfassung des globalen Zustands des Systems kann ein Prozess bestimmen, ob es eine Zyklusabhängigkeit zwischen Prozessen gibt, was auf einen Deadlock hindeuten würde.
 \item Globales Checkpointing: In verteilten Systemen kann ein globaler Schnappschuss dazu verwendet werden, einen Zustand zu erzeugen, zu dem das System nach einem Ausfall zurückkehren kann. Dies ist nützlich, um die Ausfallerholung zu erleichtern und den Datenverlust zu minimieren.
-\item Eventuelle Konsistenz: Snapshot-Algorithmen können verwendet werden, um sicherzustellen, dass eine verteilte Datenbank im Laufe der Zeit eine konsistente Ansicht der Daten erreicht. Mit anderen Worten, sie können dazu beitragen, sicherzustellen, dass alle Repliken eines Datenelements schließlich denselben Wert haben.
+\item Sich annähernde Konsistenz: Snapshot-Algorithmen können verwendet werden, um sicherzustellen, dass eine verteilte Datenbank im Laufe der Zeit eine konsistente Ansicht der Daten erreicht. Mit anderen Worten, sie können dazu beitragen, sicherzustellen, dass alle Repliken eines Datenelements schließlich denselben Wert haben.
 \item Monitoring und Debugging: In verteilten Systemen kann es eine Herausforderung sein, die Interaktionen zwischen den verschiedenen Prozessen zu verstehen, insbesondere wenn Probleme auftreten. Durch die Aufnahme eines globalen Schnappschusses des Systems zu einem bestimmten Zeitpunkt können Entwickler oder Systemadministratoren den Zustand jedes Prozesses und die Nachrichten, die zwischen den Prozessen ausgetauscht werden, überprüfen. Dies kann dabei helfen, das Problem zu identifizieren und zu beheben.
 \item Simulation von verteilten Systemen: Snapshot-Algorithmen können auch in der Simulation von verteilten Systemen nützlich sein. Durch die Aufnahme von Schnappschüssen des Systems zu verschiedenen Zeitpunkten können Wissenschaftler das Verhalten des Systems unter verschiedenen Bedingungen analysieren und besser verstehen.
 \item Konsistenz in verteilten Datenbanken: Snapshot-Algorithmen können dazu beitragen, konsistente Lesevorgänge in verteilten Datenbanken zu ermöglichen, indem sie eine konsistente Ansicht der Datenbank zu einem bestimmten Zeitpunkt erzeugen. Dies ist besonders wichtig in Systemen, die eine hohe Verfügbarkeit und Partitionstoleranz erfordern.
@@ -524,9 +523,9 @@ Es gibt viele Algorithmen zur Durchführung von Wahlen in verteilten Systemen. D
 \item Bully Algorithmus: In diesem Algorithmus beginnt jeder Knoten, der erkennt, dass der Koordinator ausgefallen ist, eine Wahl. Der Knoten sendet eine Wahlmeldung an alle anderen Knoten mit höheren IDs. Wenn er keine Antwort erhält, erklärt er sich selbst zum Koordinator. Wenn er jedoch eine Antwort von einem Knoten mit einer höheren ID erhält, wird er zum \enquote{Unterdrückten} und wartet auf eine Nachricht von dem Knoten, der sich zum Koordinator erklärt.
 \item Tree Election Algorithmus: Dieser Algorithmus verwendet eine Baumstruktur, um die Wahl durchzuführen. Der Baum ist so organisiert, dass der Knoten mit der höchsten ID an der Wurzel steht. Wenn ein Knoten feststellt, dass der Koordinator ausgefallen ist, sendet er eine Wahlmeldung an den Wurzelknoten. Der Wurzelknoten wählt dann den Knoten mit der höchsten ID als neuen Koordinator.
 \item Echo-Algorithmus mit Ausnahmen: Der Echo-Algorithmus ist ein grundlegender Algorithmus für verteilte Systeme, der verwendet werden kann, um Informationen in einem Netzwerk zu verbreiten oder eine globale Operation durchzuführen. In Bezug auf Wahlen könnten \enquote{Ausnahmen} Knoten sein, die von der Wahl ausgeschlossen sind, möglicherweise aufgrund von Ausfällen oder weil sie kürzlich als Koordinatoren gedient haben und daher von der nächsten Wahl ausgeschlossen sind.
-\item Minimum Spanning Tree (MST): Dieser Algorithmus wird häufig in Netzwerkdesign und -routing verwendet, kann aber auch für Wahlen verwendet werden. Der MST verbindet alle Knoten in einem Netzwerk mit der minimalen Gesamtverbindungskosten. Für Wahlen könnte der MST verwendet werden, um eine effiziente Nachrichtenverbreitung für den Wahlprozess zu ermöglichen. Der MST könnte basierend auf den Knoten-IDs oder einem anderen Kriterium erstellt werden, und der Knoten an der Wurzel des MST könnte als Koordinator ausgewählt werden.
+\item Minimum Spanning Tree (MST): Dieser Algorithmus wird häufig in Netzwerkdesign und -routing verwendet, kann aber auch für Wahlen verwendet werden. Der MST verbindet alle Knoten in einem Netzwerk mit minimalen Gesamtverbindungskosten. Für Wahlen könnte der MST verwendet werden, um eine effiziente Nachrichtenverbreitung für den Wahlprozess zu ermöglichen. Der MST könnte basierend auf den Knoten-IDs oder einem anderen Kriterium erstellt werden, und der Knoten an der Wurzel des MST könnte als Koordinator ausgewählt werden.
 \end{itemize}
-Im folgenden soll eine Beispiel an IEEE 1394 diskutiert werden. Das IEEE 1394 ist ein serieller Busstandard, der oft zur Datenübertragung und Kommunikation zwischen Computern und digitalen Geräten wie Camcordern und digitalen Kameras verwendet wird. Es ist auch als FireWire bekannt und wurde von Apple Inc. entwickelt.
+Im Folgenden soll ein Beispiel mit Bezug auf IEEE 1394 diskutiert werden. Das IEEE 1394 ist ein serieller Busstandard, der oft zur Datenübertragung und Kommunikation zwischen Computern und digitalen Geräten wie Camcordern und digitalen Kameras verwendet wird. Es ist auch als FireWire bekannt und wurde von Apple Inc. entwickelt.
 
 Die IEEE 1394-Spezifikation enthält einen spezifischen Algorithmus zur Leader-Election oder zur Bestimmung des \enquote{Bus Managers}. Der Bus Manager ist das Gerät, das Kontroll- und Verwaltungsaufgaben auf dem Bus übernimmt. Dies kann zum Beispiel das Aufrechterhalten der Topologie-Map, das Management von Bandbreitenzuweisungen oder das Initiieren von Bus-Resets einschließen. Der Algorithmus zur Wahl des Bus Managers in IEEE 1394 funktioniert wie folgt:
 \begin{itemize}
@@ -535,11 +534,11 @@ Die IEEE 1394-Spezifikation enthält einen spezifischen Algorithmus zur Leader-E
 \item Wahl des Bus Managers: Das Gerät mit den höchsten Fähigkeiten wird zum Bus Manager gewählt. Bei einem Gleichstand (zwei oder mehr Geräte mit gleichen Fähigkeiten) wird das Gerät mit der höchsten physikalischen Adresse gewählt.
 \item Kommunikation der Wahl: Das gewählte Gerät sendet eine Nachricht an alle anderen Geräte auf dem Bus, um seine Rolle als Bus Manager zu kommunizieren.
 \end{itemize}
-Wenn der  Bully-Algorithmus eher auf die Identität der Knoten (ihre IDs) abzielt, zielt der IEEE 1394 Algorithmus auf die Fähigkeiten und Ressourcen der Knoten ab. Beide Algorithmen versuchen, einen Leader in einem verteilten System zu wählen, aber sie tun dies auf unterschiedliche Weise und könnten in verschiedenen Szenarien geeignet sein.
+Während der  Bully-Algorithmus eher auf die Identität der Knoten (ihre IDs) abzielt, zielt der IEEE 1394 Algorithmus auf die Fähigkeiten und Ressourcen der Knoten ab. Beide Algorithmen versuchen, einen Leader in einem verteilten System zu wählen, aber sie tun dies auf unterschiedliche Weise und könnten in verschiedenen Szenarien geeignet sein.
 \\\\
 Die \textbf{Unmöglichkeit der Wahl in anonymen Ringen} ist ein bekanntes Problem in verteilten Systemen. Es bezieht sich auf die Situation, in der alle Knoten in einem Ring identisch und ununterscheidbar sind (anonym) und keine eindeutige ID haben. In solchen Fällen ist es unmöglich, einen eindeutigen Leader oder Koordinator zu wählen, da es keine Möglichkeit gibt, einen Knoten von einem anderen zu unterscheiden.
 
-Die grundlegende Idee hinter der Unmöglichkeit der Wahl in anonymen Ringen ist, dass jeder Algorithmus, der versucht, eine Wahl durchzuführen, in einem symmetrischen Zustand enden muss, in dem alle Knoten denselben Zustand haben. Da alle Knoten identisch sind, gibt es keine Möglichkeit, einen Knoten auf eine Art und Weise zu brechen, die alle Knoten dazu bringen würde, übereinstimmend einen Leader zu wählen.
+Die grundlegende Idee hinter der Unmöglichkeit der Wahl in anonymen Ringen ist, dass jeder Algorithmus, der versucht, eine Wahl durchzuführen, in einem symmetrischen Zustand enden muss, in dem alle Knoten denselben Zustand haben. Da alle Knoten identisch sind, gibt es keine Möglichkeit, einen Knoten auf eine Art und Weise zu berechnen, die alle Knoten dazu bringen würde, übereinstimmend einen Leader zu wählen.
 \\\\
 In synchronen Netzwerken mit begrenzten erwarteten Verzögerungen kann das Problem jedoch gelöst werden. Ein synchrones Netzwerk ist ein Netzwerk, in dem alle Operationen in vorhersehbaren und begrenzten Zeitschritten stattfinden. In solchen Netzwerken kann die Zeit als Unterscheidungsmerkmal verwendet werden, um einen Leader zu wählen.
 
@@ -547,7 +546,7 @@ Ein solcher Algorithmus könnte beispielsweise so aussehen: Jeder Knoten sendet 
 
 Dieser Algorithmus funktioniert, weil die begrenzten erwarteten Verzögerungen in einem synchronen Netzwerk garantieren, dass die Nachrichten in einer vorhersehbaren Reihenfolge ankommen. Es ist jedoch wichtig zu beachten, dass die tatsächliche Leistung dieses Algorithmus stark von den spezifischen Merkmalen des Netzwerks abhängen kann, einschließlich der Anzahl der Knoten, der Netzwerklatenz und der Zuverlässigkeit der Nachrichtenübermittlung.
 \\\\
-\textbf{Netzen mit begrenzter Verzögerung} bieten noch weiteren Algorithmenklassen Anwendung. Ein Beispiel sind \enquote{Bounded Delay Networks with Local Clocks}. \enquote{Bounded Delay Networks with Local Clocks} bezieht sich auf Netzwerkmodelle, in denen jedes Knoten (oder System) eine lokale Uhr hat und die Verzögerungen für die Übermittlung von Nachrichten im Netzwerk begrenzt (oder gebunden) sind. Hier sind die Hauptkonzepte, die für diese Ansätze erfolgreich umzusetzen sind:
+\textbf{Netze mit begrenzter Verzögerung} bieten noch weiteren Algorithmenklassen Anwendung. Ein Beispiel sind \enquote{Bounded Delay Networks with Local Clocks}. \enquote{Bounded Delay Networks with Local Clocks} bezieht sich auf Netzwerkmodelle, in denen jeder Knoten (oder System) eine lokale Uhr hat und die Verzögerungen für die Übermittlung von Nachrichten im Netzwerk begrenzt (oder gebunden) sind. Hier sind die Hauptkonzepte, die für diese Ansätze erfolgreich umzusetzen sind:
 \begin{itemize}
 \item Lokale Uhren: Jeder Knoten im Netzwerk hat eine eigene Uhr. Diese Uhren können unabhängig voneinander laufen und müssen nicht synchronisiert sein. Sie dienen als Zeitquelle für den jeweiligen Knoten und können verwendet werden, um die Reihenfolge von Ereignissen zu bestimmen, Zeitstempel zu erzeugen, Verzögerungen zu messen usw.
 \item Begrenzte Verzögerungen: In solchen Netzwerken ist die Zeit, die benötigt wird, um eine Nachricht von einem Knoten zum anderen zu übermitteln, begrenzt. Das bedeutet, dass es eine maximale Verzögerungszeit gibt, die nicht überschritten wird. Diese Eigenschaft ist besonders wichtig für bestimmte Algorithmen und Protokolle, die davon ausgehen, dass Nachrichten innerhalb einer bestimmten Zeit ankommen.
@@ -571,7 +570,7 @@ Die verschiedenen Synchronizer-Algorithmen von Awerbuch (Alpha, Beta und Gamma) 
 Es ist wichtig zu beachten, dass die Synchronizer-Algorithmen von Awerbuch keinen globalen Takt oder eine globale Synchronisation bieten. Stattdessen bieten sie eine Art \enquote{lokale} Synchronisation, die es den Knoten ermöglicht, ihre Aktionen in Bezug auf ihre unmittelbaren Nachbarn zu koordinieren. Dies kann für viele Anwendungen in verteilten Systemen nützlich sein, einschließlich Routing, Leader-Election, Konsensfindung und mehr.
 
 \subsubsection{Mutual Exclusion}
-Mutual Exclusion, oder wechselseitiger Ausschluss, ist ein Konzept in der Informatik, das bei der Programmierung von Mehrprozess- oder Mehrfadenanwendungen verwendet wird. Es bezieht sich auf die Anforderung, dass ein Prozess oder Thread einen kritischen Bereich betritt, während kein anderer Prozess diesen Bereich betritt. Dies ist nützlich, um Datenkonsistenz und -integrität in Mehrprozess- oder Mehrfadenanwendungen sicherzustellen.
+Mutual Exclusion, oder wechselseitiger Ausschluss, ist ein Konzept in der Informatik, das bei der Programmierung von Mehrprozess- oder Mehrfadenanwendungen verwendet wird. Es bezieht sich auf die Anforderung, dass ein Prozess oder Thread einen kritischen Bereich betritt, während kein anderer Prozess oder Thread diesen Bereich betritt. Dies ist nützlich, um Datenkonsistenz und -integrität in Mehrprozess- oder Mehrfadenanwendungen sicherzustellen.
 \\\\
 Es gibt verschiedene Algorithmen und Verfahren, die entwickelt wurden, um wechselseitigen Ausschluss zu erreichen. Hier sind einige davon:
 \begin{itemize}
@@ -594,13 +593,13 @@ Insgesamt gibt es keine \enquote{beste} Methode für alle Situationen. Der geeig
 \centering
 \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
 \hline
-\textbf{Name} & \textbf{Aufwand} & \textbf{Fairness} & \textbf{Overhead} & \textbf{Komplex} & \textbf{Sonstig} \\ 
+\textbf{Name} & \textbf{Aufwand} & \textbf{Fairness} & \textbf{Overhead} & \textbf{Komplex} & \textbf{Sonstiges} \\ 
 \hline
 Ricart-Agrawala & Hoch (Jeder Prozess muss mit jedem anderen kommunizieren) & Ja & Hoch & Mittel & Funktioniert gut in verteilter Umgebung \\ 
 \hline
 Raymond's Tree-Based & Mittel (Kommunikation entlang des Baumes) & Ja & Mittel & Hoch & Baum-struktur muss aufrechterhalten werden \\ 
 \hline
-Agrawal-El Abbadi & Gering (Nur Zeitstempel-Vergleich) & Könnte Problematisch sein bei Netzwerkverzögerungen & Gering & Mittel & Funktioniert gut in Hochanforderungsumgebungen \\ 
+Agrawal-El Abbadi & Gering (Nur Zeitstempel-Vergleich) & Könnte problematisch sein bei Netzwerkverzögerungen & Gering & Mittel & Funktioniert gut in Hochanforderungsumgebungen \\ 
 \hline
 Peterson's & Keine (Idealisiertes Modell) & Ja & Gering & Niedrig & Verwendet in theoretischen Modellen, selten in der Praxis \\ 
 \hline
@@ -646,9 +645,7 @@ Dissemination & Alle zu allen (über mehrere Runden) & Hoch & Sehr gut & Hoch (m
 Es sollte beachtet werden, dass der beste Algorithmus von vielen Faktoren abhängig ist, einschließlich der Anzahl der Prozesse, der Netzwerklatenz und anderen Aspekten der spezifischen Anwendung oder Umgebung.
 
 \subsubsection{Self-Stabilization}
-Die Selbststabilisierung ist ein Konzept in der verteilten Systemtheorie, das es Systemen ermöglicht, sich von beliebigen initialen Zuständen zu erholen und in einen korrekten Zustand zu übergehen, in dem sie korrekt funktionieren. Ein selbststabilisierendes System garantiert, dass es nach einer endlichen Anzahl von Schritten einen korrekten Zustand erreicht, unabhängig vom Anfangszustand.
-
-Jetzt gehen wir auf einige spezifische Algorithmen ein:
+Die Selbststabilisierung ist ein Konzept in der verteilten Systemtheorie, das es Systemen ermöglicht, sich von beliebigen initialen Zuständen zu erholen und in einen korrekten Zustand zu übergehen, in dem sie korrekt funktionieren. Ein selbststabilisierendes System garantiert, dass es nach einer endlichen Anzahl von Schritten einen korrekten Zustand erreicht, unabhängig vom Anfangszustand. Einige Ideen werden im Folgenden diskutiert:
 \begin{itemize}
 \item Dijkstra's Token Ring for Mutual Exclusion: Dies ist ein selbststabilisierender Algorithmus für gegenseitigen Ausschluss. In diesem Algorithmus sind die Prozesse in einem Ring organisiert und tauschen ein \enquote{Token} aus. Nur der Prozess, der das Token hat, darf den kritischen Bereich betreten. Der Token zirkuliert ständig um den Ring, so dass jeder Prozess schließlich die Möglichkeit hat, den kritischen Bereich zu betreten. Der Algorithmus stabilisiert sich selbst, indem er garantiert, dass es immer genau ein Token im System gibt, unabhängig vom Anfangszustand.
 \item Arora-Gouda Spanning Tree: Dieser Algorithmus erstellt einen aufspannenden Baum in einem Netzwerk. Der Baum beginnt mit einem einzigen Knoten (der Wurzel) und fügt nach und nach Knoten hinzu, bis alle Knoten im Baum enthalten sind. Der Algorithmus ist selbststabilisierend, da er sicherstellt, dass der Baum schließlich alle Knoten enthält und keine Zyklen aufweist, unabhängig vom Anfangszustand.
