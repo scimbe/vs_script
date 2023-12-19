@@ -294,15 +294,15 @@ Ein weiterer wichtiger Aspekt ist die Datenwiederherstellung nach Ausfällen. Ob
 \\\\
 Das folgende Beispiel soll die Funktionsweise verdeutlichen. Stellen Sie sich ein verteiltes Speichersystem vor, das eine Datei mit dem Inhalt \enquote{ABCDEFGH} speichern muss. Um Erasure Coding anzuwenden, teilen wir die Datei in vier Datenfragmente auf (k=4):
 \begin{itemize}
-\item Fragment 1: \enquote{AB}
-\item Fragment 2: \enquote{CD}
-\item Fragment 3: \enquote{EF}
-\item Fragment 4: \enquote{GH}
+\item Fragment 1 (F1): \enquote{AB}
+\item Fragment 2 (F2): \enquote{CD}
+\item Fragment 3 (F3): \enquote{EF}
+\item Fragment 4 (F4): \enquote{GH}
 \end{itemize}
 Wir verwenden ein (6,4)-Erasure-Coding-Schema, d.h. wir erstellen zwei zusätzliche Paritätsfragmente (n-k=2) auf Basis der ursprünglichen Datenfragmente. In diesem Beispiel verwenden wir ein vereinfachtes XOR-Verfahren, um die Paritätsfragmente zu generieren:
 \begin{itemize}
-\item Paritätsfragment 1: Fragment 1 XOR Fragment 2 = \enquote{AB} XOR \enquote{CD} = \enquote{P1}
-\item Paritätsfragment 2: Fragment 3 XOR Fragment 4 = \enquote{EF} XOR \enquote{GH} = \enquote{P2}
+\item Paritätsfragment 1 (P1): [berechnet aus F1, F2, F3, F4]
+\item Paritätsfragment 2 (P2): [berechnet aus F1, F2, F3, F4]
 \end{itemize}
 Wir haben nun insgesamt sechs Fragmente (n=6):
 \begin{itemize}
@@ -317,11 +317,11 @@ Diese Fragmente werden auf sechs verschiedene Knoten in unserem verteilten Speic
 \\\\
 Angenommen, Knoten 1 und Knoten 2, die Fragment 1 und Fragment 2 speichern, fallen aus. Trotzdem können wir die ursprüngliche Datei immer noch aus den verbleibenden Fragmenten rekonstruieren:
 \begin{itemize}
-\item Fragment 1: Paritätsfragment 1 XOR Fragment 2 = \enquote{P1} XOR \enquote{CD} = \enquote{AB}
-\item Fragment 2: Paritätsfragment 1 XOR Fragment 1 = \enquote{P1} XOR \enquote{AB} = \enquote{CD}
+\item F1 = rekonstruiert aus F3, F4, P1, P2
+\item F2 = rekonstruiert aus F3, F4, P1, P2
 \end{itemize}  
 Durch das Kombinieren von Fragment 1, Fragment 2, Fragment 3 und Fragment 4 erhalten wir die ursprüngliche Datei \enquote{ABCDEFGH} zurück.
-\\\\xxxx
+\\\\
 Dieses Beispiel zeigt, wie Erasure Coding die ursprünglichen Daten in kleinere Fragmente aufteilt und zusätzliche Paritätsinformationen erstellt, um eine effiziente Datenredundanz und Fehlertoleranz zu ermöglichen. Bitte beachten Sie, dass dies ein stark vereinfachtes Beispiel ist und reale Erasure-Coding-Verfahren wie Reed-Solomon-Codes komplexere mathematische Operationen verwenden, um die Paritätsinformationen zu generieren.
 
 \subsubsection{Fehlertoleranz durch Wiederherstellung}
@@ -412,12 +412,12 @@ Diese Art der Lastverteilung kann zu einer effizienteren Ressourcennutzung führ
 
 Alternative Umsetzungen könnten beispielsweise Least-Connection (der Knoten mit den wenigsten aktiven Verbindungen erhält die nächste Aufgabe), Weighted Distribution (jeder Knoten erhält Aufgaben entsprechend seinem zugewiesenen Gewicht, das seine Leistungsfähigkeit repräsentiert), oder Random Distribution (Aufgaben werden zufällig auf die Knoten verteilt) sein. Jede dieser Strategien hat ihre eigenen Vor- und Nachteile und kann je nach den spezifischen Anforderungen und Eigenschaften des verteilten Systems besser geeignet sein.
 
-\subsubsection{Anti-Entropy}
+\subsubsection{Anti-Entropy-(Repair)}
 Anti-Entropie ist ein Begriff, der in verteilten Systemen verwendet wird, um Verfahren zu beschreiben, die darauf abzielen, die Konsistenz zwischen verschiedenen Knoten oder Replikaten im System zu gewährleisten. Insbesondere bezieht sich Anti-Entropie auf Mechanismen, die dafür sorgen, dass alle Repliken eines bestimmten Datenelements den gleichen Zustand aufweisen, selbst in Anbetracht von Updates, Netzwerklatenzen oder Ausfällen.
 
 In der Theorie der Information ist Entropie ein Maß für die Unsicherheit oder das Informationschaos. In diesem Kontext kann die \enquote{Entropie} in einem verteilten System als ein Zustand betrachtet werden, in dem verschiedene Repliken eines Datenelements unterschiedliche und inkonsistente Zustände aufweisen. Anti-Entropie-Verfahren wirken dieser \enquote{Entropie} entgegen, indem sie sicherstellen, dass alle Repliken eines Datenelements synchronisiert werden und den gleichen Zustand aufweisen.
 
-Ein verbreitetes Anti-Entropie-Verfahren ist das sogenannte \enquote{Read-Repair}. Wenn ein Knoten ein Datenelement liest und feststellt, dass seine Replik nicht mit anderen Repliken übereinstimmt, aktualisiert er seine Replik, um sie mit den anderen zu synchronisieren.
+Ein verbreitetes Anti-Entropie-Rpair-Verfahren ist das sogenannte \enquote{Read-Repair}. Wenn ein Knoten ein Datenelement liest und feststellt, dass seine Replik nicht mit anderen Repliken übereinstimmt, aktualisiert er seine Replik, um sie mit den anderen zu synchronisieren.
 
 Ein weiteres Verfahren ist das \enquote{Anti-Entropy-Repair} (auch als \enquote{Anti-Entropy-Synchronisation} bezeichnet), bei dem Knoten periodisch oder auf Anforderung Paare von Repliken vergleichen und Unterschiede bereinigen. Dies kann zum Beispiel durch den Einsatz von Merkle-Bäumen geschehen, einer Datenstruktur, die effiziente Vergleiche und Synchronisationen ermöglicht.
 
@@ -432,7 +432,7 @@ Anti-Entropie-Verfahren können auch durch die Wahl der Datenstruktur beeinfluss
 Schließlich ist es wichtig zu beachten, dass Anti-Entropie-Verfahren Ressourcen verbrauchen, einschließlich Netzwerkbandbreite und Rechenleistung. Daher ist es wichtig, sie sorgfältig zu planen und zu optimieren, um die Leistung und Effizienz des verteilten Systems zu maximieren.
 
 
-	
+\label{Woche10}	
 
 
 

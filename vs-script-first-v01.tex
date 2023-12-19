@@ -37,8 +37,13 @@
 \usepackage{booktabs}
 
 \usepackage{fancyhdr}
+\usepackage{tcolorbox}
 
-
+\newcommand{\importantvs}[1]{
+  \begin{tcolorbox}[colback=yellow!10!white,colframe=blue!50!black]
+    #1
+  \end{tcolorbox}
+}
 
 \pagestyle{fancy}
 \renewcommand{\sectionmark}[1]{\markright{#1}} % Aktualisieren Sie den rechten Markierungsbefehl, um den Abschnittstitel zu speichern
@@ -46,7 +51,7 @@
 \fancyhead[R]{\rightmark} % Setzen Sie den rechten Kopfzeileninhalt auf den Abschnittstitel
 \fancyfoot[C]{\thepage{} von \pageref*{LastPage}} % Setzt die Seitenzahlen in der Fußzeile
 \fancyfoot[R]{\copyright\ CC BY-NC-SA 4.0}
-\fancyfoot[L]{VS-Becke-V0.9-2}
+\fancyfoot[L]{VS-Becke-V0.9-3}
 
 
 \renewcommand{\headrulewidth}{0.4pt} % Fügt eine Linie unter der Kopfzeile hinzu
@@ -80,7 +85,7 @@
 \addbibresource{references.bib}
 
 % Titel und Autor
-\title{Verteilte Systeme\\ (Skript zum Modul v0.9-2)}
+\title{Verteilte Systeme\\ (Skript zum Modul v0.9-3)}
 \author{Prof. Dr. Martin Becke\footnote{Dieser Text wurde in Teilen mit der Unterstützung von ChatGPT erzeugt. Dieser Text{} wird durchgehend vom Autor geprüft, erweitert und verfeinert. Dieser Text ist nur für die Lehre vorgesehen. Bitte beachten Sie Lizenz und Version}}
 
 
@@ -105,7 +110,7 @@
 \newpage
 % Fügen Sie hier Ihre Copyright-Notiz und Nutzungserklärung hinzu
 \noindent
-\textcopyright\ 2022-2023, Prof. Dr. Martin Becke\\\\ 
+\textcopyright\ 2022-2023, Prof. Dr. Martin Becke\\
 Dieses Werk ist lizenziert unter der Creative Commons (4.0 International License)\\
 - Namensnennung\\ - Nicht-kommerziell\\ - Weitergabe unter gleichen Bedingungen \\Um eine Kopie dieser Lizenz zu sehen, besuchen Sie\\ \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.\\
 Sonstig: Alle Rechte vorbehalten.
@@ -115,6 +120,8 @@ Versionen:\\
 0.9-0 2023 SoSe - Initiale Version, noch stark Text-basiert. Schlichtes Layout\\
 0.9-1 2023 SoSe - Weiter noch stark Text-basiert. Besseres Layout (DinA4, Header, Footer)\\ 
 0.9-2 2023 SoSe - Erste Überarbeitung Text - Tag
+\\
+0.9-3 2023 WiSe - Zweite überarbeitung Text - Tag
 \\\\
 Liebe Studierende,\\\\ vor uns liegt eine einzigartige Gelegenheit. Unser gemeinsames Skript, an dem bereits viele engagierte Geister gearbeitet haben, wartet darauf, durch unsere Ideen, Erkenntnisse und Beiträge weiter verbessert zu werden. Es ist ein lebendiges Werkzeug für das Lernen, und wir sind die aktuellen Hüter.
 
@@ -130,26 +137,29 @@ Ihr Beitrag wird nicht nur Ihnen und Ihren Kommilitonen zugutekommen, sondern au
 \\\\
 Martin Becke
 \\\\
-Dank für die Kommentare, Anmerkungen und Korrekturen: \\
+Dank für die Kommentare, Anmerkungen und Korrekturen:  \\
 2023 SoSe Frank Matthiesen (Korrekturen Vortragsfolien) \\
 2023 SoSe Niklas Kück (Viele Korrekturen und Textvorschläge für Kapitel 1,2 \& 3)\\
-2023 SoSe Matz Heitmüller (Korrekturen: Beispiel-Architekturen und Folien Kapitel 2) \\
+2023 SoSe Matz Heitmüller (Korrekturen: Beispiel-Architekturen und Folien Kapitel 2, Verschiedene Korrekturen) \\
 2023 SoSe Adel Ahmad (Hinweis Pull Argumentation, fehlende Motivation IDM, Unschärfe NOS) \\
+2023 SoSe Haidar Mortada (Fehler  Erasure-Coding) \\  
+2023 WiSe Morten Mednis (Fehler in Speedup Funktion) \\
+2023 WiSe Yannis Günther (Rechtschreibung 26x) \\
+2023 WiSe Sebastian Wewer (Rechtschreibung 25x, Position Graphik) \\
 \\
 ToDo:\\
 - Quellen und Links zu Tools\\
 - Mehr beschreibene Graphiken\\
-- Textüberarbeitung\\
-- Noch Raum für Sicherheit\\
-- Stichwortverzeichnis
-\newpage
+
 % Inhaltsverzeichnis
 \tableofcontents
+\newpage
+\input{./vs-script-orga}
 \newpage
 % Einleitung
 % Termin 1 - vs-slides-chapter01-1
 \section{Einleitung}
-Verteilte Systeme sind ein wichtiges Feld der Informatik, das sich mit der Vernetzung und Zusammenarbeit unabhängiger Computer beschäftigt, um in vielen Fällen eine gemeinsame Aufgabe zu erfüllen. Durch die Verwendung von verteilten Systemen können komplexe Anwendungen und Aufgaben effektiver und effizienter gelöst werden, indem die Rechenleistung und Speicherkapazität mehrerer Computer gemeinsam genutzt werden. Verteilte Systeme sind in vielen Bereichen der IT Branche und inbesondere im industriellen Umfeld weit verbreitet und spielen eine wichtige Rolle bei der Entwicklung neuer Technologien und Anwendungen. Beispiele sind weit verbreitet, insbesondere im Bereich der Cloud Anwendungen, der Künstlichen Intelligenz, des maschinellen Lernens oder auch des Internet of Things (IoT). Im Folgenden soll ein kleiner Einlick für Verteilte Systeme am Standort Hamburg gegeben werden, auf dem eine Defintion des Begriffes \enquote{Verteilte Systeme}  mit einer angemessenen Abgrenzung folgt. 
+Verteilte Systeme sind ein wichtiges Feld der Informatik, das sich mit der Vernetzung und Zusammenarbeit unabhängiger Computer beschäftigt, um in vielen Fällen eine gemeinsame Aufgabe zu erfüllen. Durch die Verwendung von verteilten Systemen können komplexe Anwendungen und Aufgaben effektiver und effizienter gelöst werden, indem die Rechenleistung und Speicherkapazität mehrerer Computer gemeinsam genutzt werden. Verteilte Systeme sind in vielen Bereichen der IT Branche und insbesondere im industriellen Umfeld weit verbreitet und spielen eine wichtige Rolle bei der Entwicklung neuer Technologien und Anwendungen. Beispiele sind weit verbreitet, insbesondere im Bereich der Cloud Anwendungen, der Künstlichen Intelligenz, des maschinellen Lernens oder auch des Internet of Things (IoT). Im Folgenden soll ein kleiner Einblick für Verteilte Systeme am Standort Hamburg gegeben werden, auf dem eine Definition des Begriffes \enquote{Verteilte Systeme}  mit einer angemessenen Abgrenzung folgt. 
 \input{kapitel-01/einleitung-verteilte-systeme}
 \input{kapitel-01/definition-verteilte-systeme}
 \input{kapitel-01/abgrenzung-ai-its}
