@@ -1,6 +1,10 @@
+
 % !TEX options=--shell-escape
 \immediate\write18{makeindex \jobname.idx \jobname.glo -t \jobname.glg -s \jobname.ist -o \jobname.gls}
+%%%%%%%%%%%%%% Do not touch   %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Open document  %%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[a4paper]{article}
+
 \usepackage[margin=3cm]{geometry} %Ändert alle Ränder auf 2cm
 % oder Sie können einzelne Ränder so anpassen:
 %\usepackage[left=3cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
@@ -11,17 +15,11 @@
 \usepackage[german]{babel}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{subcaption} 
-\usepackage{graphicx}
-\usepackage{hyperref}
 \usepackage{listings}
 \usepackage{color}
-\usepackage{caption}
-
 \usepackage{showidx}
 \usepackage{imakeidx}
-
 \usepackage[version=4]{mhchem}
-
 \usepackage{listings}
 \usepackage{color}
 \usepackage{xcolor} 
@@ -30,21 +28,31 @@
 \usepackage{enumitem} \setitemize{leftmargin=*}   
 \usepackage{pgfplots}
 \usepackage{amsmath}
-\usepackage{float}
 \usepackage{tabularx}
-\usepackage{lastpage}
 \usepackage{microtype}
-\usepackage{booktabs}
 
-\usepackage{fancyhdr}
+
+\usepackage{import}
+\usepackage{graphicx}
 \usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{lastpage}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%% New Commands   %%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\subfilesbibliography}[1]{%
+  {\bibliography{#1}}
+  {}%
+}
 
 \newcommand{\importantvs}[1]{
   \begin{tcolorbox}[colback=yellow!10!white,colframe=blue!50!black]
     #1
   \end{tcolorbox}
 }
-
 \pagestyle{fancy}
 \renewcommand{\sectionmark}[1]{\markright{#1}} % Aktualisieren Sie den rechten Markierungsbefehl, um den Abschnittstitel zu speichern
 \fancyhf{} % Löscht die aktuellen Kopf- und Fußzeilen
@@ -83,18 +91,20 @@
 
 \usepackage[backend=biber,style=ieee]{biblatex}
 \addbibresource{references.bib}
+\providecommand{\main}{.}  % *Modification: define file location
+
+
+\usepackage{subfiles} % Best loaded last in the preamble
 
 % Titel und Autor
 \title{Verteilte Systeme\\ (Skript zum Modul v0.9-3)}
 \author{Prof. Dr. Martin Becke\footnote{Dieser Text wurde in Teilen mit der Unterstützung von ChatGPT erzeugt. Dieser Text{} wird durchgehend vom Autor geprüft, erweitert und verfeinert. Dieser Text ist nur für die Lehre vorgesehen. Bitte beachten Sie Lizenz und Version}}
 
-
 \pgfplotsset{compat=1.18} 
 
 \makeindex
 
-
-% Beginn des Dokuments
+%%%%%%%%%%%%%% Start Documents %%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 % Titelseite
@@ -108,7 +118,8 @@
 \vspace*{\fill}
 
 \newpage
-% Fügen Sie hier Ihre Copyright-Notiz und Nutzungserklärung hinzu
+
+%%%%%%%%%%%%%% Copyright %%%%%%%%%%%%%%%%%%%%%%%
 \noindent
 \textcopyright\ 2022-2024, Prof. Dr. Martin Becke\\
 Dieses Werk ist lizenziert unter der Creative Commons (4.0 International License)\\
@@ -116,13 +127,17 @@ Dieses Werk ist lizenziert unter der Creative Commons (4.0 International License
 Sonstig: Alle Rechte vorbehalten.
 \noindent
 \\\\
+%%%%%%%%%%%%%% Version %%%%%%%%%%%%%%%%%%%%%%%
 Versionen:\\
 0.9-0 2023 SoSe - Initiale Version, noch stark Text-basiert. Schlichtes Layout\\
-0.9-1 2023 SoSe - Weiter noch stark Text-basiert. Besseres Layout (DinA4, Header, Footer)\\
+0.9-1 2023 SoSe - Weiter noch stark Text-basiert. Besseres Layout (DinA4, Header, Footer)\\ 
 0.9-2 2023 SoSe - Erste Überarbeitung Text - Tag
 \\
 0.9-3 2023 WiSe - Zweite überarbeitung Text - Tag
 \\\\
+
+%%%%%%%%%%%%%% Motivation %%%%%%%%%%%%%%%%%%%%%%%
+
 Liebe Studierende,\\\\ vor uns liegt eine einzigartige Gelegenheit. Unser gemeinsames Skript, an dem bereits viele engagierte Geister gearbeitet haben, wartet darauf, durch unsere Ideen, Erkenntnisse und Beiträge weiter verbessert zu werden. Es ist ein lebendiges Werkzeug für das Lernen, und wir sind die aktuellen Hüter.
 
 Sie haben alle die Möglichkeit, Ihren Stempel auf dieses Skript zu setzen und es noch besser zu machen. Durch Ihre Teilnahme an der Überarbeitung dieses Skripts tragen Sie dazu bei, die Qualität unserer Ausbildung zu verbessern und unser gemeinsames Wissen zu erweitern.
@@ -135,86 +150,59 @@ In diesem Prozess sind wir mehr als nur Einzelpersonen; wir sind Teil einer Geme
 
 Ihr Beitrag wird nicht nur Ihnen und Ihren Kommilitonen zugutekommen, sondern auch zukünftigen Studierenden, die auf diesem Skript aufbauen werden. Lassen Sie uns dieses Erbe fortsetzen und gemeinsam ein Skript schaffen, auf das wir stolz sein können.
 \\\\
-Martin Becke
+Martin Becke 
 \\\\
+%%%%%%%%%%%%%% Acknowledgment %%%%%%%%%%%%%%%%%%%%%%%
 Dank für die Kommentare, Anmerkungen und Korrekturen:  \\
 2023 SoSe Frank Matthiesen (Korrekturen Vortragsfolien) \\
 2023 SoSe Niklas Kück (Viele Korrekturen und Textvorschläge für Kapitel 1,2 \& 3)\\
 2023 SoSe Matz Heitmüller (Korrekturen: Beispiel-Architekturen und Folien Kapitel 2, Verschiedene Korrekturen) \\
 2023 SoSe Adel Ahmad (Hinweis Pull Argumentation, fehlende Motivation IDM, Unschärfe NOS) \\
-2023 SoSe Haidar Mortada (Fehler  Erasure-Coding) \\
+2023 SoSe Haidar Mortada (Fehler  Erasure-Coding) \\  
 2023 WiSe Morten Mednis (Fehler in Speedup Funktion) \\
 2023 WiSe Yannis Günther (Rechtschreibung 26x) \\
 2023 WiSe Sebastian Wewer (Rechtschreibung 38x, Position Graphik) \\
 2023 WiSe Malte Behrmann (Rechtschreibfehler 2x)\\
 \\
-
-% Inhaltsverzeichnis
+%%%%%%%%%%%%%% Inhaltsverzeichnis %%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents
 \newpage
+%%%%%%%%%%%%%%       Orga         %%%%%%%%%%%%%%%%%%%%%%%
 \input{orga/vs-script-orga}
 \newpage
 % Einleitung
 % Termin 1 - vs-slides-chapter01-1
-\section{Einleitung}
-Verteilte Systeme sind ein wichtiges Feld der Informatik, das sich mit der Vernetzung und Zusammenarbeit unabhängiger Computer beschäftigt, um in vielen Fällen eine gemeinsame Aufgabe zu erfüllen. Durch die Verwendung von verteilten Systemen können komplexe Anwendungen und Aufgaben effektiver und effizienter gelöst werden, indem die Rechenleistung und Speicherkapazität mehrerer Computer gemeinsam genutzt werden. Verteilte Systeme sind in vielen Bereichen der IT Branche und insbesondere im industriellen Umfeld weit verbreitet und spielen eine wichtige Rolle bei der Entwicklung neuer Technologien und Anwendungen. Beispiele sind weit verbreitet, insbesondere im Bereich der Cloud Anwendungen, der Künstlichen Intelligenz, des maschinellen Lernens oder auch des Internet of Things (IoT). Im Folgenden soll ein kleiner Einblick für Verteilte Systeme am Standort Hamburg gegeben werden, auf dem eine Definition des Begriffes \enquote{Verteilte Systeme}  mit einer angemessenen Abgrenzung folgt.
-\input{kapitel-01/einleitung-verteilte-systeme}
-\input{kapitel-01/definition-verteilte-systeme}
-\input{kapitel-01/abgrenzung-ai-its}
-\input{kapitel-01/ziele}
-% Termin 2 - vs-slides-chapter01-2
-\input{kapitel-01/ziele-detail}
+%%%%%%%%%%%%%%       Chapter I      %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%      Einleitung      %%%%%%%%%%%%%%%%%%%%%%%
+\subfile{kapitel-01/chapter-01}
 \newpage
-% Termin 2 - vs-slides-chapter01-2
-% Termin 2 - vs-slides-chapter01-3
-% Kapitel 1 
-\newpage
-\section{Architektur}
-In diesem Kapitel werden die Grundlagen behandelt, um die unterschiedlichen Formen der Realisierung von verteilten Systemen zu klassifizieren und einordnen zu können. Diese Diskussion sagt noch nichts über die reale Umsetzung aus, bietet aber den Einstiegspunkt in diese. Es wird darauf eingegangen, welche Vorkenntnisse notwendig sind und welche Ziele mit den Architekturansätzen erreicht werden sollen.
-\input{kapitel-02/realisierung}
-%Termin-3 - vs-slides-chapter02-1
-
-\input{kapitel-02/architekturen}
-%Termin-4 - vs-slides-chapter02-2
-
-\input{kapitel-02/pattern}
-%Termin-5 - vs-slides-chapter02-3
-%Termin-5 - vs-slides-chapter02-4
-
-\subsection{Beispielarchitekturen}
-Die Remote Procedure Call (RPC) Architektur und die Peer-to-Peer (P2P) Architektur sind zwei grundlegend unterschiedliche Ansätze zur Entwicklung verteilter Systeme, die jeweils ihre eigenen Stärken und Schwächen aufweisen. Beide Architekturen bieten Lösungen für verschiedene Anwendungsfälle und Probleme, die in verteilter Systementwicklung auftreten. Durch das Vergleichen dieser beiden Beispielarchitekturen können wir ein besseres Verständnis der verschiedenen Aspekte und Herausforderungen bei der Entwicklung verteilter Systeme gewinnen.
-\input{kapitel-02/rpc-architecture}
-\input{kapitel-02/chord-architecture}
-%Termin-6 - vs-slides-chapter02-5
-
-\newpage
-% Work in progress
-
-\input{kapitel-03/prozess}
-
-%Termin-7 - vs-slides-chapter03-1
-\newpage
-\input{kapitel-03/kommunikation}
-
-%Termin-8 - vs-slides-chapter03-2
-\newpage
-%vs-slides-chapter04-1 koordination
-\input{kapitel-04/koordination}
-\input{kapitel-04/sync}
-%Termin-9 -
-\input{kapitel-04/konsens}
-%Termin-10 - Konsens mit Raft und Paxos Algorithmus
-
-\newpage
-\input{kapitel-05/algorithmen}
-%Termin-11 -
-
+%%%%%%%%%%%%%%      Chapter II      %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%      Architektur     %%%%%%%%%%%%%%%%%%%%%%%
+\subfile{kapitel-02/chapter-02}
 \newpage
 
-\input{kapitel-06/monitoring}
-\input{kapitel-06/debugging}
-\input{kapitel-06/deployment}
-%Termin-12 -
+%%%%%%%%%%%%%%      Chapter III     %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%      Realisierung    %%%%%%%%%%%%%%%%%%%%%%%
+\subfile{kapitel-03/chapter-03}
+\newpage
+
+%%%%%%%%%%%%%%      Chapter IV      %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%      Koordination    %%%%%%%%%%%%%%%%%%%%%%%
+\subfile{kapitel-04/chapter-04}
+\newpage
+
+%%%%%%%%%%%%%%      Chapter IV      %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%      Algorithmen     %%%%%%%%%%%%%%%%%%%%%%%
+\subfile{kapitel-05/chapter-05}
+\newpage
+
+%%%%%%%%%%%%%%      Chapter IV      %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%      Deployment      %%%%%%%%%%%%%%%%%%%%%%%
+\subfile{kapitel-06/chapter-06}
+
+
+%%%%%%%%%%%%%% Do not touch   %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% close document %%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\indexname}{Stichwortverzeichnis}
 \addcontentsline{toc}{section}{Stichwortverzeichnis}
 \printindex
@@ -223,3 +211,4 @@ Die Remote Procedure Call (RPC) Architektur und die Peer-to-Peer (P2P) Architekt
 \printbibliography
 
 \end{document}
+
