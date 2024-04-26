@@ -40,7 +40,7 @@ Das Skript ist als interaktives Lehrmittel konzipiert, das die aktive Beteiligun
 Das Hauptziel ist es, den Studierenden ein tiefes Verständnis für die Planung, Entwicklung und Implementierung verteilter Systeme zu vermitteln.
 
 
-# Struktur
+# Struktur (Navigation im Projekt)
 Die Struktur des Projektes ist am einfachsten der Main-Datei vs-script-first-v01.tex zu entnehmen. 
 
 ## Präambel
