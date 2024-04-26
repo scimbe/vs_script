@@ -1,30 +1,17 @@
-name: LaTeX Build
-
-on:
-  push:
-    paths:
-      - '**/*.tex'
-  pull_request:
-    paths:
-      - '**/*.tex'
-
+name: Build LaTeX document
+on: [push]
 jobs:
-  build:
+  build_latex:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Install LaTeX
-      run: sudo apt-get install texlive-full
-
-    - name: Compile LaTeX Documents
-      run: |
-        for file in $(find . -name '*.tex'); do
-          pdflatex -halt-on-error $file
-          if [ $? -ne 0 ]; then
-            echo "Compilation failed for $file"
-            exit 1
-          fi
-        done
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: vs-script-first-v01.tex
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: vs-script-first-v01.pdf
