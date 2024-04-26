@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Farbdefinitionen und Stil für den Code
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{Callback Pattern in Java}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Callback Interface}
+
+\begin{lstlisting}[language=Java, caption=LightSwitchCallback Interface]
+public interface LightSwitchCallback {
+    void onCompletion(String status);
+}
+\end{lstlisting}
+
+\section*{Lamp Implementation}
+
+\begin{lstlisting}[language=Java, caption=Lamp Class]
+public class Lamp {
+    public void switchLight(String status, LightSwitchCallback callback) {
+        System.out.println("Licht ist jetzt " + status + ".");
+        callback.onCompletion("Lichtschaltung zu " + status + " abgeschlossen.");
+    }
+}
+\end{lstlisting}
+
+\section*{Client Implementation}
+
+\begin{lstlisting}[language=Java, caption=LightSwitchClient Class]
+public class LightSwitchClient implements LightSwitchCallback {
+
+    @Override
+    public void onCompletion(String status) {
+        System.out.println("Callback empfangen: " + status);
+    }
+
+    public static void main(String[] args) {
+        LightSwitchClient client = new LightSwitchClient();
+        Lamp lamp = new Lamp();
+
+        lamp.switchLight("an", client);
+        lamp.switchLight("aus", client);
+    }
+}
+\end{lstlisting}
+
+\end{document}

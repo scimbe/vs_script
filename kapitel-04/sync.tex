@@ -38,8 +38,8 @@ A = |T - \bar{x}|
 \end{equation}
 In einer idealen Situation wäre eine Uhr sowohl präzise als auch akkurat: Sie würde konsequent die gleiche Zeit anzeigen (hohe Präzision) und diese Zeit wäre nahe an der tatsächlichen Zeit (hohe Akkuratesse). In der Praxis gibt es jedoch oft einen Kompromiss zwischen Präzision und Akkuratesse.
 \\\\
-Häufig wird die UTC als Basis für eine präzise und akkurat Uhr gewählt.
-Die \textbf{Universal Time Coordinated (UTC)} ist die Zeitstandard, der zur Koordination von Weltzeit verwendet wird. Es handelt sich dabei um eine atomare Zeitskala, die auf International Atomic Time (TAI), mit Sprüngen von einer Sekunde, basiert, um sie nahe an der mittleren Sonnenzeit (UT1) zu halten.
+Häufig wird die UTC als Basis für eine präzise und akkurate Uhr gewählt.
+Die \textbf{Universal Time Coordinated (UTC)} ist der Zeitstandard, der zur Koordination von Weltzeit verwendet wird. Es handelt sich dabei um eine atomare Zeitskala, die auf International Atomic Time (TAI), mit Sprüngen von einer Sekunde, basiert, um sie nahe an der mittleren Sonnenzeit (UT1) zu halten.
 
 UTC ist die Zeit, die in allen Bereichen der Wissenschaft und Technik, in der Luft- und Raumfahrt, in der Navigation und in der Datenverarbeitung verwendet wird. Sie ist auch die Zeit, die von Zeitservern im Internet zur Synchronisation von Computern, Mobilgeräten und anderen digitalen Geräten verwendet wird.
 Die Verwendung von UTC als Akronym für Coordinated Universal Time in Englisch oder Temps Universel Coordonné in Französisch ist tatsächlich ein Kompromiss zwischen den beiden Sprachen.
@@ -61,7 +61,7 @@ In diesem Beispiel ermöglichen die globalen Zeitstempel, dass alle Knoten im ve
 \\\\
 Um eine gemeinsame Uhr in verteilten Systemen zu etablieren, gibt es neben den beschriebenen Ansätzen weitere Algorithmen und Protokolle um dies zu erlangen. Die Hauptziele dieser Ansätze sind die Synchronisation der Uhren der einzelnen Knoten und die Minimierung der Abweichungen zwischen ihnen, hier spielt der Einsatz zusätlicher Hardware eine Rolle, oder die Abkehr von einen zentralen Zeitgeber, wie einer Atomuhr:
 \begin{itemize}
-\item \textbf{Precision Time Protocol} (PTP): PTP ist ein alterntives Protokoll zu NTP, das entwickelt wurde, um eine präzise Zeitsynchronisation in verteilten Systemen zu erreichen. Im Gegensatz zu NTP ist PTP speziell für lokale Netzwerke (LANs) entwickelt worden und ermöglicht eine höhere Genauigkeit in der Zeitsynchronisation. PTP verwendet einen sogenannten \enquote{Grandmaster Clock} sowie \enquote{Ordinary Clocks} und \enquote{Boundary Clocks}, um eine präzise Synchronisation über das Netzwerk zu erreichen.
+\item \textbf{Precision Time Protocol} (PTP): PTP ist ein alternatives Protokoll zu NTP, das entwickelt wurde, um eine präzise Zeitsynchronisation in verteilten Systemen zu erreichen. Im Gegensatz zu NTP ist PTP speziell für lokale Netzwerke (LANs) entwickelt worden und ermöglicht eine höhere Genauigkeit in der Zeitsynchronisation. PTP verwendet einen sogenannten \enquote{Grandmaster Clock} sowie \enquote{Ordinary Clocks} und \enquote{Boundary Clocks}, um eine präzise Synchronisation über das Netzwerk zu erreichen.
 \item \textbf{Cristian's Algorithm}: Cristian's Algorithm ist ein einfacherer Ansatz zur Uhrensynchronisation in verteilten Systemen, bei dem ein Zeitserver als Referenz dient. Die Knoten stellen regelmäßig Anfragen an den Zeitserver, um ihre Uhren zu synchronisieren. Bei jeder Anfrage berechnet der Knoten die Netzwerkverzögerung und passt seine Uhr entsprechend an.
 \item \textbf{Berkeley Algorithm}: Der Berkeley Algorithm ist ein weiterer Algorithmus zur Synchronisation der Uhren in verteilten Systemen. In diesem Ansatz wird ein Koordinator ausgewählt, der die Zeitinformationen von allen Knoten im System sammelt und einen gewichteten Durchschnitt berechnet. Anschließend verteilt der Koordinator die berechnete Zeit an alle Knoten, die ihre Uhren entsprechend anpassen.
 \item \textbf{Logische Uhren}: Obwohl logische Uhren keine physische Uhrensynchronisation bieten, bieten sie eine Möglichkeit, die Reihenfolge von Ereignissen in einem verteilten System zu bestimmen, ohne eine gemeinsame Uhr zu etablieren. Diese Methode verwendet logische Zähler, die bei jedem Ereignis oder jeder Nachricht inkrementiert werden, um eine partielle Ordnung der Ereignisse zu etablieren.
@@ -135,7 +135,7 @@ Sicher, PTP kann auch ohne Hardwareunterstützung betrieben werden, indem es auf
 In solchen Fällen ist PTP weniger effektiv und sehr häufig nicht besser als NTP geeignet für Anwendungen.
 
 \subsubsection{Cristian's Algorithm}
-Cristian's Algorithmus ist ein Zeit-Synchronisationsprotokoll, welcher entwickelt wurde, um die Zeitabweichung zwischen einem Zeitserver und einem Client in einem verteilten System zu reduzieren. Der Algorithmus basiert auf der Kommunikation zwischen dem Client und dem Zeitserver, um die Netzwerkverzögerung zu schätzen und die Client-Uhr entsprechend anzupassen.
+Cristian's Algorithmus ist ein Zeit-Synchronisationsprotokoll, welches entwickelt wurde, um die Zeitabweichung zwischen einem Zeitserver und einem Client in einem verteilten System zu reduzieren. Der Algorithmus basiert auf der Kommunikation zwischen dem Client und dem Zeitserver, um die Netzwerkverzögerung zu schätzen und die Client-Uhr entsprechend anzupassen.
 \\\\
 Der Ablauf des Cristian's Algorithmus ist wie folgt:
 \begin{enumerate}
@@ -181,7 +181,7 @@ Ein Beispiel, in dem Cristian's Algorithmus in der Praxis eingesetzt wird, ist i
 
 \subsubsection{Berkeley Algorithm}
 
-Der Berkeley-Algorithmus, benannt nach der University of California, Berkeley, wo er entwickelt wurde, ist ein verteiltes Zeitsynchronisationsprotokoll, welcher in Netzwerken eingesetzt wird, um die Uhrzeiten von Computern oder anderen Knoten zu synchronisieren.  Der Berkeley-Algorithmus unterscheidet sich von anderen Zeitsynchronisationsprotokollen wie dem Network Time Protocol (NTP) dadurch, dass er auf einem Master-Slave-Modell basiert und keine Hierarchie von Zeitservern erfordert.
+Der Berkeley-Algorithmus, benannt nach der University of California, Berkeley, wo er entwickelt wurde, ist ein verteiltes Zeitsynchronisationsprotokoll, welches in Netzwerken eingesetzt wird, um die Uhrzeiten von Computern oder anderen Knoten zu synchronisieren.  Der Berkeley-Algorithmus unterscheidet sich von anderen Zeitsynchronisationsprotokollen wie dem Network Time Protocol (NTP) dadurch, dass er auf einem Master-Slave-Modell basiert und keine Hierarchie von Zeitservern erfordert.
 \\\\
 Der Berkeley-Algorithmus beruht auf dem grundlegenden Prinzip, dass ein ausgewählter Knoten im Netzwerk, der sogenannte \enquote{Master}, für die Zeitsynchronisation verantwortlich ist. Die anderen Knoten, die als \enquote{Slaves} bezeichnet werden, stellen ihre Uhrzeiten anhand der vom Master bereitgestellten Informationen ein. Der Algorithmus läuft in mehreren Schritten ab, die im Folgenden erläutert werden.
 
@@ -259,7 +259,7 @@ Betrachten wir ein verteiltes System mit mehreren Prozessen, die Transaktionen a
 
 \item Wenn ein Prozess $P_j$ eine Transaktion $T_i$ an einen anderen Prozess $P_k$ sendet, wird die logische Uhr $C_j$ inkrementiert und zusammen mit der Transaktion an $P_k$ gesendet. Bei Empfang der Transaktion wird die logische Uhr $C_k$ des empfangenden Prozesses auf das Maximum von $C_k$ und dem empfangenen Zeitstempel (plus eins) gesetzt: $C_k := \max(C_k, C_j(T_i) + 1)$.
 
-\item item Bei der Ausführung von Transaktionen werden die zugeordneten Zeitstempel verwendet, um die relative Ordnung der Transaktionen zu bestimmen und mögliche Konflikte aufzulösen. Zum Beispiel kann ein Konflikt in Form eines schreibgeschützten oder schreibgeschützten Zugriffs auf dieselben Daten auftreten. In solchen Fällen kann der Zeitstempel verwendet werden, um die Transaktionen konsistent zu ordnen, indem die Transaktion mit dem kleineren Zeitstempel vor der Transaktion mit dem größeren Zeitstempel ausgeführt wird.
+\item Bei der Ausführung von Transaktionen werden die zugeordneten Zeitstempel verwendet, um die relative Ordnung der Transaktionen zu bestimmen und mögliche Konflikte aufzulösen. Zum Beispiel kann ein Konflikt in Form eines schreibgeschützten Zugriffs auf dieselben Daten auftreten. In solchen Fällen kann der Zeitstempel verwendet werden, um die Transaktionen konsistent zu ordnen, indem die Transaktion mit dem kleineren Zeitstempel vor der Transaktion mit dem größeren Zeitstempel ausgeführt wird.
 \end{itemize}
 
 Ein praktisches Beispiel für die Anwendung von Lamport-Uhren in einem Transaktionskonzept ist die Google Spanner-Datenbank. Spanner ist eine globale, verteilte Datenbank, die konsistente und konfliktfreie Transaktionen über mehrere Rechenzentren hinweg gewährleistet. Obwohl Spanner in seiner Implementierung nicht ausschließlich auf Lamport-Uhren basiert, verwendet es ein ähnliches Konzept, das als TrueTime bezeichnet wird. TrueTime ermöglicht es, eine globale Ordnung von Ereignissen und Transaktionen in der Spanner-Datenbank herzustellen, indem jedem Ereignis ein Zeitstempel zugeordnet wird, der sowohl aus einer logischen als auch aus einer physischen Komponente besteht.
@@ -298,7 +298,7 @@ Um Vektoruhren in einem Transaktionskonzept zu integrieren, können wir die folg
 \begin{itemize}
 \item Jeder Prozess $P_j$ im verteilten System führt eine Vektoruhr $V_j$ mit und weist jeder initiierten Transaktion $T_i$ den aktuellen Vektorzeitstempel $V_j(T_i)$ zu.
 \item Bei der Kommunikation zwischen Prozessen zur Koordination von Transaktionen (z. B. zum Sperren von Ressourcen oder zur Synchronisation) werden die Vektoruhren der beteiligten Prozesse entsprechend den oben beschriebenen Regeln aktualisiert.
-\item Bei der Ausführung von Transaktionen werden die zugeordneten Vektorzeitstempel verwendet, um die relative Ordnung der Transaktionen zu bestimmen und mögliche Konflikte aufzulösen. Zum Beispiel kann ein Konflikt in Form eines schreibgeschützten oder schreibgeschützten Zugriffs auf dieselben Daten auftreten. In solchen Fällen kann der Vektorzeitstempel verwendet werden, um die Transaktionen konsistent zu ordnen, indem die Transaktion, die gemäß der \enquote{happens-before} Relation früher stattfindet, vor der anderen Transaktion ausgeführt wird.
+\item Bei der Ausführung von Transaktionen werden die zugeordneten Vektorzeitstempel verwendet, um die relative Ordnung der Transaktionen zu bestimmen und mögliche Konflikte aufzulösen. Zum Beispiel kann ein Konflikt in Form eines schreibgeschützten Zugriffs auf dieselben Daten auftreten. In solchen Fällen kann der Vektorzeitstempel verwendet werden, um die Transaktionen konsistent zu ordnen, indem die Transaktion, die gemäß der \enquote{happens-before} Relation früher stattfindet, vor der anderen Transaktion ausgeführt wird.
 \end{itemize}
 Ein praktisches Beispiel für die Anwendung von Vektoruhren in einem Transaktionskonzept ist die Implementierung von verteilten Datenbanksystemen, die konsistente und konfliktfreie Transaktionen über mehrere Knoten hinweg gewährleisten müssen. Vektoruhren können dazu verwendet werden, eine globale Ordnung von Ereignissen und Transaktionen in der Datenbank herzustellen und dabei sowohl kausale Beziehungen als auch Konkurrenzverhältnisse präzise abzubilden. Dies ermöglicht es, die Datenbank auf einem konsistenten Zustand zu halten und mögliche Anomalien oder Inkonsistenzen in den verarbeiteten Transaktionen zu vermeiden.
 
@@ -426,9 +426,9 @@ Für die Implementierung in Java können Sie separate Task für jeden Philosophe
 Es ist eine einfache Implementierung, da die Entscheidungslogik zentralisiert ist. Deadlocks können effektiv vermieden werden, indem der Koordinator die Anfragen zur Freigabe und Belegung von Ressourcen verwaltet.
 Dennoch existiert ein Single Point of Failure, sprich wenn der zentrale Koordinator ausfällt, kann das gesamte System beeinträchtigt werden.
 Ein zentraler Koordinator kann bei sehr großen Systemen mit vielen Prozessen oder Ressourcen zum Flaschenhals werden. Auch die Kommunikation zwischen den Philosophen und dem Koordinator kann zu Verzögerungen führen, insbesondere in weit verteilten Systemen.
-Erweitert man diesen Ansatz um eine Hierarchie die Ressourcen sind einige Probleme gelöst, wie eine einfache und effektive Methode zur Vermeidung von Deadlocks.
+Erweitert man diesen Ansatz um eine Hierarchie der Ressourcen sind einige Probleme gelöst, wie eine einfache und effektive Methode zur Vermeidung von Deadlocks.
 
-Versucht man den Ansatz mit den Hierarchien in einen dezentralen Ansatz zu überführen, kann es dennoch zu Verhungern führen, wenn einige Philosophen immer wieder von anderen überstimmen.
+Versucht man den Ansatz mit den Hierarchien in einen dezentralen Ansatz zu überführen, kann es dennoch zu Verhungern führen, wenn einige Philosophen immer wieder von anderen überstimmt werden.
 
 In der dezentralisierten Lösung gibt es keinen zentralen Koordinator. Stattdessen versuchen die Philosophen selbstständig, Gabeln aufzunehmen und abzulegen, indem sie einige Regeln befolgen, um Deadlocks und Verhungern zu vermeiden. Eine mögliche Strategie ist die Hierarchie der Ressourcen: Jede Gabel wird einer Priorität zugewiesen, und die Philosophen müssen die Gabeln in aufsteigender Reihenfolge der Priorität aufnehmen.
 

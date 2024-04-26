@@ -1,8 +1,8 @@
 \subsection{Grundlagen für die Realisierung}
 
-Um sich die Freiheitsgrade der Realisierung von Verteilten Systemen bewusst zu werden, kann man sich im ersten Schritt noch einmal die grundsätzliche Architektur einer Recheneinheit vor Augen führen, die für die Problemlösung herangezogen werden kann. Typische Referenzen in diesem Fall sind die Harvard- oder die von-Neumann Architektur. 
-
-Die Harvard-Architektur und die von-Neumann-Architektur sind beide grundlegende Architekturen für die Gestaltung von Computern und digitalen Rechensystemen. Beide Architekturen haben gemeinsam, dass sie die Grundlagen für die Funktionsweise moderner Computer bilden und auf der Verwendung von Binärcode und elektronischen Komponenten basieren.
+Um sich den Freiheitsgraden der Realisierung von Verteilten Systemen bewusst zu werden, kann man sich im ersten Schritt noch einmal die grundsätzliche Architektur einer Recheneinheit vor Augen führen, die in diesem Kontext immer für die Problemlösung herangezogen werden (Wenngleich andere Ansätze auch denkbar sind). Typische Referenzen in diesem Fall sind die Harvard- oder die von-Neumann Architektur. 
+\\\\
+Die Harvard-Architektur und die von-Neumann-Architektur sind beides grundlegende Architekturen für die Gestaltung von Computern und digitalen Rechensystemen. Beide Architekturen haben gemeinsam, dass sie die Grundlagen für die Funktionsweise moderner Computer bilden und auf der Verwendung von Binärcode und elektronischen Komponenten basieren.
 
 Eine wichtige Unterscheidung besteht natürlich darin, dass die von Neumann-Architektur eine gemeinsame Speicherarchitektur hat, in der sowohl Anweisungen als auch Daten in einem gemeinsamen Speicher gespeichert werden. Die Harvard-Architektur hingegen verwendet getrennte Speicher für Anweisungen und Daten, was zu einem schnelleren Zugriff auf beide Arten von Informationen führen kann.
 \\\\
@@ -13,19 +13,23 @@ Somit ergibt sich, das in einem Verteilten System\footnote{welches mindestens au
 \subsubsection{Funktionale vs. ressourcenorientierte Zerlegung}
 
 In der Softwarearchitektur gibt es mehrere Teile-und-herrsche-Ansätze, um komplexe Systeme zu entwickeln und zu verwalten. Zunächst soll aber der Fokus auf eine Einteilung in zwei rudimentäre Ansätze gelegt werden:
+\importantvs{
 \begin{itemize} 
 \item Funktional
 \item Ressourcenorientiert
 \end{itemize}
+}
 Bei der funktionalen Zerlegung wird das System in kleinere, im besten Fall atomare, Funktionen/Prozeduren zerlegt, die jeweils auf eine bestimmte Aufgabe spezialisiert sind. Die Idee ist, dass jede Funkion unabhängig von den anderen funktioniert, um das System als Ganzes zu unterstützen. Beispielhaft könnte das eine Funktion sein, dass die Sortierung von Zahlen übernimmt, aber auch eine Funktion für die Filterung oder Suche. Die funktionale Zerlegung zielt darauf ab, die Komplexität des Systems zu reduzieren, indem es in kleinere, leichter handhabbare Teile aufgeteilt wird. 
 Einfach gesprochen werden folgend disjunkte Funktionen bestimmt, versucht diese generisch zu erfassen und abstrahiert zu beschreiben. Eine Unterscheidung in \enquote{Funktionale}, \enquote{Deklarative} oder \enquote{Objektorientierte} Programmierung soll zu diesem Zweitpunkt noch nicht getroffen werden, da es auch in einem Verteilten System notwendig sein wird, unterschiedliche Programmierungsansätze miteinander zu verbinden. 
 Zudem kann zu diesem Zeitpunkt auch mal festgestellt werden, dass die Auswahl der Sprache für die Lösung eines bestimmten Problems keine Rolle spielt, wenn alle beteiligten Sprachen Turing-vollständig sind. Das bedeutet, dass jede dieser Sprachen in der Lage ist, jede denkbare Berechnung durchzuführen, solange genügend Zeit und Speicherplatz zur Verfügung stehen.
 \\\\
 Richten wir weiter den Blick zunächst weiter auf Funnktionen und Prozesse. Für die Beschreibung von Funktionen/Prozessen gibt es eine recht generische Form, die über jeden Architekurtyp und jeder Sprache relativ konstant bleibt.
+\importantvs{
 \begin{itemize} 
 \item Funktionssignatur 
 \item Funktionssemantik (Definition)
 \end{itemize}
+}
 Ein Beispiel für die Formulierung einer Funktionssignatur in Pseudocode könnte für die Addition zweier Werte in dieser Form beschrieben werden:
 \begin{lstlisting}[caption={Funktionssignatur},captionpos=b,label={lst:signatur}]
     function sum(a: int, b: int) -> int;
@@ -33,7 +37,7 @@ Ein Beispiel für die Formulierung einer Funktionssignatur in Pseudocode könnte
 Die Funktionssignatur in Listing \ref{lst:signatur} gibt an, dass die Funktion \enquote{sum} zwei Parameter vom Typ \enquote{int} erwartet und einen Rückgabewert vom Typ \enquote{int} liefert. Einige der wichtigsten Informationen, die in einer Funktionssemantik enthalten sein können, sind:
 \begin{itemize} 
 \item Der Name der Funktion:\\ Dies gibt an, wie die Funktion genannt wird und welche Funktion sie ausführt.
-\item Die Parameter der Funktion: Dies beschreibt, welche Eingabe die Funktion erwartet und welche Bedeutung die einzelnen Parameter haben.
+\item Die Parameter der Funktion:\\ Dies beschreibt, welche Eingabe die Funktion erwartet und welche Bedeutung die einzelnen Parameter haben.
 \item Der Rückgabewert der Funktion:\\ Dies beschreibt, welche Ausgabe die Funktion liefert und welche Bedeutung der Rückgabewert hat.
 \item Die Bedingungen und Einschränkungen:\\ Dies beschreibt, welche Bedingungen erfüllt sein müssen, damit die Funktion korrekt ausgeführt wird, und welche Einschränkungen es bei der Verwendung der Funktion gibt.
 \item Die Ausführungslogik:\\ Dies beschreibt, wie die Funktion ausgeführt wird, welche Schritte dabei durchlaufen werden und welche Algorithmen verwendet werden.
