@@ -7,8 +7,7 @@
 ## Einleitung
 Das Skript behandelt verteilte Systeme, eine zentrale Technologie in vielen IT-Anwendungen. Die Einführung fordert die Studierenden auf, das Skript aktiv mitzugestalten und zu verbessern, um die Qualität der Bildung zu erhöhen. Dieses Repo ist die Instanziierung einer direkten Möglichkeit.  
 
-## Anleitung 
-### Schritt 2: CodeSpace erstellen
+## Anleitung CodeSpace erstellen
 - **CodeSpace öffnen:** Navigieren Sie zu Ihrem Repository und klicken Sie auf den grünen Button "Code" und dann auf "Open with CodeSpaces". Wählen Sie dann "New CodeSpace".
 - **Warten Sie, bis der CodeSpace bereit ist:** GitHub wird eine Cloud-basierte Entwicklungsumgebung für Sie vorbereiten. Dies kann einige Minuten dauern.
 
