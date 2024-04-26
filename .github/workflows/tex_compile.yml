@@ -11,6 +11,7 @@ jobs:
         with:
           root_file: vs-script-first-v01.tex
         args: "-lualatex -file-line-error -interaction=nonstopmode"
+
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
