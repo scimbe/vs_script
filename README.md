@@ -2,7 +2,7 @@
 
 **Autor:** Prof. Dr. Martin Becke  
 **Datum:** 25. April 2024  
-**Lizenz:** [Creative Commons (4.0 International License)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+**Lizenz:** [Creative Commons (4.0 International License)](http://creativecommons.org/licenses/by-nc-sa/4.0/) CC BY-NC-SA 4.0
 
 ## Einleitung
 Das Skript behandelt verteilte Systeme, eine zentrale Technologie in vielen IT-Anwendungen. Die Einführung fordert die Studierenden auf, das Skript aktiv mitzugestalten und zu verbessern, um die Qualität der Bildung zu erhöhen. Dieses Repo ist die Instanziierung einer direkten Möglichkeit.  
