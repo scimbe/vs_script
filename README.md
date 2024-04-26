@@ -5,7 +5,7 @@
 **Lizenz:** [Creative Commons (4.0 International License)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## Einleitung
-Das Skript behandelt verteilte Systeme, eine zentrale Technologie in vielen IT-Anwendungen. Die Einführung fordert die Studierenden auf, das Skript aktiv mitzugestalten und zu verbessern, um die Qualität der Bildung zu erhöhen.
+Das Skript behandelt verteilte Systeme, eine zentrale Technologie in vielen IT-Anwendungen. Die Einführung fordert die Studierenden auf, das Skript aktiv mitzugestalten und zu verbessern, um die Qualität der Bildung zu erhöhen. Dieses Repo ist die Instanziierung einer direkten Möglichkeit.  
 
 ## Inhaltsübersicht
 - **Studienplan:** Gliederung der Themen über das Semester.
@@ -13,20 +13,20 @@ Das Skript behandelt verteilte Systeme, eine zentrale Technologie in vielen IT-A
 - **Realisierung:** Behandlung von Prozessen und Threads, Multithreading, Serveranwendungen und Virtualisierung.
 - **Koordination, Konsens und Fehler:** Erörterung von Konsistenzmodellen, Synchronisationsprotokollen und Konsensbildung in verteilten Systemen.
 - **Algorithmen:** Verschiedene Algorithmen für paralleles Rechnen und Koordination.
-- **Betrieb:** Themen wie Monitoring, Debugging und Deployment.
+- **Betrieb/Deployment:** Themen wie Monitoring, Debugging und Deployment.
 
 ## Wichtige Technologien und Konzepte
 - **Message Passing**
-- **Distributed Hash Table (DHT)**
-- **Blockchain-Technologie**
-- **Service Discovery**
+- **Pattern**
+- **RPC/Chord/Blockchain-Technologie**
+- **Discovery**
 - **Fehler- und Fehlertoleranzmechanismen**
 
 ## Anwendungsbereiche
-Von Online-Transaktionssystemen bis zu drahtlosen Sensornetzwerken und Cloud-Anwendungen. Speziell in Hamburg werden verteilte Systeme im Smart Port und in der Luftfahrtindustrie eingesetzt.
+Von Online-Transaktionssystemen bis zu drahtlosen Sensornetzwerken und Cloud-Anwendungen.
 
 ## Herausforderungen
-Die Planung und Integration verteilter Systeme, Gewährleistung der Datensicherheit und Datenschutz sind kritische Aspekte.
+Die Planung und Integration verteilter Systeme, Gewährleistung der Datensicherheit und Datenschutz sind kritische Aspekte, die leider noch nicht betrachtet werden.
 
 ## Beitrag zum Lernprozess
 Das Skript ist als interaktives Lehrmittel konzipiert, das die aktive Beteiligung und das Engagement der Studierenden erfordert, um theoretisches Wissen praktisch umzusetzen.
