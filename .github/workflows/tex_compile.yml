@@ -1,0 +1,30 @@
+name: LaTeX Build
+
+on:
+  push:
+    paths:
+      - '**/*.tex'
+  pull_request:
+    paths:
+      - '**/*.tex'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Install LaTeX
+      run: sudo apt-get install texlive-full
+
+    - name: Compile LaTeX Documents
+      run: |
+        for file in $(find . -name '*.tex'); do
+          pdflatex -halt-on-error $file
+          if [ $? -ne 0 ]; then
+            echo "Compilation failed for $file"
+            exit 1
+          fi
+        done
