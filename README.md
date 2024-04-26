@@ -1,4 +1,4 @@
-# Verteilte Systeme (Skript Zusammenfassung)
+# Verteilte Systeme
 
 **Autor:** Prof. Dr. Martin Becke  
 **Datum:** 25. April 2024  
