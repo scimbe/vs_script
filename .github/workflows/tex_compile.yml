@@ -6,11 +6,17 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
-      - name: Compile LaTeX document
+      - name: Compile LaTeX document first
         uses: xu-cheng/latex-action@v3
         with:
           root_file: vs-script-first-v01.tex
-          args: "-lualatex -file-line-error -interaction=nonstopmode"
+          args: " -synctex=1 -file-line-error -interaction=nonstopmode"
+          
+      - name: Compile LaTeX document second
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: vs-script-first-v01.tex
+          args: " -synctex=1 -file-line-error -interaction=nonstopmode"
 
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
