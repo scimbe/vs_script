@@ -18,8 +18,8 @@ jobs:
       run: |
         file vs-script-first-v01.pdf | grep -q ' PDF '
 
-    - name: Upload PDF
-      uses: actions/upload-artifact@v2
-      with:
-        name: PDF
-        path: vs-script-first-v01.pdf
+#     - name: Upload PDF
+#      uses: actions/upload-artifact@v2
+#       with:
+#         name: PDF
+#         path: vs-script-first-v01.pdf
