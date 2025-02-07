@@ -1,0 +1,118 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\title{Verteilte Systeme}
+\subtitle{Beispielarchitekturen und Realisierung}
+\author{Prof. Dr. Martin Becke}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Beispielarchitekturen: RPC}
+    Remote Procedure Call (RPC) ermöglicht das Aufrufen von Funktionen auf entfernten Systemen, als wären sie lokal. 
+    Vergleichbar mit einem Telefonanruf: Der Anrufer (Client) tätigt einen Anruf (RPC) an den Angerufenen (Server), der den Anruf entgegennimmt und die gewünschte Aktion ausführt.
+\end{frame}
+
+\begin{frame}{RPC - Architektur}
+    Die RPC-Architektur besteht aus:
+    \begin{itemize}
+        \item \textbf{Client und Server:} Zwei entkoppelte Kommunikationspartner.
+        \item \textbf{Client- und Server-Stub:} Verwalten die Kommunikation und Datenkonvertierung (Marshalling).
+        \item \textbf{Kommunikationsprotokoll:} Beispielsweise TCP/IP.
+    \end{itemize}
+
+    Der Client-Stub marshallt die Parameter, sendet die Anfrage an den Server, der die Funktion ausführt. Der Server-Stub marshallt das Ergebnis und sendet es zurück an den Client.
+\end{frame}
+
+\begin{frame}{RPC - Schichtenmodell und Marshalling}
+    Im Schichtenmodell von RPC übernimmt die Middleware die Aufgabe der Kommunikation und Datenkonvertierung. \newline
+    \textbf{Marshalling:} Transformation von Daten in ein Format, das über das Netzwerk übertragen werden kann.
+\end{frame}
+
+\begin{frame}{Marshalling vs. Serialisierung}
+    Marshalling und Serialisierung sind verwandte Konzepte:
+    \begin{itemize}
+        \item \textbf{Marshalling:} Vorbereiten von Daten für RPC, inklusive Metadaten.
+        \item \textbf{Serialisierung:} Umwandlung eines Objekts in eine lineare Darstellung, oft Teil des Marshalling-Prozesses.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Copy-in, Copy-out}
+    \textbf{"Copy-in, Copy-out"} ist ein Prinzip beim Marshalling:
+    \begin{itemize}
+        \item \textbf{Copy-in:} Die Parameterwerte werden in eine Nachricht kopiert.
+        \item \textbf{Copy-out:} Die Ergebnisse werden zurück in die ursprünglichen Variablen kopiert.
+    \end{itemize}
+    Dies vermeidet direkte Speichermanipulation zwischen Systemen.
+\end{frame}
+
+\begin{frame}{IDL und Codegenerierung}
+    \textbf{Interface Definition Language (IDL)} beschreibt die Schnittstelle von entfernten Prozeduren. \newline
+    Codegeneratoren erstellen automatisch Stub- und Skeleton-Code aus der IDL, was die Implementierung von RPC vereinfacht.
+\end{frame}
+
+\begin{frame}{Beispiel: XML-RPC und gRPC}
+    \begin{itemize}
+        \item \textbf{XML-RPC:} Verwendet XML für die Datenkodierung und HTTP für die Übertragung.
+        \item \textbf{gRPC:} Verwendet Protocol Buffers (effizientes binäres Format) und HTTP/2.
+    \end{itemize}
+    Beide sind Beispiele für RPC-Implementierungen mit \textbf{"Copy-in, Copy-out"}-Semantik.
+\end{frame}
+
+\begin{frame}{Remote Method Invocation (RMI)}
+    RMI ist ähnlich wie RPC, jedoch speziell für objektorientierte Sprachen wie Java. Es ermöglicht das Aufrufen von Methoden auf entfernten Objekten. \newline
+    Vergleichbar mit RPC, jedoch mit Objekten statt Prozeduren.
+\end{frame}
+
+\begin{frame}{Beispielarchitekturen: P2P Chord}
+    \textbf{Chord} ist ein P2P-System, das eine verteilte Hashtabelle implementiert. Es ermöglicht effizientes Suchen und Speichern von Daten in einem dezentralen Netzwerk. \newline
+    Vergleichbar mit einem verteilten Telefonbuch: Jeder Knoten kennt nur einen Teil des Telefonbuchs, kann jedoch jeden Eintrag effizient finden.
+\end{frame}
+
+\begin{frame}{Chord - Struktur und Funktionsweise}
+    \begin{itemize}
+        \item \textbf{Identifier Space:} Ein Ring mit eindeutigen IDs für Knoten und Schlüssel.
+        \item \textbf{Key-Node Mapping:} Schlüssel werden dem Knoten zugewiesen, dessen ID am nächsten liegt.
+        \item \textbf{Finger Tables:} Ermöglichen effizientes Routing im Netzwerk.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Chord - Dynamik und Fehlertoleranz}
+    Chord ist dynamisch und fehlertolerant:
+    \begin{itemize}
+        \item Knoten können hinzugefügt oder entfernt werden, ohne das System zu beeinträchtigen.
+        \item Redundante Informationsspeicherung und regelmäßige Aktualisierungen der Finger Tables sorgen für Robustheit.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Cassandra - Anpassungen an Chord}
+    Apache Cassandra, ein verteiltes NoSQL-Datenbanksystem, nutzt Ideen von Chord, jedoch mit Anpassungen:
+    \begin{itemize}
+        \item \textbf{Partitionierungsstrategie:} Cassandra verwendet einen Partitionsschlüssel zur Verteilung der Daten auf Knoten.
+        \item \textbf{Replikationsstrategie:} Daten werden auf mehreren Knoten repliziert, um Verfügbarkeit und Fehlertoleranz zu gewährleisten.
+        \item \textbf{Gossip-Protokoll:} Dient der Kommunikation zwischen Knoten.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Cassandra - Weiterentwicklung}
+    Zusätzliche Techniken in Cassandra:
+    \begin{itemize}
+        \item \textbf{Lese- und Schreibkonsistenz:} Anpassbar an die Anforderungen der Anwendung.
+        \item \textbf{Hinted Handoff:} Für den Umgang mit vorübergehend ausgefallenen Knoten.
+        \item \textbf{Repair und Anti-Entropy:} Zur Erkennung und Behebung von Inkonsistenzen zwischen Replikaten.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Anti-Entropy}
+    Anti-Entropy-Mechanismen stellen die Konsistenz zwischen Replikaten in verteilten Systemen sicher. \newline
+    Sie erkennen und beheben Inkonsistenzen, die durch Updates, Netzwerklatenzen oder Ausfälle entstehen können. \newline
+    Vergleichbar mit einem Reparaturdienst: Er stellt sicher, dass alle Kopien eines Dokuments identisch sind, auch wenn Änderungen an einer Kopie vorgenommen wurden.
+\end{frame}
+
+\end{document}

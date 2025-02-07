@@ -1,0 +1,108 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\title{Verteilte Systeme}
+\subtitle{Entwurfsmuster und Beispielarchitekturen}
+\author{Prof. Dr. Martin Becke}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{MVC – Beispiel: Smarte Lampe}
+    Um das MVC-Muster zu veranschaulichen, betrachten wir das Beispiel einer smarten Lampe, die über eine App gesteuert werden kann:
+    \begin{itemize}
+        \item \textbf{Model (Lampe):} Speichert den Zustand der Lampe (ein/aus, Helligkeit, Farbe).
+        \item \textbf{View (App):} Zeigt den Zustand der Lampe an und ermöglicht dem Benutzer, die Lampe zu steuern.
+        \item \textbf{Controller (Raspberry Pi):} Empfängt Eingaben von der App, aktualisiert das Model und sendet Aktualisierungen an die View. Er agiert wie ein Dirigent, der das Orchester (Model und View) koordiniert.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{MVC-Varianten: CVM und VCM}
+    CVM (Controller-View-Model) und VCM (View-Controller-Model) sind Variationen von MVC, die die Reihenfolge der Komponenten im Schichtenmodell ändern. Sie beeinflussen den Datenfluss und die Abhängigkeiten zwischen den Komponenten.
+\end{frame}
+
+\begin{frame}{Proxy – Arten und Vorteile}
+    Ein Proxy agiert als Stellvertreter für einen Dienst und bietet verschiedene Vorteile:
+    \begin{itemize}
+        \item \textbf{Caching:} Zwischenspeichern häufig abgerufener Daten, um die Leistung zu verbessern.
+        \item \textbf{Sicherheit:} Kontrolle des Zugriffs auf den eigentlichen Dienst.
+        \item \textbf{Lastverteilung:} Verteilung der Anfragen auf mehrere Server.
+    \end{itemize}
+
+    \textbf{Arten:} Forward Proxy, Reverse Proxy, Caching Proxy, Load Balancing Proxy. Jeder Typ hat spezifische Anwendungsfälle und Vorteile.
+\end{frame}
+
+\begin{frame}{Broker vs. Proxy}
+    Broker und Proxies vermitteln beide die Kommunikation zwischen Komponenten, aber auf unterschiedliche Weise:
+    \begin{itemize}
+        \item \textbf{Broker:} Empfängt, speichert und leitet Nachrichten weiter. Kann diese auch filtern oder transformieren.
+        \item \textbf{Proxy:} Agiert als transparenter Stellvertreter, der den Zugriff auf einen Dienst kontrolliert.
+    \end{itemize}
+    Die Wahl zwischen Broker und Proxy hängt vom gewünschten Grad an Kontrolle und Flexibilität ab.
+\end{frame}
+
+\begin{frame}{Observer Pattern (Beobachter)}
+    Das Observer Pattern ermöglicht eine lose Kopplung zwischen einem Objekt (Subjekt) und seinen abhängigen Objekten (Beobachtern). Wenn sich der Zustand des Subjekts ändert, werden alle Beobachter benachrichtigt und können entsprechend reagieren. Vergleichbar mit einem Nachrichtensystem: Abonnenten (Beobachter) erhalten Benachrichtigungen, wenn neue Nachrichten (Änderungen) veröffentlicht werden.
+\end{frame}
+
+\begin{frame}{Callback Pattern (Rückruf)}
+    Das Callback Pattern ermöglicht asynchrone Kommunikation, indem eine Funktion (Callback) als Argument an eine andere Funktion übergeben wird. Die Callback-Funktion wird später ausgeführt, wenn ein bestimmtes Ereignis eintritt. Vergleichbar mit einem Bestellvorgang: Der Kunde (Aufrufer) gibt seine Telefonnummer (Callback) an, und der Shop ruft ihn an (führt den Callback aus), wenn die Bestellung fertig ist.
+\end{frame}
+
+\begin{frame}{Singleton Pattern}
+    Das Singleton Pattern stellt sicher, dass eine Klasse nur eine einzige Instanz hat und bietet einen globalen Zugriffspunkt auf diese Instanz. Es ist nützlich für die Verwaltung gemeinsamer Ressourcen oder Konfigurationen. \newline Herausforderungen in verteilten Systemen: Skalierbarkeit, Synchronisation und Fehlertoleranz.
+\end{frame}
+
+\begin{frame}{Factory Pattern}
+    Das Factory Pattern kapselt die Objekterstellung und ermöglicht die Erstellung von Objekten, ohne die konkreten Klassen kennen zu müssen. Vergleichbar mit einer Fabrik: Sie produziert verschiedene Produkte (Objekte) basierend auf den Anforderungen des Kunden.
+\end{frame}
+
+\begin{frame}{Dependency Injection (DI)}
+    DI ist ein Entwurfsmuster, bei dem Abhängigkeiten eines Objekts von außen bereitgestellt werden, anstatt dass das Objekt sie selbst erstellt. Es fördert lose Kopplung und Testbarkeit. Vergleichbar mit einem Restaurant: Der Koch (Objekt) benötigt Zutaten (Abhängigkeiten), die ihm vom Kellner (DI-Container) gebracht werden.
+\end{frame}
+
+\begin{frame}{Adapter und Wrapper Pattern}
+    Adapter und Wrapper dienen beide der Anpassung von Schnittstellen:
+    \begin{itemize}
+        \item \textbf{Adapter:} Passt eine bestehende Schnittstelle an eine andere an.
+        \item \textbf{Wrapper:} Erweitert die Funktionalität einer bestehenden Schnittstelle.
+    \end{itemize}
+    Vergleichbar mit einem Reiseadapter: Er ermöglicht die Verwendung von Geräten mit unterschiedlichen Steckern.
+\end{frame}
+
+\begin{frame}{Interceptor Pattern}
+    Das Interceptor Pattern ermöglicht das Abfangen und Verarbeiten von Nachrichten oder Anfragen, bevor sie an ihr Ziel gelangen. Es ist nützlich für Sicherheitsüberprüfungen, Logging oder Leistungsüberwachung. Vergleichbar mit einem Zollbeamten: Er überprüft den Verkehr, bevor er die Grenze passieren lässt.
+\end{frame}
+
+\begin{frame}{Fassade Pattern}
+    Das Fassade Pattern bietet eine vereinfachte Schnittstelle für ein komplexes Subsystem und reduziert die Komplexität für den Client. Vergleichbar mit einem Kundenservice: Er bietet eine einzige Anlaufstelle für verschiedene Anfragen.
+\end{frame}
+
+\begin{frame}{Pipeline Pattern}
+    Das Pipeline Pattern organisiert die Verarbeitung in eine Reihe von Schritten, die sequentiell ausgeführt werden. Jeder Schritt wird von einem spezialisierten Modul durchgeführt. Vergleichbar mit einer Fertigungsstraße: Das Produkt durchläuft verschiedene Stationen (Module), bevor es fertig ist.
+\end{frame}
+
+\begin{frame}{Watchdog Pattern}
+    Das Watchdog Pattern dient zur Überwachung von Prozessen oder Ressourcen und greift ein, wenn Probleme auftreten. Vergleichbar mit einem Wachhund: Er schlägt Alarm, wenn etwas nicht stimmt.
+\end{frame}
+
+\begin{frame}{Master-Worker Pattern}
+    Das Master-Worker Pattern verteilt die Arbeit auf mehrere Worker, die vom Master koordiniert werden. Es erhöht die Leistung und Skalierbarkeit. \newline \textbf{Beispiel:} MapReduce-Paradigma.
+\end{frame}
+
+\begin{frame}{MapReduce}
+    MapReduce ist ein Programmiermodell für die Verarbeitung großer Datenmengen auf verteilten Systemen. Es besteht aus zwei Phasen:
+    \begin{itemize}
+        \item \textbf{Map:} Aufteilung der Daten in Schlüssel-Wert-Paare.
+        \item \textbf{Reduce:} Verarbeitung der Schlüssel-Wert-Paare, um Ergebnisse zu erzeugen.
+    \end{itemize}
+    Vergleichbar mit einer Volkszählung: Die Daten werden in verschiedene Regionen aufgeteilt (Map) und dann zusammengeführt (Reduce), um die Gesamtbevölkerung zu ermitteln.
+\end{frame}
+
+\end{document}

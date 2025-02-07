@@ -1,0 +1,129 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\title{Verteilte Systeme}
+\subtitle{Koordination, Konsistenz und Fehlertoleranz}
+\author{Prof. Dr. Martin Becke}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Koordination, Konsens und Fehler}
+    In verteilten Systemen müssen unabhängige Knoten zusammenarbeiten, um gemeinsame Ziele zu erreichen. Dies erfordert:
+    \begin{itemize}
+        \item \textbf{Koordination:} Synchronisation von Aktionen.
+        \item \textbf{Konsens:} Einigung auf gemeinsame Entscheidungen.
+        \item \textbf{Fehlerbehandlung:} Umgang mit unerwarteten Zuständen.
+    \end{itemize}
+    \textbf{Analogie:} Wie ein Orchester, bei dem die Musiker synchron spielen, dem Dirigenten folgen und Fehler schnell korrigieren müssen.
+\end{frame}
+
+\begin{frame}{Konsistenz}
+    Konsistenz beschreibt, wie Änderungen in einem verteilten System sichtbar werden. Ziel ist, dass alle Knoten eine einheitliche Sicht auf die Daten haben. \newline
+    Verschiedene Konsistenzmodelle bieten dabei unterschiedliche Kompromisse zwischen:
+    \begin{itemize}
+        \item \textbf{Leistung:} Geschwindigkeit und Verfügbarkeit.
+        \item \textbf{Datenkonsistenz:} Einheitlichkeit und Integrität.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Das CAP-Theorem}
+    Das CAP-Theorem besagt, dass ein verteiltes System maximal zwei der drei Eigenschaften gleichzeitig erfüllen kann:
+    \begin{itemize}
+        \item \textbf{Consistency (Konsistenz):} Alle Knoten sehen dieselben Daten.
+        \item \textbf{Availability (Verfügbarkeit):} Jeder Anfrage wird eine Antwort geliefert.
+        \item \textbf{Partition Tolerance (Partitionstoleranz):} Das System bleibt trotz Netzwerkausfällen funktionsfähig.
+    \end{itemize}
+    In der Praxis müssen Systeme oft zwischen Konsistenz und Verfügbarkeit abwägen, da Partitionstoleranz unverzichtbar ist.
+\end{frame}
+
+\begin{frame}{Konsistenzmodelle (1/3)}
+    \begin{itemize}
+        \item \textbf{Strikte Konsistenz:} Alle Knoten sehen sofort dieselben Daten. Schwierig in der Praxis umzusetzen.
+        \item \textbf{Linearisierbarkeit:} Jede Operation erscheint atomar und wird sofort reflektiert.
+        \item \textbf{Sequentielle Konsistenz:} Die Reihenfolge der Operationen ist auf allen Knoten gleich.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Konsistenzmodelle (2/3)}
+    \begin{itemize}
+        \item \textbf{Kausale Konsistenz:} Kausal abhängige Operationen werden in derselben Reihenfolge ausgeführt. Unabhängige Operationen können unterschiedlich ausgeführt werden.
+        \item \textbf{Eventual Consistency:} Änderungen werden schließlich synchronisiert, aber nicht sofort. Geeignet für Systeme mit hoher Verfügbarkeit.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Konsistenzmodelle (3/3)}
+    Weitere und spezialisierte Konsistenzmodelle:
+    \begin{itemize}
+        \item \textbf{Tunable Consistency:} Anpassbare Konsistenzstufen.
+        \item \textbf{Quorum-Systeme:} Die Mehrheit der Knoten muss zustimmen.
+        \item \textbf{CRDTs (Conflict-free Replicated Data Types):} Konfliktfreie Datenstrukturen.
+        \item \textbf{Hybride Ansätze:} Kombination mehrerer Konsistenzmodelle.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Synchronisation in verteilten Systemen}
+    Synchronisation ist essenziell, um die Reihenfolge von Ereignissen zu koordinieren und Konsistenz zu gewährleisten. \newline
+    \textbf{Herausforderungen:}
+    \begin{itemize}
+        \item Keine gemeinsame Uhr.
+        \item Netzwerklatenzen.
+        \item Fehlertoleranz.
+    \end{itemize}
+    \textbf{Lösungsansätze:}
+    \begin{itemize}
+        \item Physikalische Uhren: z. B. NTP, PTP.
+        \item Logische Uhren: z. B. Lamport-Uhren, Vektoruhren.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conflict-Free Replicated Data Types (CRDTs)}
+    CRDTs sind spezielle Datenstrukturen für verteilte Systeme, die Konflikte bei der Replikation vermeiden. \newline
+    \textbf{Arten von CRDTs:}
+    \begin{itemize}
+        \item \textbf{Operation-basiert (CmRDTs):} Replikation durch Operationen.
+        \item \textbf{Zustandsbasiert (CvRDTs):} Replikation durch Zustände.
+    \end{itemize}
+    \textbf{Beispiele:} Grow-only Counter (G-Counter), Two-Phase Set (2P-Set).
+\end{frame}
+
+\begin{frame}{Logische Uhren}
+    Logische Uhren bieten eine Möglichkeit, die Reihenfolge von Ereignissen in verteilten Systemen zu bestimmen:
+    \begin{itemize}
+        \item \textbf{Lamport-Uhren:} Erfassen die "happens-before"-Beziehung durch inkrementelle Zeitstempel.
+        \item \textbf{Vektoruhren:} Erweiterung der Lamport-Uhren für vollständige Ereignisordnungen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Locking in verteilten Systemen}
+    Locking wird zur Koordination des Zugriffs auf gemeinsame Ressourcen verwendet. \newline
+    \textbf{Herausforderungen:}
+    \begin{itemize}
+        \item Deadlocks: Prozesse warten gegenseitig auf die Freigabe von Ressourcen.
+        \item Leistungseinbußen: Wartende Prozesse können die Performance beeinträchtigen.
+        \item Verfügbarkeitsprobleme: Ausfälle von Lock-Managern können kritische Auswirkungen haben.
+    \end{itemize}
+    \textbf{Lösungen:} Zentraler Lock-Manager, verteiltes Locking, Zweiphasen-Locking.
+\end{frame}
+
+\begin{frame}{Das Philosophenproblem}
+    \textbf{Problem:} Fünf Philosophen sitzen um einen Tisch und benötigen zwei Gabeln zum Essen. \newline
+    \textbf{Ziele:}
+    \begin{itemize}
+        \item Vermeidung von Deadlocks.
+        \item Sicherstellung, dass jeder Philosoph irgendwann essen kann.
+    \end{itemize}
+    \textbf{Lösungsansätze:}
+    \begin{itemize}
+        \item Hierarchisches Locking.
+        \item Ressourcenanfrage mit zufälligen Wartezeiten.
+    \end{itemize}
+\end{frame}
+
+\end{document}

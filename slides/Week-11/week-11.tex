@@ -1,0 +1,142 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\title{Verteilte Systeme}
+\subtitle{Algorithmen für Koordination und Konsens}
+\author{Prof. Dr. Martin Becke}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Algorithmen in Verteilten Systemen}
+    Verteilte Systeme benötigen spezielle Algorithmen, um Herausforderungen wie Konsens, Koordination, Replikation und Fehlertoleranz zu meistern. \newline
+    \textbf{Herausforderungen:}
+    \begin{itemize}
+        \item Knoten können ausfallen.
+        \item Nachrichten können verloren gehen.
+        \item Kommunikation ist oft asynchron.
+    \end{itemize}
+    \textbf{Analogie:} Wie ein Team von Bergsteigern: Sie müssen zusammenarbeiten und kommunizieren, um das Ziel zu erreichen, selbst wenn einige Mitglieder ausfallen oder der Weg unvorhersehbar wird.
+\end{frame}
+
+\begin{frame}{Paralleles Rechnen}
+    Paralleles Rechnen ermöglicht die gleichzeitige Ausführung von Berechnungen auf mehreren Prozessoren oder Knoten. \newline
+    \textbf{Eigenschaften:}
+    \begin{itemize}
+        \item Ideal für rechenintensive Aufgaben, die in unabhängige Teile zerlegt werden können.
+        \item Beispiele: Matrixmultiplikation, Bildverarbeitung, Simulationen, Maschinelles Lernen.
+    \end{itemize}
+    \textbf{Analogie:} Wie ein Team von Köchen, die gemeinsam ein Menü zubereiten: Jeder Koch arbeitet an einem anderen Gang, wodurch das Menü schneller fertig wird.
+\end{frame}
+
+\begin{frame}{MapReduce}
+    MapReduce ist ein Programmiermodell für die Verarbeitung großer Datenmengen in verteilten Systemen. \newline
+    \textbf{Phasen:}
+    \begin{itemize}
+        \item \textbf{Map:} Die Eingabedaten werden in Schlüssel-Wert-Paare umgewandelt. \newline \textit{Analogie:} Sortieren von Wäsche nach Farben.
+        \item \textbf{Reduce:} Paare mit gleichem Schlüssel werden zusammengefasst. \newline \textit{Analogie:} Zählen der Socken jeder Farbe.
+    \end{itemize}
+    \textbf{Beispiel:} Wortzählung in einem großen Textkorpus.
+\end{frame}
+
+\begin{frame}{Resilient Distributed Datasets (RDDs) - Spark}
+    RDDs sind unveränderliche, verteilte Datensammlungen in Apache Spark, die effiziente Datenverarbeitung und Wiederverwendung ermöglichen. \newline
+    \textbf{Funktionen:}
+    \begin{itemize}
+        \item Unterstützung für Transformationen wie \texttt{map}, \texttt{filter} und \texttt{reduce}.
+        \item Geeignet für komplexe Operationen wie SQL-Abfragen oder Machine Learning.
+    \end{itemize}
+    \textbf{Analogie:} Wie ein gut organisiertes Lager, in dem Materialien (Daten) effizient abgerufen und verarbeitet werden können.
+\end{frame}
+
+\begin{frame}{Zentralisierte vs. Dezentralisierte Algorithmen}
+    \begin{itemize}
+        \item \textbf{Zentralisiert:} Ein einzelner Knoten steuert den Algorithmus. \newline \textit{Vorteil:} Einfachheit. \newline \textit{Nachteil:} Anfällig für Ausfälle des zentralen Knotens. \newline \textit{Analogie:} Ein Dirigent leitet ein Orchester.
+        \item \textbf{Dezentralisiert:} Verantwortung verteilt auf alle Knoten. \newline \textit{Vorteil:} Robuster und skalierbarer. \newline \textit{Nachteil:} Komplexer in der Umsetzung. \newline \textit{Analogie:} Ein Jazz-Ensemble improvisiert zusammen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Konsensalgorithmen}
+    Konsensalgorithmen stellen sicher, dass alle Knoten in einem verteilten System trotz Fehlern denselben Zustand oder Wert annehmen. \newline
+    \textbf{Beispiele:}
+    \begin{itemize}
+        \item Paxos.
+        \item Raft.
+        \item ZAB (ZooKeeper Atomic Broadcast).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Paxos}
+    Paxos ist ein bekannter Konsensalgorithmus, der robust und fehlertolerant ist, jedoch als komplex in der Implementierung gilt. \newline
+    \textbf{Rollen:}
+    \begin{itemize}
+        \item Proposer (Antragsteller).
+        \item Acceptor (Annehmer).
+        \item Learner (Lerner).
+    \end{itemize}
+    \textbf{Phasen:} Vorbereitung, Annahme, Lernen.
+\end{frame}
+
+\begin{frame}{Raft}
+    Raft ist eine modernere und verständlichere Alternative zu Paxos. \newline
+    \textbf{Kernkonzepte:}
+    \begin{itemize}
+        \item \textbf{Leader Election:} Ein Leader wird gewählt.
+        \item \textbf{Log Replication:} Der Leader repliziert Logs an andere Knoten.
+        \item \textbf{Safety:} Garantiert Konsistenz.
+    \end{itemize}
+    \textbf{Analogie:} Wie ein gut organisiertes Team, das von einem gewählten Anführer koordiniert wird.
+\end{frame}
+
+\begin{frame}{ZooKeeper Atomic Broadcast (ZAB)}
+    ZAB ist ein speziell für Apache ZooKeeper entwickeltes Konsensprotokoll. \newline
+    \textbf{Eigenschaften:}
+    \begin{itemize}
+        \item Garantiert zuverlässige Replikation.
+        \item Sichert konsistenten Systemzustand.
+    \end{itemize}
+    \textbf{Modi:}
+    \begin{itemize}
+        \item Recovery (Wiederherstellung).
+        \item Broadcast (Übertragung).
+    \end{itemize}
+    \textbf{Analogie:} Wie ein Nachrichtendienst, der sicherstellt, dass alle Abonnenten dieselben Nachrichten erhalten.
+\end{frame}
+
+\begin{frame}{Koordination: Snapshots und Checkpoints}
+    \begin{itemize}
+        \item \textbf{Snapshots:} Erfassen den globalen Systemzustand zu einem bestimmten Zeitpunkt. \newline \textit{Analogie:} Wie ein Foto.
+        \item \textbf{Checkpoints:} Speichern den lokalen Prozesszustand. \newline \textit{Analogie:} Wie ein Speicherpunkt in einem Videospiel.
+    \end{itemize}
+    Beide Techniken sind essenziell für Fehlertoleranz und Debugging.
+\end{frame}
+
+\begin{frame}{Koordination: Deadlock Detection und Termination Detection}
+    \begin{itemize}
+        \item \textbf{Deadlock Detection:} Erkennt Situationen, in denen Prozesse zyklisch aufeinander warten.
+        \item \textbf{Termination Detection:} Erkennt, wann alle Prozesse ihre Arbeit abgeschlossen haben.
+    \end{itemize}
+    Beide Mechanismen sind entscheidend für die korrekte Funktion verteilter Systeme.
+\end{frame}
+
+\begin{frame}{Koordination: Mutual Exclusion und Barriers}
+    \begin{itemize}
+        \item \textbf{Mutual Exclusion:} Verhindert, dass mehrere Prozesse gleichzeitig auf eine Ressource zugreifen. \newline \textit{Analogie:} Wie ein Schlüssel für ein Badezimmer.
+        \item \textbf{Barriers:} Synchronisiert Prozesse an bestimmten Punkten im Code. \newline \textit{Analogie:} Wie eine Startlinie bei einem Rennen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Koordination: Self-Stabilization und Smart Contracts}
+    \begin{itemize}
+        \item \textbf{Self-Stabilization:} Systeme erholen sich automatisch von Fehlern und erreichen einen korrekten Zustand. \newline \textit{Analogie:} Wie ein Stehaufmännchen.
+        \item \textbf{Smart Contracts:} Automatisierte Verträge auf Blockchains. \newline \textit{Analogie:} Wie ein digitaler Notar.
+    \end{itemize}
+\end{frame}
+
+\end{document}

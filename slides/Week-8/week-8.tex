@@ -1,0 +1,149 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\title{Verteilte Systeme}
+\subtitle{Kommunikation, Koordination und Konsistenz}
+\author{Prof. Dr. Martin Becke}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Kommunikation in verteilten Systemen}
+    Kommunikation ist das Nervensystem verteilter Systeme. Sie ermöglicht den Informationsaustausch und die Koordination zwischen Knoten. Verschiedene Faktoren beeinflussen die Kommunikation, darunter Topologie, Eigenschaften, Protokolle und Serialisierungsformate. \newline
+    Vergleichbar mit dem Straßennetz in einer Stadt: Es bestimmt, wie effizient Menschen und Güter von A nach B gelangen.
+\end{frame}
+
+\begin{frame}{Kommunikationstopologien}
+    Die Topologie eines verteilten Systems beeinflusst Effizienz und Zuverlässigkeit. Gängige Topologien sind:
+    \begin{itemize}
+        \item \textbf{One-to-All:} Ein Knoten sendet an alle anderen. Vergleichbar mit einer Radioübertragung.
+        \item \textbf{Spanning Tree:} Nachrichten werden entlang eines Baumes weitergeleitet. Vergleichbar mit einem Flusssystem.
+        \item \textbf{Flooding:} Jeder Knoten sendet an alle Nachbarn. Vergleichbar mit einer Kettenreaktion.
+        \item \textbf{Gossip:} Jeder Knoten sendet an einige zufällig ausgewählte Nachbarn. Vergleichbar mit der Verbreitung eines Gerüchts.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Kommunikationseigenschaften}
+    Nachrichten können abhängig von den Anwendungsanforderungen folgende Eigenschaften haben:
+    \begin{itemize}
+        \item \textbf{Persistent:} Nachrichten werden dauerhaft gespeichert (z. B. ein Brief).
+        \item \textbf{Transient:} Nachrichten werden nur vorübergehend gespeichert (z. B. ein Telefongespräch).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Kommunikationseigenschaften: Synchron vs. Asynchron}
+    Die zeitliche Kopplung der Kommunikationspartner beeinflusst das Systemdesign:
+    \begin{itemize}
+        \item \textbf{Synchron:} Der Sender wartet auf eine Antwort. Einfacher zu implementieren, aber blockierend.
+        \item \textbf{Asynchron:} Der Sender wartet nicht auf eine Antwort. Komplexer, aber performanter und nicht blockierend.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Kommunikationsprotokolle: TCP/IP, MQTT, HTTP}
+    Die Wahl eines Protokolls hängt von den Anforderungen ab:
+    \begin{itemize}
+        \item \textbf{TCP/IP:} Zuverlässig, aber langsamer.
+        \item \textbf{MQTT:} Leichtgewichtig, ideal für IoT.
+        \item \textbf{HTTP:} Zustandslos, Basis für Webanwendungen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{RESTful APIs und Ressourcen}
+    RESTful APIs verwenden Ressourcen als zentrale Elemente:
+    \begin{itemize}
+        \item Jede Ressource hat eine eindeutige URI.
+        \item Ressourcen können über HTTP-Methoden (GET, POST, PUT, DELETE) manipuliert werden.
+    \end{itemize}
+    Vergleichbar mit einem Online-Shop: Produkte, Kunden und Bestellungen sind Ressourcen, die über die API verwaltet werden.
+\end{frame}
+
+\begin{frame}{HATEOAS (Hypermedia as the Engine of Application State)}
+    HATEOAS ermöglicht es Clients, eine API dynamisch zu erkunden:
+    \begin{itemize}
+        \item Links zu verwandten Ressourcen sind in Antworten enthalten.
+    \end{itemize}
+    Vergleichbar mit einem interaktiven Buch: Links führen den Leser zu anderen Kapiteln.
+\end{frame}
+
+\begin{frame}{Richardson Maturity Model}
+    Das Richardson Maturity Model beschreibt die Reife von RESTful APIs:
+    \begin{itemize}
+        \item \textbf{Level 0:} Einzelner URI und eine einzige HTTP-Methode (RPC-Stil).
+        \item \textbf{Level 1:} Ressourcenorientierung, aber nicht alle HTTP-Methoden.
+        \item \textbf{Level 2:} Verwendung aller HTTP-Methoden.
+        \item \textbf{Level 3:} HATEOAS.
+    \end{itemize}
+    Höhere Levels stehen für "RESTvollere" APIs.
+\end{frame}
+
+\begin{frame}{Alternative APIs: CoAP, XMPP, AMQP, DDS, OPC-UA}
+    Neben RESTful APIs existieren weitere Protokolle für spezifische Anwendungsfälle:
+    \begin{itemize}
+        \item \textbf{CoAP:} Für ressourcenbeschränkte Geräte.
+        \item \textbf{XMPP:} Für Instant Messaging.
+        \item \textbf{AMQP:} Für Enterprise Messaging.
+        \item \textbf{DDS:} Für Echtzeitdaten.
+        \item \textbf{OPC-UA:} Für industrielle Kommunikation.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Message Broker - MQTT vs. Kafka}
+    \begin{itemize}
+        \item \textbf{MQTT:} Leichtgewichtig, Publish-Subscribe, ideal für IoT.
+        \item \textbf{Kafka:} Hochperformant, Streaming-Plattform, geeignet für große Datenmengen.
+    \end{itemize}
+    Die Wahl hängt vom Anwendungsfall ab.
+\end{frame}
+
+\begin{frame}{Message Broker Architektur}
+    Ein Message Broker vermittelt die Kommunikation zwischen Anwendungen. Komponenten:
+    \begin{itemize}
+        \item \textbf{Broker:} Empfang, Speicherung und Weiterleitung von Nachrichten.
+        \item \textbf{Producer:} Sendet Nachrichten an den Broker.
+        \item \textbf{Consumer:} Empfängt Nachrichten vom Broker.
+    \end{itemize}
+    \textbf{Beispiele:} RabbitMQ, Kafka.
+\end{frame}
+
+\begin{frame}{Fehlersemantik: QoS in MQTT}
+    MQTT bietet verschiedene Quality of Service (QoS) Levels:
+    \begin{itemize}
+        \item \textbf{QoS 0 (At most once):} Keine Garantie für die Zustellung.
+        \item \textbf{QoS 1 (At least once):} Mindestens einmal Zustellung, aber Duplikate möglich.
+        \item \textbf{QoS 2 (Exactly once):} Genau einmal Zustellung.
+    \end{itemize}
+    Die Wahl hängt von den Anwendungsanforderungen ab.
+\end{frame}
+
+\begin{frame}{Das Zwei-Generäle-Problem}
+    Das Zwei-Generäle-Problem zeigt die Schwierigkeiten der zuverlässigen Kommunikation über unsichere Kanäle. Selbst mit Bestätigungen kann keine absolute Zustellgarantie erreicht werden. Dieses Problem ist zentral in verteilten Systemen.
+\end{frame}
+
+\begin{frame}{Serialisierungsformate}
+    Serialisierungsformate wandeln Datenstrukturen in übertragbare Formate um:
+    \begin{itemize}
+        \item \textbf{Protocol Buffers:} Effizient, binär.
+        \item \textbf{MessagePack:} Kompakt, effizient.
+        \item \textbf{JSON:} Menschenlesbar, größer.
+        \item \textbf{XML:} Flexibel, komplexer.
+    \end{itemize}
+    Die Wahl hängt von den Anforderungen ab.
+\end{frame}
+
+\begin{frame}{Koordination in verteilten Systemen}
+    Koordination ist essenziell für die Zusammenarbeit von Prozessen. Techniken:
+    \begin{itemize}
+        \item \textbf{Snapshots:} Erfassen des globalen Systemzustands.
+        \item \textbf{Checkpoints:} Speichern des Zustands zur Wiederherstellung.
+        \item \textbf{Deadlock Detection:} Erkennen von Deadlocks.
+        \item \textbf{Termination Detection:} Feststellen, wann alle Prozesse abgeschlossen sind.
+    \end{itemize}
+\end{frame}
+
+\end{document}

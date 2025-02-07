@@ -1,0 +1,171 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\title{Verteilte Systeme}
+\subtitle{Konsens, Fehlertoleranz und Replikation}
+\author{Prof. Dr. Martin Becke}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Konsensbildung in verteilten Systemen}
+    Konsensbildung ist der Prozess, bei dem eine Gruppe von Knoten in einem verteilten System eine gemeinsame Vereinbarung über einen Wert oder Zustand trifft. \newline
+    \textbf{Wesentliche Herausforderungen:}
+    \begin{itemize}
+        \item Fehlertoleranz.
+        \item Kommunikationslatenz.
+        \item Sicherheit.
+    \end{itemize}
+    \textbf{Analogie:} Wie eine Jury, die ein Urteil fällen muss – alle Geschworenen müssen sich einigen, auch wenn einige anderer Meinung sind oder nicht erreichbar sind.
+\end{frame}
+
+\begin{frame}{Quorumsabstimmung}
+    Bei der Quorumsabstimmung muss eine Mindestanzahl von Knoten (das Quorum) zustimmen, um eine Entscheidung zu treffen. \newline
+    \textbf{Kompromiss:}
+    \begin{itemize}
+        \item Kleineres Quorum: Schnellere Entscheidungen, aber höhere Fehlerwahrscheinlichkeit.
+        \item Größeres Quorum: Höhere Zuverlässigkeit, aber langsamere Entscheidungen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Zentralisierte vs. dezentrale Konsensbildung}
+    \begin{itemize}
+        \item \textbf{Zentralisiert:} Ein Knoten (Leader) steuert den Prozess. Einfach, aber anfällig für Ausfälle des Leaders. \newline \textit{Analogie:} Wie eine Monarchie.
+        \item \textbf{Dezentralisiert:} Alle Knoten sind gleichberechtigt. Robuster und skalierbarer, aber komplexer. \newline \textit{Analogie:} Wie eine Demokratie.
+    \end{itemize}
+    Hybride Ansätze kombinieren beide Strategien.
+\end{frame}
+
+\begin{frame}{Fallbeispiel Zentral: ZooKeeper Atomic Broadcast (ZAB)}
+    ZAB ist ein Konsensprotokoll, das von Apache ZooKeeper verwendet wird. \newline
+    \textbf{Eigenschaften:}
+    \begin{itemize}
+        \item Garantiert zuverlässige Replikation von Updates.
+        \item Ermöglicht geordnete Vereinbarungen über Änderungen am Systemzustand.
+    \end{itemize}
+    \textbf{Analogie:} Wie ein Orchesterdirigent, der sicherstellt, dass alle Musiker im gleichen Takt spielen.
+\end{frame}
+
+\begin{frame}{Fallbeispiel Dezentral: Blockchain-Mechanismen}
+    Blockchain-Mechanismen ermöglichen dezentrale Konsensbildung. \newline
+    \textbf{Beispiele:}
+    \begin{itemize}
+        \item \textbf{Proof-of-Work (PoW):} Miner lösen komplexe Rätsel, um Transaktionen zu validieren und neue Blöcke hinzuzufügen.
+        \item \textbf{Proof-of-Stake (PoS):} Die Wahrscheinlichkeit, einen Block hinzuzufügen, hängt vom Anteil am Netzwerk ab.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Blockchain: Vorteile und Nachteile}
+    \textbf{Vorteile:}
+    \begin{itemize}
+        \item Dezentralisierung.
+        \item Transparenz.
+        \item Sicherheit.
+    \end{itemize}
+    \textbf{Nachteile:}
+    \begin{itemize}
+        \item Skalierbarkeit.
+        \item Hoher Energieverbrauch (bei PoW).
+        \item Anfälligkeit für 51%-Angriffe.
+        \item Datenunveränderlichkeit (Problematisch bei Fehlern).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Fehlertoleranz}
+    Fehlertoleranz ist die Fähigkeit eines Systems, trotz Fehlern funktionsfähig zu bleiben. \newline
+    \textbf{Strategien:}
+    \begin{itemize}
+        \item Redundanz.
+        \item Wiederherstellung.
+        \item Fehlertolerante Kommunikation.
+        \item Byzantinische Fehlertoleranz.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Fehlerarten}
+    Fehler in verteilten Systemen können auftreten als:
+    \begin{itemize}
+        \item \textbf{Hardwarefehler:} Ausfall von Komponenten.
+        \item \textbf{Softwarefehler:} Bugs im Code.
+        \item \textbf{Kommunikationsfehler:} Verlust oder Verzögerung von Nachrichten.
+        \item \textbf{Byzantinische Fehler:} Fehlerhafte oder böswillige Knoten.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Fehlermodell-Terminologie}
+    Unterschiedliche Begriffe beschreiben verschiedene Aspekte von Fehlern:
+    \begin{itemize}
+        \item \textbf{Fault (Fehler):} Ursache des Problems.
+        \item \textbf{Error (Fehlzustand):} Inkonsistenter Systemzustand.
+        \item \textbf{Failure (Ausfall):} Beobachtbares Ergebnis.
+    \end{itemize}
+    Diese Begriffe sind wichtig für die Analyse und Behebung von Fehlern.
+\end{frame}
+
+\begin{frame}{Fehlerarten: Fail-Stop, Fail-Noisy, Fail-Silent}
+    \begin{itemize}
+        \item \textbf{Fail-Stop:} Der Knoten hält an und signalisiert den Fehler.
+        \item \textbf{Fail-Noisy:} Der Knoten liefert falsche Ergebnisse.
+        \item \textbf{Fail-Silent:} Der Knoten hält an, ohne den Fehler zu signalisieren.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Redundanz (1/2)}
+    Redundanz erhöht die Fehlertoleranz durch zusätzliche Ressourcen:
+    \begin{itemize}
+        \item \textbf{Datenredundanz:} Mehrere Kopien der Daten (Replikation, Erasure Coding).
+        \item \textbf{Rechenredundanz:} Parallele Ausführung von Berechnungen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Redundanz (2/2)}
+    \begin{itemize}
+        \item \textbf{Kommunikationsredundanz:} Mehrere Kommunikationspfade.
+        \item \textbf{Prozess-Resilienz:} System bleibt trotz Prozessausfällen funktionsfähig.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Replikation}
+    Replikation erstellt und verwaltet Kopien von Daten auf mehreren Knoten. \newline
+    \textbf{Vorteile:}
+    \begin{itemize}
+        \item Erhöhte Verfügbarkeit.
+        \item Bessere Zuverlässigkeit.
+        \item Verbesserte Skalierbarkeit.
+        \item Schnellere Wiederherstellung.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Replikation: Strategien}
+    \begin{itemize}
+        \item \textbf{Passive Replikation (Master-Slave):} Ein Knoten (Master) bearbeitet Anfragen, andere Knoten (Slaves) werden synchronisiert.
+        \item \textbf{Aktive Replikation (Multi-Master):} Alle Knoten bearbeiten Anfragen, erfordert komplexe Konsistenzverwaltung.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Replikation: Cold, Warm, Hot}
+    \textbf{Unterschiede in der Aktualität der Replikate:}
+    \begin{itemize}
+        \item \textbf{Cold:} Seltene Aktualisierung (z. B. Backups).
+        \item \textbf{Warm:} Regelmäßige Aktualisierung, aber nicht in Echtzeit.
+        \item \textbf{Hot:} Nahezu Echtzeit-Aktualisierung, hohe Verfügbarkeit.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Erasure Coding}
+    Erasure Coding teilt Daten in Fragmente und erstellt Paritätsinformationen. \newline
+    \textbf{Vorteile:}
+    \begin{itemize}
+        \item Speicherplatzsparender als Replikation.
+        \item Ermöglicht Datenwiederherstellung bei Teilverlust.
+    \end{itemize}
+    \textbf{Analogie:} Wie ein RAID-System, bei dem Daten über mehrere Festplatten verteilt werden.
+\end{frame}
+
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\title{Verteilte Systeme}
+\subtitle{Realisierung und Virtualisierung}
+\author{Prof. Dr. Martin Becke}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Prozesse und Threads}
+    Prozesse und Threads sind grundlegende Konzepte für die Organisation und Ausführung von Aufgaben in verteilten Systemen:
+    \begin{itemize}
+        \item \textbf{Prozess:} Eine laufende Instanz eines Programms mit eigenem Speicherbereich. Vergleichbar mit einem Koch in einer Restaurantküche: Jeder Koch hat seine eigenen Zutaten und Werkzeuge.
+        \item \textbf{Thread:} Ein leichter Ausführungsstrang innerhalb eines Prozesses. Vergleichbar mit einem Hilfskoch: Threads teilen sich die Küche (Prozess), haben jedoch eigene Aufgaben.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Threads - Vorteile in verteilten Systemen}
+    Threads bieten in verteilten Systemen folgende Vorteile:
+    \begin{itemize}
+        \item \textbf{Parallelität:} Mehrere Aufgaben können gleichzeitig ausgeführt werden.
+        \item \textbf{Effiziente Ressourcennutzung:} Threads teilen sich Ressourcen innerhalb eines Prozesses.
+        \item \textbf{Reaktionsfähigkeit:} Das System kann auf Ereignisse reagieren, während andere Aufgaben ausgeführt werden.
+        \item \textbf{Feinere Granularität:} Aufgaben können in kleinere Einheiten unterteilt werden.
+    \end{itemize}
+    \textbf{Hinweis:} Threads erfordern sorgfältige Synchronisation, um Konflikte zu vermeiden.
+\end{frame}
+
+\begin{frame}{Thread-Modelle}
+    Verschiedene Thread-Modelle bieten unterschiedliche Ansätze:
+    \begin{itemize}
+        \item \textbf{Many-to-One:} Mehrere Benutzer-Threads werden von einem Kernel-Thread verwaltet.
+        \item \textbf{One-to-One:} Jeder Benutzer-Thread hat einen eigenen Kernel-Thread.
+        \item \textbf{N:M (Many-to-Many):} Eine Kombination aus beiden Modellen.
+    \end{itemize}
+    Die Wahl des Modells hängt von den spezifischen Anforderungen des Systems ab.
+\end{frame}
+
+\begin{frame}{Threadpool}
+    Ein Threadpool ist eine Gruppe von Threads, die im Voraus erstellt und zur Ausführung von Aufgaben aus einer Warteschlange verwendet werden. Vorteile:
+    \begin{itemize}
+        \item \textbf{Effizienz:} Threads müssen nicht für jede Aufgabe neu erstellt werden.
+        \item \textbf{Einfachheit:} Threads werden wiederverwendet und zentral verwaltet.
+    \end{itemize}
+    Vergleichbar mit einem Team von Taxifahrern: Sie warten auf Anrufe (Aufgaben) und führen diese aus. Die Größe des Pools sollte sorgfältig gewählt werden, um die Ressourcen optimal zu nutzen.
+\end{frame}
+
+\begin{frame}{Multithreaded Clients - Beispiel: Webbrowser}
+    Multithreading verbessert die Leistung und Benutzerfreundlichkeit:
+    \begin{itemize}
+        \item Webbrowser verwenden Threads, um verschiedene Aufgaben gleichzeitig auszuführen (z. B. Rendern von Webseiten, Laden von Bildern, Verarbeiten von Benutzereingaben).
+        \item Jeder Tab im Browser kann als separater Thread betrachtet werden.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Thread-Level Parallelism (TLP)}
+    \textbf{Thread-Level Parallelism (TLP):} Ein Maß für die Parallelisierung eines Programms.
+    \begin{itemize}
+        \item Ein TLP von 1 bedeutet perfekte Parallelisierung.
+        \item Werte kleiner als 1 zeigen ineffiziente Parallelisierung.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Single-Threaded Prozesse - Beispiel: Node.js}
+    \textbf{Node.js:} Ein Single-Threaded-System, das asynchrone I/O nutzt, um eine hohe Skalierbarkeit zu erreichen.
+    \begin{itemize}
+        \item Besonders effizient bei I/O-intensiven Aufgaben.
+        \item Blockierende Operationen können jedoch die Leistung beeinträchtigen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Blocking vs. Non-Blocking}
+    \textbf{Blocking:} Eine Operation blockiert den Thread, bis sie abgeschlossen ist. \newline
+    \textbf{Non-Blocking:} Eine Operation gibt sofort zurück, auch wenn sie noch nicht abgeschlossen ist. \newline
+    Non-Blocking I/O verbessert Skalierbarkeit und Leistung in verteilten Systemen.
+\end{frame}
+
+\begin{frame}{Prozesse in verteilten Systemen}
+    Prozesse in verteilten Systemen sind separate Ausführungseinheiten, die auf verschiedenen Knoten laufen können. Sie ermöglichen:
+    \begin{itemize}
+        \item \textbf{Parallelisierung:} Gleichzeitige Ausführung von Aufgaben.
+        \item \textbf{Fehlertoleranz:} Unabhängige Prozesse erhöhen die Systemrobustheit.
+    \end{itemize}
+    Vergleichbar mit einem Orchester: Jeder Musiker (Prozess) spielt sein Instrument unabhängig, aber zusammen erzeugen sie ein harmonisches Ganzes.
+\end{frame}
+
+\begin{frame}{Prozessverwaltung: DOS vs. NOS}
+    \begin{itemize}
+        \item \textbf{Distributed Operating Systems (DOS):} Zielen auf Transparenz und globale Ressourcenverwaltung ab. Vergleichbar mit einem einzelnen, großen Computer.
+        \item \textbf{Network Operating Systems (NOS):} Fokussieren auf dezentrale Ressourcenverwaltung und Datenaustausch. Vergleichbar mit einem Netzwerk unabhängiger Computer.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prozessfehler}
+    Typen von Prozessfehlern in verteilten Systemen:
+    \begin{itemize}
+        \item \textbf{Crash Failure:} Plötzlicher Absturz eines Prozesses.
+        \item \textbf{Omission Failure:} Keine Reaktion auf Anfragen.
+        \item \textbf{Timing Failure:} Antwort außerhalb des erwarteten Zeitfensters.
+        \item \textbf{Byzantine Failure:} Unvorhersehbares oder böswilliges Verhalten.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Virtualisierung - Motivation}
+    Virtualisierung ermöglicht die Ausführung mehrerer virtueller Maschinen (VMs) auf einer einzigen physischen Maschine. Vorteile:
+    \begin{itemize}
+        \item Effiziente Ressourcennutzung.
+        \item Flexibilität und Skalierbarkeit.
+        \item Kosteneinsparungen.
+        \item Vereinfachte Verwaltung.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Virtualisierung - Typen}
+    Verschiedene Arten der Virtualisierung:
+    \begin{itemize}
+        \item \textbf{Hardware-Virtualisierung:} Direkter Zugriff auf Hardware.
+        \item \textbf{Vollvirtualisierung:} Vollständige Emulation der Hardware.
+        \item \textbf{Paravirtualisierung:} Angepasstes Gastbetriebssystem.
+        \item \textbf{Betriebssystemvirtualisierung:} Container teilen sich den Kernel (z. B. Docker).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hypervisor}
+    \textbf{Hypervisor:} Eine Software zur Verwaltung der Virtualisierung.
+    \begin{itemize}
+        \item \textbf{Typ 1 (Bare Metal):} Läuft direkt auf der Hardware.
+        \item \textbf{Typ 2 (Hosted):} Läuft auf einem Betriebssystem.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Containerisierung (Docker, Kubernetes)}
+    Containerisierungstechnologien:
+    \begin{itemize}
+        \item \textbf{Docker:} Erstellt und verwaltet Container.
+        \item \textbf{Kubernetes:} Orchestriert und verwaltet Container.
+    \end{itemize}
+    Container bieten leichtgewichtige Virtualisierung und ermöglichen effiziente Bereitstellung und Skalierung von Anwendungen.
+\end{frame}
+
+\begin{frame}{Cloud Computing Modelle: SaaS, PaaS, IaaS}
+    Cloud Computing bietet verschiedene Service-Modelle:
+    \begin{itemize}
+        \item \textbf{SaaS (Software as a Service):} Anwendungen werden über das Internet bereitgestellt.
+        \item \textbf{PaaS (Platform as a Service):} Plattformen für Entwicklung und Bereitstellung.
+        \item \textbf{IaaS (Infrastructure as a Service):} Zugriff auf grundlegende IT-Ressourcen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Cloud vs. Eigenes Rechenzentrum}
+    Vergleich von Cloud Computing und eigenem Rechenzentrum:
+    \begin{itemize}
+        \item \textbf{Cloud:} Flexibler, kosteneffizienter, skalierbar.
+        \item \textbf{Eigenes Rechenzentrum:} Mehr Kontrolle, Datenschutz, individuelle Anpassungen.
+    \end{itemize}
+\end{frame}
+
+\end{document}

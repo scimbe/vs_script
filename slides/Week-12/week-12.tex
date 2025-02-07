@@ -1,0 +1,149 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+\title{Verteilte Systeme}
+\subtitle{Betrieb und Wartung}
+\author{Prof. Dr. Martin Becke}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Betrieb verteilter Systeme}
+    Der Betrieb eines verteilten Systems umfasst alle Aktivitäten, die erforderlich sind, um das System stabil und performant zu halten. \newline
+    \textbf{Wesentliche Aufgaben:}
+    \begin{itemize}
+        \item Einrichten und Konfigurieren von Hardware und Software.
+        \item Überwachen des Systemverhaltens.
+        \item Fehlerdiagnose und -behebung.
+        \item Aktualisieren von Komponenten.
+    \end{itemize}
+    \textbf{Analogie:} Wie ein großes Krankenhaus: Verschiedene Abteilungen (Knoten) müssen koordiniert arbeiten, um die Patientenversorgung zu gewährleisten.
+\end{frame}
+
+\begin{frame}{Monitoring (1/2)}
+    Monitoring ist die kontinuierliche Überwachung des Zustands und der Leistung eines Systems. \newline
+    \textbf{Ziele:}
+    \begin{itemize}
+        \item Sicherstellung der Systemintegrität.
+        \item Optimierung der Leistung.
+        \item Frühzeitige Fehlererkennung.
+    \end{itemize}
+    \textbf{Analogie:} Wie die Überwachung der Vitalparameter eines Patienten, um frühzeitig auf gesundheitliche Probleme reagieren zu können.
+\end{frame}
+
+\begin{frame}{Monitoring (2/2)}
+    Monitoring in verteilten Systemen umfasst die Erfassung und Analyse von:
+    \begin{itemize}
+        \item Systemmetriken (CPU, Speicher, Netzwerklatenz, Fehlerraten).
+        \item Logs und Traces für detaillierte Einblicke in das Verhalten.
+    \end{itemize}
+    \textbf{Tools:} Prometheus, Grafana, Jaeger. \newline
+    Diese helfen bei der Visualisierung und Analyse der Daten.
+\end{frame}
+
+\begin{frame}{Monitoring: Herausforderungen}
+    \textbf{Typische Herausforderungen:}
+    \begin{itemize}
+        \item \textbf{Skalierbarkeit:} Verarbeitung großer Datenmengen von vielen Knoten.
+        \item \textbf{Synchronisation:} Zeitliche Abstimmung von Daten verschiedener Knoten.
+        \item \textbf{Intrusivität:} Minimierung des Einflusses des Monitorings auf das System.
+        \item \textbf{Sicherheit:} Schutz der Monitoring-Daten vor unbefugtem Zugriff.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Monitoring: Strategien}
+    Strategien zur Verbesserung des Monitorings:
+    \begin{itemize}
+        \item \textbf{Benchmarks und Performance-Modelle:} Vergleich der aktuellen Leistung mit definierten Standards.
+        \item \textbf{Anomalieerkennung:} Identifikation ungewöhnlicher Verhaltensmuster.
+        \item \textbf{Vorhersagende Analytik:} Prognose zukünftiger Zustände und Leistung.
+        \item \textbf{Formale Methoden:} Modellierung des Systemverhaltens zur Erkennung von Fehlern.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Debugging}
+    Debugging ist der Prozess der Identifikation und Behebung von Fehlern in Software. \newline
+    \textbf{Besonderheiten in verteilten Systemen:}
+    \begin{itemize}
+        \item Fehler verteilen sich oft über mehrere Knoten und Komponenten.
+        \item Erfordert tiefgreifende Analysen, um Ursachen zu identifizieren.
+    \end{itemize}
+    \textbf{Analogie:} Wie die Suche nach einem Fehler in einem komplexen Uhrwerk, bei dem viele Teile interagieren.
+\end{frame}
+
+\begin{frame}{Debugging-Techniken}
+    Typische Debugging-Techniken:
+    \begin{itemize}
+        \item \textbf{Distributed Debugging:} Debugger, die über Netzwerke hinweg arbeiten.
+        \item \textbf{Tracing:} Verfolgung von Anfragen und Transaktionen (z. B. mit Jaeger, Zipkin).
+        \item \textbf{Log Aggregation:} Zentralisierte Sammlung und Analyse von Logs.
+        \item \textbf{Crash Reporting:} Automatisierte Erfassung von Abstürzen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Debugging: Fehlerinjektion}
+    Fehlerinjektion testet die Robustheit eines Systems durch das absichtliche Einführen von Fehlern. \newline
+    \textbf{Beispiel:} Chaos Monkey (Netflix), das zufällige Ausfälle von Komponenten simuliert.
+\end{frame}
+
+\begin{frame}{Deployment}
+    Deployment beschreibt die Bereitstellung und Inbetriebnahme von Software in einer Produktionsumgebung. \newline
+    \textbf{Ziele:}
+    \begin{itemize}
+        \item Minimierung von Ausfallzeiten.
+        \item Gewährleistung eines reibungslosen Übergangs.
+    \end{itemize}
+    \textbf{Analogie:} Wie der Umzug in ein neues Haus, der sorgfältige Planung und Organisation erfordert.
+\end{frame}
+
+\begin{frame}{Deployment-Strategien (1/2)}
+    \begin{itemize}
+        \item \textbf{Rolling Deployment:} Schrittweise Aktualisierung der Knoten. \newline \textit{Analogie:} Renovierung eines Hauses in kleinen Schritten.
+        \item \textbf{Blue/Green Deployment:} Zwei identische Umgebungen (blau und grün), wobei der Verkehr nach der Aktualisierung auf die neue Umgebung umgeleitet wird.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Deployment-Strategien (2/2)}
+    \begin{itemize}
+        \item \textbf{Canary Deployment:} Test der neuen Version auf einer kleinen Gruppe von Benutzern oder Servern. \newline \textit{Analogie:} Ein Kanarienvogel im Bergwerk.
+        \item \textbf{Shadow Deployment:} Testen der neuen Version in einer Schattenumgebung, die den Produktionsverkehr spiegelt.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Continuous Integration und Continuous Delivery (CI/CD)}
+    CI/CD automatisiert Softwareentwicklung und Bereitstellung:
+    \begin{itemize}
+        \item \textbf{Continuous Integration (CI):} Regelmäßige Integration von Codeänderungen und automatisierte Tests.
+        \item \textbf{Continuous Delivery (CD):} Automatisierte Bereitstellung in kurzen Zyklen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Infrastruktur als Code (IaC)}
+    IaC ermöglicht die Verwaltung und Bereitstellung von Infrastruktur durch Code. \newline
+    \textbf{Vorteile:}
+    \begin{itemize}
+        \item Automatisierung.
+        \item Konsistenz.
+        \item Versionierung.
+    \end{itemize}
+    \textbf{Tools:} Terraform, Ansible, Puppet, Chef. \newline
+    \textbf{Analogie:} Wie ein Bauplan, der die Infrastruktur präzise beschreibt und reproduzierbar macht.
+\end{frame}
+
+\begin{frame}{Zusammenfassung}
+    Der erfolgreiche Betrieb verteilter Systeme erfordert:
+    \begin{itemize}
+        \item Effektives Monitoring zur Fehlererkennung und Leistungsoptimierung.
+        \item Durchdachtes Debugging zur schnellen Behebung von Problemen.
+        \item Sorgfältige Deployment-Strategien zur Minimierung von Ausfallzeiten.
+        \item Automatisierung durch CI/CD und IaC, um Effizienz und Konsistenz zu gewährleisten.
+    \end{itemize}
+\end{frame}
+
+\end{document}
