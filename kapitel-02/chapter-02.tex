@@ -70,7 +70,9 @@ Die Funktionssemantik kann in Form von Kommentaren, Dokumentation oder einfach d
 \end{lstlisting}
 Listing \ref{lst:semantik} beschreibt, dass die Funktion \enquote{sum} die beiden Parameter \enquote{a} und \enquote{b} addiert und das Ergebnis entsprechend des Rückgabetyps als Rückgabewerts zurückgibt. Die Festlegung eines Rückgabetyps beschreibt bereits einen ersten Vertrag in der Nutzung von Funktionen. In diesem Beispiel wird weiter die Funktionssemantik durch den Code selbst ausgedrückt. Sind systematisch und vollständig alle atomaren Funktionen mit Funktionssignatur und Funktionssemantik in der Anforderungsanalyse und im Design bestimmt, kann aus der Summe aller Funktionen mit einer Funktionskomposition das gesamte System als die Summe aller Funktionen erstellt werden. 
 \examplevs{Bei der Funktionskomposition werden Funktionen kombiniert, um komplexe Aufgaben zu erfüllen. Das Ergebnis der Funktionskomposition kann die erwartete Applikation sein, oder ein Teil des Gesamtdienstes (Service), der von dem Gesamtsystem erbracht werden soll}
-Im Gegensatz dazu bezieht sich die ressourcenorientierte Zerlegung auf die Zerlegung des Systems in kleinere, auf Ressourcen orientierte Sicht. Die Idee ist, dass jede Einheit auf eine bestimmte Ressource spezialisiert ist und sie effizient nutzen kann, um das System als Ganzes zu unterstützen indem eine Schnittstelle zu der Ressource angeboten wird. Die Eigenschaften der Ressourcen werden typischerweise über ein reduziertes Set von Funktionen manipuliert.  In Bezug auf die ressourceorientierte Zerlegung ist CRUD ein wichtiger Teil des Entwurfsprozesses, da es die grundlegenden Operationen definiert, die auf Ressourcen angewendet werden können. Jede Ressource wird normalerweise mit einer oder mehreren der CRUD-Operationen verbunden sein.
+
+\paragraph{Diskussion ressourcenorientierte Zerlegung}\mbox{}\\
+Im Gegensatz dazu bezieht sich die ressourcenorientierte Zerlegung auf die Zerlegung des Systems in kleine Einheiten (Entities). Die Idee ist, dass jede Einheit als bestimmte Ressource spezialisiert ist und sie über definierte Operationen effizient genutzt werden können. Die Operationen werden typischerweise über ein reduziertes Set von Funktionen umgesetzt.  In Bezug auf die ressourceorientierte Zerlegung ist daher CRUD ein wichtiger Teil des Entwurfsprozesses, da es besipielhaft die grundlegenden Operationen definieren kann, die auf Ressourcen angewendet werden können. Wählt man diesen Ansatz wird jede Ressource normalerweise mit einer oder mehreren der CRUD-Operationen verbunden sein.
 
 \examplevs{
 Unter \textbf{CRUD} versteht man üblicherweise folgende Funktionen:
@@ -85,7 +87,7 @@ Unter \textbf{CRUD} versteht man üblicherweise folgende Funktionen:
 \item \textbf{Delete}: Löschen oder Entfernen von vorhandenen Daten aus der Anwendung. Zum Beispiel kann ein Benutzer sein Konto löschen oder ein Administrator kann einen ungenutzten Datensatz entfernen.
 \end{itemize}
 }
-Die Schnittstelle einer Ressource muss nicht auf CRUD Funktionen reduziert sein, oder sie exakt in dieser Form umsetzen, aber wichtig ist dieses Konzept allemal.
+Die Schnittstelle einer Ressource muss nicht auf CRUD Funktionen reduziert sein, oder sie exakt in dieser Form umsetzen, dennoch wichtig ist dieses Konzept allema, da es häufig als Ursprung dient.
 \\\\
 \paragraph{Diskussion am Beispiel Stuhl}\mbox{}\\
 \begin{figure}[ht!]
@@ -177,7 +179,7 @@ In Slack wird Sharding verwendet, um die Benutzerdaten zu partitionieren. Das be
 \item Daten-\textbf{Replikation}: Hierbei werden Daten auf mehreren Knoten im Netzwerk gespeichert, um Redundanz und Fehlertoleranz zu gewährleisten. Wenn ein Knoten ausfällt, kann ein anderer Knoten die Arbeit übernehmen und sicherstellen, dass das System weiterhin funktioniert.
 \end{itemize}
 \warningvs{Die Datenseparation in verteilten Systemen ist ein wichtiger Aspekt für die Skalierung und die Verfügbarkeit von Anwendungen.} Durch die Verteilung von Daten auf mehrere Knoten im Netzwerk kann das System schnell auf Anforderungen reagieren und bietet eine hohe Verfügbarkeit, selbst wenn einzelne Knoten ausfallen.
-
+\newpage
 \subsubsection{Schnittstellen zwischen den Entitäten}
 
 Verteilte Systeme bestehen aus mehreren eigenständigen \enquote{nodes}, die über ein Netzwerk miteinander verbunden sind und gemeinsam arbeiten. Jeder node repräsentiert eine Funktion oder eine Ressource, bzw. die Orchestrierung im funktionalen bzw. ressource-orientierten Ansatz. Unabhängig der Zerlegungsmethode müssen diese nodes miteinander kommunizieren, um Daten auszutauschen und ihre Arbeit zu koordinieren. 
@@ -266,7 +268,7 @@ Weiter kann das Versenden von Nachrichten sowohl synchron oder asynchron aufgefa
 \\\\
 Signale und Events sind Ereignisse, die in einem System auftreten, während eine Nachricht eine Mitteilung ist, die zwischen verschiedenen Systemen ausgetauscht wird. Signale werden normalerweise zwischen verschiedenen Prozessen oder Anwendungen im selben System verwendet, während Events normalerweise innerhalb einer Anwendung auftreten. Nachrichten werden normalerweise zwischen verschiedenen Anwendungen oder Systemen ausgetauscht.
 
-Events, Signale und Nachrichten bilden die Grundlage für weiterführende Konzepte in der Schnittstellenkonzeptionierung von verteilten Systemen:
+Events, Signale und Nachrichten bilden die Grundlage für weiterführende Konzepte in der Schnittstellenkonzeptionierung von verteilten Systemen. In den klassischen Büchern, wird auf die grundsätzlichen Architekturziele verwiesen, die auf Basis von Funktionen (RPC), auf Teilung des gemeinsamen Speichers (Shared Memory), auf Teilung der Daten (Beispielhaft Datenbank-Replikation) oder die Verarbeitung von Nachrichten und Events (Stream Processing)  setzen
 \warningvs{
 \begin{itemize}  
 \item \textbf{Remote Procedure Call} (RPC): Hierbei wird eine Funktion auf einem entfernten System aufgerufen, als ob sie lokal ausgeführt würde. Der Aufruf wird über das Netzwerk gesendet und das entfernte System führt die Funktion aus und gibt das Ergebnis zurück.
@@ -275,22 +277,132 @@ Events, Signale und Nachrichten bilden die Grundlage für weiterführende Konzep
 \item \textbf{Stream Processing}: Hierbei werden Daten in Echtzeit von verschiedenen Knoten im System gestreamt und verarbeitet, um Echtzeit-Analysen und -Verarbeitung zu ermöglichen. Stream Processing wird oft in Anwendungen wie Finanzdienstleistungen, E-Commerce und Social-Media-Anwendungen eingesetzt.
 \end{itemize}  
 }
-Diese Möglichkeiten sollen auch mehr im Detail im Kontext der Architekturparadigmen diskutiert werden.
+Diese Ansicht, mit den Auswirkungen auf die Archtitektur hält der Autor aber für kaum noch zeitgemäss, da die Überlegungen heute in verschiedenste gegensätzliche Architekturstile münden können, und die API-fokusierten Architekturstile eine enorme Bedeutung erfahren haben.  
+
+\paragraph{API fokusierte Architekturstile}
+\mbox{}\\
+APIs bilden die Grundlage moderner Softwarekommunikation. Die Architektur von Softwaresystemen basiert oft auf definierten API-Schnittstellen, die die Kommunikation zwischen Komponenten ermöglichen. Bekannte Stile wie \textbf{REST}, textbf{GraphQL} oder \textbf{gRPC} definieren dabei unterschiedliche Kommunikationsmuster, die im Laufe dieser Ausarbeitung noch besprochen und auf ihren Kern zurückgeführt werden. 
+\importantvs{
+Die heute wichtigsten Architekturstile sind (individuelle Auswahl):
+\begin{itemize}
+    \item \textbf{REST}: Architekturstil basierend auf Ressourcen und HTTP-Methoden.
+    \item \textbf{GraphQL}: Flexible Datenabfrage-APIs mit einheitlichem Schema.
+    \item \textbf{gRPC}: Protokollbasiertes RPC mit hoher Effizienz.
+    \item \textbf{SOAP}: XML-basierter Kommunikationsstandard für Webservices.
+\end{itemize}
+}
+Allerdings führen wachsende Skalierungsanforderungen und komplexere Systemlandschaften dazu, dass Alternativen zu API-Architekturen an Bedeutung gewinnen. Die folgenden Übersicht soll nur einen Eindruck vermitteln, ein vollständiges Verständnis wird zu diesem Zeitpunkt nicht angenommen.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Ansatz} & \textbf{Vorteile} & \textbf{Einsatzgebiete} \\
+        \hline
+        API (REST, gRPC, etc.) & Standardisierte Schnittstellen & Webservices, Microservices \\
+        Ereignisgesteuert (EDA) & Asynchron, skalierbar & Event-Processing, IoT \\
+        Service Mesh & Automatische Kommunikation & Mikroservices mit hoher Vernetzung \\
+        Datenbank-Replikation & Weniger API-Aufrufe & Hochfrequente Datenabfragen \\
+        P2P-Kommunikation & Dezentral, resilient & Blockchain, Filesharing \\
+        FaaS & Skalierbar, eventgetrieben & Serverless Computing \\
+        \hline
+    \end{tabular}
+    \caption{Vergleich von API-Architekturen und alternativen Ansätzen}
+    \label{tab:vergleich}
+\end{table}
+\importantvs{
+\paragraph{Ereignisgesteuerte Architektur (Event-Driven Architecture, EDA)}
+\mbox{}\\
+Statt eines klassischen Request-Response-Modells setzt EDA auf asynchrone Ereignisse. Komponenten sind über eine Messaging-Plattform (z. B. Kafka, RabbitMQ) verbunden. Dies ermöglicht lose Kopplung und verbesserte Skalierbarkeit. 
+\\
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Hohe Skalierbarkeit und Asynchronität.
+    \item Entkopplung der Kommunikation zwischen Diensten.
+    \item Geeignet für reaktive Systeme mit Echtzeitverarbeitung.
+\end{itemize}
+}
+\importantvs{
+\paragraph{Service Mesh}
+\mbox{}\\
+Ein Service Mesh ersetzt herkömmliche API-Management-Schichten durch eine dedizierte Netzwerkschicht. Jedes Microservice verfügt über ein Sidecar-Proxy, das die gesamte Kommunikation übernimmt (z. B. Istio, Linkerd). Ein Sidecar Proxy ist ein Architekturkonzept, das häufig in Service Meshes verwendet wird. Es handelt sich dabei um eine zusätzliche Proxy-Instanz, die neben einem Hauptdienst (Microservice) in derselben Umgebung läuft – meist als separater Container in einem Kubernetes Pod. Der Sidecar Proxy übernimmt verschiedene Funktionen, insbesondere im Bereich Netzwerkkontrolle, Sicherheit und Observability.
+Hierfür ist das Verständnis von Proxies unabdinglich. 
+\\
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Automatische Service-to-Service-Kommunikation ohne API-Design.
+    \item Verbesserte Resilienz, Sicherheit und Observability.
+\end{itemize}
+}
+\importantvs{
+\paragraph{Datenbank-Replikation und Direct Data Access}
+\mbox{}\\
+Statt API-Aufrufen können Systeme direkt auf eine geteilte Datenbank zugreifen. Daten werden synchron oder asynchron repliziert (z. B. PostgreSQL Logical Replication).
+\\
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Reduktion von API-Aufrufen und Netzwerk-Overhead.
+    \item Keine API-Wartung oder Versionierung erforderlich.
+    \item Optimierte Performance für datenintensive Anwendungen.
+\end{itemize}
+}
+\importantvs{
+\paragraph{Peer-to-Peer (P2P)-Kommunikation}
+\mbox{}\\
+Im Gegensatz zu Client-Server-APIs setzt P2P-Kommunikation auf eine dezentrale Architektur, in der Knoten direkt miteinander interagieren (z. B. IPFS, libp2p).
+\\
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Eliminierung zentraler Vermittler und Single Points of Failure.
+    \item Höhere Resilienz durch verteilte Kommunikationsstrukturen.
+    \item Besonders geeignet für Blockchain- und Filesharing-Anwendungen.
+\end{itemize}
+}
+\importantvs{
+\paragraph{Function-as-a-Service (FaaS)}
+\mbox{}\\
+FaaS ermöglicht die Ausführung einzelner Funktionen ohne persistente API-Schnittstellen. Die Verarbeitung wird durch Events getriggert (z. B. AWS Lambda, Google Cloud Functions).
+\\
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Keine API-Verwaltung notwendig.
+    \item Skalierung auf Abruf ohne dauerhafte Server-Ressourcen.
+    \item Geeignet für serverlose, eventbasierte Systeme.
+\end{itemize}
+}
+Man erkennt schnell, das die Feinheiten der Ansätze nicht ohne tieferes Verständnis disktuiert werden können, wenn man nicht ein Buzzword-Bingo verhindern will, daher konzentrieren wir uns an dieser Stelle zunächst wieder auf die Grundlagen.
 
 \subsubsection{Kopplung}
-Bevor sich den Architekturen zugewendet wird, sollen noch einige weitere wichtige Begriffe im Design verteilter Systeme eingebracht werden: Ein wichtiger ist der Kopplungsbegriff. 
+Bevor sich detailierter den Architekturen zugewendet wird, sollen noch einige weitere wichtige Begriffe im Design verteilter Systeme eingebracht werden: Ein wichtiger ist der Kopplungsbegriff. 
 \importantvs{
 Der Kopplungsbegriff ist in verteilten Systemen von entscheidender Bedeutung, da er die Art und Weise beschreibt, wie verschiedene Anwendungen und Systeme in einem verteilten System miteinander interagieren und kommunizieren.}Eine falsche Wahl der Kopplungsart kann zu schwerwiegenden Problemen führen, die die Interoperabilität und Integration von Anwendungen in einem verteilten System beeinträchtigen können.
 \\\\
 Die Wahl der richtigen Kopplungsart kann jedoch auch erhebliche Vorteile bieten. Eine direkte Kopplung kann zu einer höheren Leistung führen und eine bessere Integration von Anwendungen ermöglichen, während eine indirekte Kopplung die Skalierbarkeit und Zuverlässigkeit verbessern kann. Eine losgekoppelte Architektur kann die Flexibilität  und die Ausfallsicherheit erhöhen, während eine strukturelle Kopplung die Zusammenarbeit und Integration von Anwendungen erleichtern kann.
-\\\\
+
+\importantvs{
 Eine \textbf{direkte} Kopplung tritt auf, wenn Anwendungen oder Systeme direkt miteinander verbunden sind und direkt miteinander kommunizieren. Beispielsweise können zwei Anwendungen über eine Netzwerkverbindung oder einen direkten Datenlink verbunden sein und direkt miteinander kommunizieren.
-\\\\\
+}
+
+\textbf{Analogie:} Zwei Personen aus unterschiedlichen Teams treffen sich persönlich in einem Büro und sprechen direkt miteinander. Es gibt keinen Umweg über Dritte, und beide Teilnehmer müssen verfügbar sein und dieselbe Sprache sprechen, damit die Kommunikation erfolgreich verläuft.
+
+\importantvs{
 Eine \textbf{indirekte} Kopplung tritt auf, wenn Anwendungen oder Systeme über ein gemeinsames Mediator-System oder eine Middleware miteinander kommunizieren. Das Mediator-System oder die Middleware stellt eine Abstraktionsschicht bereit, die die Interoperabilität und Integration von Anwendungen in einem verteilten System erleichtert.
-\\\\
+}
+
+\textbf{Analogie:} Nun nehmen die beiden Personen nicht direkt Kontakt auf, sondern wenden sich an eine zentrale Empfangsdame oder ein Vermittlungssystem. Diese Vermittlung sorgt dafür, dass beide richtig miteinander verbunden werden, beispielsweise indem sie Termine koordiniert, die Sprache übersetzen, für Sicherheit sorgen oder eine gemeinsame Plattform/Online-Meetingraum bereitstellt. Das ist vergleichbar mit einer Middleware, die eine Abstraktionsschicht zwischen den Systemen bietet.
+
+\importantvs{
 Eine \textbf{losgekoppelte} Kopplung tritt auf, wenn Anwendungen oder Systeme über Nachrichten kommunizieren, ohne sich direkt zu verbinden. In diesem Fall sendet eine Anwendung eine Nachricht an eine Middleware oder einen Broker, der die Nachricht an die Empfängeranwendung weiterleitet.
-\\\\
+}
+
+\textbf{Analogie:}  Bei dieser Variante hinterlässt eine Person für die andere eine schriftliche Nachricht in einem gemeinsamen Postfach oder einer zentralen Inbox, ohne die Person direkt zu treffen. Die Nachricht kann später vom Empfänger abgeholt werden. In der IT-Welt übernimmt ein Message-Broker (Nachrichtenhändler, wie die Post) diese Funktion, indem er Nachrichten speichert und sie den Zielanwendungen nach Bedarf zustellt.
+
+\importantvs{
 Eine \textbf{strukturelle} Kopplung tritt auf, wenn Anwendungen oder Systeme durch gemeinsame Datenstrukturen oder Datentypen verbunden sind. Beispielsweise können Anwendungen über eine gemeinsame Datenbank oder eine gemeinsame Dateistruktur kommunizieren.
+}
+
+\textbf{Analogie:} 
+Hier greifen beide Personen auf dasselbe Dokumentenarchiv oder dieselben Formulare zu. Die eigentliche Kommunikation findet über geteilte Datenstrukturen statt, etwa in Form von Tabellen oder Textdateien, in die beide zugreifen. Auch wenn die Kommunikation nicht zwingend zeitgleich geschieht, erfolgt sie über identische Datenformate.
 \\\\
 Die Tabelle~\ref{tab:kopplungsarten} gibt nochmals einen Überblick mit den Definitionen. 
 \begin{table}[!ht]
@@ -306,6 +418,7 @@ Die Tabelle~\ref{tab:kopplungsarten} gibt nochmals einen Überblick mit den Defi
     Strukturelle Kopplung & Die Anwendungen und Systeme in einem verteilten System sind durch gemeinsame Datenstrukturen oder Datentypen verbunden. \\ \hline
   \end{tabular}
 \end{table}
+\newpage
 \subsubsection{Mechanismen und Policies}
 
 Mechanismen sind die grundlegenden Bausteine oder Funktionen, die zur Implementierung von verteilten Systemen benötigt werden. Policies hingegen sind die Entscheidungsregeln oder Leitlinien, die bestimmen, wie die Mechanismen eingesetzt und betrieben werden.
@@ -323,7 +436,10 @@ Beispiele von Policies in verteilten Systemen:
 \item Fehlerbehandlung: Policies zur Fehlerbehandlung legen fest, wie verteilte Systeme auf Fehler wie Hardware- oder Softwareausfälle, Netzwerkstörungen oder Datenverlust reagieren. Beispiele für Fehlerbehandlungspolicies sind Retry, Timeout, Fallback auf Alternativen und Datenwiederherstellung.
 \item Sicherheit: Sicherheits-Policies bestimmen, wie verteilte Systeme den Schutz von Daten, Diensten und Benutzern gewährleisten. Beispiele sind Authentifizierung, Autorisierung, Verschlüsselung und Auditing.
 \item Lastverteilung: Lastverteilungspolicies legen fest, wie die Arbeitslast in verteilten Systemen auf die verschiedenen Knoten verteilt wird, um eine optimale Leistung und Ressourcenauslastung zu erreichen. Beispiele sind statische Lastverteilung, dynamische Lastverteilung und adaptives Load Balancing.
-\end{itemize}     
+\end{itemize}    
+\textbf{Analogie:} Ein Schraubenzieher zum Eindrehen von Schrauben (im Uhrzeigersinn) ist ein anderer Mechanismus als ein Schraubenzieher zum Ausdrehen von Schrauben (gegen den Uhrzeigersinn). Obwohl sie auf dem gleichen physikalischen Prinzip basieren und die gleichen Ressourcen nutzen, sind \textbf{eindrehen} und \textbf{ausdrehen} diesem Sinne Teil der Definition des jeweiligen Mechanismus. Ist wiederum das \textbf{drehen} der Mechanismus, können \textbf{links} und \textbf{rechts} als Policy angenommen werden.
+\\\\
+Unabhängig davon, welcher Perspektive man folgt, bleibt das grundlegende Prinzip der Trennung von Mechanismus und Policy wertvoll.  Es geht darum, Verantwortlichkeiten zu trennen und die Flexibilität und Wartbarkeit des Codes zu erhöhen.  Auch wenn die Grenze zwischen Mechanismus und Policy in manchen Fällen etwas verschwimmen kann, hilft das Konzept, über Designentscheidungen nachzudenken und bessere Softwarearchitekturen zu entwickeln.
 \examplevs{
 \paragraph{AI Beispiel - Webserver Cluster}\mbox{}\\ 
 Als Beispiel für die Ausprägung soll die Lastverteilung in einem verteilten System gewählt sein, welche genutzt wird um einen  Webserver-Cluster zu betreiben. In diesem Fall ist Lastverteilung zunächst ein Mechanismus, der die Arbeitslast über mehrere Server oder Knoten verteilt, um eine bessere Leistung, Verfügbarkeit und Skalierbarkeit zu erreichen. Um eine effektive Lastverteilung zu ermöglichen, kann ein Load Balancer eingesetzt werden. Der Load Balancer ist dafür verantwortlich, ankommende Anfragen an die verschiedenen Server im Cluster weiterzuleiten.
@@ -551,6 +667,7 @@ In den 1990er Jahren gewannen TCP/IP-basierte Netzwerkprotokolle zunehmend an Be
 In den letzten Jahren haben Schichtenmodelle auch bei der Entwicklung von verteilten Systemen jenseits von Netzwerken an Bedeutung gewonnen. Auch wenn das Modell manchmal recht angestaubt erscheint, wird es zum Beispiel verwendet, um die Architektur von Cloud-basierten Anwendungen oder Microservices zu beschreiben.
 \\\\
 Um nochmals die Kraft eines Schichtenmodells zu verdeutlichen, soll auch nochmal diskutiert werden, nach welchen Ansätzen ein System in Schichten unterschieden werden kann. Doch hierzu soll weniger der deutsche Begriff Schicht genutzt sein, sondern vielmehr  die englischen Begriffe \enquote{Tier} (Ebene) und \enquote{Layer} (Schicht). Diese Begriffe sind in dem Kontext gut etabliert und besser geeignet, um die notwendige Diskussion zu führen:
+\newpage
 \paragraph{Layer}\mbox{}\\
 \importantvs{
 Ein (Software-)\textbf{Layer} beschreibt eine logische Gruppierung von Funktionen innerhalb einer Anwendung oder eines Systems. 
@@ -770,9 +887,9 @@ Das Muster besteht aus zwei Hauptkomponenten: dem Publisher und dem Subscriber. 
 Der Publisher muss nicht wissen, wer die Ereignisse oder Nachrichten empfängt, und der Subscriber muss nicht wissen, woher die Ereignisse oder Nachrichten kommen. Dies ermöglicht eine höhere Flexibilität und Skalierbarkeit des Systems, da neue Komponenten oder Dienste einfach hinzugefügt oder entfernt werden können, ohne dass dies Auswirkungen auf andere Komponenten oder Dienste hat.
 
 Das Muster kann auf verschiedene Arten implementiert werden, z.B. durch die Verwendung von Messaging-Systemen, die die Kommunikation zwischen dem Publisher und dem Subscriber verwalten, oder durch die Verwendung von APIs, die es dem Subscriber ermöglichen, Ereignisse oder Nachrichten direkt vom Publisher zu empfangen.
-\\\\
+\examplevs{
 Ein Beispiel für die Verwendung von Publish/Subscribe ist ein System zur Überwachung von Sensoren in einer Fabrik. Die Sensoren senden Ereignisse an das System, wenn sie ein Problem erkennen. Die verschiedenen Komponenten des Systems, wie z.B. das Alarmierungssystem oder das Wartungssystem, abonnieren diese Ereignisse und werden automatisch benachrichtigt, wenn ein Problem auftritt. Dadurch kann das System schnell auf Probleme reagieren und effizienter arbeiten.
-\\\\
+}
 Wichtig wahrzunehmen ist, dass die Realisierung eines Publish/Subscribe meist selbst ein verteiltes System darstellt und meist über Point-to-Point kommuniziert, obwohl ein Point-to-Multipoint besser geeignet wäre.
 \item \textbf{Client/Server}, Request/Reply\\
 Neben dem später diskutierten Client/Server-Architekturmuster, existiert auch das Client/Server Kommunikationsmuster. Das Client/Server-Kommunikations-muster ist ein grundlegendes Pattern in der Entwicklung von Netzwerkanwendungen, bei dem eine Anwendung (der Client) eine Verbindung zu einer anderen Anwendung (dem Server) herstellt, um eine bestimmte Aktion oder Dienstleistung anzufordern.
@@ -782,34 +899,58 @@ In diesem Muster sendet der Client eine Anfrage an den Server, die eine bestimmt
 Das Client/Server-Kommunikationsmuster ermöglicht es, komplexe Anwendungen aufzubauen, indem verschiedene Komponenten oder Dienste in einem verteilten System miteinander kommunizieren. Der Client kann verschiedene Anfragen an den Server senden, z.B. die Abfrage von Daten oder die Ausführung von Operationen, und der Server kann entsprechend antworten und die angeforderten Dienste bereitstellen.
 \\\\
 Das Muster kann auf verschiedene Arten implementiert werden, z.B. durch die Verwendung von APIs, die es dem Client ermöglichen, Anfragen direkt an den Server zu senden, oder durch die Verwendung von Messaging-Systemen, die die Kommunikation zwischen dem Client und dem Server verwalten.
-\\\\
+\examplevs{
 Ein Beispiel für die Verwendung des Client/Server-Kommunikationsmusters ist eine Webanwendung, bei der ein Benutzer eine Anfrage an einen Webserver sendet, um eine bestimmte Webseite anzuzeigen. Der Webserver verarbeitet die Anfrage und sendet die entsprechende Webseite an den Browser des Benutzers zurück.
 \\\\
 In diesem Fall wird sogar durch die Nutzung des HTTP Protokolls, das Request/Reply-Muster angewendet, welches eine spezielle Form der Client/Server-Kommunikation beschreibt. In diesem Fall wird immer in einer synchronen Kommunikation eine Anfrage (Request) gestellt und auf die Antwort (Reply/Response) gewartet. Andere Client/Server-Kommunikationsmuster können auch asynchron sein.
-\\\\
+}
 Das Client/Server-Kommunikationsmuster ist eine effektive Möglichkeit, verteilte Anwendungen zu entwickeln, indem es eine einfache Methode zur Kommunikation zwischen verschiedenen Komponenten und Diensten bietet. Basis der Kommunikation kann eine Point-to-Point, Point-to-Multipoint aber auch Publish/Subscribe Kommunikation sein. 
 
 \item \textbf{Mobile Code}\\
 Mobile Code ist ein Konzept in verteilten Systemen, bei dem ein Stück Code von einem Computer zu einem anderen Computer transportiert und auf diesem ausgeführt wird. Der Code wird dabei in der Regel als ausführbare Datei oder Skript über das Netzwerk übertragen.
 
 Mobile Code ermöglicht es, Anwendungen und Dienste zu entwickeln, die auf verteilten Systemen ausgeführt werden können. Ein Beispiel für die Verwendung von Mobile Code ist die Remote-Ausführung von Skripten oder Programmen auf einem Server, der von einem Client-Computer aus gesteuert wird. Ein weiteres Beispiel ist die Verwendung von JavaScript in Webbrowsern, bei denen der Code von einer Website heruntergeladen und auf dem Client-Computer ausgeführt wird.
-
+\examplevs{
 Ein aktuelles Beispiel für die Verwendung von Mobile Code ist die Verwendung von Container-Technologien wie Docker oder Kubernetes. Container können als mobile Code betrachtet werden, da sie Anwendungen und deren Abhängigkeiten in einem einzigen Paket bündeln und es ermöglichen, diese auf verschiedenen Computern und Betriebssystemen auszuführen. Container-Images können auf einem Server erstellt und dann auf andere Server oder Cloud-Plattformen verteilt werden, wo sie ausgeführt werden können.
-
-Mobile Code birgt jedoch auch Risiken, da er Sicherheitsprobleme wie die Möglichkeit der Einschleusung von Malware oder Viren auf dem Zielcomputer aufgrund fehlender Kontrolle über den ausgeführten Code verursachen kann. Es ist wichtig, geeignete Sicherheitsmechanismen und Überprüfungsverfahren zu implementieren, um diese Risiken zu minimieren.
+}
+Mobile Code birgt jedoch auch Risiken, da er Sicherheitsprobleme wie die Möglichkeit der Einschleusung von Malware oder Viren auf dem Zielcomputer aufgrund fehlender Kontrolle über den ausgeführten Code verursachen kann. Es ist wichtig, geeignete Sicherheitsmechanismen und Überprüfungsverfahren zu implementieren, um diese Risiken zu minimieren. Beispielhaft ist nicht jedes Docker Image freundlich!
 
 Für die Übertragung von Mobile Code braucht es wieder rudimentärere Kommunikationsmuster. 
 \item \textbf{Virtual Shared Memory} \\
 Virtual Shared Memory (VSM) ist ein Konzept in verteilten Systemen, dass es mehreren Prozessen ermöglicht, auf gemeinsamen Speicher zuzugreifen, als ob sie physisch auf demselben Computer ausgeführt würden. Dabei wird ein virtueller Adressraum bereitgestellt, der auf mehreren Computern verteilt ist, aber für die Prozesse so aussieht, als ob er auf einem einzigen Computer lokalisiert wäre.
 
 Das VSM-Konzept ermöglicht es, die Kommunikation und den Datenaustausch zwischen verschiedenen Prozessen in einem verteilten System zu optimieren, indem der gemeinsame Speicher für alle Prozesse zugänglich gemacht wird. Dadurch können die Prozesse auf Daten zugreifen und sie teilen, ohne dass explizite Nachrichtenübertragungsprotokolle erforderlich sind.
-
+\examplevs{
 Ein Beispiel für die Verwendung von VSM könnte ein verteiltes Datenverarbeitungssystem sein, bei dem mehrere Prozesse gleichzeitig auf Daten in einem gemeinsamen Speicher zugreifen und sie verarbeiten. Statt Daten hin- und herzusenden, können die Prozesse auf den gemeinsamen Speicher zugreifen, um auf die benötigten Daten zuzugreifen und sie zu verarbeiten.
-
+}
+\examplevs{
 Eine weitere Anwendung von VSM könnte in der Cloud-Computing-Umgebung sein, wo virtuelle Maschinen auf verschiedenen physischen Servern ausgeführt werden. Wenn eine virtuelle Maschine den Zugriff auf Speicher benötigt, der auf einem anderen Server lokalisiert ist, kann VSM verwendet werden, um den Zugriff auf den gemeinsamen Speicher zu ermöglichen, als ob er auf der lokalen Maschine vorhanden wäre.
-
+}
 Die darunterliegende Technologie, kann aber auch wieder als verteiltes System verstanden werden.
 \end{itemize}
+
+\subsubsection{Time triggered vs event triggered}
+Zeitgesteuerte (Time-Triggered) und ereignisgesteuerte (Event-Triggered) Ansätze sind zwei verschiedene Kommunikationsparadigmen, die in verteilten Systemen eingesetzt werden. Sie unterscheiden sich hauptsächlich in der Art und Weise, wie sie die Kommunikation und Koordination zwischen verschiedenen Knoten in einem System abwickeln.
+\begin{itemize}
+\item Synchronisation: In zeitgesteuerten Systemen sind alle Knoten synchronisiert und folgen einem festen Zeitplan. Die Kommunikation zwischen den Knoten findet zu vorher festgelegten Zeitpunkten statt. In ereignisgesteuerten Systemen sind die Knoten nicht streng synchronisiert. Die Kommunikation zwischen den Knoten wird durch das Auftreten von Ereignissen ausgelöst, die nicht an einen festen Zeitplan gebunden sind.
+\item Determinismus: Zeitgesteuerte Systeme sind deterministisch, da die Kommunikation und die Aktionen der Knoten in einem vordefinierten Zeitrahmen ablaufen. Dies führt zu einer hohen Vorhersagbarkeit des Systemverhaltens. Ereignisgesteuerte Systeme sind weniger deterministisch, da die Kommunikation und die Aktionen der Knoten von variablen Ereignissen abhängig sind. Dies kann zu einer geringeren Vorhersagbarkeit des Systemverhaltens führen.
+\item Koordination: Die Koordination zwischen den Knoten erfolgt über einen gemeinsamen globalen Zeitgeber, der sicherstellt, dass alle Knoten zur gleichen Zeit agieren. Die Koordination in ereignisgesteuerten Systemen erfolgt auf der Basis von Ereignissen, die von den Knoten selbst generiert oder von anderen Knoten empfangen werden. Dies führt zu einer dezentralisierten Steuerung.
+\item Latenz: Die Latenz in zeitgesteuerten Systemen ist in der Regel gering, da die Kommunikation zwischen den Knoten zu vorher festgelegten Zeitpunkten stattfindet und somit keine unerwarteten Verzögerungen auftreten. Die Latenz in ereignisgesteuerten Systemen kann variabel sein und von der Häufigkeit und dem Zeitpunkt der Ereignisse abhängen.
+\item Ressourcen: Zeitgesteuerte Systeme benötigen im Allgemeinen mehr Ressourcen, da sie kontinuierlich arbeiten und den gesamten Zeitrahmen nutzen. Ereignisgesteuerte Systeme nutzen in der Regel weniger Ressourcen, da sie nur bei Bedarf, d.h. bei Auftreten eines Ereignisses, aktiv werden.
+\end{itemize}
+
+In verteilten Systemen, bei denen mehrere Knoten (z.B. Computer, Sensoren, Aktoren) über ein Netzwerk miteinander verbunden sind, um gemeinsam an einer Aufgabe zu arbeiten, hat die Wahl zwischen zeit- und ereignisgesteuerten Ansätzen erhebliche Auswirkungen auf die Systemarchitektur, das Design und die Leistung.
+\begin{itemize}
+\item Systemarchitektur: Die Wahl des Kommunikationsparadigmas beeinflusst die Art und Weise, wie die Knoten im System miteinander interagieren und wie sie koordiniert werden. Bei zeitgesteuerten Systemen ist eine zentralisierte Steuerung erforderlich, während ereignisgesteuerte Systeme eher dezentralisiert sind. Dies wirkt sich auf die Topologie und die Organisation des verteilten Systems aus.
+\item Systemdesign: Die Entscheidung für ein zeit- oder ereignisgesteuertes Paradigma beeinflusst die Designentscheidungen, wie z.B. die Auswahl von Kommunikationsprotokollen, Middleware und Algorithmen zur Koordination und Synchronisation. Zeitgesteuerte Systeme erfordern in der Regel spezielle Hardware oder Software zur Synchronisation der Knoten, während ereignisgesteuerte Systeme flexibler in der Auswahl der Kommunikationsmechanismen sind.
+\item Leistung und Skalierbarkeit: Die Leistung eines verteilten Systems hängt von Faktoren wie Durchsatz, Latenz und Zuverlässigkeit ab. Zeitgesteuerte Systeme bieten in der Regel eine bessere Vorhersagbarkeit der Leistung, können aber auch mehr Ressourcen verbrauchen. Ereignisgesteuerte Systeme sind in der Regel ressourcenschonender und können leichter skaliert werden, bieten aber möglicherweise weniger Vorhersagbarkeit und Determinismus.
+\item Fehlertoleranz und Wiederherstellung: Zeit- und ereignisgesteuerte Systeme haben unterschiedliche Ansätze zur Bewältigung von Fehlern und zum Wiederherstellen des normalen Betriebs. In zeitgesteuerten Systemen kann die Wiederherstellung komplexer sein, da die Knoten eng synchronisiert sind und ein Ausfall eines Knotens den Zeitplan und die Koordination beeinflussen kann. In ereignisgesteuerten Systemen ist die Wiederherstellung möglicherweise einfacher, da die Knoten unabhängiger voneinander arbeiten.
+\item Anwendungsdomänen: Die Eignung von zeit- und ereignisgesteuerten Ansätzen hängt stark von der jeweiligen Anwendungsdomäne ab. Zeitgesteuerte Systeme eignen sich besser für sicherheitskritische und echtzeitfähige Anwendungen, während ereignisgesteuerte Systeme für Anwendungen mit variabler Last und unabhängigen Knoten geeignet sind.
+\end{itemize}
+Die Wahl zwischen zeit- und ereignisgesteuerten Ansätzen für verteilte Systeme hängt von den Anforderungen der spezifischen Anwendung und den gewünschten Eigenschaften ab. Die Entscheidung sollte auf einer sorgfältigen Analyse der Systemanforderungen, der erforderlichen Leistung und der notwendigen Fehlertoleranz basieren.
+
+\paragraph{Vorteile einer Middleware}
+\mbox{}\\
 Mit welchem Kommunikationsansatz das verteilte System in der Middleware auch umgesetzt wird, die vielen Vorteile für den Anwendungsentwickler bleiben davon unberührt. Hier sind einige davon:
 \begin{itemize}
 \item Abstraktion von Komplexität: Die Middleware abstrahiert die Komplexität der unterliegenden Systeme und Technologien und bietet Entwicklern eine einheitliche Schnittstelle zum Entwickeln von Anwendungen. Dadurch müssen Entwickler nicht jedes Mal neu lernen, wie sie mit verschiedenen Technologien und Systemen arbeiten müssen, sondern können sich auf das Entwickeln der eigentlichen Anwendung konzentrieren.
@@ -857,11 +998,11 @@ Jede Art von Server hat ihre eigenen Vor- und Nachteile und ist für verschieden
 \end{itemize}
 Wichtig ist wahrzunehmen, dass nicht jede Verteilung eine Client und Server Architektur ist, sondern dass dies mit der Verteilung der Aufgaben verbunden ist. Auf dem Server sind alle Anbieter (Provider) von Diensten vereint und auf den Clients, die Nutzer (Consumer) der Dienste. 
 \\\\
-In der Client-Server-Architektur gibt es eine klare Trennung der Zuständigkeiten. Clients stellen Anfragen an Server, die diese verarbeiten und darauf antworten. Die Kommunikation zwischen Client und Server kann über verschiedene Protokolle wie HTTP, FTP oder SMTP erfolgen. Dieses Muster passt auch gut zu einem Request/Reply Pattern. 
-Client-Server-Architektur versucht, man \textbf{falls möglich, zustandslos} zu designen. Zustandslos bedeutet bedeuted in diesem Zusammenhang, dass sie keine Informationen über den aktuellen Zustand eines Clients zwischen den Anfragen speichern. 
+In der Client-Server-Architektur gibt es eine klare Trennung der Zuständigkeiten. Clients stellen Anfragen an Server, die diese verarbeiten und darauf antworten. Die Kommunikation zwischen Client und Server kann über verschiedene Protokolle wie HTTP, FTP oder SMTP erfolgen. Dieses Muster passt auch gut zu einem Request/Reply Kommunikationspattern. 
+Client-Server-Architektur versucht, man \textbf{falls möglich, zustandslos} zu designen. Zustandslos bedeutet in diesem Zusammenhang, dass sie keine Informationen über den aktuellen Zustand eines Clients zwischen den Anfragen speichern. 
 
 \importantvs{
-    Zustandslos in VS: Keine Abhängigkeit der Nachrichten zueinander!
+    Zustandslos in VS einfach gesprochen: Keine Abhängigkeit der Nachrichten zueinander!
 }
 
 Dies ermöglicht eine bessere Skalierbarkeit und Wartbarkeit der Server, da sie keine Ressourcen für die Verwaltung von Client-Zuständen aufwenden müssen. Dies macht das Design eines Systems bei weitem einfacher. Zustandsbehaftete Dienste sind schwerer zu beschreiben, zu betreiben und zu warten. 
@@ -1005,25 +1146,6 @@ Ein Beispiel für die Anwendung der Hexagonalen Zwiebelarchitektur in verteilten
 \end{itemize}
 Jeder dieser Microservices kann die Hexagonale Zwiebelarchitektur verwenden, um seine internen Anliegen zu trennen und eine klare Kommunikationsschnittstelle für andere Microservices und externe Systeme bereitzustellen. Ports und Adapter können für die Kommunikation mit anderen Microservices und externen Systemen (z.B. Datenbanken, Messaging-Systemen und externen APIs) verwendet werden. Die Hexagonale Zwiebelarchitektur ermöglicht es jedem Microservice, unabhängig voneinander entwickelt, getestet und gewartet zu werden, während sie gleichzeitig eine klare Schnittstelle für die Zusammenarbeit im verteilten System bietet.
 
-\subsubsection{Time triggered vs event triggered}
-Zeitgesteuerte (Time-Triggered) und ereignisgesteuerte (Event-Triggered) Ansätze sind zwei verschiedene Kommunikationsparadigmen, die in verteilten Systemen eingesetzt werden. Sie unterscheiden sich hauptsächlich in der Art und Weise, wie sie die Kommunikation und Koordination zwischen verschiedenen Knoten in einem System abwickeln.
-\begin{itemize}
-\item Synchronisation: In zeitgesteuerten Systemen sind alle Knoten synchronisiert und folgen einem festen Zeitplan. Die Kommunikation zwischen den Knoten findet zu vorher festgelegten Zeitpunkten statt. In ereignisgesteuerten Systemen sind die Knoten nicht streng synchronisiert. Die Kommunikation zwischen den Knoten wird durch das Auftreten von Ereignissen ausgelöst, die nicht an einen festen Zeitplan gebunden sind.
-\item Determinismus: Zeitgesteuerte Systeme sind deterministisch, da die Kommunikation und die Aktionen der Knoten in einem vordefinierten Zeitrahmen ablaufen. Dies führt zu einer hohen Vorhersagbarkeit des Systemverhaltens. Ereignisgesteuerte Systeme sind weniger deterministisch, da die Kommunikation und die Aktionen der Knoten von variablen Ereignissen abhängig sind. Dies kann zu einer geringeren Vorhersagbarkeit des Systemverhaltens führen.
-\item Koordination: Die Koordination zwischen den Knoten erfolgt über einen gemeinsamen globalen Zeitgeber, der sicherstellt, dass alle Knoten zur gleichen Zeit agieren. Die Koordination in ereignisgesteuerten Systemen erfolgt auf der Basis von Ereignissen, die von den Knoten selbst generiert oder von anderen Knoten empfangen werden. Dies führt zu einer dezentralisierten Steuerung.
-\item Latenz: Die Latenz in zeitgesteuerten Systemen ist in der Regel gering, da die Kommunikation zwischen den Knoten zu vorher festgelegten Zeitpunkten stattfindet und somit keine unerwarteten Verzögerungen auftreten. Die Latenz in ereignisgesteuerten Systemen kann variabel sein und von der Häufigkeit und dem Zeitpunkt der Ereignisse abhängen.
-\item Ressourcen: Zeitgesteuerte Systeme benötigen im Allgemeinen mehr Ressourcen, da sie kontinuierlich arbeiten und den gesamten Zeitrahmen nutzen. Ereignisgesteuerte Systeme nutzen in der Regel weniger Ressourcen, da sie nur bei Bedarf, d.h. bei Auftreten eines Ereignisses, aktiv werden.
-\end{itemize}
-
-In verteilten Systemen, bei denen mehrere Knoten (z.B. Computer, Sensoren, Aktoren) über ein Netzwerk miteinander verbunden sind, um gemeinsam an einer Aufgabe zu arbeiten, hat die Wahl zwischen zeit- und ereignisgesteuerten Ansätzen erhebliche Auswirkungen auf die Systemarchitektur, das Design und die Leistung.
-\begin{itemize}
-\item Systemarchitektur: Die Wahl des Kommunikationsparadigmas beeinflusst die Art und Weise, wie die Knoten im System miteinander interagieren und wie sie koordiniert werden. Bei zeitgesteuerten Systemen ist eine zentralisierte Steuerung erforderlich, während ereignisgesteuerte Systeme eher dezentralisiert sind. Dies wirkt sich auf die Topologie und die Organisation des verteilten Systems aus.
-\item Systemdesign: Die Entscheidung für ein zeit- oder ereignisgesteuertes Paradigma beeinflusst die Designentscheidungen, wie z.B. die Auswahl von Kommunikationsprotokollen, Middleware und Algorithmen zur Koordination und Synchronisation. Zeitgesteuerte Systeme erfordern in der Regel spezielle Hardware oder Software zur Synchronisation der Knoten, während ereignisgesteuerte Systeme flexibler in der Auswahl der Kommunikationsmechanismen sind.
-\item Leistung und Skalierbarkeit: Die Leistung eines verteilten Systems hängt von Faktoren wie Durchsatz, Latenz und Zuverlässigkeit ab. Zeitgesteuerte Systeme bieten in der Regel eine bessere Vorhersagbarkeit der Leistung, können aber auch mehr Ressourcen verbrauchen. Ereignisgesteuerte Systeme sind in der Regel ressourcenschonender und können leichter skaliert werden, bieten aber möglicherweise weniger Vorhersagbarkeit und Determinismus.
-\item Fehlertoleranz und Wiederherstellung: Zeit- und ereignisgesteuerte Systeme haben unterschiedliche Ansätze zur Bewältigung von Fehlern und zum Wiederherstellen des normalen Betriebs. In zeitgesteuerten Systemen kann die Wiederherstellung komplexer sein, da die Knoten eng synchronisiert sind und ein Ausfall eines Knotens den Zeitplan und die Koordination beeinflussen kann. In ereignisgesteuerten Systemen ist die Wiederherstellung möglicherweise einfacher, da die Knoten unabhängiger voneinander arbeiten.
-\item Anwendungsdomänen: Die Eignung von zeit- und ereignisgesteuerten Ansätzen hängt stark von der jeweiligen Anwendungsdomäne ab. Zeitgesteuerte Systeme eignen sich besser für sicherheitskritische und echtzeitfähige Anwendungen, während ereignisgesteuerte Systeme für Anwendungen mit variabler Last und unabhängigen Knoten geeignet sind.
-\end{itemize}
-Die Wahl zwischen zeit- und ereignisgesteuerten Ansätzen für verteilte Systeme hängt von den Anforderungen der spezifischen Anwendung und den gewünschten Eigenschaften ab. Die Entscheidung sollte auf einer sorgfältigen Analyse der Systemanforderungen, der erforderlichen Leistung und der notwendigen Fehlertoleranz basieren.
 
 \label{Woche04}\subsection{Supporting Pattern}
 

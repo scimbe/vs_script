@@ -26,16 +26,29 @@
 \end{frame}
 
 
-\begin{frame}{Definition}
+\begin{frame}{Definition Verteilte Systeme}
 
-    \begin{block}{Was sind verteilte Systeme?}
-    Verteilte Systeme sind eine Gruppe von vernetzten, autonomen Computern, die für den Benutzer als ein kohärentes System erscheinen. Sie arbeiten zusammen, um eine gemeinsame Aufgabe zu erfüllen, ohne dass ein zentraler Koordinator vorhanden sein muss.  Denken Sie an ein Ameisenvolk: Jede Ameise handelt individuell, aber zusammen erreichen sie komplexe Aufgaben.
-    \end{block}
+    \begin{columns}[c] % Zentriert die Spalten
 
-    \textbf{Kerneigenschaft:} Kein gemeinsamer Speicher.  Die Kommunikation erfolgt über das Netzwerk, was Herausforderungen bei der Koordination mit sich bringt.
+        \begin{column}{0.5\textwidth} % Linke Spalte für den Text
+            \begin{block}{Was sind verteilte Systeme?}
+                Verteilte Systeme sind eine Gruppe von vernetzten, autonomen Computern, die für den Benutzer als ein kohärentes System erscheinen. Sie arbeiten zusammen, um eine gemeinsame Aufgabe zu erfüllen, ohne dass ein zentraler Koordinator vorhanden sein muss.  Denken Sie an ein Ameisenvolk: Jede Ameise handelt individuell, aber zusammen erreichen sie komplexe Aufgaben.
+            \end{block}
+
+            \textbf{Kerneigenschaft:} Kein gemeinsamer Speicher.  Die Kommunikation erfolgt über das Netzwerk, was Herausforderungen bei der Koordination mit sich bringt.
+        \end{column}
+
+        \begin{column}{0.5\textwidth} % Rechte Spalte für das Bild
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{fig/Definition-VS.png} % Pfad zum NEUEN Bild mit hellblauem Hintergrund
+                \caption{Definition eines Vektorfeldes im $\mathbb{R}^3$}
+            \end{figure}
+        \end{column}
+        \note{ \textbf{Kerneigenschaft:} Kein gemeinsamer Speicher.  Die Kommunikation erfolgt über das Netzwerk, was Herausforderungen bei der Koordination mit sich bringt. }
+    \end{columns}
 
 \end{frame}
-
 
 \begin{frame}{Abgrenzung}
 
@@ -45,6 +58,18 @@
         \item \textbf{Monolithische Systeme:}  Alle Komponenten befinden sich in einer einzigen Codebasis.  Wie ein einzelner, großer Kuchen – schwer zu ändern oder zu erweitern, im Gegensatz zu einem Buffet mit verschiedenen, unabhängigen Gerichten (verteiltes System).
         \item \textbf{Microservices:} Eine spezielle Form verteilter Systeme, bei der eine Anwendung in kleine, unabhängige Services aufgeteilt ist. Wie ein Baukastensystem: jeder Baustein (Service) hat eine spezifische Funktion und kann unabhängig kombiniert werden.
         \item \textbf{Großrechner/Mainframes:} Leistungsstarke, zentralisierte Systeme, die typischerweise in Rechenzentren eingesetzt werden. Wie ein einzelner, mächtiger Dirigent, der ein Orchester leitet – im Gegensatz zu einem selbstorganisierenden Ensemble (verteiltes System).
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Teamarbeit}
+
+   Gruppenarbeit
+
+    \begin{itemize}
+        \item Was muss ich aus Sicht der Informatik machen, um ein Labyrinth zu lösen. Was ist die wesentliche Herausforderung?
+        \item \textbf{Defintion VS:} Eine Diskussion wert 
     \end{itemize}
 
 \end{frame}
@@ -76,6 +101,34 @@
 
     Jeder dieser Aspekte erfordert eine sorgfältige Planung und Umsetzung.
 
+\end{frame}
+
+
+\begin{frame}{Teamarbeit}
+
+  Welchen Einfluss haben die Sichten auf die Teamarbeit
+
+    \begin{itemize}
+        \item Welche Sichten verfolgen wir im Praktikum (Muss, Should, Could)? Wer übernimmt welche Position?
+        \item Wie kann Teile-und-herrsche Verfahren helfen
+        \item Welche Methodenbäume wollen wir nutzen? Dokumentationsmethode (ARC42?), Entwicklungsmethode(Agil-Scrum), Sichten verbinden Beispiel: DevOps?
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Diskussion Dokumetationsmethode}
+
+  Möchte keine Vorgaben machen: Möchte Arc42 (\url{https://arc42.org/}) vorschlagen 
+
+    \begin{itemize}
+        \item Welche Sichten verfolgen wir im Praktikum (Muss, Should, Could)? Wer übernimmt welche Position?
+        \item Wie kann Teile-und-herrsche Verfahren helfen
+        \item Welche Methodenbäume wollen wir nutzen? Dokumentationsmethode (ARC42?), Entwicklungsmethode(Agil-Scrum), Sichten verbinden Beispiel: DevOps?
+    \end{itemize}
+    Diskussion: Lego Bauanleitung
+
+    Diskussion: Iterationen des Dokuments (Handout)
 \end{frame}
 
 \end{document}

@@ -15,9 +15,16 @@
 \end{frame}
 
 \begin{frame}{Architektur -- Grundlagen}
-    Die Architektur eines verteilten Systems beschreibt die Struktur und Organisation des Systems sowie die Interaktion zwischen den Komponenten. Sie bildet die Grundlage für die Implementierung und den Betrieb des Systems und beeinflusst wesentliche Eigenschaften wie Leistung, Skalierbarkeit, Zuverlässigkeit und Sicherheit. 
+    Die Architektur eines verteilten Systems beschreibt die Struktur und Organisation des Systems, sowie die Interaktion zwischen den Komponenten. Sie bildet die Grundlage für die Implementierung und den Betrieb des Systems und beeinflusst wesentliche Eigenschaften wie Leistung, Skalierbarkeit, Zuverlässigkeit und Sicherheit. 
     \newline \newline
     Sie ist vergleichbar mit einem Bauplan für ein Haus: Dieser definiert die Anordnung der Räume, die verwendeten Materialien und die Verbindungen zwischen den einzelnen Teilen.
+    \newline \newline
+    \textbf{Bemerkung 1:} Wir können keinen Weltfrieden, nur das was uns die Haredware erlaubt!\\
+    \textbf{Bemerkung 2:} Sprachen im Grunde egal, solange Turing-vollständig!
+\end{frame}
+
+\begin{frame}{Architektur -- Grundlagen}
+    Beschreibt einen Stuhl aus Informatiksicht! (5 Minuten)
 \end{frame}
 
 \begin{frame}{Zerlegung -- Funktional vs. Ressourcenorientiert}
@@ -36,6 +43,12 @@
         \textbf{Ressourcenorientiert:} Der Fokus liegt auf den Ressourcen (Beine, Lehne, Sitzfläche). Diese Ressourcen bilden zusammen einen Stuhl. \newline Datenbank-Analogie: CRUD-Operationen auf den Ressourcen.
     \end{columns}
 \end{frame}
+
+\begin{frame}{Diskussionen: Geschichte der Zerlegungsmethoden}
+    Es gibt immer wieder neue Idee, es gibt nicht die Lösung.
+    Diskussion: Zeitstrahlbild - Aktuell die wichtigsten
+\end{frame}
+
 
 \begin{frame}{Datenseparation}
     In verteilten Systemen werden Daten häufig auf mehrere Knoten verteilt, um Leistung, Skalierbarkeit und Zuverlässigkeit zu verbessern. Verschiedene Strategien zur Datenseparation sind:
@@ -56,7 +69,7 @@
     Asynchrone Kommunikation wird oft bevorzugt, da sie eine höhere Leistung und Flexibilität ermöglicht.
 \end{frame}
 
-\begin{frame}{Kommunikation (2/2)}
+\begin{frame}{Kommunikation (1/2)}
     Neben der zeitlichen Kopplung ist auch die Art der Nachrichtenübermittlung wichtig:
     \begin{itemize}
         \item \textbf{Persistent:} Die Daten werden dauerhaft gespeichert. Vergleichbar mit dem Speichern einer Datei auf der Festplatte.
@@ -64,6 +77,8 @@
     \end{itemize}
     Die Wahl des Ansatzes hängt von den Anforderungen der Anwendung ab.
 \end{frame}
+
+
 
 \begin{frame}{Kopplung}
     Die Kopplung beschreibt die Abhängigkeit zwischen Komponenten oder Systemen. In verteilten Systemen wird eine lose Kopplung angestrebt, um Flexibilität und Ausfallsicherheit zu erhöhen. Verschiedene Kopplungsarten sind:
@@ -73,6 +88,33 @@
         \item \textbf{Losgekoppelt:} Kommunikation über Nachrichten ohne direkte Verbindung.
         \item \textbf{Strukturell:} Verbindung über gemeinsame Datenstrukturen.
     \end{itemize}
+    Welche Analogien fallen Ihnen dazu ein?
+\end{frame}
+
+
+\begin{frame}{Einfluss auf Architektur (1/2}
+
+Architekturziele und -stiles haben eine Basis wie
+   \begin{itemize}
+     \item Gemeinsamen Speichers (Shared Memory)
+     \item Datenseperation (auf Teilung der Daten, beispielhaft Datenbank-
+Replikation) 
+      \item Kommunitkation (Nachrichten, Events (Stream Processing) oder Signals)
+      \begin{itemize}
+         \item Funktionen (Entfernter Funktionsaufruf - RPC) 
+      \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Einfluss auf Architektur  (2/2}
+   API-orientierter Architecurestile sind heute sehr verbreitet (welche auf Protokolle (Kommunikation) basieren):
+\begin{itemize}
+    \item \textbf{REST}: Architekturstil basierend auf Ressourcen und HTTP-Methoden.
+    \item \textbf{GraphQL}: Flexible Datenabfrage-APIs mit einheitlichem Schema.
+    \item \textbf{gRPC}: Protokollbasiertes RPC mit hoher Effizienz (indirekt).
+    \item \textbf{SOAP}: XML-basierter Kommunikationsstandard für Webservices.
+\end{itemize}
+ Alle basieren in irgendeiner Form auf vereinbarten Strukturen oder Schemata (Vertrag/Definition) und haben das Ziel der Entkopplung. Ihre unterschiede sind herauszuarbeiten.
 \end{frame}
 
 \begin{frame}{Mechanismen und Policies}
@@ -80,9 +122,17 @@
     \textbf{Policies} bestimmen, wie diese Mechanismen angewendet werden (z. B. Ressourcenallokation, Fehlerbehandlung). Zusammen bilden sie die Grundlage für die Funktionsweise eines verteilten Systems.
 \end{frame}
 
+\begin{frame}{Gruppenarbeit}
+    Schauen wir uns mal eine API an!
+\end{frame}
+
 \begin{frame}{Stateful vs. Stateless}
     \textbf{Stateful:} Eine Komponente speichert Informationen über den Zustand vorheriger Interaktionen. Vergleichbar mit einem Bankautomaten, der merkt, wie viel Geld abgehoben wurde. \newline
     \textbf{Stateless:} Eine Komponente speichert keine Informationen über vorherige Interaktionen. Vergleichbar mit einem Webserver, der jede Anfrage unabhängig behandelt.
+\end{frame}
+
+\begin{frame}{Diskussion}
+    Einkaufen mit einem Warenkorb!
 \end{frame}
 
 \begin{frame}{Transaktionen}
@@ -92,6 +142,15 @@
         \item \textbf{Konsistenz:} Die Datenintegrität wird erhalten.
         \item \textbf{Isolation:} Transaktionen beeinflussen sich nicht gegenseitig.
         \item \textbf{Dauerhaftigkeit:} Ergebnisse bleiben nach Abschluss erhalten.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Wichtige Ideen}
+    Weiter braucht es ein Verständnis von wichtigen Ideen, für die weitere Diskussion:
+    \begin{itemize}
+        \item \textbf{Idempotent} 
+        \item \textbf{Schlüssel-Wert-Speichersysteme} 
     \end{itemize}
 \end{frame}
 

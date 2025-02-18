@@ -16,6 +16,30 @@
 \end{frame}
 
 
+\begin{frame}{Gruppendiskussion}
+    Welche typischen QS Ziele kennen wir in SE:
+    \begin{itemize}
+        \item \textbf{Bisher im Praktikum} 
+        \item \textbf{Aus der Literatur} 
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Gruppendiskussion}
+    Beispiel Ausfallsicherheit:
+    \begin{itemize}
+        \item \textbf{Mission Critical} 
+        \item \textbf{Hochverfügbar} 
+        \item \textbf{Buisness kritisch} 
+        \item \textbf{Nicht-kritisch} 
+    \end{itemize}
+    \begin{itemize}
+    \item WICHTIG (auch für das Praktikum): Erst wenn quantifizierbare, überprüfbare Kriterien formuliert werden, die Hülsenworte wie
+    \textbf{hoch}, \textbf{schnell} und \textbf{wichtig} ersetzen, bekommen die Vereinbarungen einen Wert.
+    \item Funktionale Ziele sind weiter wichtig, wir ergänzen sie im Praktikum
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Ziele verteilter Systeme (1/2)}
     Verteilte Systeme verfolgen, wie alle Softwaresysteme, grundlegende Ziele.  Dazu gehören neben der Erfüllung der funktionalen Anforderungen auch nicht-funktionale Anforderungen, die für den langfristigen Erfolg entscheidend sind.
 
@@ -44,10 +68,19 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Weiter funktionale Skalierbarkeit}
+    Vielleicht aus DB zwei Ansätze für Archtiektur von functionalen Systemen:
+    \begin{itemize}
+    \item \textbf{vertikale Skalierung}
+    \item \textbf{horizontale Skalierung}
+    \end{itemize}
+\end{frame}
 
 \begin{frame}{Grenzen der Skalierbarkeit -- Little's Law}
     Little's Law besagt: Die durchschnittliche Anzahl an Kunden in einem System ist gleich der Ankunftsrate multipliziert mit der durchschnittlichen Verweilzeit der Kunden im System.  Dies impliziert, dass die Skalierbarkeit eines Systems begrenzt ist durch die Fähigkeit, Anfragen zu verarbeiten, und dass eine zunehmende Anfragerate zu längeren Wartezeiten führen kann.  Stellen Sie sich eine Warteschlange in einem Supermarkt vor: Je mehr Kunden ankommen, desto länger wird die Warteschlange.
 \end{frame}
+
+
 
 \begin{frame}{Grenzen der Skalierbarkeit -- Gustafson's Law}
 Gustafson's Law besagt: Die Problemgröße kann mit einer Erhöhung der Anzahl von Prozessoren erhöht werden, während die Zeit zur Lösung des Problems relativ konstant bleibt. Dies impliziert, dass die Parallelisierung ein Schlüssel zur Skalierbarkeit ist.  Denken Sie an ein Team von Bauarbeitern:  Je mehr Arbeiter, desto größer das Haus, das sie in der gleichen Zeit bauen können.
@@ -62,10 +95,17 @@ Gustafson's Law besagt: Die Problemgröße kann mit einer Erhöhung der Anzahl v
  Brooks' Law besagt: Durch Hinzufügen von Ressourcen kann die Komplexität eines Systems nicht reduziert werden.  Im Gegenteil, es kann sogar zu mehr Komplexität und Overhead führen.  Stellen Sie sich ein Softwareprojekt vor: Je mehr Entwickler beteiligt sind, desto komplexer wird die Kommunikation und Koordination.
 \end{frame}
 
+\begin{frame}{Gruppenarbeit: Gesetze}
+      \begin{itemize}
+        \item Handout
+        \item Aufgaben    
+      \end{itemize}
+\end{frame}
+
 
 \begin{frame}{Verteilungstransparenz im Detail}
 
-Verteilungstransparenz strebt an, die Komplexität des verteilten Systems vor dem Benutzer zu verbergen.  Verschiedene Arten der Transparenz werden unterschieden:
+Komplexität des verteilten Systems vor dem Benutzer zu verbergen:
 
     \begin{itemize}
         \item \textbf{Zugriffstransparenz:}  Ort und Art des Zugriffs auf Ressourcen sind verborgen.
@@ -74,8 +114,10 @@ Verteilungstransparenz strebt an, die Komplexität des verteilten Systems vor de
         \item \textbf{Replikationstransparenz:}  Die Existenz von Replikaten ist verborgen.
         \item \textbf{Fehlertransparenz:}  Fehler werden vom Benutzer verborgen.
         \item \textbf{Nebenläufigkeitstransparenz:} Parallele Zugriffe auf Ressourcen sind verborgen.
+        \item \textbf{Persistenztransparenz: }  Zustand eines Prozesses oder einer Anwendung bleibt unabhängig von Unterbrechungen erhalte (
     \end{itemize}
-
+    Hinweis 1: Persistenztransparenz und Relocation(Umplatzierung) findet man auch immer häufiger\\
+    Hinweis 2: Vielleicht Störungsgefühl da aus Sicht des Nutzers. 
 \end{frame}
 
 
@@ -114,5 +156,13 @@ Verteilungstransparenz strebt an, die Komplexität des verteilten Systems vor de
   Die Berücksichtigung dieser Fehlschlüsse ist entscheidend für den Entwurf robuster und zuverlässiger verteilter Systeme.
 \end{frame}
 
+\begin{frame}{Diskussion: Neue Sicht auf Fehler}
+
+  \begin{itemize}
+    \item Fehler ist keine Ausnahme, sondern die Regel
+    \item Aufbau Incident Management
+    \item Teststrategien hilfreich 
+  \end{itemize}
+\end{frame}
 
 \end{document}

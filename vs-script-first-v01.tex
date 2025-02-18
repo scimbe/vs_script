@@ -2,8 +2,17 @@
 % !TEX options=--shell-escape
 \immediate\write18{makeindex \jobname.idx \jobname.glo -t \jobname.glg -s \jobname.ist -o \jobname.gls}
 %%%%%%%%%%%%%% Do not touch   %%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%% Open document  %%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[a4paper]{article}
+
+
+
+%%%%%%%%%%%%%% OALS DOWNLOAD %%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[a4paper]{article}
+
+
+%%%%%%%%%%% ALS BUCH %%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,10pt]{book}
+\setcounter{chapter}{1}
+\renewcommand{\thesection}{\arabic{section}}
 
 \usepackage[margin=3cm]{geometry} %Ändert alle Ränder auf 2cm
 % oder Sie können einzelne Ränder so anpassen:
@@ -70,7 +79,7 @@
 \fancyhead[R]{\rightmark} % Setzen Sie den rechten Kopfzeileninhalt auf den Abschnittstitel
 \fancyfoot[C]{\thepage{} von \pageref*{LastPage}} % Setzt die Seitenzahlen in der Fußzeile
 \fancyfoot[R]{\copyright\ CC BY-NC-SA 4.0}
-\fancyfoot[L]{VS-Becke-V0.9-4}
+\fancyfoot[L]{VS-Becke-V0.9-5}
 
 
 \renewcommand{\headrulewidth}{0.4pt} % Fügt eine Linie unter der Kopfzeile hinzu
@@ -108,8 +117,8 @@
 \usepackage{subfiles}  % Best loaded last in the preamble
 
 % Titel und Autor
-\title{Verteilte Systeme\\ (Skript zum Modul v0.9-4)}
-\author{Prof. Dr. Martin Becke\footnote{Dieser Text wurde in Teilen mit der Unterstützung von ChatGPT erzeugt. Dieser Text{} wird durchgehend vom Autor geprüft, erweitert und verfeinert. Dieser Text ist nur für die Lehre vorgesehen. Bitte beachten Sie Lizenz und Version}}
+\title{Verteilte Systeme\\ (Skript zum Modul v0.9-5)}
+\author{Prof. Dr. Martin Becke\footnote{Dieser Text wurde in Teilen mit der Unterstützung von DeepL, ChatGPT (Sprache und Aufbau) und Claude erzeugt. Dieser Text{} wird durchgehend vom Autor geprüft, erweitert und verfeinert. Dieser Text ist nur für die Lehre vorgesehen. Bitte beachten Sie Lizenz und Version.}}
 
 \pgfplotsset{compat=1.18} 
 
@@ -132,7 +141,7 @@
 
 %%%%%%%%%%%%%% Copyright %%%%%%%%%%%%%%%%%%%%%%%
 \noindent
-\textcopyright\ 2022-2024, Prof. Dr. Martin Becke\\
+\textcopyright\ 2022-2025, Prof. Dr. Martin Becke\\
 Dieses Werk ist lizenziert unter der Creative Commons (4.0 International License)\\
 - Namensnennung\\ - Nicht-kommerziell\\ - Weitergabe unter gleichen Bedingungen \\Um eine Kopie dieser Lizenz zu sehen, besuchen Sie\\ \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}. 
 Sonstig: Alle Rechte vorbehalten.
@@ -144,7 +153,8 @@ Versionen:\\
 0.9-1 2023 SoSe - Weiter noch stark Text-basiert. Besseres Layout (DinA4, Header, Footer)\\
 0.9-2 2023 SoSe - Erste Überarbeitung Text - Tag\\
 0.9-3 2023 WiSe - Zweite überarbeitung Text - Tag \\
-0.9-2 2023 SoSe - Dritte Überarbeitung Text - Format Beispiele\\
+0.9-4 2023 SoSe - Dritte Überarbeitung Text - Format Beispiele\\
+0.9-5 2025 SoSe - Vierte Überarbeitung Text - Angepasste Slides\\
 %%%%%%%%%%%%%% Motivation %%%%%%%%%%%%%%%%%%%%%%%
 
 Liebe Studierende,\\ vor uns liegt eine einzigartige Gelegenheit. Unser gemeinsames Skript, an dem bereits viele engagierte Geister gearbeitet haben, wartet darauf, durch unsere Ideen, Erkenntnisse und Beiträge weiter verbessert zu werden. Es ist ein lebendiges Werkzeug für das Lernen, und wir sind die aktuellen Hüter.
@@ -160,7 +170,9 @@ In diesem Prozess sind wir mehr als nur Einzelpersonen; wir sind Teil einer Geme
 Ihr Beitrag wird nicht nur Ihnen und Ihren Kommilitonen zugutekommen, sondern auch zukünftigen Studierenden, die auf diesem Skript aufbauen werden. Lassen Sie uns dieses Erbe fortsetzen und gemeinsam ein Skript schaffen, auf das wir stolz sein können.
 \\\\
 Martin Becke
-\\\\
+\newpage
+\paragraph{Hall of Fame}
+\mbox{}\\
 %%%%%%%%%%%%%% Acknowledgment %%%%%%%%%%%%%%%%%%%%%%%
 Dank für die Kommentare, Anmerkungen und Korrekturen:  \\
 2023 SoSe Frank Matthiesen (Korrekturen Vortragsfolien) \\
