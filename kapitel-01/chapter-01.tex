@@ -45,11 +45,11 @@ Dies ist natürlich nur eine sehr kleine und nicht vollständige Auswahl von Bei
 \newpage
 \subsection{Definition}
 
-Eine Definition~\cite{coulouris2012distributed} von verteilten Systemen kann man als eine Gruppe von vernetzten, autonomen Computern verstehen, die gemeinsam eine Aufgabe erfüllen, ohne dass ein zentraler Koordinator benötigt wird. Dabei können die Computer geographisch verteilt sein und über unterschiedliche Hardware- und Software-Plattformen verfügen.
+Eine Definition~\cite{coulouris2012distributed} von verteilten Systemen ist beschrieben wie folgt: Man kann es als eine Gruppe von vernetzten, autonomen Computern verstehen, die gemeinsam eine Aufgabe erfüllen, ohne dass ein zentraler Koordinator benötigt wird. Dabei können die Computer geographisch verteilt sein und über unterschiedliche Hardware- und Software-Plattformen verfügen. Dies ist aber nur eine von vielen diskutierten, wobei sicher die folgende Definition die höchste Verbreitung hat: 
 
-\importantvs{Laut Tanenbaum\cite{tanenbaum2017distributed} sind verteilte Systeme \enquote{eine Sammlung unabhängiger Computer, die den Benutzern als ein kohärentes System erscheinen} (Tanenbaum and van Steen, 2017, S. 4). Die Kommunikation in verteilten Systemen erfolgt über das Netzwerk und erfordert eine koordinierte Zusammenarbeit der einzelnen Komponenten.}
+\warningvs{Laut Tanenbaum\cite{tanenbaum2017distributed} sind verteilte Systeme \enquote{eine Sammlung unabhängiger Computer, die den Benutzern als ein kohärentes System erscheinen} (Tanenbaum and van Steen, 2017, S. 4). Die Kommunikation in verteilten Systemen erfolgt über das Netzwerk und erfordert eine koordinierte Zusammenarbeit der einzelnen Komponenten.}
 \mbox{}\\
-Die Definition von einem Verteilten System ist aber nicht trennscharf. Daher existieren durchaus alternative Definitionen, denen man sich im Zweifelsfall gewahr werden muss. So können beispielhaft weitere Alternativen genannt werden, die die vorhandene Definition erweitern.
+Die Definition von einem Verteilten System ist somit nicht trennscharf. Es existieren, zu den genannten, durchaus alternative Definitionen, denen man sich im Zweifelsfall gewahr werden muss. So können beispielhaft für detailreichere Alternativen folgende genannt werden:
 
 \examplevs{
 So definiert \cite{garg2016distributed} ein verteiltes System als mehrere unabhängige Computer, die miteinander kommunizieren und \enquote{kooperieren}, um gemeinsam eine Aufgabe zu erfüllen.
@@ -62,7 +62,7 @@ Sicher ist, es gibt viele verschiedene Definitionen von verteilten Systemen, die
 
 Nun kann man anführen, dass bei einer Vielzahl von Definitionen diese ihre Bedeutung verlieren, da ein effizienter und sinnvoller Einsatz in einer praktischen Umsetzung nicht hilfreich erscheint, doch ist hier folgendes anzuführen:
 
-Verteilte Systeme bieten generische Lösungsansätze für unterschiedliche Problemklassen an. Da es sich bei Verteilten Systemen nicht selten um komplexe Systeme handelt, welche aus einer Vielzahl von miteinander kommunizierenden und kooperierenden Komponenten bestehen, haben die Abweichungen der Eigenschaften einen hohen Einfluss auf die Etablierung der generischen Lösungsansätze. Somit muss die doch meist sehr generische Definition um einzelne Eigenschaften angereichert werden, damit entsprechende Logikzweige für eine adäquate Lösung formuliert werden können. Die generische Definition ist daher als Ausgangspunkt zu sehen, für den weiteren Anforderungsprozess. 
+Verteilte Systeme bieten generische Lösungsansätze für \textbf{unterschiedliche Problemklassen} an. Da es sich bei Verteilten Systemen nicht selten um komplexe Systeme handelt, welche aus einer Vielzahl von miteinander kommunizierenden und kooperierenden Komponenten bestehen, haben die Abweichungen der Eigenschaften einen hohen Einfluss auf die Etablierung der generischen Lösungsansätze. Somit muss die doch meist sehr generische Definition um einzelne Eigenschaften angereichert werden, damit entsprechende Logikzweige für eine adäquate Lösung formuliert werden können. Die generische Definition ist daher als Ausgangspunkt zu sehen, für den weiteren Anforderungsprozess. 
 
 Noch einen Schritt weiter, ist es besonders fordernd für den Anforderungsprozess, dass diese Eigenschaften der Komponenten auf verschiedenen Geräten und Standorten verteilt sein können und zunächst systematisch erfasst und vollständig beschrieben werden müssen. Fehler in diesem Prozess können weitreichende Folgen für den Erfolg der angestrebten Lösung haben.
 \examplevs{
@@ -82,13 +82,20 @@ Diese Lösung ist trivial und durchläuft das Labyrinth schrittweise, indem der 
 \examplevs{
 Die Herausforderung in diesem Fall ist nicht das Verständnis für den Algorithmus, sondern die Herausforderung beginnt im Anforderungsprozess des verteilten Systems. Es ist wichtig zu beachten, dass der vorgestellte Lösungsansatz nur funktioniert, da das Labyrinth als Graph modelliert werden konnte, und der Informatiker dies in der Anforderungsanalyse erkennt. Wobei im verteilten System die Knoten als Positionen im Labyrinth und die Kanten, als  möglichen Wege, willkürlich verteilt sein können und somit die Herausforderung darin besteht, dass das ganze Bild des Labyrinths nicht direkt ersichtlich ist. So ist aber für eine adäquate Lösungsfindung genau diese Identifikation wesentlich, damit der mit der Lösung verbundene Graph und die damit verbundene Breitensuche als Logikbaum für eine effiziente Lösung identifiziert werden kann.
 }
-Die Bandbreite von Anwendungen, die verteilte Systeme nutzen, ist enorm und reicht - wie alleine für Hamburg festgestellt - von großen Online-Transaktionssystemen bis hin zu drahtlosen Sensornetzwerken. Es ist häufig sehr viel komplexer als die Suche nach einem Ausgang in einem Labyrinth oder die Identifikation einer einzelnen Problemklasse. Daher ist es wichtig, eine Definition und eine klare Abgrenzung zu schaffen, um sicherzustellen, dass die Systeme im sinne einer notwendigen Verteilung effektiv entworfen, entwickelt und implementiert werden können. 
+
+\examplevs{
+Für ein verteiltes System mag bereits dies eine interessante Herausforderung für die Skalierung über die Problemgröße  darstellen und der parallelisierbarkeit des Problems, wahrscheinlicher ist jedoch, dass das Problem noch nicht vollständig erfasst ist. So ist es in einem verteilten System (VS)  nicht unerwartet das keine "Gottessicht" auf das Problem existiert und niemand den gesamten Graphen überblicken und organisieren kann.  In einem VS ist es ein wahrscheinliches Szenario, dass jeder Knoten gemeinsam mit anderen Knoten die Entscheidung über die Durchführung der Graphdurchsuchung organisieren muss, ohne sich seiner eigenen globalen Position bewusst zu sein. Dies erfordert eine sorgfältige Koordination und einen intensiven Informationsaustausch mit den benachbarten Knoten. Die Lösungsstrategie wird sich sicherlich unterscheiden, je nachdem, ob das System über stabile und verlustfreie Kommunikationswege verfügt oder ob der Graph instabil ist, beispielsweise weil er sich zur Laufzeit verändert oder Knoten unerwartet aus dem Verbund ausscheiden.
+}
+Die Bandbreite von Anwendungen und ihren Anforderungen, die verteilte Systeme nutzen, ist enorm und reicht - wie alleine für Hamburg festgestellt - von großen Online-Transaktionssystemen bis hin zu drahtlosen Sensornetzwerken. Es ist häufig sehr viel komplexer als die Suche nach einem Ausgang in einem Labyrinth oder die Identifikation einer einzelnen Problemklasse. Daher ist es wichtig, eine Definition und eine klare Abgrenzung zu schaffen, um sicherzustellen, dass die Systeme im Sinne einer notwendigen Verteilung effektiv entworfen, entwickelt und implementiert werden können. 
 
 \warningvs{Hier werden jedoch oft Fehler gemacht, da nicht selten generische Ansätze ohne Berücksichtigung des Anwendungsfalls diskutiert werden und somit möglicherweise nicht zur angestrebten Lösung passen, da sie die notwendigen Charaktereigenschaften nicht repräsentieren. Somit ist die Erweiterung der Definition des vorhandenen verteilten Systems grundsätzlich eine Aufgabe die zu erfüllen ist, unabhängig des Startpunktes der gewählten generischen Definition.}
 \examplevs{
 Die Untersuchung der Eigenschaften von verteilten Systemen ist auch für die Forschung und Entwicklung noch immer sehr relevant.
 }
 Dennoch, am Anfang braucht man für den gesamten Prozess einen Startpunkt. Der Informatiker muss sich bewusst machen, dass die zu lösende Aufgabe ein verteiltes System repräsentiert. Für eine erste Einschätzung der Situation, ob das Themengebiet der verteilten Systeme zum Tragen kommt, genügt aber ein kleiner Schritt. Dieser Schritt umfasst die Prüfung einer wesentlichen Eigenschaft, die alle Definitionen miteinander verbindet.  Kurz gesprochen ist der gemeinsame Nenner das \enquote{nicht-vorhanden-sein} eines gemeinsamen (Arbeits-)Speichers. Wird kein gemeinsamer Speicher genutzt, um sich zu koordinieren, ist die Umsetzung eines verteilten Systems sehr wahrscheinlich und der Startpunkt gegeben, um die Anforderungen an das System und damit die genutzte Definition entsprechend zu verfeinern.
+\warningvs{
+Muss man kein VS bauen, sollte man es auch nicht tuen!
+}
 \subsection{Abgrenzung}
 Eine Abgrenzung des Begriffs \enquote{Verteilte Systeme} in der Informatik kann nur auf unterschiedlichen Ebenen gelingen, da es sich bei Verteilten Systemen um ein sehr breites und vielschichtiges Feld handelt. Hier soll auch kein Versuch unternommen werden dies vollständig zu tun, sondern es soll nur einen Blick in diese Diskussion geben.
 \\\\
@@ -127,7 +134,7 @@ Eine klare Definition von Verteilten Systemen fällt insbesondere auch daher sch
 
 Um diese unterschiedlichen Ebenen zu verdeutlichen, soll zunächst die Unterscheidung in zwei Ebenen angedacht werden, auch wenn eine Vielzahl anderer Einteilungen angenommen werden können.
 \\\\
-So können verteilte Systeme in einem ersten trivialen Ansatz von einer technologischen und einer anwendungsbezogenen Ebene betrachtet werden\cite{coulouris2012distributed}. Auf der technologischen Ebene werden Verteilte Systeme als eine Sammlung von Computern und Netzwerken interpretiert, die miteinander kommunizieren und kooperieren, um eine gemeinsame Aufgabe zu erfüllen.Diese Art der Interpretation wurde bereits bei den Begriffsbestimmungen diskutiert. Auf der anwendungsbezogenen Ebene geht es dagegen um die Verwendung von Verteilten Systemen zur Lösung von Problemen in bestimmten Anwendungsdomänen.
+So können verteilte Systeme in einem ersten trivialen Ansatz von einer technologischen und einer anwendungsbezogenen Ebene betrachtet werden \cite{coulouris2012distributed}. Auf der technologischen Ebene werden Verteilte Systeme als eine Sammlung von Computern und Netzwerken interpretiert, die miteinander kommunizieren und kooperieren, um eine gemeinsame Aufgabe zu erfüllen. Diese Art der Interpretation wurde bereits bei den Begriffsbestimmungen diskutiert. Auf der anwendungsbezogenen Ebene geht es dagegen um die Verwendung von Verteilten Systemen zur Lösung von Problemen in bestimmten Anwendungsdomänen.
 
 \examplevs{Ein Beispiel für ein verteiltes System auf technologischer Ebene ist das Internet. Das Internet besteht aus einer Vielzahl von Computern und Netzwerken, die miteinander verbunden sind und Informationen austauschen.
  Andere Beispiele für verteilte Systeme auf technologischer Ebene sind Cloud-Computing-Plattformen, Peer-to-Peer-Netzwerke und verteilte Datenbanken.
@@ -158,16 +165,36 @@ Alle Aspekte implizieren unterschiedliche Anforderungen, die disjunkt betrachtet
 \importantvs{
   \begin{itemize}
     \item \textbf{Architektursicht:} Hier liegt der Fokus auf der Struktur und Organisation des Systems sowie der Verteilung der Komponenten und deren Interaktion. Es geht darum, die Komponenten des Systems zu identifizieren, deren Aufgaben und Verantwortlichkeiten zu definieren und eine geeignete Architektur zu entwerfen, die eine effiziente Zusammenarbeit der Komponenten ermöglicht.
+  \end{itemize}
+}    
+\importantvs{
+  \begin{itemize}    
     \item \textbf{Prozesssicht:} In der Prozesssicht steht die zeitliche Abfolge der Abläufe und Interaktionen im Vordergrund. Es geht darum, die Prozesse und Workflows im System zu identifizieren und zu modellieren, um eine effektive Koordination und Steuerung der Aktivitäten zu gewährleisten.
+  \end{itemize}
+}    
+\importantvs{
+  \begin{itemize}    
     \item \textbf{Datensicht:} Die Datensicht fokussiert auf die Daten, die im System verarbeitet werden. Hier geht es um die Definition und Modellierung der Datenstrukturen, die in den Komponenten des verteilten Systems verwendet werden, sowie um die Speicherung, Verarbeitung und Übertragung der Daten.
+  \end{itemize}
+}    
+\importantvs{
+  \begin{itemize}     
     \item \textbf{Sicherheitssicht:} Die Sicherheitssicht betrachtet die Aspekte der Datensicherheit und des Datenschutzes im Verteilten System. Es geht darum, Risiken und Bedrohungen zu identifizieren und geeignete Maßnahmen zu ergreifen, um die Daten und das System insgesamt vor unautorisiertem Zugriff, Missbrauch oder Diebstahl zu schützen.
+  \end{itemize}
+}    
+\importantvs{
+  \begin{itemize}     
     \item \textbf{Betriebssicht:} Die Betriebssicht betrachtet Aspekte wie die Verfügbarkeit, Zuverlässigkeit und Skalierbarkeit des Verteilten Systems. Hier geht es darum, sicherzustellen, dass das System kontinuierlich und zuverlässig arbeitet und bei Bedarf flexibel skaliert werden kann.
+  \end{itemize}
+}    
+\importantvs{
+  \begin{itemize}     
     \item \textbf{Entwicklersicht:} Die Entwicklersicht betrachtet Aspekte der Entwicklung und Implementierung von Verteilten Systemen. Hier geht es um die Auswahl geeigneter Programmiersprachen, Frameworks und Tools sowie um die Anwendung von Best Practices und Methoden, um eine effiziente und qualitativ hochwertige Entwicklung zu gewährleisten.
   \end{itemize}
 }
 Je nach Kontext und Zielsetzung können auch weitere Sichten auf ein Verteiltes System relevant sein, beispielsweise die ökonomische bzw. ökologische Sicht oder die Benutzersicht. Auch hier können die einzelnen Diskussionspunkte eine beliebige Komplexität annehmen. Wichtig ist, im Vorfeld einer Diskussion zu bestimmen welcher Fokus die Diskussion hat. Alles miteinander zu verweben, ist eine sehr komplexe Herangehensweise, die nicht selten zum Scheitern verurteilt ist.
 \warningvs{
-TIPP Praktikum: Das Teile-und-herrsche Verfahren ist hier ein erster guter Ansatz, um Arbeitspakete und Aufgabenfelder zu schnüren.
+Das Teile-und-herrsche Verfahren ist hier ein erster guter Ansatz, um Arbeitspakete und Aufgabenfelder zu schnüren.
 }
 Als Beispiel soll die ökonomische/ökologische Anforderung an den Energieverbrauch von Transaktionen eingebracht werden. Es ist schwierig vorab eine generische, aber genaue Antwort auf diese Frage zu geben, da dies von vielen Faktoren abhängig ist, wie z.B. der Art der Datenbank, der Größe und Komplexität der Transaktionen und der Energiequelle, die zur Unterstützung der Datenbank verwendet wird.
 Soll weiter die Anforderung an die \ce{CO2} Produktion ausgerichtet werden, gibt es schon vieles alleine bei der Datenhaltung zu beachten. 
@@ -313,7 +340,7 @@ Ein weiterer Ansatz besteht darin, die Lastverteilung zu optimieren, um sicherzu
 
   \item \textbf{Funktionale Skalierbarkeit}: Dieses Unterziel bezieht sich auf die Fähigkeit eines verteilten Systems, die Anzahl der unterstützten Funktionen und Dienste zu erhöhen, ohne dass dies zu einer Abnahme der Leistung oder Stabilität führt. Eine funktional skalierbare Architektur ermöglicht es auch neue Dienste oder Funktionen hinzuzufügen, um sich an sich ändernde Geschäftsanforderungen oder Benutzerbedürfnisse anzupassen.
 
-        In diesem Zusammenhang soll auch kurz auf die Grenzen der funktionalen Skalierbarkeit eingegangen werden. Die Skalierbarkeit hängt häufig von der Problemgröße ab. Die Problemgröße selbst bezieht sich auf die Datenmenge, die bei einem bestimmten Problem oder einer bestimmten Aufgabe verarbeitet werden muss. Dies hat wiederum einen direkten Einfluss auf die Dimensionierung der Funktionen. Die Größe des Problems selbst hängt wiederum von verschiedenen Faktoren ab, wie z. B. der Anzahl der Eingangsvariablen, der Größe der Eingangsdaten, der Anzahl der Ausgangsvariablen oder die Komplexität des zur Lösung des Problems verwendeten Algorithmus. In jedem Fall ist zu beachten, dass sich die Größe des Problems auf verschiedene Weise auf die Gestaltung der Funktionen auswirken kann, z. B. auf die Zeit, die zur Lösung des Problems akzeptiert wird, oder auf den Speicherplatz, der zur Speicherung der Daten erforderlich ist. In der Regel benötigen größere Probleme mehr Rechenleistung und Speicherplatz und fordern mehr Zeit, um gelöst zu werden, was zu einer direkten Abhängigkeit zwischen Funktion und Ressource führt. Im besten Fall kann die Arbeit innerhalb eines einzelnen Problems parallelisiert werden. Diese Parallelisierung kann man sich bildlich wie die Bearbeitung von Akten in einem Büro vorstellen. In einem fiktiven Beispiel als Stapel von Anträgen, die nicht nur von einer Person, sondern von mehreren Personen bearbeitet werden. Der Antragsstapel dient als Sammelstelle für Aufgaben und es bedarf eines geeigneten Mechanismus, um die Anträge an die Bearbeiter zu verteilen. Dabei sind verschiedene Regeln zu beachten, wie Little's Law~\cite{little1961proof}:
+        In diesem Zusammenhang soll auch kurz auf die Grenzen der funktionalen Skalierbarkeit eingegangen werden. Die Skalierbarkeit hängt häufig von der Problemgröße ab. Die Problemgröße selbst bezieht sich häufig auf die Datenmenge, die bei einem bestimmten Problem oder einer bestimmten Aufgabe verarbeitet werden muss. Dies hat wiederum einen direkten Einfluss auf die Dimensionierung der Funktionen. Die Größe des Problems selbst hängt wiederum von verschiedenen Faktoren ab, wie z. B. der Anzahl der Eingangsvariablen, der Größe der Eingangsdaten, der Anzahl der Ausgangsvariablen oder die Komplexität des zur Lösung des Problems verwendeten Algorithmus. In jedem Fall ist zu beachten, dass sich die Größe des Problems auf verschiedene Weise auf die Gestaltung der Funktionen auswirken kann, z. B. auf die Zeit, die zur Lösung des Problems akzeptiert wird, oder auf den Speicherplatz, der zur Speicherung der Daten erforderlich ist. In der Regel benötigen größere Probleme mehr Rechenleistung und Speicherplatz und fordern mehr Zeit, um gelöst zu werden, was zu einer direkten Abhängigkeit zwischen Funktion und Ressource führt. Im besten Fall kann die Arbeit innerhalb eines einzelnen Problems parallelisiert werden. Diese Parallelisierung kann man sich bildlich wie die Bearbeitung von Akten in einem Büro vorstellen. In einem fiktiven Beispiel als Stapel von Anträgen, die nicht nur von einer Person, sondern von mehreren Personen bearbeitet werden. Der Antragsstapel dient als Sammelstelle für Aufgaben und es bedarf eines geeigneten Mechanismus, um die Anträge an die Bearbeiter zu verteilen. Dabei sind verschiedene Regeln zu beachten, wie Little's Law~\cite{little1961proof}:
 \importantvs{
         \textbf{Little's Law} ist ein Gesetz der Warteschlangentheorie, das besagt, dass die durchschnittliche Anzahl von Kunden in einem System gleich der Produktivität des Systems multipliziert mit der durchschnittlichen Zeit, die ein Kunde im System verbringt, ist. Im Kontext von verteilten Systemen bedeutet dies, dass die Problemgröße eines verteilten Systems direkt mit der Anzahl der in diesem System aktiven Prozesse oder Anfragen zusammenhängt.
 }
@@ -337,12 +364,13 @@ Ein weiterer Ansatz besteht darin, die Lastverteilung zu optimieren, um sicherzu
         Angenommen, das verteilte System besteht aus 4 Knoten, und jeder Knoten kann 25 GB Daten in 2,5 Minuten analysieren. Durch Hinzufügen von Knoten wird die Größe des Problems erhöht, das System kann jedoch immer noch das Ziel der Analyse innerhalb der vorgegebenen 10 Minuten erreichen.
 }
         Gustafsons Gesetz trifft aber nur zu, wenn die eingesetzten Algorithmen die Skalierung durch ausreichende Parallelisierung stützen. Das Amdahlsche Gesetz~\cite{amdahl1967validity} besagt, dass die Leistungssteigerung durch die Parallelisierung eines Systems begrenzt ist durch den Anteil der Berechnungen, der nicht parallelisiert werden kann. Das bedeutet, dass bei der Optimierung der Leistung eines Systems durch Parallelisierung die nicht-parallelisierbaren Anteile minimiert werden sollten, um eine optimale Leistungssteigerung zu erreichen. Ein Beispiel soll dies verdeutlichen:
-
+\examplevs{
         Angenommen, es existiert eine Aufgabe, die aus zwei Teilaufgaben besteht: Eine Teilaufgabe ist zu 95\% nicht parallelisierbar in einer Schleife. Wie viel schneller wird das System im Vergleich zur Ausführung auf einem einzelnen Prozessor sein, wenn es auf 8 Prozessoren skaliert?
 
         Um dies zu berechnen, können wir das Amdahlsche Gesetz anwenden. Laut dem Gesetz ist die maximale Beschleunigung, die wir durch Parallelisierung erzielen können, durch den Anteil der sequenziell ausgeführten Berechnungen begrenzt.
         Die maximale Beschleunigung, die wir erreichen können, wird als Speedup bezeichnet. Der Speedup kann als Maß für die Effizienz der Parallelisierung verwendet werden und wird wie folgt berechnet:
-
+}
+\examplevs{
         \begin{equation*}
           Speedup = \frac{T_1}{T_p}
         \end{equation*}
@@ -356,7 +384,7 @@ Ein weiterer Ansatz besteht darin, die Lastverteilung zu optimieren, um sicherzu
         \end{align*}
 
         Das bedeutet, dass das System, welches die Aufgabe auf 8 Prozessoren ausführt, nicht schneller arbeiten wird als 6 Prozessoren. Die parallele Ausführung der Teilaufgaben hat keine Auswirkungen auf die Gesamtzeit, da es keinen sequenziell auszuführenden Anteil gibt, der durch Parallelisierung beschleunigt werden kann.
-
+}
         In diesem Beispiel zeigt das Amdahlsche Gesetz, dass die parallele Ausführung der Teilaufgaben in diesem System keinen Leistungsvorteil bietet, da der sequenziell auszuführende Anteil bestimmend ist. Dieses muss immer als Grundlage für das Gustafsons Gesetz verstanden werden.
 
         \begin{figure}[!h]
@@ -387,7 +415,8 @@ Ein weiterer Ansatz besteht darin, die Lastverteilung zu optimieren, um sicherzu
         In verteilten Systemen kann ein sogenannter \enquote{Superspeedup} erreicht werden, wenn die Berechnungen und Prozesse über mehrere Rechner oder Knoten verteilt werden, was zu einer signifikanten Verbesserung der Leistung führt und zusätzlich Caching Mechanismen genutzt werden, die auf einer einzelnen CPU nicht möglich wären.\\
         \\
         Wie auch immer, zu Beginn der Entwicklung eines Verteilten Systems steht häufig noch nicht fest, inwieweit das System langfristig skalieren soll, daher sind auch schon kleine Systeme mit ausreichend Skalierungsmöglichkeiten zu designen und damit auch mit einem hohen Maß an möglicher Parallelität. Dies kann in kleinen Entscheidungen bereits einen großen Unterschied machen, wie beispielhaft in der Auswahl der Sortieralgorithmen.
-
+\examplevs{ 
+        \paragraph{Quicksort vs Mergesort in VS}\mbox{}\\
         Hier sollen beispielhaft zunächst zwei Gründe aufgeführt werden, warum die Auswahl von Mergesort sich in einer generischen Diskussion besser eignet, als die Wahl von Quicksort. Diese Diskussion soll einzig die Detailtiefe der Überlegungen andeuten.
 
         Zunächst steht hier der Kommunikationsaufwand: Bei Quicksort müssen die Teillisten für jeden rekursiven Aufruf aufgeteilt und zwischen verschiedenen Knoten im verteilten System ausgetauscht werden. Dies erzeugt einen hohen Kommunikationsaufwand zwischen den Knoten, der die Gesamtleistung des verteilten Systems beeinträchtigen kann. Im Gegensatz dazu kann Mergesort leichter parallelisiert werden, indem die sortierten Teillisten fusioniert werden, um die endgültige sortierte Liste zu erstellen. Hierdurch wird der Kommunikationsaufwand reduziert.
@@ -396,16 +425,18 @@ Ein weiterer Ansatz besteht darin, die Lastverteilung zu optimieren, um sicherzu
         Wenn das Pivot-Element nicht sorgfältig ausgewählt wird, kann dies zu einer ungleichmäßigen Verteilung der Arbeit führen. Ein schlecht gewähltes Pivot-Element kann dazu führen, dass eine Teilliste ungewöhnlich groß wird und mehr Zeit benötigt, um sortiert zu werden als die anderen Teillisten. Infolgedessen können einige Knoten im verteilten System stark belastet werden, während andere Knoten inaktiv bleiben, was die Gesamtleistung des Systems beeinträchtigt.
 
         Dies macht deutlich, dass bei der Konzeptionierung eines skalierenden Systems, nicht nur Anforderungen an das Problemverständnis gestellt werden, sondern auch eine breite Expertise. Diese umfasst eine tiefe Kenntnis über die möglichen Lösungskorridore  und ihrer bestimmenden Eigenschaften.
-
+}
         Am Ende sollte noch eine weitere Gesetzmäßigkeit  für die Skalierung verinnerlicht werden. Brooks sagt aus, dass die Komplexität eines Systems nicht durch Hinzufügen von Ressourcen reduziert werden kann. 
 \warningvs{Mit anderen Worten, wenn ein System zu komplex ist, wird es nicht einfacher, nur weil man mehr Ressourcen hinzufügt.}Diese Gesetzmäßigkeit wird aber viel zu oft in der Praxis ignoriert. Jeder Knoten muss mit den neuen Knoten interagieren, was den Kommunikationsaufwand exponentiell steigen lässt. Zudem entsteht zusätzlicher Overhead durch Synchronisation und Datenverteilung. Ein Beispiel ist ein verteiltes Datenbanksystem: Wenn zusätzliche Datenbankserver hinzugefügt werden, steigt der Aufwand für die Konsistenzsicherung und Partitionstoleranz.
   \item \textbf{Verwaltungs- oder Administrative-Skalierbarkeit}: Verwaltungs- oder administrative Skalierbarkeit bezieht sich auf die Fähigkeit eines verteilten Systems, effektiv und effizient von Administratoren oder Betreibern verwaltet und überwacht zu werden, unabhängig von der Größe oder Komplexität des Systems. Dies ist besonders wichtig, da verteilte Systeme in der Regel aus einer Vielzahl von Komponenten und Knoten bestehen, die auf verschiedenen Hardware- und Software-Plattformen laufen und in verschiedenen Netzwerken miteinander kommunizieren.
 
         Ein wichtiges Ziel der Verwaltungs- oder Administrative-Skalierbarkeit ist es, eine konsistente und zuverlässige Überwachung, Konfiguration und Verwaltung von verteilten Systemen zu ermöglichen, unabhängig von der Größe oder Komplexität des Systems. Dies kann durch die Verwendung von automatisierten Tools und Prozessen erreicht werden, die es Administratoren ermöglichen, das System zentralisiert und effektiv zu überwachen und zu verwalten.
-
+\examplevs{
         Kubernetes ist ein in diesem Zusammenhang häufig genanntes Beispiel. Es handelt sich um eine Open-Source-Plattform für die Verwaltung von containerisierten Anwendungen. Kubernetes bietet eine Vielzahl von Funktionen und Werkzeugen, die es Administratoren ermöglichen, containerisierte Anwendungen unabhängig von der Größe oder Komplexität des Systems effizient zu verwalten. Dazu gehören Funktionen wie automatische Skalierung, Lastverteilung, Fehlerbehebung, Überwachung und Protokollierung.
-
+}
+\examplevs{
         Auch Apache ZooKeeper sollte genannt werden, als eine Open-Source-Software zur Koordination von verteilten Anwendungen. ZooKeeper bietet Funktionen wie Synchronisierung, Konfiguration, Überwachung und Benachrichtigung, die es Administratoren ermöglichen, komplexe verteilte Anwendungen effektiv und effizient zu verwalten und zu überwachen.
+}
 \end{itemize}
 
 \subsubsection{Verteilungstransparenz}
@@ -423,18 +454,19 @@ Da es ein schwieriges Feld ist dieses Ziel zu erreichen, greift der informierte 
   \item  \textbf{Zugriffstransparenz (Access)}: Sie ist eine Art der Transparenz in verteilten Systemen, die darauf abzielt, dem Benutzer den Zugriff auf Ressourcen im Netzwerk so einfach wie möglich zu machen. Der Benutzer sollte in der Lage sein, auf Ressourcen zuzugreifen, ohne sich darüber Gedanken machen zu müssen, wo sich die Ressourcen befinden oder wie sie zugänglich gemacht werden können.
 
         Zugriffstransparenz kann gut am Beispiel der Dienstvermittlung diskutiert werden. Bei der Dienstvermittlung wird ein zentraler Dienst eingerichtet, der Benutzern dabei hilft, auf Ressourcen im Netzwerk zuzugreifen, ohne dass sie sich über den genauen Standort oder die Eigenschaften der Ressourcen Gedanken machen müssen. Der Dienst kann beispielsweise die Namen von Diensten und Ressourcen im Netzwerk bereitstellen und den Benutzer auf die entsprechenden Ressourcen weiterleiten.
-
+\examplevs{
         Eine besondere Variante der Dienstvermittlung ist die Adressauflösung. Hierbei wird eine Adresse verwendet, um auf eine Ressource im Netzwerk zuzugreifen, ohne dass der Benutzer sich über den genauen Standort der Ressource Gedanken machen muss. Die Adressauflösung kann automatisch erfolgen, indem beispielsweise ein Domain Name System (DNS) verwendet wird.
-
+}
         Auch Netzwerkprotokolle können im Sinne der Zugriffstransparenz diskutiert werden. Durch die Verwendung von Netzwerkprotokollen und damit verbundenen Schichtenmodellen können Benutzer auf Ressourcen im Netzwerk zugreifen, ohne sich Gedanken darüber machen zu müssen, wie die Kommunikation zwischen den Komponenten erfolgt oder wie Daten über das Netzwerk übertragen werden.
 
   \item \textbf{Lokalitäts-Transparenz (Location)}: Diese Transparenz zielt darauf ab, dem Benutzer die Komplexität des Systems zu verbergen, indem ihm das \enquote{Gefühl} vermittelt wird, dass Ressourcen lokal verfügbar sind, auch wenn sie sich in Wirklichkeit an einem entfernten Ort befinden.
         %Mit anderen Worten, Lokalitäts-Transparenz bedeutet, dass der Benutzer nicht wissen oder sich darum kümmern muss, wo sich eine bestimmte Ressource im Netzwerk befindet oder wie sie zugänglich gemacht wird.
-
+\examplevs{
         Ein Beispiel für Lokalitäts-Transparenz ist die Verwendung von virtuellen Ressourcen. Durch die Erstellung von virtuellen Ressourcen, wie virtuellen Maschinen oder virtuellen Festplatten, können Ressourcen im Netzwerk bereitgestellt werden, ohne dass der Benutzer sich Gedanken darüber machen muss, wo sich die physischen Ressourcen befinden.
-
+}
+\examplevs{
         Ein weiteres Beispiel für Lokalitäts-Transparenz ist die Verwendung von Dateisystemen. Durch die Verwendung von verteilten Dateisystemen kann der Benutzer auf Dateien zugreifen, ohne sich Gedanken darüber machen zu müssen, wo sich die Dateien im Netzwerk befinden. Das verteilte Dateisystem sorgt dafür, dass der Benutzer auf die Dateien zugreifen kann, als ob sie sich lokal auf seinem Gerät befinden.
-
+}
         Lokalitäts-Transparenz kann auch durch die Verwendung von Replikation erreicht werden. Durch die Replikation von Ressourcen auf verschiedene Knoten im Netzwerk kann der Benutzer auf die Ressourcen zugreifen, ohne sich Gedanken darüber machen zu müssen, wo sich die Ressourcen befinden oder welche Knoten verfügbar sind.
 
   \item \textbf{Migrationstransparenz (Migration)}: %Die Transparenz ermöglicht den Benutzern, von einem Ort oder Gerät zu einem anderen zu wechseln, ohne dabei ihre Sitzung oder den Zugriff auf ihre Ressourcen zu verlieren. 
@@ -447,9 +479,9 @@ Da es ein schwieriges Feld ist dieses Ziel zu erreichen, greift der informierte 
         Die Migrationstransparenz wird oft durch Mechanismen wie Sitzungs- und Zustandssynchronisierung, Lastverteilung und automatische Skalierung erreicht. Sitzungs- und Zustandssynchronisierung ermöglicht es Benutzern, ihre Sitzungen und Zustände zwischen verschiedenen Geräten oder Standorten zu synchronisieren. Lastverteilung und automatische Skalierung sorgen dafür, dass die Ressourcen im System je nach Bedarf automatisch skaliert und verteilt werden, um eine unterbrechungsfreie Benutzererfahrung zu gewährleisten.
 
   \item \textbf{Replikationstransparenz (Replication)}:  Auf replizierte Ressourcen zuzugreifen, ohne sich über die Anzahl der Replikate, deren Standort oder die zugrunde liegenden Mechanismen Gedanken machen zu müssen ist ein tolles Ziel. Die  Replikationstransparenz ermöglicht es Benutzern, auf replizierte Ressourcen zuzugreifen, als ob es nur eine einzige Ressource im System gäbe, im besten Fall eine kohärente.
-
+\examplevs{
         Ein Beispiel für Replikationstransparenz ist die Verwendung von replizierten Datenbanken. Durch die Replikation von Datenbanken auf verschiedenen Knoten im Netzwerk kann der Benutzer auf die Datenbank zugreifen, ohne sich Gedanken darüber machen zu müssen, wo sich die Datenbank befindet oder welche Knoten verfügbar sind. Der Benutzer kann einfach auf die replizierte Datenbank zugreifen, als ob es nur eine einzige Datenbank im System gäbe.
-
+}
         %Ein weiteres Beispiel für Replikationstransparenz ist die Verwendung von verteilten Dateisystemen. Durch die Replikation von Dateien auf verschiedenen Knoten im Netzwerk kann der Benutzer auf die Dateien zugreifen, ohne sich Gedanken darüber machen zu müssen, wo sich die Dateien befinden oder welche Knoten verfügbar sind. Der Benutzer kann einfach auf die replizierten Dateien zugreifen, als ob es nur eine einzige Datei im System gäbe.
 
         Die Replikationstransparenz wird oft durch Mechanismen wie Replikation, Konsistenz-Protokolle und Fehlertoleranz erreicht. Die Replikation sorgt dafür, dass Daten oder Ressourcen auf mehreren Knoten im Netzwerk dupliziert werden, um eine höhere Verfügbarkeit und Zuverlässigkeit zu gewährleisten. Konsistenz-Protokolle sorgen dafür, dass alle Replikate synchronisiert werden und dass Änderungen an einem Replikat auch auf allen anderen Replikaten propagiert werden. Fehlertoleranzmechanismen sorgen dafür, dass das System auch dann noch funktioniert, wenn ein oder mehrere Knoten im Netzwerk ausfallen oder nicht verfügbar sind.
@@ -474,7 +506,7 @@ Da es ein schwieriges Feld ist dieses Ziel zu erreichen, greift der informierte 
         \paragraph{Diskussion Incident Management}\mbox{}\\
         Immer mehr setzt sich auch der Gedanke durch aus Fehlern zu lernen. Dies ist vielmehr eine organisatorische Diskussion als eine technische. Dieser Prozess wird häufig als \enquote{Incident Management} bezeichnet. In diesem Prozess kann nicht das Fehlerverhalten im auftretenden Fall korrigiert werden, aber die darauffolgenden Situationen. Einfach gesprochen ist es das Ziel einen Fehler nicht zweimal zu machen. Dies ist ein langfristiges Ziel in verteilten Systemen um die Fehlertransparenz zu erhöhen.
         \\\\
-        Incident Management zielt auf die schnelle Identifizierung, Analyse, Reaktion und Behebung von unerwarteten Ereignissen oder Störungen, die die normalen Abläufe eines Systems, einer Organisation oder eines Netzwerks beeinträchtigen können. Incident Management ist ein wichtiger Bestandteil des IT-Service-Managements (ITSM) und zielt darauf ab, die negativen Auswirkungen solcher Vorfälle auf Geschäftsprozesse und die Servicequalität zu minimieren. Es umfasst im Allgemeinen die folgenden Schritte:
+        \textbf{Incident Management} zielt auf die schnelle Identifizierung, Analyse, Reaktion und Behebung von unerwarteten Ereignissen oder Störungen, die die normalen Abläufe eines Systems, einer Organisation oder eines Netzwerks beeinträchtigen können. Incident Management ist ein wichtiger Bestandteil des IT-Service-Managements (ITSM) und zielt darauf ab, die negativen Auswirkungen solcher Vorfälle auf Geschäftsprozesse und die Servicequalität zu minimieren. Es umfasst im Allgemeinen die folgenden Schritte:
         \begin{itemize}
           \item Incident-Erkennung: Das erste und entscheidende Element des Incident-Managements ist die frühzeitige Erkennung von Vorfällen. Dies kann durch automatisierte Überwachungssysteme, Benachrichtigungen von Benutzern oder Mitarbeitern oder andere Methoden erreicht werden.
           \item Incident-Registrierung: Sobald ein Vorfall erkannt wurde, wird er in einem zentralen Incident-Management-System (IMS) oder einem Ticketing-System erfasst. Dies stellt sicher, dass alle relevanten Informationen über den Vorfall dokumentiert sind und eindeutig identifiziert werden können.
@@ -527,21 +559,32 @@ Die Ziele eines Verteilten Systems spielen eine wichtige Rolle im Anforderungspr
 Ein Anforderungsprozess für Verteilte Systeme sollte in mehrere Schritte unterteilt werden, die sich insbesondere am Anfang auf die Definition, Erfassung und Verwaltung der Anforderungen konzentriert. Dies wird auch nochmals deutlicher in der mit diesem Script verbundenen praktischen Arbeit. \examplevs{
 Im Folgenden werden einige der bisher genannten Schritte im Anforderungsprozess beschrieben\footnote{Eine Auseinandersetzung mit diesen Schritten, wird für die praktische Aufgabe sehr empfohlen}:
 \begin{itemize}
-  \item Definieren der Ziele und Anforderungen: Das erste und wichtigste Ziel im Anforderungsprozess ist die Ziele und Anforderungen des Verteilten Systems zu definieren. Dies auch im Detail mit Fokus auf Priorität und  Ausprägung.
+  \item \textbf{Definieren der Ziele und Anforderungen:} Das erste und wichtigste Ziel im Anforderungsprozess ist die Ziele und Anforderungen des Verteilten Systems zu definieren. Dies auch im Detail mit Fokus auf Priorität und  Ausprägung.
 \end{itemize}
 }
 \examplevs{
 \begin{itemize}
-  \item Anforderungen erfassen: Nachdem die Ziele und Anforderungen definiert wurden, müssen sie erfasst und dokumentiert werden. Hierbei können Techniken wie Interviews, Umfragen, Workshops oder Prototyping genutzt werden, um die Bedürfnisse und Anforderungen der Benutzer und Stakeholder des Systems zu ermitteln. Die Auseinandersetzung mit Software Engineering Werkzeugen wird sehr angeraten. Auch kommt der Dokumentationsmethodik eine besondere Bedeutung zu. Werkzeuge wie ARC42\footnote{\url{https://www.arc42.de/overview/}} sind gut geeignet den Prozess zu steuern und zu organisieren.
-
+  \item \textbf{Anforderungen erfassen:} Nachdem die Ziele und Anforderungen definiert wurden, müssen sie erfasst und dokumentiert werden. Hierbei können Techniken wie Interviews, Umfragen, Workshops oder Prototyping genutzt werden, um die Bedürfnisse und Anforderungen der Benutzer und Stakeholder des Systems zu ermitteln. Die Auseinandersetzung mit Software Engineering Werkzeugen wird sehr angeraten. Auch kommt der Dokumentationsmethodik eine besondere Bedeutung zu. Werkzeuge wie ARC42\footnote{\url{https://www.arc42.de/overview/}} sind gut geeignet den Prozess zu steuern und zu organisieren.
+\end{itemize}
+}
+\examplevs{
+\begin{itemize}
   \item \textbf{Anforderungen analysieren und spezifizieren:} Die erfassten Anforderungen müssen analysiert und spezifiziert werden, um sicherzustellen, dass sie vollständig, konsistent und widerspruchsfrei sind. Hierbei können Methoden wie Use-Case-, Datenfluss- oder Zustandsdiagramme eingesetzt werden. Eine ausreichende Kenntnis der Beschreibung ist hier dringend geboten\footnote{UML Tutorial: \url{ http://bedford-computing.co.uk/learning/wp-content/uploads/2016/09/UML-2.0-in-Action_-A-project-based-tutorial-eBook.pdf}}.
-
+\end{itemize}
+}
+\examplevs{
+\begin{itemize}
   \item \textbf{Validieren und verifizieren der Anforderungen:} Die spezifizierten Anforderungen müssen anschließend validiert und verifiziert werden, um sicherzustellen, dass sie den Zielen und Anforderungen entsprechen und vollständig sind. Hierbei können Techniken wie Prototyping, Simulationen oder Tests eingesetzt werden. Auch Gespräche in der Fachgruppe sind hilfreich. Dies sollte begleitend zum Script in praktischen Übungen umgesetzt werden.
-
+\end{itemize}
+}
+\examplevs{
+\begin{itemize}
   \item \textbf{Verwalten der Anforderungen:} Schließlich müssen die Anforderungen verwaltet werden, um sicherzustellen, dass sie während des gesamten Lebenszyklus des Verteilten Systems aktuell und gültig bleiben. Hierbei können Tools und Techniken wie Anforderungsmanagement-Systeme oder Versionskontrollsysteme eingesetzt werden. Ideen wie Kanban Board können hier ein ersten Einstieg bieten.
 \end{itemize}
 }
-Die Anforderungsanalyse für Verteilte Systeme ist ein wichtiger Schritt, um die Funktionalität, Leistung und Zuverlässigkeit eines verteilten Systems zu definieren und zu gewährleisten. Hier sind einige Ansätze und Methoden, um eine Anforderungsanalyse für verteilte Systeme durchzuführen:
+Die Anforderungsanalyse für Verteilte Systeme ist ein wichtiger Schritt, um die Funktionalität, Leistung und Zuverlässigkeit eines verteilten Systems zu definieren und zu gewährleisten. 
+\examplevs{
+Hier sind einige Ansätze und Methoden, um eine Anforderungsanalyse für verteilte Systeme durchzuführen:
 \begin{itemize}
   \item \textbf{Anwendungsfalldiagramme (Use Case Diagrams):} Diese Diagramme beschreiben die Interaktionen zwischen den Benutzern und dem System in Form von Anwendungsfällen. Bei verteilten Systemen ist es wichtig, die Kommunikation zwischen den verschiedenen Komponenten und die Verantwortlichkeiten jedes Systems zu identifizieren.
 
@@ -563,7 +606,7 @@ Die Anforderungsanalyse für Verteilte Systeme ist ein wichtiger Schritt, um die
 
         Beispiel: Ein Workshop zur Identifizierung von Anforderungen für ein verteiltes Fertigungssystem könnte Stakeholder wie Produktmanager, Entwickler, Betriebsteams und Endbenutzer zusammenbringen, um gemeinsam Anforderungen zu definieren.
 \end{itemize}
-
+}
 In dieser Ausarbeitung wird die perfekte Umsetzung der Diagramme nicht in den Fokus gestellt, sondern vielmehr Ihren Nutzen bei der Strukturierung und Visualisierung.
 
 \subsection{Pitfalls}

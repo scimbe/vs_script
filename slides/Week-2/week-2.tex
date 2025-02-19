@@ -1,4 +1,8 @@
 \documentclass{beamer}
+\usepackage{graphicx}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\definecolor{lightblue}{RGB}{25, 25, 112} % RGB-Werte für Hellblau
 
 \usetheme{CambridgeUS}
 \usecolortheme{dolphin}
@@ -33,11 +37,10 @@
         \item \textbf{Buisness kritisch} 
         \item \textbf{Nicht-kritisch} 
     \end{itemize}
-    \begin{itemize}
-    \item WICHTIG (auch für das Praktikum): Erst wenn quantifizierbare, überprüfbare Kriterien formuliert werden, die Hülsenworte wie
-    \textbf{hoch}, \textbf{schnell} und \textbf{wichtig} ersetzen, bekommen die Vereinbarungen einen Wert.
-    \item Funktionale Ziele sind weiter wichtig, wir ergänzen sie im Praktikum
-    \end{itemize}
+    \mbox{}\\
+    \textbf{Wichtig:} (auch für das Praktikum): Erst wenn quantifizierbare, überprüfbare Kriterien formuliert werden, die Hülsenworte wie \textbf{hoch}, \textbf{schnell} und \textbf{wichtig} ersetzen, bekommen die Vereinbarungen einen Wert.
+  
+   
 \end{frame}
 
 \begin{frame}{Ziele verteilter Systeme (1/2)}
@@ -52,20 +55,26 @@
 
 \begin{frame}{Ziele verteilter Systeme (2/2)}
     \begin{itemize}
+        \item \textbf{Verteilungstransparenz:}  Der Benutzer sollte nicht merken, dass er mit einem verteilten System interagiert.  Wie ein einzelner, kohärenter Computer.        
         \item \textbf{Skalierbarkeit (Scalability):}  Fähigkeit des Systems, mit wachsenden Anforderungen und steigender Last umzugehen.  Wie ein elastisches Band: Es kann gedehnt werden, ohne zu reißen.
-        \item \textbf{Verteilungstransparenz:}  Der Benutzer sollte nicht merken, dass er mit einem verteilten System interagiert.  Wie ein einzelner, kohärenter Computer.
     \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Skalierbarkeit im Detail}
-    Skalierbarkeit ist nicht eindimensional.  Verschiedene Arten der Skalierbarkeit müssen im Anforderungsprozess berücksichtigt werden:
+    \begin{columns}[c] % Zentriert die Spalten
 
-    \begin{itemize}
-        \item \textbf{Räumlich:}  Ausdehnung auf verschiedene geografische Standorte.  Wie ein multinationales Unternehmen mit Niederlassungen in verschiedenen Ländern.
-        \item \textbf{Funktional:}  Erhöhung der Anzahl unterstützter Funktionen und Dienste. Wie ein Schweizer Taschenmesser: Es bietet viele verschiedene Werkzeuge.
-        \item \textbf{Administrativ:}  Effiziente Verwaltung des Systems, unabhängig von seiner Größe und Komplexität. Wie ein gut organisiertes Orchester:  Der Dirigent kann das Orchester effektiv leiten, unabhängig von der Anzahl der Musiker.
-    \end{itemize}
+        \begin{column}[c]{0.9\textwidth}
+            \begin{figure}
+                \centering
+                
+                    \includegraphics[width=0.8\textwidth]{fig/Skalierung.png}
+           
+                \caption{Symbolbild Skalierung}
+            \end{figure}
+        \end{column}
+
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Weiter funktionale Skalierbarkeit}
@@ -77,28 +86,36 @@
 \end{frame}
 
 \begin{frame}{Grenzen der Skalierbarkeit -- Little's Law}
-    Little's Law besagt: Die durchschnittliche Anzahl an Kunden in einem System ist gleich der Ankunftsrate multipliziert mit der durchschnittlichen Verweilzeit der Kunden im System.  Dies impliziert, dass die Skalierbarkeit eines Systems begrenzt ist durch die Fähigkeit, Anfragen zu verarbeiten, und dass eine zunehmende Anfragerate zu längeren Wartezeiten führen kann.  Stellen Sie sich eine Warteschlange in einem Supermarkt vor: Je mehr Kunden ankommen, desto länger wird die Warteschlange.
+    \textbf{Little's Law} besagt: Die durchschnittliche Anzahl an Kunden in einem System ist gleich der Ankunftsrate multipliziert mit der durchschnittlichen Verweilzeit der Kunden im System.  
+    \mbox{}\\    \mbox{}\\
+    Dies impliziert, dass die Skalierbarkeit eines Systems begrenzt ist durch die Fähigkeit, Anfragen zu verarbeiten, und dass eine zunehmende Anfragerate zu längeren Wartezeiten führen kann.  Stellen Sie sich eine Warteschlange in einem Supermarkt vor: Je mehr Kunden ankommen, desto länger wird die Warteschlange.
 \end{frame}
 
 
 
 \begin{frame}{Grenzen der Skalierbarkeit -- Gustafson's Law}
-Gustafson's Law besagt: Die Problemgröße kann mit einer Erhöhung der Anzahl von Prozessoren erhöht werden, während die Zeit zur Lösung des Problems relativ konstant bleibt. Dies impliziert, dass die Parallelisierung ein Schlüssel zur Skalierbarkeit ist.  Denken Sie an ein Team von Bauarbeitern:  Je mehr Arbeiter, desto größer das Haus, das sie in der gleichen Zeit bauen können.
+\textbf{Gustafson's Law} besagt: Die Problemgröße kann mit einer Erhöhung der Anzahl von Prozessoren erhöht werden, während die Zeit zur Lösung des Problems relativ konstant bleibt. 
+\mbox{}\\    \mbox{}\\
+Dies impliziert, dass die Parallelisierung ein Schlüssel zur Skalierbarkeit ist.  Denken Sie an ein Team von Bauarbeitern:  Je mehr Arbeiter, desto größer das Haus, das sie in der gleichen Zeit bauen können.
 \end{frame}
 
 \begin{frame}{Grenzen der Skalierbarkeit -- Amdahl's Law}
-    Amdahl's Law besagt:  Die maximale Beschleunigung durch Parallelisierung ist begrenzt durch den Anteil der Berechnung, der nicht parallelisiert werden kann.  Dies impliziert, dass die nicht parallelisierbaren Anteile minimiert werden sollten, um eine optimale Leistungssteigerung zu erzielen.  Stellen Sie sich eine Straße mit einem einspurigen Abschnitt vor:  Egal wie viele Spuren die Straße sonst hat, der einspurige Abschnitt begrenzt den Verkehrsfluss.
+    \textbf{Amdahl's Law} besagt:  Die maximale Beschleunigung durch Parallelisierung ist begrenzt durch den Anteil der Berechnung, der nicht parallelisiert werden kann.  
+    \mbox{}\\     \mbox{}\\
+    Dies impliziert, dass die nicht parallelisierbaren Anteile minimiert werden sollten, um eine optimale Leistungssteigerung zu erzielen.  Stellen Sie sich eine Straße mit einem einspurigen Abschnitt vor:  Egal wie viele Spuren die Straße sonst hat, der einspurige Abschnitt begrenzt den Verkehrsfluss.
 
 \end{frame}
 
 \begin{frame}{Grenzen der Skalierbarkeit -- Brooks' Law}
- Brooks' Law besagt: Durch Hinzufügen von Ressourcen kann die Komplexität eines Systems nicht reduziert werden.  Im Gegenteil, es kann sogar zu mehr Komplexität und Overhead führen.  Stellen Sie sich ein Softwareprojekt vor: Je mehr Entwickler beteiligt sind, desto komplexer wird die Kommunikation und Koordination.
+ \textbf{Brooks' Law} besagt: Durch Hinzufügen von Ressourcen kann die Komplexität eines Systems nicht reduziert werden.  Im Gegenteil, es kann sogar zu mehr Komplexität und Overhead führen.  
+ \mbox{}\\    \mbox{}\\
+ Stellen Sie sich ein Softwareprojekt vor: Je mehr Entwickler beteiligt sind, desto komplexer wird die Kommunikation und Koordination.
 \end{frame}
 
 \begin{frame}{Gruppenarbeit: Gesetze}
       \begin{itemize}
-        \item Handout
-        \item Aufgaben    
+        \item Handout:  2A-Skalierbarkeitsgesetze-Handout.pdf
+        \item Aufgaben: 2A-Skalierbarkeitsgesetze-Aufgaben.pdf    
       \end{itemize}
 \end{frame}
 
@@ -116,13 +133,15 @@ Komplexität des verteilten Systems vor dem Benutzer zu verbergen:
         \item \textbf{Nebenläufigkeitstransparenz:} Parallele Zugriffe auf Ressourcen sind verborgen.
         \item \textbf{Persistenztransparenz: }  Zustand eines Prozesses oder einer Anwendung bleibt unabhängig von Unterbrechungen erhalte (
     \end{itemize}
-    Hinweis 1: Persistenztransparenz und Relocation(Umplatzierung) findet man auch immer häufiger\\
-    Hinweis 2: Vielleicht Störungsgefühl da aus Sicht des Nutzers. 
+    Hinweis 1: Persistenztransparenz und Relocation immer häufiger\mbox{}\\
+    Hinweis 2: Vielleicht Störungsgefühl da aus Sicht des Nutzers. \mbox{}\\
 \end{frame}
 
 
 \begin{frame}{Kohärenz}
-  Ein verteiltes System verhält sich kohärent, wenn es sich für den Benutzer so verhält, als würden alle Daten und Funktionen an einem zentralen Ort bereitgestellt, obwohl sie tatsächlich auf verschiedene Knoten im System verteilt sind.  Das Ziel ist, die Komplexität des verteilten Systems zu verbergen und eine einheitliche und konsistente Benutzererfahrung zu bieten.
+  Ein verteiltes System verhält sich kohärent, wenn es sich für den Benutzer so verhält, als würden alle Daten und Funktionen an einem zentralen Ort bereitgestellt, obwohl sie tatsächlich auf verschiedene Knoten im System verteilt sind. 
+  \mbox{}\\
+  Das Ziel ist, die Komplexität des verteilten Systems zu verbergen und eine einheitliche und konsistente Benutzererfahrung zu bieten.
 \end{frame}
 
 
@@ -159,7 +178,7 @@ Komplexität des verteilten Systems vor dem Benutzer zu verbergen:
 \begin{frame}{Diskussion: Neue Sicht auf Fehler}
 
   \begin{itemize}
-    \item Fehler ist keine Ausnahme, sondern die Regel
+    \item Fehler ist keine Ausnahme, sondern die Regel!
     \item Aufbau Incident Management
     \item Teststrategien hilfreich 
   \end{itemize}

@@ -1,6 +1,11 @@
 \documentclass{beamer}
+\usepackage{graphicx}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\definecolor{lightblue}{RGB}{25, 25, 112} % RGB-Werte für Hellblau
 
 \usetheme{CambridgeUS} % Beispielhaftes ansprechendes Design
+
 \usecolortheme{dolphin}
 
 \title{Verteilte Systeme}
@@ -30,23 +35,33 @@
 
     \begin{columns}[c] % Zentriert die Spalten
 
-        \begin{column}{0.5\textwidth} % Linke Spalte für den Text
-            \begin{block}{Was sind verteilte Systeme?}
-                Verteilte Systeme sind eine Gruppe von vernetzten, autonomen Computern, die für den Benutzer als ein kohärentes System erscheinen. Sie arbeiten zusammen, um eine gemeinsame Aufgabe zu erfüllen, ohne dass ein zentraler Koordinator vorhanden sein muss.  Denken Sie an ein Ameisenvolk: Jede Ameise handelt individuell, aber zusammen erreichen sie komplexe Aufgaben.
-            \end{block}
-
-            \textbf{Kerneigenschaft:} Kein gemeinsamer Speicher.  Die Kommunikation erfolgt über das Netzwerk, was Herausforderungen bei der Koordination mit sich bringt.
-        \end{column}
-
-        \begin{column}{0.5\textwidth} % Rechte Spalte für das Bild
+        \begin{column}{0.9\textwidth}
             \begin{figure}
                 \centering
-                \includegraphics[width=0.9\textwidth]{fig/Definition-VS.png} % Pfad zum NEUEN Bild mit hellblauem Hintergrund
-                \caption{Definition eines Vektorfeldes im $\mathbb{R}^3$}
+                \begin{tcolorbox}[colback=lightblue,arc=0pt,outer arc=0pt,boxrule=0pt,toprule=0pt,bottomrule=0pt,rightrule=0pt,leftrule=0pt] % Hellblauer Hintergrund, keine Rahmen
+                    \includegraphics[width=1.0\textwidth]{fig/Definition-VS.png}
+                \end{tcolorbox}
+                \caption{Symbolbild Definition}
             \end{figure}
         \end{column}
+
         \note{ \textbf{Kerneigenschaft:} Kein gemeinsamer Speicher.  Die Kommunikation erfolgt über das Netzwerk, was Herausforderungen bei der Koordination mit sich bringt. }
     \end{columns}
+
+\end{frame}
+
+\begin{frame}{Definition Verteilte Systeme}
+
+    \begin{columns}[c] % Zentriert die Spalten
+
+        \begin{column}{1.0\textwidth} % Linke Spalte für den Text
+            \begin{block}{Was sind verteilte Systeme?}
+                \textbf{Tanenbaum:} Verteilte Systeme sind eine Gruppe von vernetzten, autonomen Computern, die für den Benutzer als ein kohärentes System erscheinen. Sie arbeiten zusammen, um eine gemeinsame Aufgabe zu erfüllen, ohne dass ein zentraler Koordinator vorhanden sein muss.  Denken Sie an ein Ameisenvolk: Jede Ameise handelt individuell, aber zusammen erreichen sie komplexe Aufgaben.
+            \end{block}
+            \mbox{}\\
+            \textbf{Kerneigenschaft:} Kein gemeinsamer Speicher.
+        \end{column}
+   \end{columns}
 
 \end{frame}
 
@@ -56,27 +71,26 @@
 
     \begin{itemize}
         \item \textbf{Monolithische Systeme:}  Alle Komponenten befinden sich in einer einzigen Codebasis.  Wie ein einzelner, großer Kuchen – schwer zu ändern oder zu erweitern, im Gegensatz zu einem Buffet mit verschiedenen, unabhängigen Gerichten (verteiltes System).
-        \item \textbf{Microservices:} Eine spezielle Form verteilter Systeme, bei der eine Anwendung in kleine, unabhängige Services aufgeteilt ist. Wie ein Baukastensystem: jeder Baustein (Service) hat eine spezifische Funktion und kann unabhängig kombiniert werden.
         \item \textbf{Großrechner/Mainframes:} Leistungsstarke, zentralisierte Systeme, die typischerweise in Rechenzentren eingesetzt werden. Wie ein einzelner, mächtiger Dirigent, der ein Orchester leitet – im Gegensatz zu einem selbstorganisierenden Ensemble (verteiltes System).
     \end{itemize}
-
+  \textbf{Microservices:} Eine spezielle Form verteilter Systeme, bei der eine Anwendung in kleine, unabhängige Services aufgeteilt ist. Wie ein Baukastensystem: jeder Baustein (Service) hat eine spezifische Funktion und kann unabhängig kombiniert werden.
 \end{frame}
 
 
 \begin{frame}{Teamarbeit}
 
-   Gruppenarbeit
+   \textbf{Gruppenarbeit}
 
     \begin{itemize}
-        \item Was muss ich aus Sicht der Informatik machen, um ein Labyrinth zu lösen. Was ist die wesentliche Herausforderung?
-        \item \textbf{Defintion VS:} Eine Diskussion wert 
+        \item \textbf{Diskussion:} Was muss ich aus Sicht der Informatik machen, um ein Labyrinth zu lösen. Was ist die wesentliche Herausforderung?
+        \item \textbf{Defintion VS:} Arbeitsblatt: 1A-Definition-Tanenbaum-Task-01-Aufgabenblatt.pdf
     \end{itemize}
 
 \end{frame}
 
 \begin{frame}{Abstraktionsebenen}
 
-    Verteilte Systeme lassen sich auf verschiedenen Abstraktionsebenen betrachten:
+    Verteilte Systeme lassen sich auf verschiedenen Abstraktionsebenen teilen:
 
     \begin{itemize}
         \item \textbf{Technologisch:} Fokus auf Hardware, Netzwerke und Protokolle.  Wie die einzelnen Instrumente eines Orchesters und wie sie miteinander verbunden sind.
@@ -90,7 +104,7 @@
 
 \begin{frame}{Aspekte und Sichten}
 
-    Verschiedene Aspekte sind bei der Entwicklung verteilter Systeme zu berücksichtigen:
+    Verschiedene Aspekte sind bei der Entwicklung verteilter Systeme zu berücksichtigen (Auswahl):
 
     \begin{itemize}
         \item \textbf{Skalierbarkeit/Ausfallsicherheit:}  Wie reagiert das System auf wachsende Last? Wie wird mit Ausfällen umgegangen?
@@ -103,23 +117,9 @@
 
 \end{frame}
 
-
-\begin{frame}{Teamarbeit}
-
-  Welchen Einfluss haben die Sichten auf die Teamarbeit
-
-    \begin{itemize}
-        \item Welche Sichten verfolgen wir im Praktikum (Muss, Should, Could)? Wer übernimmt welche Position?
-        \item Wie kann Teile-und-herrsche Verfahren helfen
-        \item Welche Methodenbäume wollen wir nutzen? Dokumentationsmethode (ARC42?), Entwicklungsmethode(Agil-Scrum), Sichten verbinden Beispiel: DevOps?
-    \end{itemize}
-
-\end{frame}
-
-
 \begin{frame}{Diskussion Dokumetationsmethode}
 
-  Möchte keine Vorgaben machen: Möchte Arc42 (\url{https://arc42.org/}) vorschlagen 
+  Möchte keine Vorgaben machen: Dennoch, möchte Arc42 (\url{https://arc42.org/}) vorschlagen!
 
     \begin{itemize}
         \item Welche Sichten verfolgen wir im Praktikum (Muss, Should, Could)? Wer übernimmt welche Position?

@@ -103,16 +103,18 @@ Die Schnittstelle einer Ressource muss nicht auf CRUD Funktionen reduziert sein,
   \caption{Ressourcen-orientierte Zerlegung mit Relation}
   \label{fig:stuhl-r}
 \end{figure}
-Um den Unterschied der Ansätze nochmal zu verdeutlichen soll die Analogie der \enquote{Zerlegung eines Stuhls} als Sitzgelegenheit herangezogen werden. Wo bei der funktionalen Zerlegung die Suche nach einer Funktionen, wie das \enquote{Sitzen} im Vordergrund steht, und bei der ressourcenorientierten Zerlegung die Identifikation der einzlenen Ressourcen, wie (Stuhl-)Bein, Sitz(-fläche) oder (Rücken-)Lehne. Umgesetzt in ein Designentwurf für die funktionale Zerlegung ergibt sich beispielhaft in einer objektorientierten Sprache folgender der in dem Diagramm\ref{fig:stuhl-f} zu erkenne ist. 
+Um den Unterschied der Ansätze nochmal zu verdeutlichen soll die Analogie der \enquote{Zerlegung eines Stuhls} als Sitzgelegenheit herangezogen werden. Wo bei der funktionalen Zerlegung die Suche nach einer Funktionen, wie das \enquote{Sitzen} im Vordergrund steht, und bei der ressourcenorientierten Zerlegung die Identifikation der einzlenen Ressourcen, wie (Stuhl-)Bein, Sitz(-fläche) oder (Rücken-)Lehne. Umgesetzt in ein Designentwurf ergibt sich beispielhaft in einer objektorientierten Sprache folgendes Diagramm\ref{fig:stuhl-f}. 
 
 In diesem Beispiel ist es wichtig zu erkennen, dass das Design mit der funktionalen Zerlegung auch seine Schwächen hat. Auch wenn eine korrekte Funktionssignatur bestimmt wurde, kann sich hinter dem Interface der realen Umsetzung dennoch eine nicht zu erwartende Umsetzung verbergen. In diesem  Beispiel wird beim Versuch sich zu setzen nicht nur ein eleganter Stuhl zu erwarten sein, sondern es kann auch eine Bierkiste die Sitzmöglichkeit repräsentieren. Diese Möglichkeiten der Polymorphie eröffnet Chancen und Risiken.  
 \\\\
-Die ressourcenorientierte Zerlegung ist dahingehend intuitiver (siehe Abbildung \ref{fig:stuhl-r}, da ein System in seine einzelnen Ressourcen zerlegt wird, wobei diese eindeutig identifizierbar sein müssen. Auf diese Weise können diese Ressourcen als Entitäten Beziehungen zueinander aufbauen, welche wiederum mit weiteren Eigenschaften belegt werden können. In der korrekten Umsetzung ergibt sich so ein gutes Bild des Gesamtsystems. Die Gefahr besteht jedoch darin, dass die Ressourcen und deren Attribute nicht genau genug bestimmt werden oder die Beziehungen falsch beschrieben sind. In der hier benannten Analogie kann der Bausatz eines Stuhls auch auf eine Art und Weise beschrieben werden, dass die Lehne an den Beinen montiert ist und somit trotz identifizierter Ressourcen nicht den Dienst eines Stuhles, zumindest wie er erwartet wird, erfüllen kann.
+Die ressourcenorientierte Zerlegung ist dahingehend intuitiver (siehe Abbildung \ref{fig:stuhl-r}), da ein System in seine einzelnen Ressourcen zerlegt wird, wobei diese eindeutig identifizierbar sein müssen. Auf diese Weise können diese Ressourcen als Entitäten Beziehungen zueinander aufbauen, welche wiederum mit weiteren Eigenschaften belegt werden können. In der korrekten Umsetzung ergibt sich so ein gutes Bild des Gesamtsystems. Die Gefahr besteht jedoch darin, dass die Ressourcen und deren Attribute nicht genau genug bestimmt werden oder die Beziehungen falsch beschrieben sind. In der hier benannten Analogie kann der Bausatz eines Stuhls auch auf eine Art und Weise beschrieben werden, dass die Lehne an den Beinen montiert ist und somit trotz identifizierter Ressourcen nicht den Dienst eines Stuhles, zumindest wie er erwartet wird, erfüllen kann.
 \\\\
 Der geneigte Leser könnte als Übung hinterfragen, wie die Umsetzung eines Schachspiels in der funktionalen Zerlegung beschrieben werden könnte und wie dies in der ressourcenorientierten Zerlegung aussehen würde. So ergeben sich beispielhaft die Optionen, dass das Spielbrett sowohl in der objektorientierten Sprache durch eine Klasse mit Methoden ausgedrückt wird, die das Brett und die Spielregeln verwaltet, oder als Datenbankressource mit der gleichen Aufgabe.
 
-Bei der Datenbank-Ressource werden die Spielzüge mit dem CRUD Interface realisiert. Spielregeln könnten durch Datenbank-Trigger erfasst werden. Ein Datenbank-Trigger ist ein spezielles Programm oder Skript, das  automatisch ausgeführt wird, wenn bestimmte Änderungen an einer Datenbanktabelle oder -sicht vorgenommen werden. Der Trigger wird auf eine bestimmte Aktion (z.B. INSERT, UPDATE oder DELETE) festgelegt und kann verwendet werden, um eine Reihe von Aufgaben oder Maßnahmen auszuführen, wenn diese Aktion auftritt.
-
+Bei der Datenbank-Ressource werden die Spielzüge mit dem CRUD Interface realisiert. Spielregeln könnten durch Datenbank-Trigger erfasst werden. 
+\warningvs{
+Ein Datenbank-Trigger ist ein spezielles Programm oder Skript, das  automatisch ausgeführt wird, wenn bestimmte Änderungen an einer Datenbanktabelle oder -sicht vorgenommen werden. Der Trigger wird auf eine bestimmte Aktion (z.B. INSERT, UPDATE oder DELETE) festgelegt und kann verwendet werden, um eine Reihe von Aufgaben oder Maßnahmen auszuführen, wenn diese Aktion auftritt.
+}
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Schachbrett - Objektorientiert},captionpos=b,label={lst:schachbrett-oo}]
 public class ChessBoard {
@@ -200,12 +202,16 @@ Eine wesentliche Unterscheidung ist synchron und asynchron. Dies bezieht sich au
 \importantvs{
 \begin{itemize} 
 \item \textbf{Synchrone} Kommunikation bedeutet, dass die Kommunikation in (beinah) Echtzeit stattfindet, d.h. der Sender wartet auf eine Antwort des Empfängers, bevor er mit der nächsten Aktion fortfährt. Beispielsweise kann eine Anwendung eine Anforderung an eine Datenbank senden und auf die Antwort der Datenbank warten, bevor sie mit der Verarbeitung der nächsten Anforderung fortfährt. Bei synchroner Kommunikation kann das System oder die Anwendung nur dann fortfahren, wenn die Antwort vollständig ist.
+\end{itemize}  
+}
+\importantvs{
+\begin{itemize} 
 \item \textbf{Asynchrone} Kommunikation hingegen bedeutet, dass die Kommunikation asynchron oder zeitversetzt erfolgt, d.h. der Sender sendet eine Nachricht an den Empfänger, ohne auf eine sofortige Antwort zu warten. Der Empfänger verarbeitet die Nachricht dann und sendet eine Antwort zurück, wenn er bereit ist. Beispielsweise kann eine Anwendung eine Anforderung an einen Server senden und ohne auf eine Antwort zu warten, mit der Verarbeitung der nächsten Anforderung fortfahren. Die Antwort des Servers wird später empfangen, wenn sie verfügbar ist.
 \end{itemize}  
 }
 Synchrone Kommunikation ist einfach zu implementieren und zu kontrollieren, da der Sender auf eine Antwort des Empfängers wartet, bevor er fortfährt. Es ist jedoch langsam, da der Sender auf die Antwort des Empfängers warten muss, bevor er weitere Aktionen ausführen kann.
 
-Asynchrone Kommunikation hingegen ist schneller, da der Sender die nächste Aktion ausführen kann, ohne auf die Antwort des Empfängers zu warten. Es ist jedoch schwieriger zu implementieren und zu kontrollieren, da der Sender und Empfänger möglicherweise nicht synchronisiert sind und es zu Datenverlust oder Fehlern kommen kann. 
+Asynchrone Kommunikation hingegen ist adaptiver, da der Sender die nächste Aktion ausführen kann, ohne auf die Antwort des Empfängers zu warten. Es ist jedoch schwieriger zu implementieren und zu kontrollieren, da der Sender und Empfänger möglicherweise nicht synchronisiert sind und es zu Datenverlust oder Fehlern kommen kann. 
 \warningvs{
 \textbf{Bereits zu diesem Zeitpunkt sollte festgestellt werden, dass ein Design mit asynchronen Aufrufen dennoch in Verteilten Systemen vorzuziehen ist}.
 }
@@ -213,6 +219,10 @@ Eine weitere Unterscheidung in der Kommunikation ist persistente und transiente 
 \importantvs{
 \begin{itemize} 
 \item \textbf{Persistente} Kommunikation bedeutet, dass die Daten, die zwischen den Systemen übertragen werden, dauerhaft gespeichert werden. Das bedeutet, dass die Daten im besten Fall auch nach einem Systemausfall oder einem Neustart des Systems noch verfügbar sind. Bei der persistenten Kommunikation wird die Datenübertragung oft über Protokolle wie das Transmission Control Protocol (TCP) abgewickelt, die sicherstellen, dass die Daten vollständig und fehlerfrei übertragen werden.
+\end{itemize}  
+}
+\importantvs{
+\begin{itemize} 
 \item \textbf{Transiente} Kommunikation hingegen bedeutet, dass die Daten, die zwischen den Systemen uni- oder bidirektional übertragen werden, vorübergehend und nicht dauerhaft gespeichert werden. Das bedeutet, dass die Daten nach einem Systemausfall oder einem Neustart des Systems nicht mehr verfügbar sind. Transiente Kommunikation wird oft über Protokolle wie das User Datagram Protocol (UDP) abgewickelt, die schnell und effizient sind, aber keine Garantie dafür bieten, dass die Daten vollständig oder fehlerfrei übertragen werden.
 \end{itemize}  
 }
@@ -268,7 +278,7 @@ Weiter kann das Versenden von Nachrichten sowohl synchron oder asynchron aufgefa
 \\\\
 Signale und Events sind Ereignisse, die in einem System auftreten, während eine Nachricht eine Mitteilung ist, die zwischen verschiedenen Systemen ausgetauscht wird. Signale werden normalerweise zwischen verschiedenen Prozessen oder Anwendungen im selben System verwendet, während Events normalerweise innerhalb einer Anwendung auftreten. Nachrichten werden normalerweise zwischen verschiedenen Anwendungen oder Systemen ausgetauscht.
 
-Events, Signale und Nachrichten bilden die Grundlage für weiterführende Konzepte in der Schnittstellenkonzeptionierung von verteilten Systemen. In den klassischen Büchern, wird auf die grundsätzlichen Architekturziele verwiesen, die auf Basis von Funktionen (RPC), auf Teilung des gemeinsamen Speichers (Shared Memory), auf Teilung der Daten (Beispielhaft Datenbank-Replikation) oder die Verarbeitung von Nachrichten und Events (Stream Processing)  setzen
+Events, Signale und Nachrichten bilden die Grundlage für weiterführende Konzepte in der Schnittstellenkonzeptionierung von verteilten Systemen. In den klassischen Quellen, wird auf die grundsätzlichen Architekturziele verwiesen, die auf Basis von Funktionen (RPC), auf Teilung des gemeinsamen Speichers (Shared Memory), auf Teilung der Daten (Beispielhaft Datenbank-Replikation) oder die Verarbeitung von Nachrichten und Events (Stream Processing)  setzen
 \warningvs{
 \begin{itemize}  
 \item \textbf{Remote Procedure Call} (RPC): Hierbei wird eine Funktion auf einem entfernten System aufgerufen, als ob sie lokal ausgeführt würde. Der Aufruf wird über das Netzwerk gesendet und das entfernte System führt die Funktion aus und gibt das Ergebnis zurück.
@@ -281,7 +291,7 @@ Diese Ansicht, mit den Auswirkungen auf die Archtitektur hält der Autor aber f�
 
 \paragraph{API fokusierte Architekturstile}
 \mbox{}\\
-APIs bilden die Grundlage moderner Softwarekommunikation. Die Architektur von Softwaresystemen basiert oft auf definierten API-Schnittstellen, die die Kommunikation zwischen Komponenten ermöglichen. Bekannte Stile wie \textbf{REST}, textbf{GraphQL} oder \textbf{gRPC} definieren dabei unterschiedliche Kommunikationsmuster, die im Laufe dieser Ausarbeitung noch besprochen und auf ihren Kern zurückgeführt werden. 
+APIs bilden die Grundlage moderner Softwarekommunikation. Die Architektur von Softwaresystemen basiert oft auf definierten API-Schnittstellen, die die Kommunikation zwischen Komponenten ermöglichen. Bekannte Stile wie \textbf{REST}, \textbf{GraphQL} oder \textbf{gRPC} definieren dabei unterschiedliche Kommunikationsmuster, die im Laufe dieser Ausarbeitung noch besprochen und auf ihren Kern zurückgeführt werden. 
 \importantvs{
 Die heute wichtigsten Architekturstile sind (individuelle Auswahl):
 \begin{itemize}
@@ -291,7 +301,7 @@ Die heute wichtigsten Architekturstile sind (individuelle Auswahl):
     \item \textbf{SOAP}: XML-basierter Kommunikationsstandard für Webservices.
 \end{itemize}
 }
-Allerdings führen wachsende Skalierungsanforderungen und komplexere Systemlandschaften dazu, dass Alternativen zu API-Architekturen an Bedeutung gewinnen. Die folgenden Übersicht soll nur einen Eindruck vermitteln, ein vollständiges Verständnis wird zu diesem Zeitpunkt nicht angenommen.
+Allerdings führen wachsende Skalierungsanforderungen und komplexere Systemlandschaften dazu, dass auch moderne Alternativen zu API-Architekturen an Bedeutung gewinnen. Die folgenden Übersicht soll nur einen Eindruck vermitteln, ein vollständiges Verständnis wird zu diesem Zeitpunkt nicht angenommen.
 
 \begin{table}[h]
     \centering
@@ -382,28 +392,28 @@ Die Wahl der richtigen Kopplungsart kann jedoch auch erhebliche Vorteile bieten.
 \importantvs{
 Eine \textbf{direkte} Kopplung tritt auf, wenn Anwendungen oder Systeme direkt miteinander verbunden sind und direkt miteinander kommunizieren. Beispielsweise können zwei Anwendungen über eine Netzwerkverbindung oder einen direkten Datenlink verbunden sein und direkt miteinander kommunizieren.
 }
-
+\examplevs{
 \textbf{Analogie:} Zwei Personen aus unterschiedlichen Teams treffen sich persönlich in einem Büro und sprechen direkt miteinander. Es gibt keinen Umweg über Dritte, und beide Teilnehmer müssen verfügbar sein und dieselbe Sprache sprechen, damit die Kommunikation erfolgreich verläuft.
-
+}
 \importantvs{
 Eine \textbf{indirekte} Kopplung tritt auf, wenn Anwendungen oder Systeme über ein gemeinsames Mediator-System oder eine Middleware miteinander kommunizieren. Das Mediator-System oder die Middleware stellt eine Abstraktionsschicht bereit, die die Interoperabilität und Integration von Anwendungen in einem verteilten System erleichtert.
 }
-
+\examplevs{
 \textbf{Analogie:} Nun nehmen die beiden Personen nicht direkt Kontakt auf, sondern wenden sich an eine zentrale Empfangsdame oder ein Vermittlungssystem. Diese Vermittlung sorgt dafür, dass beide richtig miteinander verbunden werden, beispielsweise indem sie Termine koordiniert, die Sprache übersetzen, für Sicherheit sorgen oder eine gemeinsame Plattform/Online-Meetingraum bereitstellt. Das ist vergleichbar mit einer Middleware, die eine Abstraktionsschicht zwischen den Systemen bietet.
-
+}
 \importantvs{
 Eine \textbf{losgekoppelte} Kopplung tritt auf, wenn Anwendungen oder Systeme über Nachrichten kommunizieren, ohne sich direkt zu verbinden. In diesem Fall sendet eine Anwendung eine Nachricht an eine Middleware oder einen Broker, der die Nachricht an die Empfängeranwendung weiterleitet.
 }
-
+\examplevs{
 \textbf{Analogie:}  Bei dieser Variante hinterlässt eine Person für die andere eine schriftliche Nachricht in einem gemeinsamen Postfach oder einer zentralen Inbox, ohne die Person direkt zu treffen. Die Nachricht kann später vom Empfänger abgeholt werden. In der IT-Welt übernimmt ein Message-Broker (Nachrichtenhändler, wie die Post) diese Funktion, indem er Nachrichten speichert und sie den Zielanwendungen nach Bedarf zustellt.
-
+}
 \importantvs{
 Eine \textbf{strukturelle} Kopplung tritt auf, wenn Anwendungen oder Systeme durch gemeinsame Datenstrukturen oder Datentypen verbunden sind. Beispielsweise können Anwendungen über eine gemeinsame Datenbank oder eine gemeinsame Dateistruktur kommunizieren.
 }
-
+\examplevs{
 \textbf{Analogie:} 
 Hier greifen beide Personen auf dasselbe Dokumentenarchiv oder dieselben Formulare zu. Die eigentliche Kommunikation findet über geteilte Datenstrukturen statt, etwa in Form von Tabellen oder Textdateien, in die beide zugreifen. Auch wenn die Kommunikation nicht zwingend zeitgleich geschieht, erfolgt sie über identische Datenformate.
-\\\\
+}
 Die Tabelle~\ref{tab:kopplungsarten} gibt nochmals einen Überblick mit den Definitionen. 
 \begin{table}[!ht]
   \centering
@@ -422,7 +432,7 @@ Die Tabelle~\ref{tab:kopplungsarten} gibt nochmals einen Überblick mit den Defi
 \subsubsection{Mechanismen und Policies}
 
 Mechanismen sind die grundlegenden Bausteine oder Funktionen, die zur Implementierung von verteilten Systemen benötigt werden. Policies hingegen sind die Entscheidungsregeln oder Leitlinien, die bestimmen, wie die Mechanismen eingesetzt und betrieben werden.
-\\\\
+\examplevs{
 Beispiele von Mechanismen in verteilten Systemen:
 \begin{itemize} 
 \item Kommunikation: In verteilten Systemen müssen die Knoten miteinander kommunizieren, um Daten auszutauschen und zusammenzuarbeiten. Mechanismen wie Message Passing, Remote Procedure Calls (RPC) und Remote Method Invocation (RMI) ermöglichen diese Kommunikation.
@@ -430,6 +440,8 @@ Beispiele von Mechanismen in verteilten Systemen:
 \item Replikation: Die Replikation ist ein Mechanismus, bei dem Daten oder Dienste auf mehreren Knoten im verteilten System dupliziert werden, um die Verfügbarkeit, Fehlertoleranz und Leistung zu verbessern.
 \item Konsistenz: Um die Datenintegrität in verteilten Systemen aufrechtzuerhalten, müssen Mechanismen zur Gewährleistung der Konsistenz der Daten eingesetzt werden. Beispiele sind sequentielle Konsistenz, kausale Konsistenz, eventual Konsistenz und ACID-Transaktionen.
 \end{itemize} 
+}
+\examplevs{
 Beispiele von Policies in verteilten Systemen:
 \begin{itemize} 
 \item Ressourcenallokation: In verteilten Systemen müssen Entscheidungen darüber getroffen werden, wie Ressourcen wie Rechenleistung, Speicherplatz und Bandbreite zugewiesen werden. Beispiele für Ressourcenallokations-Policies sind First-Come-First-Served (FCFS), Round Robin, Prioritätswarteschlangen und Fair-Share-Scheduling.
@@ -437,8 +449,10 @@ Beispiele von Policies in verteilten Systemen:
 \item Sicherheit: Sicherheits-Policies bestimmen, wie verteilte Systeme den Schutz von Daten, Diensten und Benutzern gewährleisten. Beispiele sind Authentifizierung, Autorisierung, Verschlüsselung und Auditing.
 \item Lastverteilung: Lastverteilungspolicies legen fest, wie die Arbeitslast in verteilten Systemen auf die verschiedenen Knoten verteilt wird, um eine optimale Leistung und Ressourcenauslastung zu erreichen. Beispiele sind statische Lastverteilung, dynamische Lastverteilung und adaptives Load Balancing.
 \end{itemize}    
+}
+\examplevs{
 \textbf{Analogie:} Ein Schraubenzieher zum Eindrehen von Schrauben (im Uhrzeigersinn) ist ein anderer Mechanismus als ein Schraubenzieher zum Ausdrehen von Schrauben (gegen den Uhrzeigersinn). Obwohl sie auf dem gleichen physikalischen Prinzip basieren und die gleichen Ressourcen nutzen, sind \textbf{eindrehen} und \textbf{ausdrehen} diesem Sinne Teil der Definition des jeweiligen Mechanismus. Ist wiederum das \textbf{drehen} der Mechanismus, können \textbf{links} und \textbf{rechts} als Policy angenommen werden.
-\\\\
+}
 Unabhängig davon, welcher Perspektive man folgt, bleibt das grundlegende Prinzip der Trennung von Mechanismus und Policy wertvoll.  Es geht darum, Verantwortlichkeiten zu trennen und die Flexibilität und Wartbarkeit des Codes zu erhöhen.  Auch wenn die Grenze zwischen Mechanismus und Policy in manchen Fällen etwas verschwimmen kann, hilft das Konzept, über Designentscheidungen nachzudenken und bessere Softwarearchitekturen zu entwickeln.
 \examplevs{
 \paragraph{AI Beispiel - Webserver Cluster}\mbox{}\\ 
@@ -462,7 +476,10 @@ In verteilten Systemen beziehen sich die Begriffe \enquote{stateful} und \enquot
 \begin{itemize} 
 \item \textbf{Stateful}:\\
 Ein stateful System speichert Informationen über den aktuellen Zustand der Kommunikation zwischen den Komponenten. Das bedeutet, dass ein stateful Service oder eine stateful Anwendung auf vorherige Anfragen oder Interaktionen Bezug nimmt und auf der Grundlage dieser Informationen reagiert. Stateful Systeme sind oft komplexer, da sie den Zustand der Interaktionen aktiv verwalten und speichern müssen. Sie können jedoch auch leistungsfähiger sein, da sie auf der Grundlage früherer Interaktionen individuellere oder optimierte Antworten liefern können.
-
+\end{itemize} 
+}
+\importantvs{
+\begin{itemize} 
 \item \textbf{Stateless}:\\
 Ein stateless System speichert keine Informationen über den aktuellen Zustand der Kommunikation zwischen den Komponenten. Jede Anfrage oder Interaktion wird isoliert betrachtet, ohne Bezug auf frühere Anfragen oder Interaktionen. Stateless Systeme sind in der Regel einfacher zu implementieren und zu skalieren, da sie keine kontinuierliche Zustandsverwaltung erfordern. Sie können jedoch weniger leistungsfähig sein, wenn sie auf Informationen aus früheren Interaktionen angewiesen sind, um effektiv zu funktionieren.
 \end{itemize} 
@@ -535,23 +552,23 @@ Im Message Passing werden Nachrichten, die Daten oder Anweisungen enthalten, zwi
 \importantvs{
 Die Eigenschaften von Message Passing können wie folgt zusammengefasst werden:
 \begin{itemize}
-\item Asynchrone Kommunikation: Die Kommunikation ist in der Regel asynchron, wodurch Prozesse unabhängig voneinander weiterarbeiten können, ohne auf Antworten warten zu müssen.
-\item Lose Kopplung: Die Kommunikation zwischen Prozessen ist indirekt und erfordert keine direkte Kenntnis der beteiligten Prozesse, was zu einer losen Kopplung der Komponenten führt.
-\item Skalierbarkeit: Message Passing eignet sich gut für verteilte Systeme mit einer großen Anzahl von Prozessen oder Komponenten, da es einfacher ist, zusätzliche Knoten hinzuzufügen und die Kommunikation zwischen ihnen zu verwalten.
+\item \textbf{Asynchrone Kommunikation:} Die Kommunikation ist in der Regel asynchron, wodurch Prozesse unabhängig voneinander weiterarbeiten können, ohne auf Antworten warten zu müssen.
+\item \textbf{Lose Kopplung:} Die Kommunikation zwischen Prozessen ist indirekt und erfordert keine direkte Kenntnis der beteiligten Prozesse, was zu einer losen Kopplung der Komponenten führt.
+\item \textbf{Skalierbarkeit:} Message Passing eignet sich gut für verteilte Systeme mit einer großen Anzahl von Prozessen oder Komponenten, da es einfacher ist, zusätzliche Knoten hinzuzufügen und die Kommunikation zwischen ihnen zu verwalten.
 \end{itemize}
 }
 \examplevs{
 Beispiele für Message Passing in verteilten Systemen:
 \begin{itemize}
-\item Message Queues: Message Queues sind Datenstrukturen, die zum Speichern und Übertragen von Nachrichten zwischen verteilten Prozessen verwendet werden. Beispiele für Message Queue-Systeme sind RabbitMQ, Apache Kafka und Amazon SQS. Sie ermöglichen die asynchrone Kommunikation und die Entkopplung von sendenden und empfangenden Prozessen.
+\item \textbf{Message Queues:} Message Queues sind Datenstrukturen, die zum Speichern und Übertragen von Nachrichten zwischen verteilten Prozessen verwendet werden. Beispiele für Message Queue-Systeme sind RabbitMQ, Apache Kafka und Amazon SQS. Sie ermöglichen die asynchrone Kommunikation und die Entkopplung von sendenden und empfangenden Prozessen.
 \end{itemize}
 }
 
 \examplevs{
 \begin{itemize}
-\item Message Passing Interface (MPI): MPI ist ein Standard für die Kommunikation zwischen Prozessen in verteilten Systemen, insbesondere in High-Performance-Computing-Umgebungen. MPI stellt Funktionen zum Senden und Empfangen von Nachrichten, Synchronisation von Prozessen und Gruppenkommunikation bereit.
+\item \textbf{Message Passing Interface (MPI):} MPI ist ein Standard für die Kommunikation zwischen Prozessen in verteilten Systemen, insbesondere in High-Performance-Computing-Umgebungen. MPI stellt Funktionen zum Senden und Empfangen von Nachrichten, Synchronisation von Prozessen und Gruppenkommunikation bereit.
 
-\item Publish-Subscribe-Systeme: In diesem Modell senden Publisher Nachrichten an Topics, während Subscriber Nachrichten von den Topics empfangen, die sie abonniert haben. Beispiele für Publish-Subscribe-Systeme sind Google Cloud Pub/Sub, Apache Pulsar und MQTT. Dieses Modell ist ereignisgetrieben und ermöglicht eine lose Kopplung der beteiligten Prozesse.
+\item \textbf{Publish-Subscribe-Systeme:} In diesem Modell senden Publisher Nachrichten an Topics, während Subscriber Nachrichten von den Topics empfangen, die sie abonniert haben. Beispiele für Publish-Subscribe-Systeme sind Google Cloud Pub/Sub, Apache Pulsar und MQTT. Dieses Modell ist ereignisgetrieben und ermöglicht eine lose Kopplung der beteiligten Prozesse.
 \end{itemize}
 }
 Message Passing ist ein grundlegendes Konzept in verteilten Systemen und ermöglicht die Kommunikation und Koordination zwischen Prozessen oder Komponenten in einer skalierbaren und fehlertoleranten Weise.
@@ -559,13 +576,13 @@ Message Passing ist ein grundlegendes Konzept in verteilten Systemen und ermögl
 \paragraph{Actor-Modell}\mbox{}\\
 Das Actor-Modell ist ein Konzept für das Design von verteilten Systemen, das auf der Idee von unabhängigen Entitäten basiert, die als \enquote{Actoren} bezeichnet werden. Actoren sind grundlegende Recheneinheiten, die einen Zustand besitzen und in der Lage sind, Nachrichten zu empfangen und zu verarbeiten. Es setzt auf das Konzept von Message Passing auf. In diesem Modell kommunizieren Actoren ausschließlich über asynchrone Nachrichtenübermittlung, wodurch sie lose gekoppelt und hochgradig parallelisierbar sind. Die Hauptprinzipien des Actor-Modells sind:
 \begin{itemize}
-\item Isolation: Jeder Actor verwaltet seinen eigenen Zustand und verarbeitet Nachrichten unabhängig von anderen Actoren. Diese Isolation ermöglicht eine hohe Fehlertoleranz und erleichtert die Wartung und Skalierung des Systems.
+\item \textbf{Isolation:} Jeder Actor verwaltet seinen eigenen Zustand und verarbeitet Nachrichten unabhängig von anderen Actoren. Diese Isolation ermöglicht eine hohe Fehlertoleranz und erleichtert die Wartung und Skalierung des Systems.
 
-\item Nachrichtenbasierte Kommunikation: Actoren kommunizieren über asynchrone Nachrichten. Nachrichten werden in Mailboxen abgelegt und von Actoren verarbeitet, wenn sie dazu bereit sind. Dieser Ansatz reduziert die Notwendigkeit von Locking- und Synchronisierungsmechanismen und ermöglicht eine hohe Parallelität.
+\item \textbf{Nachrichtenbasierte Kommunikation:} Actoren kommunizieren über asynchrone Nachrichten. Nachrichten werden in Mailboxen abgelegt und von Actoren verarbeitet, wenn sie dazu bereit sind. Dieser Ansatz reduziert die Notwendigkeit von Locking- und Synchronisierungsmechanismen und ermöglicht eine hohe Parallelität.
 
-\item Lokalitätstransparenz: Actoren können unabhängig von ihrer physischen Lage im verteilten System agieren. Die Kommunikation zwischen Actoren ist transparent und unabhängig von der Verteilung der Actoren im System.
+\item \textbf{Lokalitätstransparenz:} Actoren können unabhängig von ihrer physischen Lage im verteilten System agieren. Die Kommunikation zwischen Actoren ist transparent und unabhängig von der Verteilung der Actoren im System.
 
-\item Fehlertoleranz: Durch die Isolation der Actoren und ihre unabhängige Verarbeitung von Nachrichten können Fehler auf einzelne Actoren beschränkt bleiben, ohne das gesamte System zu beeinträchtigen. Das Actor-Modell unterstützt auch Supervision, bei der ein Actor die Verantwortung für das Überwachen und Wiederherstellen anderer Actoren bei Fehlern übernimmt.
+\item \textbf{Fehlertoleranz:} Durch die Isolation der Actoren und ihre unabhängige Verarbeitung von Nachrichten können Fehler auf einzelne Actoren beschränkt bleiben, ohne das gesamte System zu beeinträchtigen. Das Actor-Modell unterstützt auch Supervision, bei der ein Actor die Verantwortung für das Überwachen und Wiederherstellen anderer Actoren bei Fehlern übernimmt.
 \end{itemize}
 
 
