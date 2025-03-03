@@ -640,14 +640,19 @@ Zunächst soll ein Überblick gegeben werden, bevor die Ansätze im Detail disku
 \item \textbf{Microservices-Architektur}: Hierbei wird das System in kleine, unabhängige Services unterteilt, die jeweils eine spezifische Funktion erfüllen. Diese Architektur ermöglicht eine bessere Skalierbarkeit und Flexibilität, da jeder Service unabhängig voneinander entwickelt, getestet und bereitgestellt werden kann.
 
 \item \textbf{Peer-to-Peer-Architektur} (P2P): Hierbei wird das System in ein Netzwerk von gleichwertigen Teilnehmern unterteilt, die direkt miteinander kommunizieren können, ohne auf einen zentralen Server angewiesen zu sein. Diese Architektur wird oft in Filesharing- und Kryptowährungsanwendungen verwendet.
+
+\item \textbf{Serverless-Architektur:} Diese ist eine aktuell aufkommende moderne Architekturform die mit Cloud-Diensten, wie von Microsoft, Amazon oder Google einhergehen. Anwendungen werden direkt für die Cloud entwickelt und daher als cloud-native Anwendungen bezeichnet. Hier verwaltet der Cloud-Provider automatisch die Skalierung, Lastverteilung und Verfügbarkeit. Entwickler konzentrieren sich rein auf die Logik der Funktionen. 
+\examplevs{
+\textbf{Function as a Service (FaaS)}  ist ein Paradebeispiel für cloud-native Anwendungen, die speziell für den Betrieb in Cloud-Umgebungen optimiert sind und Skalierbarkeit, Resilienz sowie lose Kopplung fördern.
+}
 \end{itemize}  
 Um Architekturmuster zu verstehen ist es auch wichtig zu hinterfragen, wie die Komponenten und Recheneinheiten in einem System angeordnet sind. Um diese zu benennen wird häufig der Begriff \enquote{node}~\cite{tanenbaum2017distributed}~(Knoten) eingeführt.
 \importantvs{
 Unter einer node versteht man ein autonomes Computerelement, sei es Hardware-Systeme oder Software-Prozesse. 
 }
-Es gibt noch andere Architekturparadigmen, aber diese sechs sind die wichtigsten und aus der Sicht des Autors am häufigsten verwendeten. Bei allen Architekturen darf die historische Komponente nicht vergessen werden. Die meisten Architekturen lassen sich daher aus dem Grundtyp einer Schichtenarchitektur erklären. 
+Es gibt noch andere Architekturparadigmen, aber diese sieben sind die wichtigsten und aus der Sicht des Autors am häufigsten verwendeten. Bei allen Architekturen darf die historische Komponente nicht vergessen werden. Tatsächlich lassen sich die meisten Architekturen aus dem Grundtyp einer Schichtenarchitektur erklären. 
 
-\subsubsection{Schichtenarchitektur}
+\subsection{Schichtenarchitektur}
 
 Schichtenmodelle spielen eine wichtige Rolle bei der Architektur von verteilten Systemen, indem sie hierarchische Strukturen definieren, die bestimmte Funktionen und Dienste je Schicht kapseln.
 \examplevs{
@@ -670,8 +675,9 @@ Schnittstellen werden auch als Dienst-Zugangspunkte (Service Access Point, SAP) 
 Der so definierte Vorgang wiederholt sich vom Prinzip her in jeder Schicht, d.h. die Schicht (N) nutzt den (N-1)-Dienst (der die Leistungen der Schichten 1 bis (N-1) zusammenfasst), steuert eigene Leistungen bei, die durch das (N)-Protokoll/der (N)-Implementierung realisiert werden, und bietet einen (N)-Dienst an, usw. Dieses System ist auch über die Verteilung nochmal in Figure \ref{fig:schichtenmodell} illustirert.\footnote{Dieses Modell wird auch intinsiv in einem Modul wie RN diskutiert}
 \\
 \newline Ein weiterer Vorteil bei der Verwendung der Architektur besteht darin, dass sie die Wiederverwendbarkeit von Komponenten und Diensten erleichtert. Da jede Schicht bestimmte Funktionen und Dienste bereitstellt, können sie in verschiedenen Systemen und Anwendungen wiederverwendet werden, ohne dass eine Neuentwicklung erforderlich ist. 
-\newline Schichten können auch dazu beitragen, die Sicherheit von Anwendungen zu verbessern. Durch die Trennung von Funktionen und Verantwortlichkeiten kann die Sicherheit jeder Schicht verbessert werden, ohne dass die Sicherheit des gesamten Systems beeinträchtigt wird. So kann beispielsweise eine Schicht, die für die Authentifizierung und Autorisierung von Benutzern verantwortlich ist, unabhängig von anderen implementiert und gewartet werden, um eine höhere Sicherheit zu gewährleisten.
+
 \examplevs{
+\paragraph{Geschichte}\mbox{}\\
 Die Idee der Schichtenmodelle für verteilte Systeme geht auf die 1970er Jahre zurück, als verschiedene Organisationen begannen, Netzwerkprotokolle zu standardisieren und zu entwickeln. Das erste bekannte Schichtenmodell für Netzwerkprotokolle war das \enquote{Department of Defense (DoD) Internet Model}, das 1982 von der US-amerikanischen Regierung eingeführt wurde. Dieses Modell hatte vier Schichten: Anwendung, Transport, Internet und Netzwerkzugang.
 
 In den 1980er Jahren wurde das Open Systems Interconnection (OSI)-Referenz-modell von der Internationalen Organisation für Normung (ISO) eingeführt. Es war ein sehr generisches Schichtenmodell für Netzwerkprotokolle und hatte sieben Schichten: Anwendung, Darstellung, Sitzung, Transport, Netzwerk, Data Link und Physikalisch. Das OSI-Modell hatte den Vorteil, dass es herstellerunabhängig war und Interoperabilität zwischen verschiedenen Netzwerkprotokollen als definiertes Ziel umsetzte.
@@ -689,10 +695,10 @@ Um nochmals die Kraft eines Schichtenmodells zu verdeutlichen, soll auch nochmal
 \importantvs{
 Ein (Software-)\textbf{Layer} beschreibt eine logische Gruppierung von Funktionen innerhalb einer Anwendung oder eines Systems. 
 }
-\mbox{}\\
+\paragraph{Layer}\mbox{}\\
 Layer werden in der Regel vertikal angeordnet und können aus mehreren Tiers bestehen, die gemeinsam eine Schicht bilden. Jedes Layer erfüllt eine spezifische Funktion und  kommuniziert über definierte Schnittstellen mit der darüber oder darunter liegenden Schicht. 
 \\\\
-Beispiele für Layer in verteilten Systemen sind die Three-Layer Architekturen, die in Anwendungslogik-Schicht, die Datenzugriffs-Schicht oder die Präsentations-Schicht unterteilt sind.
+Beispiele für Layer in verteilten Systemen sind die \textbf{Three-Layer Architekturen}, die in Anwendungslogik-Schicht, die Datenzugriffs-Schicht oder die Präsentations-Schicht unterteilt sind. In der Graphik \ref{fig:simple-layer} sind drei Layer beschrieben, die jeweils eine Schicht darstellen:
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.25 \textwidth]{fig/uml/simple-layers.png}
@@ -700,7 +706,7 @@ Beispiele für Layer in verteilten Systemen sind die Three-Layer Architekturen, 
   \label{fig:simple-layer}
 \end{figure}
 
-In der Graphik \ref{fig:simple-layer} sind drei Layer beschrieben, die jeweils eine Schicht darstellen:
+
 \begin{itemize}
 \item Das \enquote{Presentation Layer} enthält die Klasse \enquote{PresentationLayer}, die für die Benutzeroberfläche und die Interaktion mit dem Benutzer zuständig ist.
 
@@ -708,7 +714,6 @@ In der Graphik \ref{fig:simple-layer} sind drei Layer beschrieben, die jeweils e
 
 \item Das \enquote{Data Access Layer} enthält die Klasse \enquote{DataAccessLayer}, die für den Zugriff auf Datenbanken oder andere Datenquellen zuständig ist.
 \end{itemize}
-Die Pfeile zwischen den Komponenten zeigen die Abhängigkeiten zwischen den Schichten an. Die Presentation Layer ist von der Business Logic Layer abhängig und die Business Logic von der Data Access.
 
 \paragraph{Tier}\mbox{}\\
 \importantvs{
@@ -722,7 +727,7 @@ Jedes Tier hat normalerweise eine spezifische Funktion, wie z.B. Datenbank-Tier,
   \caption{Einfaches Tier Modell}
   \label{fig:simple-tier}
 \end{figure}
-In diesem Beispiel eines Three-Tier-Models existieren drei Komponenten, die jeweils ein Tier darstellen:
+In diesem Beispiel eines \textbf{Three-Tier-Architektur} existieren drei Komponenten, die jeweils ein Tier darstellen:
 \begin{itemize}
 \item Das \enquote{Client Tier} enthält die Klasse \enquote{Client}, die für die Benutzeroberfläche und die Interaktion mit dem Benutzer auf dem Client-Gerät zuständig ist.
 
@@ -749,10 +754,10 @@ Ein besonderer Architekturtyp ist eine \enquote{Single-Node-Application}, welche
 
 \subsubsection{Single Node}
 
-Eine Single-Node-Application ist ein Architekturtyp welche das Ziel hat, die Anwendung auf einem einzelnen Knoten in einem verteilten System auszuführen. Im Gegensatz zu einer Anwendung, die auf mehreren Knoten ausgeführt wird, braucht es hier keine Verteilung der Funktionen oder Daten über den logischen/physikalischen Knoten hinaus. Der Knoten kann ein physischer Server oder eine virtuelle Maschine sein, oder ein logischer Prozess.
-\\\\
+Eine Single-Node-Application ist ein Architekturtyp welche das Ziel hat, die Anwendung auf einem einzelnen Knoten in einem verteilten System auszuführen. Im Gegensatz zu einer Anwendung, die auf mehreren Knoten ausgeführt wird, braucht es hier keine Verteilung der Funktionen oder Daten über den logischen/physikalischen Knoten hinaus. Der Knoten kann ein physischer Server oder eine virtuelle Maschine sein, oder ein logischer Prozess, also muss die Laufzeitumgebung dem \textbf{node} Begriff entsprechen.
+\examplevs{
 Ein Beispiel für eine Single-Node-Application in einem verteilten System könnte eine Anwendung sein, die Daten von verschiedenen Systemen sammelt und verarbeitet. Obwohl die Anwendung nur auf einem Knoten ausgeführt wird, muss sie möglicherweise mit verschiedenen Systemen und Datenquellen kommunizieren, dies ist in der Architektur, nicht nur, nicht ausgeschlossen, sondern eine erwünschte Eigenschaft.
-\\\\
+}
 Obwohl Single-Node-Applications nicht auf mehreren Knoten verteilt sind, können sie immer noch von den Vorteilen einer Verteilung profitieren, wie z.B. Skalierbarkeit, Zuverlässigkeit und Flexibilität. Weiter können
 Single-Node-Applications von Middleware-Technologien wie Message Queues und RPC profitieren, die die Interoperabilität zwischen verschiedenen Anwendungen und Systemen erleichtern. Eine Einschränkung ist, das die Middleware nicht primär für die kooperative Arbeit genutzt wird, sondern für das Sammeln und Aufbereiten der Daten. Diese Überlegungen münden in die Bestrebung der Formulierung eines Best Practice Entwurfmusters (Pattern) des sogenannten Single-Node-Pattern miteinfließen. Das Pattern hat seinen Nutzen bereits in verschiedenen Szenarien aufgezeigt, wie zum Beispiel:
 \begin{itemize}
@@ -768,9 +773,15 @@ Das Single-Node-Pattern kann mit verschiedenen Technologien implementiert werden
 Hier sind einige Beispiele von Unternehmen, die dieses Muster einsetzen:
 \begin{itemize}
 \item Netflix\footnote{https://medium.com/@narengowda/netflix-system-design-dbec30fede8d}: Netflix verwendet das Single-Node-Pattern, um die Datenverarbeitung in ihren AWS-Cloud-Instanzen zu optimieren. Sie haben sich dafür entschieden, ihre Anwendungen in kleinere, spezialisierte Dienste aufzuteilen, die auf einzelnen Knoten ausgeführt werden. Dies ermöglicht es ihnen, schnell auf Anforderungen zu reagieren, ohne Ressourcen für überflüssige Knoten zu verschwenden.
+\end{itemize}
+}
+\examplevs{
+\begin{itemize}
 \item Airbnb\footnote{https://enqueuezero.com/airbnb-architecture.html}: Airbnb verwendet das Single-Node-Pattern, um ihre Webanwendung (Nicht die Daten) in einem einzigen Knoten zu hosten, anstatt sie auf mehrere Knoten aufzuteilen. Durch die Verwendung eines einzigen Knotens ist die Anwendung einfacher zu verwalten und zu skalieren. Airbnb kann schnell auf Veränderungen in der Nachfrage reagieren und ihre Anwendung schnell anpassen.
 \end{itemize}
 }
+
+\paragraph{Diskussion Netzwerk}\mbox{}\\
 Für die weitere Diskussion müssen die physikalischen oder auch logischen Verbindungen zwischen Nodes diskutiert werden. Die logische Verbindung muss keiner physikalischen Verbindung entsprechen. Diese \enquote{virtuelle} Netzwerkstruktur besteht häufig auf der obersten Schicht einer physikalischen Netzwerkstruktur und wird als Overlay-Netzwerk bezeichnet. Ein Overlay-Netzwerk ermöglicht den Aufbau von Netzwerkdiensten und Anwendungen, die auf verteilten Systemen basieren, indem es zusätzliche Abstraktion und Organisation bietet. Das Ziel ist es, die Kommunikation und Zusammenarbeit zwischen den Knoten zu verbessern, die Skalierbarkeit zu erhöhen und die Netzwerkverwaltung zu vereinfachen. Sie ermöglichen es, verteilte Anwendungen und Dienste unabhängig von der zugrunde liegenden Netzwerkinfrastrukturen zu entwickeln und bereitzustellen. Allerdings können Overlay-Netzwerke auch zusätzliche Komplexität und Overhead verursachen, da sie auf bestehenden Netzwerkstrukturen aufbauen und von diesen abstrahiert sind, daher neigen Entwickler gerne dazu die bereits beschriebenen Fettnäpfchen zu suchen.
 \examplevs{
 Ein Beispiel für ein Overlay-Netzwerk ist das Peer-to-Peer (P2P)-Overlay-Netzwerk~\cite{tanenbaum2017distributed}. In einem P2P-Netzwerk sind die Knoten gleichberechtigte Teilnehmer, die \textbf{direkt} miteinander kommunizieren und Ressourcen wie Rechenleistung, Speicherplatz und Bandbreite teilen. P2P-Netzwerke werden häufig für den Austausch von Dateien, die Verteilung von Inhalten oder die Bereitstellung von Streaming-Diensten verwendet.
@@ -790,7 +801,7 @@ Unstrukturierte Netzwerke sind in der Regel weniger skalierbar als strukturierte
 Aber nicht nur die Struktur stellt das Design vor unterschiedliche Herausforderungen, auch die Einordnung in bekannte und unbekannte Kommunikationspartner und wie man diese in Gruppen organisiert oder Ressourcen auch vor schädlichen Teilnehmern schützt.
 
 \subsubsection{Middleware Architektur}
-Neben dem Bedürfnis der Verteilung zur Struktur der Anwendung steht auch die Kapslung der Aufgabe für die Verteilung selbst im Fokus dieser Ausarbeitung.. 
+Neben dem Bedürfnis der Verteilung steht auch die Kapslung für die Verteilung selbst als eine Aufgabe im Fokus vieler Arbeiten. 
 
 \begin{figure}[H]
     \centering
@@ -815,21 +826,22 @@ Neben dem Bedürfnis der Verteilung zur Struktur der Anwendung steht auch die Ka
 So wäre es zielgerichtet, nach den bisherigen Diskussionen, eine Schicht zu kreieren (vgl. Figure \ref{fig:schichtenmodell-II}), welche die Aufgaben der Verteilung in sich vereint.
 \cite{tanenbaum2017distributed} beschreibt die Aufgaben einer solchen Schicht als Middleware mit folgenden Funktionsumfang:
 \begin{itemize}
-\item Bereitstellung eines breiten Angebotes für die \textbf{Kommunikation}: 
+\item Bereitstellung eines breiten Angebotes für die \textbf{Kommunikation}: \\
 Eine wichtige Funktion der Middleware ist die Bereitstellung eines umfangreichen Satzes von Kommunikationsprotokollen, die die Interaktion zwischen verschiedenen Anwendungen und Systemen ermöglichen. Diese Protokolle stellen sicher, dass Daten zwischen verschiedenen Anwendungen und Systemen effizient und sicher ausgetauscht werden können.\footnote{Wesentliche Vorarbeiten für diesen Bereich werden in einem Lehrmodul wie Rechnernetze angelegt.}
-\item Dem (Un\textbf{)Marshalling} Prozess: Ein weiterer wichtiger Aspekt von Middleware ist das (Un)Marshalling von Daten, das für integrierte Systeme notwendig ist. (Un)Marshalling bezieht sich auf den Prozess des Konvertierens von Daten in ein Format, das von einer anderen Anwendung oder einem anderen System verwendet werden kann. Die Middleware bietet die notwendigen Mechanismen, um Daten zwischen verschiedenen Systemen in einem Format zu konvertieren, das von allen beteiligten Anwendungen und Systemen verstanden werden kann. Einzelne Beispiele für die Anforderungen werden auch in diesem Skript diskutiert.\footnote{Die Codierung ist wie in GS oder GT diskutiert vom Sender und Empfänger abhängig}
-\item Protokolle zur \textbf{Namensauflösung}: Darüber hinaus bieten Middleware-Dienste auch Namensprotokolle, die es ermöglichen, Ressourcen einfach zu teilen. Mit Namensprotokollen können Ressourcen in einem verteilten System mit einem eindeutigen Namen identifiziert und von verschiedenen Anwendungen und Systemen einfach referenziert werden. Hier muss zunächst eine Diskussion über Identifier und Namen geführt werden, um die Möglichkeiten breit zu diskutieren. Dies geschieht im Kapitel Service-Discovery.
-\item \textbf{Sicherheitsprotokolle}: Auch ist die Bereitstellung von Sicherheitsprotokollen ein wichtiges Merkmal. Diese Protokolle bieten Mechanismen zur Verschlüsselung von Daten und zur Authentifizierung von Benutzern und Systemen, um sicherzustellen, dass nur autorisierte Benutzer auf das System zugreifen können und dass Daten während der Übertragung verschlüsselt und gesichert sind. Sicherheit wird in diesem Skript nicht detaillierter diskutiert.
-\item \textbf{Mechanismen zur} Steigerung der \textbf{Skalierung}: Schließlich bietet Middleware auch Skalierungsmechanismen wie Replikation und Caching, um die Leistung von Anwendungen in einem verteilten System zu verbessern. Diese Mechanismen ermöglichen die Duplizierung von Daten und Ressourcen auf verschiedenen Systemen, um die Verfügbarkeit und Zuverlässigkeit von Anwendungen zu erhöhen. Diese Punkte werden nochmals genauer in späteren Kapitel über die Realisierung diskutiert.
+\item Dem (Un\textbf{)Marshalling} Prozess:\\ Ein weiterer wichtiger Aspekt von Middleware ist das (Un)Marshalling von Daten, das für integrierte Systeme notwendig ist. (Un)Marshalling bezieht sich auf den Prozess des Konvertierens von Daten in ein Format, das von einer anderen Anwendung oder einem anderen System verwendet werden kann. Die Middleware bietet die notwendigen Mechanismen, um Daten zwischen verschiedenen Systemen in einem Format zu konvertieren, das von allen beteiligten Anwendungen und Systemen verstanden werden kann. Einzelne Beispiele für die Anforderungen werden auch in diesem Skript diskutiert.\footnote{Die Codierung ist wie in GS oder GT diskutiert vom Sender und Empfänger abhängig}
+\item Protokolle zur \textbf{Namensauflösung}:\\ Darüber hinaus bieten Middleware-Dienste auch Namensprotokolle, die es ermöglichen, Ressourcen einfach zu teilen. Mit Namensprotokollen können Ressourcen in einem verteilten System mit einem eindeutigen Namen identifiziert und von verschiedenen Anwendungen und Systemen einfach referenziert werden. Hier muss zunächst eine Diskussion über Identifier und Namen geführt werden, um die Möglichkeiten breit zu diskutieren. Dies geschieht im Kapitel Service-Discovery.
+\item \textbf{Sicherheitsprotokolle}:\\ Auch ist die Bereitstellung von Sicherheitsprotokollen ein wichtiges Merkmal. Diese Protokolle bieten Mechanismen zur Verschlüsselung von Daten und zur Authentifizierung von Benutzern und Systemen, um sicherzustellen, dass nur autorisierte Benutzer auf das System zugreifen können und dass Daten während der Übertragung verschlüsselt und gesichert sind. Sicherheit wird in diesem Skript nicht detaillierter diskutiert.
+\item \textbf{Mechanismen zur} Steigerung der \textbf{Skalierung}:\\ Schließlich bietet Middleware auch Skalierungsmechanismen wie Replikation und Caching, um die Leistung von Anwendungen in einem verteilten System zu verbessern. Diese Mechanismen ermöglichen die Duplizierung von Daten und Ressourcen auf verschiedenen Systemen, um die Verfügbarkeit und Zuverlässigkeit von Anwendungen zu erhöhen. Diese Punkte werden nochmals genauer in späteren Kapitel über die Realisierung diskutiert.
 \end{itemize}
 \importantvs{Ein großer Vorteil ist, das für den Applikationsentwickler nur die Entwicklung des Anwendungsprotokolls bleibt. Im besten Fall bietet die Schnittstelle der Middlewareschicht ein abstrahiertes \enquote{Interface}, welches sich im besten Fall nicht von einem Standalone System abgrenzen lässt, sich somit verhält wie ein kohärentes System.}
+Die einzelnen Punkte sollen nun auch nochmal beginnend mit einer Interface-Diskussion intensiver diskutiert werden.
 
 \paragraph{Interface der Middleware}\mbox{}\\\\
 Das Interface der Middleware, mit der verbundenen Realisierung, hat das primäre Ziel Interoperabilität über verschiedene Systeme zu schaffen. Diese Aufgabe kann auch wieder in einzelne Aufgaben geteilt werden: 
 \begin{itemize}
-\item Mehrere Sprachen unterstützen: Middleware kann verwendet werden, um die Interoperabilität zwischen verschiedenen Anwendungen zu verbessern, die in verschiedenen Programmiersprachen geschrieben sind. Die Middleware kann als Übersetzungsschicht dienen, um Nachrichten zwischen den Anwendungen zu übersetzen und sicherzustellen, dass sie in der korrekten Syntax und Semantik gesendet und empfangen werden.
-\item Mit mehreren Betriebssystemen und Hardwaretypen arbeiten: Eine Middleware kann dazu beitragen, die Interoperabilität zwischen Anwendungen zu verbessern, die auf verschiedenen Betriebssystemen und Hardwaretypen ausgeführt werden. Die Middleware kann als eine Abstraktionsschicht dienen, die es den Anwendungen ermöglicht, unabhängig von der zugrunde liegenden Hardware und dem Betriebssystem zu arbeiten.
-\item Mehrere Netzwerkprotokolle unterstützen: Middleware kann verwendet werden, um die Interoperabilität zwischen Anwendungen zu verbessern, die verschiedene Netzwerkprotokolle verwenden. Die Middleware kann als eine Schicht dienen, die es den Anwendungen ermöglicht, Nachrichten in einem bestimmten Protokoll zu senden und zu empfangen, unabhängig davon, welches Protokoll von der anderen Anwendung verwendet wird.
+\item \textbf{Mehrere Sprachen unterstützen:} Middleware kann verwendet werden, um die Interoperabilität zwischen verschiedenen Anwendungen zu verbessern, die in verschiedenen Programmiersprachen geschrieben sind. Die Middleware kann als Übersetzungsschicht dienen, um Nachrichten zwischen den Anwendungen zu übersetzen und sicherzustellen, dass sie in der korrekten Syntax und Semantik gesendet und empfangen werden.
+\item \textbf{Mit mehreren Betriebssystemen und Hardwaretypen arbeiten:} Eine Middleware kann dazu beitragen, die Interoperabilität zwischen Anwendungen zu verbessern, die auf verschiedenen Betriebssystemen und Hardwaretypen ausgeführt werden. Die Middleware kann als eine Abstraktionsschicht dienen, die es den Anwendungen ermöglicht, unabhängig von der zugrunde liegenden Hardware und dem Betriebssystem zu arbeiten.
+\item \textbf{Mehrere Netzwerkprotokolle unterstützen:} Middleware kann verwendet werden, um die Interoperabilität zwischen Anwendungen zu verbessern, die verschiedene Netzwerkprotokolle verwenden. Die Middleware kann als eine Schicht dienen, die es den Anwendungen ermöglicht, Nachrichten in einem bestimmten Protokoll zu senden und zu empfangen, unabhängig davon, welches Protokoll von der anderen Anwendung verwendet wird.
 \end{itemize}
 Dies ist zunächst eine sehr generische Diskussion, die aber anhand der Patterns für einen Lösungsraum insbesondere am Beispiel der RPC-Architektur nochmals diskutiert werden soll. 
 
@@ -909,7 +921,7 @@ Ein Beispiel für die Verwendung von Publish/Subscribe ist ein System zur Überw
 }
 Wichtig wahrzunehmen ist, dass die Realisierung eines Publish/Subscribe meist selbst ein verteiltes System darstellt und meist über Point-to-Point kommuniziert, obwohl ein Point-to-Multipoint besser geeignet wäre.
 \item \textbf{Client/Server}, Request/Reply\\
-Neben dem später diskutierten Client/Server-Architekturmuster, existiert auch das Client/Server Kommunikationsmuster. Das Client/Server-Kommunikations-muster ist ein grundlegendes Pattern in der Entwicklung von Netzwerkanwendungen, bei dem eine Anwendung (der Client) eine Verbindung zu einer anderen Anwendung (dem Server) herstellt, um eine bestimmte Aktion oder Dienstleistung anzufordern.
+Neben dem später diskutierten Client/Server-Architekturmuster, existiert auch das Client/Server Kommunikationsmuster. Das Client/Server-Kommunikationsmuster ist ein grundlegendes Pattern in der Entwicklung von Netzwerkanwendungen, bei dem eine Anwendung (der Client) eine Verbindung zu einer anderen Anwendung (dem Server) herstellt, um eine bestimmte Aktion oder Dienstleistung anzufordern.
 \\\\
 In diesem Muster sendet der Client eine Anfrage an den Server, die eine bestimmte Aktion oder ein bestimmtes Ergebnis erfordert. Der Server verarbeitet die Anfrage und sendet eine Antwort zurück an den Client, die das Ergebnis der Anfrage enthält.
 \\\\
@@ -989,34 +1001,47 @@ Als besondere Form gilt die \enquote{Nachrichtenorientierte Middleware}, auch be
 \item Herausgeber stellt dem Abonnenten Nachrichten zur Verfügung (Publish \& Subscribe)
 \end{itemize}
 
-\subsubsection{Client-Server-Architektur}
-Die Client-Server-Architektur ist ein fundamentales Modell für verteilte Systeme und bildet die Basis für viele Anwendungen und Dienste nicht nur im Internet. In dieser Architektur gibt es zwei Hauptkomponenten:
+
+\newpage
+\subsection{Client-Server-Architektur}
+Die Client-Server-Architektur ist ein fundamentales Modell für verteilte Systeme und bildet die Basis für viele Anwendungen und Dienste nicht nur im Internet. In dieser Architektur gibt es zwei Hauptkomponenten, den Client und den Server:
 
 \begin{itemize}
 \item \textbf{Client}: Der Client ist eine Anwendung oder ein System, das Dienste von einem Server anfordert. Clients können auf verschiedenen Geräten wie PCs, Smartphones oder Tablets laufen. Typische Beispiele für Clients sind Webbrowser, E-Mail-Clients und Messaging-Anwendungen.
 Es gibt verschiedene Arten von Clients, die in Abhängigkeit von der Menge an Daten, die sie selbst verarbeiten, kategorisiert werden können: Thin Client, Thick oder Fat Client und Hybrid Client.
+
+\examplevs{
 \begin{itemize}
-\item Thin Client: Thin Clients sind Geräte, die die meisten Datenverarbeitungsaufgaben auf den Server auslagern. Sie benötigen weniger Hardware-Ressourcen (wie CPU, Speicherplatz und RAM) und betreiben in der Regel nur das minimale Betriebssystem und Netzwerkprotokolle, um eine Verbindung zum Server herzustellen und Benutzerinteraktionen weiterzuleiten. Sie sind auf eine ständige Verbindung zum Server angewiesen, um zu funktionieren.
+\item \textbf{Thin Client:} Thin Clients sind Geräte, die die meisten Datenverarbeitungsaufgaben auf den Server auslagern. Sie benötigen weniger Hardware-Ressourcen (wie CPU, Speicherplatz und RAM) und betreiben in der Regel nur das minimale Betriebssystem und Netzwerkprotokolle, um eine Verbindung zum Server herzustellen und Benutzerinteraktionen weiterzuleiten. Sie sind auf eine ständige Verbindung zum Server angewiesen, um zu funktionieren.
 Vorteile von Thin Clients sind ihre Kosteneffizienz, einfache Administration und verbesserte Sicherheit, da keine Daten auf dem Gerät selbst gespeichert werden. Ein Nachteil ist die starke Abhängigkeit von der Netzwerk- und Serverleistung sowie -verfügbarkeit.
-\item Fat (oder Thick) Client: Im Gegensatz dazu handelt es sich bei Fat Clients um Geräte, die die meisten Datenverarbeitungsaufgaben selbst ausführen. Sie verfügen über genügend Hardware-Ressourcen, um Anwendungen zu installieren und auszuführen, und benötigen den Server hauptsächlich für die Speicherung von Daten.
+\item \textbf{Fat (oder Thick) Client:} Im Gegensatz dazu handelt es sich bei Fat Clients um Geräte, die die meisten Datenverarbeitungsaufgaben selbst ausführen. Sie verfügen über genügend Hardware-Ressourcen, um Anwendungen zu installieren und auszuführen, und benötigen den Server hauptsächlich für die Speicherung von Daten.
 Vorteile von Fat Clients sind ihre Unabhängigkeit von der Serverleistung und ihre Fähigkeit, ohne ständige Serververbindung zu funktionieren. Nachteile sind ihre höheren Kosten, da jedes Gerät eine ausreichende Hardware-Ressourcenausstattung benötigt, und die Schwierigkeiten bei der Verwaltung und Aktualisierung, da jede Änderung auf jedem Gerät individuell durchgeführt werden muss.
-\item Hybrid (oder Smart) Client: Ein Hybrid Client ist ein Mittelweg zwischen Thin und Fat Client. Er kann einige Aufgaben selbst ausführen, aber er verlässt sich auch auf den Server für bestimmte Funktionen. Hybrid Clients können sich je nach Netzwerkanforderungen und verfügbaren Ressourcen wie ein Thin oder ein Fat Client verhalten.
+\item \textbf{Hybrid (oder Smart) Client:} Ein Hybrid Client ist ein Mittelweg zwischen Thin und Fat Client. Er kann einige Aufgaben selbst ausführen, aber er verlässt sich auch auf den Server für bestimmte Funktionen. Hybrid Clients können sich je nach Netzwerkanforderungen und verfügbaren Ressourcen wie ein Thin oder ein Fat Client verhalten.
 Vorteile sind die Flexibilität und die Fähigkeit, eine Balance zwischen Server- und Client-Leistung zu finden. Nachteile sind die erhöhten Anforderungen an die Netzwerkinfrastruktur und die möglichen Herausforderungen bei der Verwaltung und Aktualisierung, ähnlich wie bei Fat Clients.
 \end{itemize}
+}
+
 \item \textbf{Server}: Der Server ist eine Anwendung oder ein System, das Dienste für Clients bereitstellt. Server können auf physischen oder virtuellen Maschinen laufen und sind in der Regel darauf ausgelegt, gleichzeitig mehreren Clients zur Verfügung zu stehen. Beispiele für Server sind Webserver, Datenbankserver und E-Mail-Server. Auch Server können in verschiedene Kategorien unterteilt werden:
+\examplevs{
 \begin{itemize}
-\item     Dedizierter Server: Ein dedizierter Server ist ein physischer Server, der komplett für den Einsatz durch einen einzelnen Kunden oder eine einzelne Anwendung reserviert ist. Im Gegensatz zu Shared-Hosting-Lösungen, bei denen mehrere Kunden auf denselben Server zugreifen, hat ein dedizierter Server den Vorteil, dass alle seine Ressourcen einem einzigen Zweck gewidmet sind, was eine höhere Leistung und Stabilität ermöglicht.
-\item Shared Server: Ein Shared Server ist das Gegenteil eines dedizierten Servers. Hier teilen sich mehrere Kunden die Ressourcen desselben physischen Servers. Dies kann kostengünstiger sein, aber es kann auch zu Leistungsproblemen führen, wenn andere auf dem Server gehostete Anwendungen zu viel Ressourcen verbrauchen.
-\item Virtueller privater Server (VPS): Ein VPS teilt sich physische Hardware-Ressourcen mit anderen virtuellen Servern, hat jedoch seine eigenen dedizierten Teile dieser Ressourcen. Dies ist eine Art Mittelweg zwischen einem dedizierten Server und einem Shared Server, der eine gewisse Kosteneffizienz mit verbesserten Leistungs- und Sicherheitsmerkmalen kombiniert.
-\item Cloud-Server: Ein Cloud-Server ist eine virtuelle Instanz in einer Cloud-Umgebung, die auf Anforderung erstellt und skaliert werden kann. Sie sind flexibel und skalierbar, da sie es ermöglichen, Ressourcen hinzuzufügen oder zu entfernen, je nach Bedarf. Zudem bieten sie hohe Verfügbarkeit und Ausfallsicherheit durch die Verteilung der Last auf mehrere physische Server in der Cloud.
+\item \textbf{Dedizierter Server:} Ein dedizierter Server ist ein physischer Server, der komplett für den Einsatz durch einen einzelnen Kunden oder eine einzelne Anwendung reserviert ist. Im Gegensatz zu Shared-Hosting-Lösungen, bei denen mehrere Kunden auf denselben Server zugreifen, hat ein dedizierter Server den Vorteil, dass alle seine Ressourcen einem einzigen Zweck gewidmet sind, was eine höhere Leistung und Stabilität ermöglicht.
+\end{itemize}
+}
+\examplevs{
+\begin{itemize}
+\item \textbf{Shared Server:} Ein Shared Server ist das Gegenteil eines dedizierten Servers. Hier teilen sich mehrere Kunden die Ressourcen desselben physischen Servers. Dies kann kostengünstiger sein, aber es kann auch zu Leistungsproblemen führen, wenn andere auf dem Server gehostete Anwendungen zu viel Ressourcen verbrauchen.
+\item \textbf{Virtueller privater Server (VPS):} Ein VPS teilt sich physische Hardware-Ressourcen mit anderen virtuellen Servern, hat jedoch seine eigenen dedizierten Teile dieser Ressourcen. Dies ist eine Art Mittelweg zwischen einem dedizierten Server und einem Shared Server, der eine gewisse Kosteneffizienz mit verbesserten Leistungs- und Sicherheitsmerkmalen kombiniert.
+\item \textbf{Cloud-Server:} Ein Cloud-Server ist eine virtuelle Instanz in einer Cloud-Umgebung, die auf Anforderung erstellt und skaliert werden kann. Sie sind flexibel und skalierbar, da sie es ermöglichen, Ressourcen hinzuzufügen oder zu entfernen, je nach Bedarf. Zudem bieten sie hohe Verfügbarkeit und Ausfallsicherheit durch die Verteilung der Last auf mehrere physische Server in der Cloud.
 \item Edge-Server: Ein Edge-Server ist ein Server, der sich näher an den Endbenutzern (oder \enquote{am Rand} des Netzwerks) befindet, um Latenzzeiten zu minimieren und die Leistung zu verbessern. Edge-Server werden oft in Content Delivery Networks (CDNs) verwendet, um Inhalte schneller an Endbenutzer zu liefern.
 \end{itemize}
+}
 Jede Art von Server hat ihre eigenen Vor- und Nachteile und ist für verschiedene Anwendungsfälle und Geschäftsanforderungen geeignet.
 \end{itemize}
+\warningvs{
 Wichtig ist wahrzunehmen, dass nicht jede Verteilung eine Client und Server Architektur ist, sondern dass dies mit der Verteilung der Aufgaben verbunden ist. Auf dem Server sind alle Anbieter (Provider) von Diensten vereint und auf den Clients, die Nutzer (Consumer) der Dienste. 
-\\\\
+}
 In der Client-Server-Architektur gibt es eine klare Trennung der Zuständigkeiten. Clients stellen Anfragen an Server, die diese verarbeiten und darauf antworten. Die Kommunikation zwischen Client und Server kann über verschiedene Protokolle wie HTTP, FTP oder SMTP erfolgen. Dieses Muster passt auch gut zu einem Request/Reply Kommunikationspattern. 
-Client-Server-Architektur versucht, man \textbf{falls möglich, zustandslos} zu designen. Zustandslos bedeutet in diesem Zusammenhang, dass sie keine Informationen über den aktuellen Zustand eines Clients zwischen den Anfragen speichern. 
+In einer Client-Server-Architektur versucht man \textbf{- falls möglich - zustandslos (stateless)} zu designen. Zustandslos bedeutet in diesem Zusammenhang, dass sie keine Informationen über den aktuellen Zustand eines Clients zwischen den Anfragen speichern. 
 
 \importantvs{
     Zustandslos in VS einfach gesprochen: Keine Abhängigkeit der Nachrichten zueinander!
@@ -1030,10 +1055,11 @@ Die zentrale Verwaltung von Ressourcen und Diensten auf dem Server erleichtert a
 \item E-Mail-Systeme: E-Mail-Clients (z.B., Microsoft Outlook, Apple Mail) stellen Anfragen an E-Mail-Server (z.B., IMAP-, POP3- oder SMTP-Server) zum Senden, Empfangen und Verwalten von E-Mails.
 \item Datenbankanwendungen: Anwendungen (Client) stellen Anfragen an Datenbankserver (Server), um Daten zu lesen, schreiben oder aktualisieren. Die Kommunikation erfolgt über Protokolle wie SQL oder NoSQL.
 \end{itemize}
-Die Client-Server-Architektur und Tiers sind in verteilten Systemen eng miteinander verbunden. Die Client-Server-Architektur bezieht sich auf die Aufteilung der Funktionalität eines Systems zwischen einem Front-End-Client und einem Back-End-Server. In diesem Sinne kann eine Server-Client-Architektur auch als Two-Tier-Architektur verstanden werden. Die n-Tier-Architektur erweitert das Konzept, indem sie die Schichten weiter aufteilt und somit noch mehr Flexibilität und Skalierbarkeit ermöglicht. Sie können in verteilten Systemen unterschiedliche Ausprägungen einnehmen.
+\paragraph{Client-Server-Architektur und Tiers}\mbox{}\\
+Die Client-Server-Architektur und Tiers sind in verteilten Systemen eng miteinander verbunden. Die Client-Server-Architektur bezieht sich auf die Aufteilung der Funktionalität eines Systems zwischen einem Front-End-Client und einem Back-End-Server. In diesem Sinne kann eine Server-Client-Architektur auch als \textbf{Two-Tier-Architektur} verstanden werden. Die \textbf{n-Tier-Architektur} erweitert das Konzept, indem sie die Schichten weiter aufteilt und somit noch mehr Flexibilität und Skalierbarkeit ermöglicht. Sie können in verteilten Systemen unterschiedliche Ausprägungen einnehmen.
 \begin{itemize}
 
-\item Kaskadenartige Kommunikation\\
+\item \textbf{Kaskadenartige Kommunikation}\\
 In einer n-Tier-Architektur können Tiers sowohl \enquote{Consumer}- als auch \enquote{Provider}-Rollen übernehmen, indem sie verschiedene Funktionen und Verantwortlichkeiten innerhalb einer Anwendung repräsentieren und Dienste sowohl anfordern als auch bereitstellen. Die kaskadenartige Kommunikation zwischen den Tiers kann sowohl Vorteile als auch Herausforderungen mit sich bringen. Wo die Vorteile noch trivial sind, lohnt der genauere Blick auf die Herausforderungen: 
 \begin{itemize}
 \item Latenz: Die kaskadenartige Kommunikation zwischen Tiers kann zu erhöhter Latenz führen, da jede Schicht auf die Antwort der nächsten Schicht warten muss, bevor sie ihre Arbeit fortsetzen oder abschließen kann.
@@ -1042,7 +1068,7 @@ In einer n-Tier-Architektur können Tiers sowohl \enquote{Consumer}- als auch \e
 \item Skalierbarkeit: Die kaskadenartige Kommunikation kann die Skalierbarkeit einer Anwendung beeinträchtigen, da die Leistungsfähigkeit einer Schicht von der Leistungsfähigkeit der darunterliegenden Schichten abhängt.
 \end{itemize}
 Um diesen Herausforderungen zu begegnen, können Entwickler Techniken wie Caching, Lastverteilung, asynchrone Kommunikation und fehlertolerante Mechanismen einsetzen, um die Leistung, Zuverlässigkeit und Skalierbarkeit der Anwendung zu verbessern.
-\item SSP - Stub/Skeleton Chains\\
+\item \textbf{SSP - Stub/Skeleton Chains}\\
 In einer n-tiered Architektur werden oft Stubs und Skeletons eingesetzt, um die Kommunikation zwischen den verschiedenen Schichten oder Tiers zu erleichtern. Stubs und Skeletons sind eine Implementierungsform von Interface-Definitionen, die es ermöglichen, Methodenaufrufe von einer Schicht zur anderen zu senden.
 
 Ein Stub ist ein Platzhalter für eine entfernte Methode und bildet damit auch eine Grundlage für die Architektur eines entfernten Methodenaufrufs. Es stellt eine lokale Implementierung einer Schnittstelle dar, die einen entfernten Server aufruft, um die Funktion auszuführen. Wenn ein Stub aufgerufen wird, wird die Anfrage an den entfernten Server gesendet, und das Ergebnis wird zurück geliefert.
@@ -1056,7 +1082,7 @@ Die SSP Stub/Skeleton Chains helfen dabei, eine gemeinsame Sprache zwischen vers
 
 \cite{tanenbaum2017distributed} führt als einen wichtigen Aspekt der Client-Server-Architektur die Middleware ein und in die Middleware nimmt er das Konzept der Stub und Skeletons wieder auf. Für \cite{tanenbaum2017distributed} ist eine Middleware insbesondere eine Software, die als Vermittler zwischen Clients und Servern fungiert und hilft, Kommunikation und Interoperabilität in verteilten Systemen zu ermöglichen und Stub und Skeleton sind die Vermittler für die Aufrufe der Funktionen zu diesem Zwecke.
               
-\subsubsection{Event-Driven Architektur}
+\subsection{Event-Driven Architektur}
 
 Die Event-Driven Architektur (EDA) ist ein Architekturansatz, bei dem die Kommunikation zwischen den Komponenten eines Systems durch Events oder Nachrichten stattfindet. In einer EDA reagieren die Komponenten auf Ereignisse, die von anderen Komponenten im System generiert werden, anstatt direkt miteinander zu kommunizieren. Dieser Ansatz fördert die Entkopplung und Skalierbarkeit von Anwendungen und ist besonders in Echtzeitsystemen und komplexen, verteilt arbeitenden Umgebungen verbreitet.
 \examplevs{
@@ -1088,7 +1114,7 @@ Die Lambda-Architektur ist nicht direkt eine Event-driven Architektur (EDA), abe
 \end{itemize}
 In einer Event-Driven Architektur können Ereignisse, die von verschiedenen Komponenten eines Systems generiert werden, als Datenströme behandelt werden. Die Lambda-Architektur kann verwendet werden, um diese Ereignisdatenströme sowohl in Echtzeit als auch in der historischen Verarbeitung zu analysieren. In diesem Fall würde die Speed-Layer auf Ereignisse reagieren und Echtzeitanalysen durchführen, während die Batch-Layer die gesammelten Ereignisse in großen Datenmengen verarbeitet.
 
-\subsubsection{Microservices-Architektur}
+\subsection{Microservices-Architektur}
 
 Die Microservices-Architektur ist ein Architekturmuster, bei dem eine Anwendung als Sammlung kleiner, unabhängiger und modularer Dienste entwickelt wird, die jeweils eine bestimmte Geschäftsfunktion ausführen. Diese Dienste sind lose gekoppelt, können unabhängig voneinander entwickelt, bereitgestellt und skaliert werden, und kommunizieren über standardisierte APIs oder Messaging-Systeme. Die Microservices-Architektur fördert die Flexibilität, Wartbarkeit und Skalierbarkeit von Anwendungen.
 \examplevs{
@@ -1110,7 +1136,7 @@ Einige Vorteile der Microservices-Architektur sind:
 \end{itemize}
 Allerdings gibt es auch Herausforderungen bei der Implementierung einer Microservices-Architektur, wie z.B. erhöhte Komplexität, Kommunikations-Overhead, Sicherheits- und Authentifizierungsfragen sowie Schwierigkeiten bei der Überwachung und Verwaltung von verteilten Systemen\footnote{Aus dem Feld \url{https://www.conf-micro.services/2019/papers/Microservices_2019_paper_18.pdf}}.
 
-\subsubsection{Peer-to-Peer-Architektur}
+\subsection{Peer-to-Peer-Architektur}
 
 Die Peer-to-Peer-Architektur (P2P) ist ein dezentrales Architekturmuster, bei dem einzelne Knoten (Peers) direkt miteinander kommunizieren, ohne dass zentrale Server oder Vermittler beteiligt sind. In einer P2P-Architektur fungieren die Knoten sowohl als Clients als auch als Server, teilen Ressourcen und tragen gemeinsam zur Leistung und Skalierbarkeit des Netzwerks bei. P2P-Architekturen sind für ihre Robustheit, Skalierbarkeit und Fehlertoleranz bekannt.
 \examplevs{
@@ -1138,7 +1164,7 @@ Zu den Herausforderungen bei der Implementierung einer P2P-Architektur gehören:
 \end{itemize}
 Trotz dieser Herausforderungen bieten P2P-Architekturen zahlreiche Vorteile und wurden erfolgreich in einer Vielzahl von Anwendungen und Systemen eingesetzt. Sie ermöglichen dezentrale, robuste und skalierbare Lösungen, die in vielen Fällen herkömmlichen, zentralisierten Architekturen überlegen sind. Eine wesentliche Variante, die in dieser Ausarbeitung besprochen werden wird ist das Chord P2P, welches in diesem Skript ausführlich als Beispielarchitektur diskutiert wird. 
 
-\subsubsection{Hexagonal Onion Architektur}
+\subsection{Hexagonal Onion Architektur}
 
 Hexagonale Zwiebelarchitektur (Hexagonal Onion Architektur) ist eine Kombination aus zwei bekannten Architekturmustern: Hexagonale Architektur (auch als Ports-and-Adapters-Architektur bekannt) und Zwiebelarchitektur (auch als Clean Architektur bekannt). Beide Muster sollen die Trennung von Anliegen fördern und die Testbarkeit, Wartbarkeit und Erweiterbarkeit von Softwareanwendungen verbessern.
 
@@ -1164,38 +1190,55 @@ Ein Beispiel für die Anwendung der Hexagonalen Zwiebelarchitektur in verteilten
 Jeder dieser Microservices kann die Hexagonale Zwiebelarchitektur verwenden, um seine internen Anliegen zu trennen und eine klare Kommunikationsschnittstelle für andere Microservices und externe Systeme bereitzustellen. Ports und Adapter können für die Kommunikation mit anderen Microservices und externen Systemen (z.B. Datenbanken, Messaging-Systemen und externen APIs) verwendet werden. Die Hexagonale Zwiebelarchitektur ermöglicht es jedem Microservice, unabhängig voneinander entwickelt, getestet und gewartet zu werden, während sie gleichzeitig eine klare Schnittstelle für die Zusammenarbeit im verteilten System bietet.
 
 
-\label{Woche04}\subsection{Supporting Pattern}
+\subsection{Serverless-Architektur}
+Serverless Architektur, oft auch als Functions-as-a-Service (FaaS) oder Backend-as-a-Service (BaaS) bezeichnet, ist ein Cloud-Computing-Ausführungsmodell, bei dem der Cloud-Provider dynamisch die Ressourcen allokiert und verwaltet, die zum Ausführen von Code benötigt werden. Der Begriff \enquote{Serverless} ist dabei etwas irreführend, da Server natürlich weiterhin existieren. Der entscheidende Unterschied besteht jedoch darin, dass die Verwaltung der Server vollständig vom Cloud-Provider übernommen wird. Dies ist somit ein erster Vetreter von Cloud-First Architekturen. Entwickler müssen sich nicht um die Bereitstellung, Konfiguration, Wartung oder Skalierung von Servern kümmern. Kernprinzipien der Serverless Architektur sind:
+\begin{itemize}
+\item \textbf{Ereignisgesteuerte Ausführung:} Serverless-Funktionen werden durch Ereignisse ausgelöst. Diese Ereignisse können vielfältig sein, z. B. HTTP-Anfragen, Datenbankänderungen, Nachrichten in einer Queue oder Zeitplanereignisse.
+\item \textbf{Automatische Skalierung:} Die Serverless-Plattform skaliert die Ressourcen automatisch und in Echtzeit basierend auf der Anzahl der eingehenden Ereignisse. Dies ermöglicht eine hohe Elastizität und die Fähigkeit, Lastspitzen ohne manuelle Intervention zu bewältigen.
+\item \textbf{Pay-per-Use Abrechnung:} Kunden zahlen nur für die tatsächliche Ausführungszeit ihres Codes. Es fallen keine Kosten für Leerlaufzeiten oder ungenutzte Ressourcen an. Dies kann zu erheblichen Kosteneinsparungen führen, insbesondere für Anwendungen mit unregelmäßiger Auslastung.
+\item \textbf{Zustandslosigkeit (Statelessness):} Serverless-Funktionen sind in der Regel zustandslos. Das bedeutet, dass jede Ausführung einer Funktion unabhängig von vorherigen Ausführungen erfolgt. Zustandsdaten müssen in externen Speicherdiensten verwaltet werden.
+\item Kurze Ausführungszeiten: Serverless-Funktionen sind typischerweise für kurze Ausführungszeiten optimiert, oft limitiert auf wenige Minuten oder sogar Sekunden. Für langlaufende Prozesse sind andere Architekturen möglicherweise besser geeignet.
+\end{itemize}
+Die Serverless-Architektur hat in den letzten Jahren eine bemerkenswerte Verbreitung erfahren.  Die Vorteile in Bezug auf Kosten, Skalierbarkeit und Entwicklerproduktivität haben zu einer raschen Akzeptanz in verschiedenen Branchen und Anwendungsbereichen geführt. Aber es gibt auch Herausforderungen mit diesem Ansatz, beispielhaft Cold Starts, Vendor Lock-in und Limitierungen bei Ausführungszeit und Ressourcen. 
+\newpage
+\label{Woche04}\section{Supporting Pattern}
 
 Entwurfsmuster und Architekturmuster sind zwei wichtige Konzepte in der Softwareentwicklung, die dazu beitragen, wiederverwendbare Lösungen für wiederkehrende Probleme zu finden. Sie unterscheiden sich hauptsächlich in ihrem Anwendungsbereich und ihrer Abstraktionsebene~\cite{gamma1994design}.
 \\\\
-Entwurfsmuster sind wiederverwendbare Lösungen für häufig auftretende Probleme auf der Ebene von Klassen und Objekten. In der deutschen Sprache setzt sich auch häufig der englische Begriff Patterns durch. Sie sind in der Regel kleiner und detaillierter als Architekturmuster und bieten Best Practices für bestimmte Designprobleme. Entwurfsmuster sind in der Regel unabhängig von einer bestimmten Programmiersprache und können in verschiedenen Projekten und Systemen eingesetzt werden.
-\\\\
-Einige bekannte Entwurfsmuster, die auch für verteilte Systeme und in diesem Skript eine Rolle spielen sind:
+\textbf{Entwurfsmuster} sind wiederverwendbare Lösungen für häufig auftretende Probleme auf der Ebene von Klassen und Objekten. In der deutschen Sprache setzt sich auch häufig der englische Begriff Patterns durch. Sie sind in der Regel kleiner und detaillierter als Architekturmuster und bieten praxisnahe Ansätze (Best Practices) für bestimmte Designprobleme. Entwurfsmuster sind in der Regel unabhängig von einer bestimmten Programmiersprache und können in verschiedenen Projekten und Systemen eingesetzt werden.
+\examplevs{
+Einige bekannte Entwurfsmuster aus der grundlegenden Informatikausbildung haben auch für verteilte Systeme eine Bedeutung, auch wenn diese sich und ihre Rolle in verteilten Systemen leicht ändern:
 \begin{itemize}
 \item \textbf{Singleton}: Stellt sicher, dass eine Klasse nur \textbf{eine} Objektinstanz hat und stellt einen globalen Zugriffspunkt dafür bereit. Beispiel: Eine zentrale Konfigurationsklasse, die von verschiedenen Teilen einer Anwendung gemeinsam genutzt wird.
 \item \textbf{Observer}: Ermöglicht einem Objekt (Subject), seinen Zustand automatisch an abhängige Objekte (Observer) zu übermitteln, wenn Änderungen eintreten. Beispiel: Ein Event-Listener-System, das Benachrichtigungen an Abonnenten sendet, wenn bestimmte Ereignisse eintreten.
 \item \textbf{Factory Method}: Definiert eine Schnittstelle zum Erstellen von Objekten in einer Superklasse, während Unterklassen die genaue Klasse der zu erzeugenden Objekte bestimmen. Beispiel: Ein Framework für die Erstellung verschiedener Arten von Diagrammen, bei dem jede Diagrammklasse ihre eigenen Erstellungsregeln hat.
 \item \textbf{Adapter}: Ermöglicht es, die Schnittstelle einer bestehenden Klasse so anzupassen, dass sie mit einer anderen Klasse kompatibel ist, ohne den Quellcode der beiden Klassen zu ändern. Beispiel: Eine Anwendung, die verschiedene Zahlungsschnittstellen unterstützt, verwendet Adapter, um die unterschiedlichen Schnittstellen in eine einheitliche API umzuwandeln.
 \end{itemize}
-Architekturmuster sind wiederum Best Practices für den Entwurf der Gesamtstruktur einer Softwareanwendung oder eines Systems. Sie befassen sich mit der Organisation von Code, Komponenten und deren Kommunikation auf einer höheren Abstraktionsebene. Architekturmuster bieten Lösungen für übergreifende Anliegen wie Skalierbarkeit, Flexibilität, Wartbarkeit und Testbarkeit.
-\\\\
-Einige bekannte Architekturmuster sind:
+}
+\textbf{Architekturmuster} sind wiederum Best Practices für den Entwurf der Gesamtstruktur einer Softwareanwendung oder eines Systems. Sie befassen sich mit der Organisation von Code, Komponenten und deren Kommunikation auf einer höheren Abstraktionsebene. Architekturmuster bieten Lösungen für übergreifende Anliegen wie Skalierbarkeit, Flexibilität, Wartbarkeit und Testbarkeit.
+\examplevs{
+Auch Architekturmuster sind wesentlicher Teil der Informatikausbildung, als Beispiele können genannt werden:
 \begin{itemize}
 \item \textbf{Schichtenarchitektur} (Layered Architecture): Das Architekturmuster unterteilt eine Anwendung in Schichten, wobei jede Schicht eine bestimmte Funktion hat, wie z.B. Präsentation, Geschäftslogik oder Datenzugriff. Dies ist sehr stark verbunden mit der Zerlegung des Teilproblems.
 \item \textbf{Model-View-Controller} (MVC): Trennt eine Anwendung in drei Hauptkomponenten - das Modell (Daten und Geschäftslogik), die Ansicht (Präsentation und Benutzerinteraktion) und den Controller (Steuerung der Datenverarbeitung und Aktualisierung der Ansicht). Beispiel: Ein Content-Management-System, das Daten speichert, Benutzerinhalte anzeigt und Benutzeraktionen verarbeitet.
 \end{itemize}
-Um beispielhaft die Bedeutung und die Anwendung des MVC-Musters deutlich zu machen, soll ein Fallbeispiel erarbeitet werden, das dieses Muster verwendet. Es ist zwar möglich, das Beispiel auch mit anderen bekannten Architekturmuster umzusetzen, jedoch liegt hier nicht der Fokus. Es soll aber vor der Diskussion kurz darauf hingewiesen werden, dass sich in der Praxis  weitere Begriffe wie das Model-View-Presenter-, das Model-View-ViewModel- oder das Model-View-Adapter-Muster oder auch weit komplexere Ansätze etabliert haben. Alle gemein haben sie, dass sie versuchen, spezifische Varianten des MVC-Musters genauer zu beschreiben.
+}
+Um beispielhaft die Bedeutung und die Anwendung des MVC-Musters deutlich zu machen, soll ein Fallbeispiel erarbeitet werden, das dieses Muster verwendet. Es ist zwar möglich, das Beispiel auch mit anderen bekannten Architekturmuster umzusetzen, jedoch liegt hier nicht der Fokus. Es soll weiter vor der Diskussion kurz darauf hingewiesen werden, dass sich in der Praxis  weitere Begriffe wie das Model-View-Presenter-, das Model-View-ViewModel- oder das Model-View-Adapter-Muster oder auch weit komplexere Ansätze etabliert haben. Alle gemein haben sie, dass sie versuchen, spezifische Varianten des MVC-Musters genauer zu beschreiben.
+\examplevs{
+\textbf{Hinweis:} Es gibt sehr gute Bücher wie \textbf{Patterns of Distributed Systems} von Martin Fowler aus dem Pearson Addison-Wesley Verlag ISBN-13: 978-0138221980. Der Umfang dieser Ausarbeitungen würden die eines Lehrmoduls sprengen, das sich nur auf eine Einführung konzentriert. Für die praktische Heranführung gibt es begleitend zu den Pattern dieser Ausarbeitung ein github Repository \url{https://github.com/scimbe/VS_Pattern_By_KI}, welches die wesentlichen Sourcen in Java umfasst. 
+}
+\subsection{Model Viewer Controller}
+Zunächst konzentrieren wir uns auf die zentralen Eigenschaften des MVC-Patterns, um dessen Bezug zu Architekturen wie der Schichtenarchitektur in verteilten Systemen herauszuarbeiten. Die erste Auseinandersetzung mit diesem Konzept kann unter Umständen verwirrend sein. Das MVC-Pattern kann sowohl als Entwurfsmuster (Design Pattern), also als allgemeine Gestaltungsrichtlinie, als auch als Architekturmuster verstanden werden, das konkrete Vorgaben zur Implementierung macht, beispielsweise im Kontext von Schichtenmodellen.
 
-\subsubsection{Model Viewer Controller}
-Zunächst konzentrieren wir uns auf die wesentlichsten Eigenschaften des MVC Patterns. Die erste ist im Zweifel direkt eine eher verwirrende. Das MVC-Pattern kann sowohl ein Entwufsmuster, also ein grober Designentwurf sein, als auch ein Architekturpattern mit einem konkreten Vorschlag der Implementierung. Wichtig festzustellen ist, auch wenn man andere Quellen zur Recherche nutzt, auf welcher Ebene das Pattern adressiert wird.  Hier konzentriert sich diese Ausführung im weiteren auf das MVC-Architekturmuster, da die Diskussion des MVC-Entwurfsmusters im grundlegenden Ansatz bereits bei der Unterscheidung von Schichten und Tiers erörtert wurde. Das MVC-Entwurfsmuster kann aus der Tier Diskussion als Three-Tier-Architektur Entwurf verstanden werden und braucht daher für das grundlegende Verständnis keine weitere Erklärung.
-\\\\
+Wesentlich ist, bei der Nutzung verschiedener Quellen zur Recherche darauf zu achten, auf welcher Ebene das Muster adressiert und diskutiert wird. In dieser Ausführung konzentrieren wir uns auf das MVC-Architekturmuster, da die Diskussion des MVC-Entwurfsmusters bereits grundlegend im Zusammenhang mit der Unterscheidung von Schichten und Tiers erörtert wurde. Wichtig ist in diesem Zusammenhang die Erkenntnis, dass das MVC-Entwurfsmuster nicht mit der Three-Tier-Architektur gleichzusetzen ist, sondern vielmehr ein Konzept zur Trennung von Verantwortlichkeiten innerhalb einer Anwendung darstellt. Die Three-Tier-Architektur hingegen bezieht sich auf die physische oder logische Verteilung von Komponenten in einem verteilten System, wofür die Teilung in MVC genutzt werden kann.
+\importantvs{
 In dem Diagramm~\ref{fig:default-mvc} repräsentieren die Klassen Model, View und Controller die drei Hauptkomponenten des MVC-Architekturmusters:
 \begin{itemize}
 \item \textbf{Model} (Modell): Kapselt Daten und Geschäftslogik. Es enthält Methoden, um Beobachter hinzuzufügen, zu entfernen und zu benachrichtigen.
 \item \textbf{View} (Ansicht): Implementiert meist das Observer-Interface und ist für die Präsentation und Benutzerinteraktion verantwortlich. Die \enquote{update()} Methode wird aufgerufen, wenn das Modell Änderungen benachrichtigt.
 \item \textbf{Controller} (Controller): Steuert die Datenverarbeitung und aktualisiert die Ansicht basierend auf Benutzeraktionen und Modelländerungen.
 \end{itemize}
-
+}
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{fig/uml/default-mvc.png}
@@ -1203,11 +1246,17 @@ In dem Diagramm~\ref{fig:default-mvc} repräsentieren die Klassen Model, View un
   \label{fig:default-mvc}
 \end{figure}
 
-Diese Basisarchitektur wird nun in ein Fallbeispiel überführt, um verschiedene Aspekte zu diskutieren. Das Szenario für die Fallstudie soll eine einfache Led-Lampe sein, die über eine eigene CPU und eigenen Speicher und einen Bluetooth Sender und Empfänger verfügt. Der Aufbau ist erweitert durch einen Raspberry PI, der sowohl die Anbindung der Lampe über Bluetooth repräsentiert, als auch den Servicezugriffspunkt für Applikationen im Internet. Der Raspberry Pi kann über eine Global Unicast IPv6 Adresse erreicht werden, um Steuerungssignale für die Lampe über die App abzugeben. 
+Diese Basisarchitektur wird nun in ein Fallbeispiel \enquote{Lampenschalter} überführt, um verschiedene Aspekte zu diskutieren. 
 
+\examplevs{
+\paragraph{Das Fallbeispiel}\mbox{}\\    
+Das Szenario für die Fallstudie soll eine einfache Led-Lampe sein, die über eine eigene CPU und eigenen Speicher und einen Bluetooth Sender und Empfänger verfügt. Der Aufbau ist erweitert durch einen Raspberry PI, der sowohl die Anbindung der Lampe über Bluetooth repräsentiert, als auch den Servicezugriffspunkt für Applikationen im Internet. Der Raspberry Pi kann über eine Global Unicast IPv6 Adresse erreicht werden, um Steuerungssignale für die Lampe über die App abzugeben. 
+}
 Wir nutzen daher das Architekturmuster um eine Aufteilung in Verantwortlichkeiten zu realisieren. Jede Verantwortlichkeit - des PI, der Lampe und der Nutzerapp - wird in einer Klasse gekapselt. Die Zugehörigkeit zum MVC Pattern wird in diesem Beispiel dadurch Stereotypen zum Ausdruck gebracht.
-\\\\
-Eine Stereotype ist eine benutzerdefinierte Kennzeichnung eines UML-Elements, die durch das Hinzufügen von Namen, Attributen und Methoden definiert werden kann. Sie erweitern die UML-Notation und ermöglichen es, zusätzliche Informationen oder Bedeutungen einem Element zuzuweisen, ohne die zugrunde liegende UML-Syntax zu ändern. Stereotypen können auch dazu verwendet werden, bestimmte Funktionen oder Verhaltensweisen hinzuzufügen, die von der Basis-UML-Syntax nicht unterstützt werden. Zum Beispiel kann eine Stereotype \enquote{Singleton} einem Klassenobjekt hinzugefügt werden, um anzuzeigen, dass nur eine einzige Instanz dieser Klasse im gesamten System vorhanden sein sollte, oder wie in diesem Fall die Sterotype  \enquote{Model}. Mit Model wird die Klasse Lampe mit der Aufgabe des Buisnessmodells gebunden. 
+\examplevs{
+\paragraph{Stereotype}\mbox{}\\
+Eine Stereotype in UML ist eine benutzerdefinierte Kennzeichnung eines UML-Elements, die durch das Hinzufügen von Namen, Attributen und Methoden definiert werden kann. Sie erweitern die UML-Notation und ermöglichen es, zusätzliche Informationen oder Bedeutungen einem Element zuzuweisen, ohne die zugrunde liegende UML-Syntax zu ändern. Stereotypen können auch dazu verwendet werden, bestimmte Funktionen oder Verhaltensweisen hinzuzufügen, die von der Basis-UML-Syntax nicht unterstützt werden. Zum Beispiel kann eine Stereotype \enquote{Singleton} einem Klassenobjekt hinzugefügt werden, um anzuzeigen, dass nur eine einzige Instanz dieser Klasse im gesamten System vorhanden sein sollte, oder wie in diesem Fall die Sterotype  \enquote{Model}. Mit Model wird die Klasse Lampe mit der Aufgabe des Buisnessmodells gebunden. 
+}
 Die Abbildung~\ref{fig:stereo-mvc} zeigt das sich nun ergebene Bild. 
 \begin{figure}[ht]
   \centering
@@ -1226,7 +1275,7 @@ Die Aufgaben der einzelnen Komponenten eines MVC-Architekturpatterns sind aber n
 \end{itemize}
 
 \subsubsection{VCM und CVM}
-Das MVC Pattern selbst kann auch in unterschiedlichen Schichtenmodellen gedacht werden und in ihrer Ausprägung beispielhaft als VCM und CVM bezeichnet werden.  Es ist wichtig zu beachten, dass VCM und CVM für sich keine weit verbreiteten oder standardisierten Architekturmuster sind und eher als Variationen des MVC-Musters betrachtet werden sollten. Bei den Variationen werden die Reihenfolge der Komponenten verändert und je mit einem Schichtenmodell vereint. Die Abbildung~\ref{fig:mvs-varianten} soll je Ausprägung eine mögliche Interpretation verdeutlichen.
+Das MVC Pattern selbst kann auch in unterschiedlichen Schichtenmodellen gedacht werden und in ihrer Ausprägung beispielhaft als VCM und CVM interpretiert werden.  Es ist wichtig zu beachten, dass VCM und CVM für sich keine weit verbreiteten oder standardisierten Architekturmuster sind und eher als Variationen des MVC-Musters betrachtet werden sollten. Bei den Variationen werden die Reihenfolge der Komponenten verändert und je mit einem Schichtenmodell vereint. Die Abbildung~\ref{fig:mvs-varianten} soll je Ausprägung eine mögliche Interpretation verdeutlichen.
 
 \begin{figure}[ht]
   \centering
@@ -1242,7 +1291,7 @@ Ein Controllermodul kann direkt auf ein Modellmodul zugreifen, um die Inhalte zu
 \\\\
 In dem hier vorgestellten Szenario stellt der Benutzer das „oberste Modul“ dar. Es kommuniziert nur gerichtet mit den View- und Controllermodulen. 
 \\\\
-Wo die in diesem Beispiel aufgebaute CVM Struktur alle Schichten für den Weg zum Modell benutzt und mit dem \enquote{handle} über die Auswirkungen informiert, wird im Beispiel des VCM Model für den Input die Schicht der View Klasse übersprungen, um eine direktere Eingabe zu unterstützen. Somit unterstützt die VCM Struktur das MVC Muster und das Schichtenmodell. Es eignet  sich aber auch für die Verarbeitung von zeitkritischen Inputs, wie sie beispielhaft in einem Jump'n'Run-Spiel gefordert sind. Der besonderer Nachteil ist, es braucht direkte Kommunikationskanäle. Dieser direkte Weg ist aber nicht immer möglich. Auch verlangen Technologien oder auch Frameworks bei User-Inputs nicht selten die klare Trennung von View und Controller. Ein Beispiel für solch eine technologische Anforderung wird von Java FX repräsentiert.     
+Wo die in diesem Beispiel aufgebaute CVM Struktur alle Schichten für den Weg zum Modell benutzt und mit dem \enquote{handle} über die Auswirkungen informiert, wird im Beispiel des VCM Model für den Input die Schicht der View Klasse übersprungen, um eine direktere Eingabe zu unterstützen. Somit unterstützt die VCM Struktur das MVC Muster und das Schichtenmodell. Es eignet  sich aber auch für die Verarbeitung von zeitkritischen Inputs, wie sie beispielhaft in einem Jump'n'Run-Spiel gefordert sind. Der besondere Nachteil ist, es braucht direkte Kommunikationskanäle. Dieser direkte Weg ist aber nicht immer möglich. Auch verlangen Technologien oder auch Frameworks bei User-Inputs nicht selten die klare Trennung von View und Controller. Ein Beispiel für solch eine technologische Anforderung wird von Java FX repräsentiert.     
 \examplevs{
 \paragraph{Beispiel: JavaFX\\\\}
 JavaFX ist ein relativ modernes Framework zur Erstellung von graphischen Benutzeroberflächen (GUIs) in Java. Es bietet verbesserte Möglichkeiten im Vergleich zu AWT und Swing. In JavaFX werden Benutzereingaben (User Inputs) über das Event-Handling-System verarbeitet. Hier ist ein Überblick darüber, wie JavaFX mit Benutzereingaben umgeht:
@@ -1254,11 +1303,11 @@ JavaFX ist ein relativ modernes Framework zur Erstellung von graphischen Benutze
 
 Das Code-Listing~\ref{lst:javafx-input} macht diese Anforderung dadurch deutlich, das die Java FX Anwendung die \enquote{javafx.application.Application} ableitet. In diesem Beispiel wird ein einfacher Button erstellt, der auf Mausklicks reagiert. Der Event-Handler wird mithilfe eines Lambda-Ausdrucks definiert und beim Klicken des Buttons wird \enquote{Button clicked!} in der Konsole ausgegeben. An dieser Stelle könnten die Daten vom Nutzer auch an den Controller weitergegeben werden.
 }
-\subsubsection{Vertreter}
+\subsection{Vertreter}
 Auch für die Verteilten Systeme machen die Schnittstellen und die Zuordnungen einen wichtigen Unterschied. Jede Bindung der Komponenten bedarf einer Kommunikation, die im Zweifel mit einem Kommunikationsweg  verbunden ist. Dieser Anforderung muss das Overlay- wie auch das physikalische Netzwerk entsprechen. Dies kann weitreichende Entscheidungen mit sich bringen. Stellen wir uns vor, dass die Lampe in unserem Fallbeispiel über Bluetooth angesprochen werden muss, so ist aus der View kein direkter physikalischer Kommunikationsweg vorhanden, um einen \enquote{handle} zu nutzen ohne den Controller oder einen etwaigen Proxy einzusetzen.  Ein Proxy in einem verteilten System ist eine Komponente, die als Vermittler zwischen Clients und entfernten Diensten fungiert. 
 \\\\
 Der Proxy ist eine Art Stellvertreter für den entfernten Dienst und ermöglicht es dem Client, auf diesen Dienst zuzugreifen, als ob er sich lokal im selben Netzwerk befände.
-Der Proxy wird typischerweise zwischen dem Consumer und dem entfernten Dienst (Provider) platziert und übernimmt die Verwaltung der Kommunikation zwischen diesen beiden Komponenten. Der Client sendet Anfragen an den Proxy, der die Anfrage entgegennimmt und an den entfernten Dienst weiterleitet. Der entfernte Dienst sendet die Antwort an den Proxy zurück, der die Antwort an den Client weiterleitet.\\\\
+Der Proxy wird typischerweise zwischen dem Consumer und dem entfernten Dienst (Provider) platziert und übernimmt die Verwaltung der Kommunikation zwischen diesen beiden Komponenten. Der Client sendet Anfragen an den Proxy, der die Anfrage entgegennimmt und an den entfernten Dienst weiterleitet. Der entfernte Dienst sendet die Antwort an den Proxy zurück, der die Antwort an den Client weiterleitet. Es ist auch interessant, das der Proxy als generischer Vertreter agieren kann und häufig einer generischen Schicht (Layer) zugeordnet wird, dies erarbeiten wir aber erst zu einem spätern Punkt. \\\\
 
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Java FX Input},captionpos=b,label={lst:javafx-input}]
@@ -1362,16 +1411,20 @@ Das Diagramm \ref{fig:broker} beschreibt das Broker-Pattern mit den folgenden Ko
 Der Client greift über das BrokerInterface auf die gewünschten Dienste zu, ohne direkt mit den ServiceProvider-Klassen zu interagieren. Der Broker verwaltet die Kommunikation zwischen Client und ServiceProvider und entkoppelt so deren Abhängigkeiten.
 
 Es ist weiter möglich eine weitere Unterschiedung in \textbf{Forwarding-Broker} und \textbf{Handle-Driven-Broker} einzuführen. 
-\\\\
+\warningvs{ 
+\paragraph{Forwarding-Broker}\mbox{}\\
 Ein Forwarding-Broker ist ein Broker, der eingehende Nachrichten an den Empfänger weiterleitet, der von der Nachrichtadresse identifiziert wird. Der Broker hat keine Vorstellung von der Struktur oder dem Inhalt der Nachrichten, sondern dient lediglich als Vermittler zwischen Sender und Empfänger. Es handelt sich um ein sehr einfaches System, das schnell und effizient arbeitet, aber nur minimale Unterstützung für die Transformation von Nachrichten bietet.
-\\\\    
+}
+\warningvs{ 
+\paragraph{Handle-Driven-Broker}\mbox{}\\
 Ein Handle-Driven-Broker ist dagegen ein Broker, der Nachrichten auf Basis eines Handles weiterleitet, das als Referenz auf eine Nachricht dient. Der Broker speichert den \enquote{handle} und bietet verschiedene Funktionen an, um die Nachrichten zu bearbeiten oder zu transformieren, bevor sie an den Empfänger weitergeleitet werden. Handle-Driven-Broker bieten erweiterte Funktionen wie die Möglichkeit, Nachrichten zu filtern, zu transformieren oder zu aggregieren, bevor sie an den Empfänger weitergeleitet werden.
-\\\\
+}
+\paragraph{Trader}\mbox{}\\
 Auch der Broker kann im Funktionssatz nochmals in einem \textbf{Trader} erweitert werden. Ein Trader ist in einem verteilten System ein Teilnehmer, der versucht, bestimmte Dienste nach Regeln zu suchen oder anzubieten. Trader bieten eine Art von \enquote{Gelbe Seiten} für verteilte Dienste an, in denen sie Informationen wie Dienstbeschreibungen, Verfügbarkeit und Qualitätsmetriken speichern und veröffentlichen. Wenn ein Teilnehmer einen Dienst benötigt, sucht er nach einem passenden Trader und sucht dann nach einem geeigneten Dienst in den bereitgestellten Informationen. Als Pattern ist der Trader eher als Service Locator Pattern bekannt welches im Grundsatz aber sehr ähnlich zu dem Broker Pattern ist. 
 \\\\
 Das Wichtigste ist aber fernab aller Konnektivität die Umsetzung der \enquote{handle}, ob im direkten Zugriff oder über einen Vermittler. Für die Umsetzung von \enquote{handle} und für die Bindung von Schichten können unterschiedliche Ansätze genutzt werden, eine sehr verbreitete ist das Observer Pattern. 
 
-\subsubsection{Observer Pattern}
+\subsection{Observer Pattern}
 In der Grundüberlegung des MVC ist das System eng gekoppelt und soll Änderungen im System immer unmittelbar signalisieren. Als Beispiel kann hier die Aktualisierung des Modells und die Implikation auf die View angesprochen werden. 
 Wenn beispielhaft die Lampe angeschaltet wurde, soll das Ereignis auch unmittelbar auf der KundenApp angezeigt werden. 
 Diese unmittelbare Kommunikation kann mit einem Observer-Pattern umgesetzt werden. 
@@ -1406,13 +1459,17 @@ Für unser Anwendungsbeispiel angepasst, soll das Oberver-Pattern zwischen der K
 \end{figure}
 
 Natürlich ist ein Architektur-Modell nicht ausreichend, um das gesamte Design zu beschreiben, auch das MVC Architektur-Modell braucht weitere Informationen für das vollständige System. Eine wichtige zusätzliche Information ist das Verhalten der Architektur. Auch für dieses Verhalten bestehen \enquote{Best Practise} Ansätze, die wir als Verhaltensmuster (Behavioral Patterns) beschreiben. 
-\\\\
+\examplevs{
 \textbf{Verhaltensmuster} (Behavioral Patterns) sind Entwurfsmuster in der Softwareentwicklung, die sich mit der Organisation und Steuerung von Objekten und deren Interaktionen beschäftigen. Sie beschreiben, wie verschiedene Objekte zusammenarbeiten und wie sie Verhaltensweisen und Aufgaben koordinieren.
 \\\\
 Behavioral Patterns beschreiben das Verhalten von Objekten in bestimmten Situationen und stellen somit Lösungen für wiederkehrende Probleme bereit, wie z.B. die Steuerung von Abläufen, die Verwaltung von Zuständen oder die Behandlung von Fehlern. Es gibt verschiedene Arten von Behavioral Patterns, die je nach Art der Aufgabe, die sie lösen sollen, in verschiedene Kategorien unterteilt werden können:
 \begin{itemize}
 \item \textbf{Klassifizierungsmuster} (Classification Patterns): Diese Muster beschreiben, wie Objekte in Klassen und Kategorien organisiert werden können, um eine effektive Klassifizierung und Strukturierung von Objekten zu ermöglichen. Ein Beispiel für ein solches Muster ist das Strategy Pattern.
 \item \textbf{Kommunikationsmuster} (Communication Patterns): Diese Muster beschreiben, wie Objekte miteinander kommunizieren und wie Nachrichten oder Daten zwischen ihnen ausgetauscht werden können. Ein Beispiel für ein solches Muster ist das Observer Pattern.
+\end{itemize}
+}
+\examplevs{
+\begin{itemize}
 \item \textbf{Kontrollmuster} (Control Patterns): Diese Muster beschreiben, wie Objekte kontrolliert und gesteuert werden können, um eine effektive Durchführung von Abläufen und Prozessen zu ermöglichen. Ein Beispiel für ein solches Muster ist das Command Pattern.
 \item \textbf{Datenmuster} (Data Patterns): Diese Muster beschreiben, wie Daten zwischen Objekten ausgetauscht und gespeichert werden können. Ein Beispiel für ein solches Muster ist das Iterator Pattern.
 \end{itemize}
@@ -1426,8 +1483,8 @@ Für die Beschreibung von Behavioral Patterns eignen sich in UML (Unified Modeli
 \item \textbf{Interaktionsübersichtsdiagramme} (Interaction Overview Diagrams): Diese Diagramme werden verwendet, um die Interaktionen zwischen verschiedenen Objekten und deren Kommunikationsmuster in einem System oder einer Anwendung zu beschreiben. Interaktionsübersichtsdiagramme können verwendet werden, um eine Übersicht über die Interaktionen in einem Behavioral Pattern zu geben.
 \end{itemize}
 Durch die Verwendung dieser Diagrammtypen können Behavioral Patterns effektiv beschrieben und visualisiert werden, was zu einer verbesserten Verständlichkeit und Kommunikation der Konzepte und Strukturen innerhalb des Patterns führt.
-\\\\
-In dem Fallbeispiel der Lampe soll zur Verdeutlichung die einfache Sequenz des Hinzufügen eines Observers zwischen PI (Controller) und Lampe (Model) den Nutzen verdeutlichen. 
+}
+In dem Fallbeispiel der Lampe soll zur Verdeutlichung die einfache Sequenz des Hinzufügen eines Observers zwischen PI (Controller) und Lampe (Model) den Nutzen verdeutlichen. Im Sequenzdiagramm~\ref{fig:seq-mvc-observer} sind die Schritte zum Hinzufügen eines Observers wie folgt beschrieben:
 
 \begin{figure}[ht]
   \centering
@@ -1436,7 +1493,7 @@ In dem Fallbeispiel der Lampe soll zur Verdeutlichung die einfache Sequenz des H
   \label{fig:seq-mvc-observer}
 \end{figure}
 
-Im Sequenzdiagramm~\ref{fig:seq-mvc-observer} sind die Schritte zum Hinzufügen eines Observers wie folgt beschrieben:
+
 \begin{itemize}
 \item Der Benutzer initiiert den Prozess, indem er den Controller bittet, einen neuen Observer hinzuzufügen.
 \item Der Controller ruft die \enquote{addObserver()} Methode des Models auf und übergibt den Observer als Parameter.
@@ -1450,33 +1507,36 @@ Ob das MVC-Pattern mit einer Kopplung über das Observer Pattern gelingt, ist ni
 \\\\
 % TODO Check spell
 In klassischen Web-Applikationen\footnote{Gemeint sind klassiche Client-Server Anwendungen, Keine ReSTful-etablierten Microservices mit beispielsweise Spring}, selbst wenn sie auf UDP oder TCP basieren, ist dies ohne weiteres nicht der Fall. Als Beispiel kann das HTTP Protokoll herangezogen werden, das auf Basis von TCP ein zustandloses Protokoll anbietet und zudem dem Request-Response-Cycle unterliegt. Insbesondere der Request-Response-Cycle setzt für jede Anfrage eine Antwort voraus und widerspricht der Funktionsweise des Observer Patterns.
-\\\\
+\examplevs{
+\paragraph{Praktische Umsetzung im Web}\mbox{}\\
 In der Praxis können Techniken wie WebSockets oder Long Polling verwendet werden, um eine Art Zustand und damit unabhängiger Kommunikation zwischen Subjekt und den Beobachtern zu simulieren und das Observer-Pattern zu verwenden, dennoch sind diese Lösungen nicht Teil von älteren HTTP Standards und sind zudem in Teilen sehr fehleranfällig. Zur Erklärung, bei diesen Lösungen werden Verbindungen zwischen Subjekt und dem Beobachter aufrechterhalten und bei Zustandsänderungen werden die entsprechenden Beobachter benachrichtigt. Allerdings sind diese Techniken mit erhöhtem Aufwand verbunden und haben auch andere Nachteile, wie z.B. eine höhere Netzwerklast und eine höhere Komplexität in der Implementierung. 
 Auch werden in unterschiedlichen HTTP Versionen unterschiedlichen \enquote{Workarounds} angeboten. So können bei HTTP2/ HTTP3 Technologien wie Server-Push Mechanismen genutzt werden. Diese werden aber stark im Kontext der Sicherheit diskutiert. 
-\\\\
+}
+
+\subsection{Callback Pattern}
 Neben dem Observer Pattern, sieht man in Verteilten Systemen auch immer wieder das Callback Pattern eingesetzt, da es nur einfache Kommunikationsstrukturen braucht. In Situationen, in denen nur eine einzige Funktion oder ein einziges Objekt auf ein bestimmtes Ereignis reagieren muss, bietet daher das Callback-Pattern eine einfachere und leichter verständliche Implementierung.
 
 Das Callback-Pattern ist auch nützlich, wenn es darum geht, den Programmfluss nicht zu blockieren, insbesondere bei asynchronen oder zeitintensiven Operationen. Es ermöglicht die Ausführung anderer Aufgaben, während die lang andauernde Operation im Hintergrund abläuft, und die Callback-Funktion wird aufgerufen, sobald die Operation abgeschlossen ist.
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.30\textwidth]{fig/uml/callback-class.png}
+  \includegraphics[width=0.40\textwidth]{fig/uml/callback-class.png}
   \caption{Callback Pattern}
   \label{fig:callback-class}
 \end{figure}
 
-\subsubsection{Callback Pattern}
+
 Das Callback-Pattern ist ein Verhaltensmuster in der Softwareentwicklung, bei dem eine Funktion (auch als Methode oder Prozedur bezeichnet) als Argument an eine andere Funktion übergeben wird. Diese übergebene Funktion, die als Callback-Funktion bezeichnet wird, wird zu einem späteren Zeitpunkt, oft nach Abschluss einer bestimmten Aufgabe oder einem Ereignis, vom aufrufenden Code ausgeführt. Das Callback-Pattern wird häufig verwendet, um asynchrone Programmierung, Ereignisbehandlung oder die Entkopplung von Funktionen zu ermöglichen und eignet sich somit auch für die asynchrone Kommuniaktation in einem verteilten System.
 
 
-
-In den Diagrammen ~\ref{fig:callback-class} und ~\ref{fig:callback-seq} wird das Callback-Pattern über die Callback-Schnittstelle, die Task-Klasse und die Main-Klasse dargestellt. Die Callback-Schnittstelle definiert die Methode onEvent(), die später als Callback-Funktion verwendet wird. Die Task-Klasse enthält die execute()-Methode, die die Callback-Funktion aufruft, wenn eine bestimmte Aktion oder ein bestimmtes Ereignis eintritt. Schließlich erstellt die Main-Klasse sowohl ein Task-Objekt als auch eine Implementierung der Callback-Schnittstelle und stellt die Kommunikation zwischen diesen beiden Elementen her. Dies ist im folgenden Listing zu erkennen.\\\\
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.50\textwidth]{fig/uml/callback-seq.png}
+  \includegraphics[width=0.5\textwidth]{fig/uml/callback-seq.png}
   \caption{Callback Pattern Sequenz}
   \label{fig:callback-seq}
 \end{figure}
 
+
+In den Diagrammen ~\ref{fig:callback-class} und ~\ref{fig:callback-seq} wird das Callback-Pattern über die Callback-Schnittstelle, die Task-Klasse und die Main-Klasse dargestellt. Die Callback-Schnittstelle definiert die Methode onEvent(), die später als Callback-Funktion verwendet wird. Die Task-Klasse enthält die execute()-Methode, die die Callback-Funktion aufruft, wenn eine bestimmte Aktion oder ein bestimmtes Ereignis eintritt. Schließlich erstellt die Main-Klasse sowohl ein Task-Objekt als auch eine Implementierung der Callback-Schnittstelle und stellt die Kommunikation zwischen diesen beiden Elementen her. Dies ist im folgenden Listing zu erkennen.\\\\
 
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Callback Pattern},captionpos=b,label={lst:callback}]
@@ -1509,18 +1569,19 @@ public class Main {
 }
 \end{lstlisting}
 \end{minipage}
-
+\importantvs{
 Obwohl Callback Pattern und Observer Pattern beide Techniken zur Implementierung von ereignisgesteuerten Kommunikationen zwischen Objekten sind, gibt es einige wichtige Unterschiede zwischen ihnen:
 
 \begin{itemize}
 \item Die aufgerufene Funktion oder das aufgerufene Objekt führt die übergebene Callback-Funktion unter bestimmten Bedingungen aus (z.B. nachdem eine bestimmte Aktion abgeschlossen ist). Ein Observer Pattern informiert über Änderungen oder Ereignisse.
 \item Das Callback Pattern ermöglicht eine einfache, unidirektionale Kommunikation zwischen zwei Objekten oder Funktionen. Die Kommunikationsbeziehung bei Observer Pattern ist $1:n$. 
 \item Das Callback Pattern eignet sich gut für einfache und direkte Kommunikationsanforderungen, bei denen nur eine geringe Anzahl von Funktionen oder Objekten beteiligt ist. Das Observer Pattern ermöglicht eine lose Kopplung zwischen Objekten und ist skalierbar, da eine beliebige Anzahl von Observern benachrichtigt werden kann.
-\end{itemize}\
+\end{itemize}
+}
 Im Listing~\ref{lst:callback} und Listing~\ref{lst:observer-I},~\ref{lst:observer-II} ist zu sehen, wie das Callback Pattern und das Observer Pattern in Java-Code implementiert werden. Im Callback Pattern wird eine Funktion direkt an die ausführende Klasse (Task) übergeben, während im Observer Pattern die Observer sich beim Subject (auch Task in diesem Beispiel) registrieren, um Benachrichtigungen zu erhalten.
 
 Für Verteilte Systeme ist sowohl für das Observer Pattern als auch das Callback Pattern die Referenzen des Callbacks bzw. des Observers eine Herausforderung. Da Verteilte Systeme sich keinen gemeinsamen Speicher teilen, muss ein Ersatz für die Adressierung der Referenz gefunden werden, dies soll zu einem späteren Zeitpunkt diskutiert werden. \\
-\newpage
+
 \begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Observer Pattern - ConcreteSubject},captionpos=b,label={lst:observer-I}]
 import java.util.ArrayList;
@@ -1608,42 +1669,45 @@ public class Main {
 \end{lstlisting}
 \end{minipage}
 
-\subsubsection{Singleton Pattern}
+\subsection{Singleton Pattern}
 
-Das Singleton-Pattern ist ein Entwurfsmuster, das sicherstellt, dass eine Klasse nur eine einzige Instanz hat und einen globalen Zugriffspunkt zu dieser Instanz bereitstellt. In verteilten Systemen kann die Verwendung des Singleton-Patterns einige Herausforderungen mit sich bringen, da es mehrere Knoten oder Prozesse gibt, die möglicherweise auf die Singleton-Instanz zugreifen müssen.
+Das Singleton-Pattern ist ein Entwurfsmuster, welches sicherstellt, dass eine Klasse nur eine einzige Instanz hat und einen globalen Zugriffspunkt zu dieser Instanz bereitstellt. In verteilten Systemen kann die Verwendung des Singleton-Patterns einige Herausforderungen mit sich bringen, da es mehrere Knoten oder Prozesse gibt, die möglicherweise auf die Singleton-Instanz zugreifen müssen.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.45\textwidth]{fig/uml/singleton.png}
   \caption{Singleton Pattern}
   \label{fig:singleton}
 \end{figure}
-
-In dem Diagramm~\ref{fig:singleton} gibt es eine Singleton-Klasse, die das Singleton-Pattern implementiert. Die Klasse hat:
+mbox{}\\
+In dem Diagramm~\ref{fig:singleton} gibt es eine Singleton-Klasse, die das Singleton-Pattern implementiert. Die Umsetzung eines Singelton in einer klassenorienitierten Sprache hat:
 \begin{itemize}
-\item Eine private statische Variable instance, die die einzige Instanz der Singleton-Klasse speichert.
-\item Einen privaten Konstruktor (Singleton()), der die Erstellung von Instanzen der Singleton-Klasse von außen verhindert.
-\item Eine öffentliche statische Methode getInstance(), die die einzige Instanz der Singleton-Klasse zurückgibt oder bei Bedarf erstellt.
+\item eine private statische Variable instance, die die einzige Instanz der Singleton-Klasse speichert.
+\item einen privaten Konstruktor (Singleton()), der die Erstellung von Instanzen der Singleton-Klasse von außen verhindert.
+\item eine öffentliche statische Methode getInstance(), die die einzige Instanz der Singleton-Klasse zurückgibt oder bei Bedarf erstellt.
 \end{itemize}
 Die Anmerkungen im Diagramm verdeutlichen, dass der private Konstruktor die Instanziierung von anderen Klassen verhindert und dass nur eine Instanz der Singleton-Klasse erstellt und über die getInstance()-Methode zugänglich gemacht wird.
 \begin{itemize}
 \item Ressourcenverwaltung: Das Singleton-Pattern kann bei der Verwaltung von Ressourcen, wie zum Beispiel Verbindungen zu Datenbanken oder Diensten, nützlich sein. Es kann dazu beitragen, den Ressourcenverbrauch zu minimieren, indem es verhindert, dass mehrere Verbindungen oder Instanzen erstellt werden, die dieselben Ressourcen verwenden.
-\item Zentrale Steuerung: Ein Singleton kann als zentrale Steuerungs- oder Koordinationskomponente in einem verteilten System dienen, indem es sicherstellt, dass es nur eine einzige Instanz gibt, die den globalen Zustand verwaltet. Ein Singleton-Pattern kann für verschiedene Anforderungen in einem verteilten System unterschiedliche Auswirkungen haben. Einige sollen exemplarisch diskutiert werden.
+\item Zentrale Steuerung: Ein Singleton kann als zentrale Steuerungs- oder Koordinationskomponente in einem verteilten System dienen, indem es sicherstellt, dass es nur eine einzige Instanz gibt, die den globalen Zustand verwaltet.
 \end{itemize}
+\examplevs{
+ Ein Singleton-Pattern kann für verschiedene Anforderungen in einem verteilten System unterschiedliche Auswirkungen haben. Einige sollen exemplarisch diskutiert werden.
 \begin{itemize}
 \item Skalierbarkeit: Das Singleton-Pattern kann die Skalierbarkeit eines verteilten Systems beeinträchtigen, da alle Knoten oder Prozesse auf die einzelne Instanz des Singleton-Objekts zugreifen müssen. Dadurch kann es zu Engpässen oder Leistungsproblemen kommen, wenn die Anzahl der Knoten oder Prozesse zunimmt.
 \item Synchronisation: In verteilten Systemen kann die Synchronisation von Singleton-Instanzen eine Herausforderung darstellen. Um sicherzustellen, dass alle Knoten dieselbe Singleton-Instanz verwenden, muss ein Mechanismus implementiert werden, um den globalen Zustand der Instanz konsistent zu halten. Dies kann zusätzliche Komplexität und Overhead verursachen, insbesondere wenn das verteilte System auch fehlertolerant sein muss.
 \item Fehlertoleranz: Ein Singleton-Objekt kann in einem verteilten System zu einem Single Point of Failure (SPOF) werden. Wenn die Singleton-Instanz ausfällt, kann dies das gesamte System beeinträchtigen. Um dieses Problem zu umgehen, sind zusätzliche Maßnahmen wie Replikation oder Clustering erforderlich, die die Komplexität erhöhen und möglicherweise die Vorteile des Singleton-Patterns zunichte machen.
 \end{itemize}
-Im Kontext dieser Diskussion kann festgestellt werden, das die Eignung des Singleton-Patterns in verteilten Systemen von den spezifischen Anforderungen und der Architektur des Systems abhängt. 
+}
+Im Kontext dieser Diskussion kann festgestellt werden, das die Eignung des Singleton-Patterns in verteilten Systemen von den spezifischen Anforderungen und der Architektur des Systems abhängt, seltener existiert, aber immer wieder auftritt. 
 
 \subsubsection{Factory Pattern}
 Das Factory-Pattern ist ein Entwurfsmuster, das Objekterstellung auf eine separate Factory-Klasse auslagert. Dies ermöglicht die Erstellung von Objekten, ohne dass der Client-Code direkt den Konstruktor der Objekte aufrufen muss. In verteilten Systemen kann das Factory-Pattern einige Vorteile bieten, welche erneut an einigen Beispielen diskutiert werden soll:
 \begin{itemize}
-\item Abstraktion und Entkopplung: Das Factory-Pattern hilft, den Client-Code von den konkreten Implementierungsdetails der erstellten Objekte zu entkoppeln. In verteilten Systemen kann dies besonders nützlich sein, da Änderungen an den Implementierungen von Diensten oder Komponenten ohne Auswirkungen auf den Client-Code vorgenommen werden können. Dies erleichtert die Wartung und Skalierung des Systems.
-\item Flexibilität bei der Objekterstellung: Das Factory-Pattern ermöglicht es, verschiedene Implementierungen von Objekten zu erstellen, basierend auf der Systemkonfiguration oder den Anforderungen des verteilten Systems. Dies kann dazu beitragen, dass das System einfacher an unterschiedliche Umgebungen oder Anforderungen angepasst werden kann.
-\item Vereinfachung der Objekterstellung: In verteilten Systemen kann die Erstellung von Objekten, insbesondere von Ressourcen wie Verbindungen zu Datenbanken oder externen Diensten, komplex sein. Das Factory-Pattern kann dazu beitragen, diese Komplexität zu kapseln und die Erstellung von Objekten für den Client-Code zu vereinfachen. Dadurch wird der Code leichter verständlich und wartbar.
-\item Zentrale Verwaltung von Ressourcen: In verteilten Systemen kann die Verwaltung von Ressourcen wie Verbindungen oder Diensten eine Herausforderung darstellen. Durch die Verwendung des Factory-Patterns können diese Ressourcen zentral erstellt und verwaltet werden, was zu einer besseren Kontrolle und einem effizienteren Ressourcenmanagement führt.
-\item Load Balancing und Failover: Das Factory-Pattern kann in verteilten Systemen dazu verwendet werden, Load Balancing und Failover-Mechanismen zu implementieren. Die Factory kann die Anfragen auf verschiedene Knoten oder Instanzen verteilen, um die Last auszugleichen oder im Falle eines Ausfalls auf einen anderen Knoten umzuschalten. Dies trägt zur Skalierbarkeit und Fehlertoleranz des Systems bei.
+\item \textbf{Abstraktion und Entkopplung:} Das Factory-Pattern hilft, den Client-Code von den konkreten Implementierungsdetails der erstellten Objekte zu entkoppeln. In verteilten Systemen kann dies besonders nützlich sein, da Änderungen an den Implementierungen von Diensten oder Komponenten ohne Auswirkungen auf den Client-Code vorgenommen werden können. Dies erleichtert die Wartung und Skalierung des Systems.
+\item \textbf{Flexibilität bei der Objekterstellung:} Das Factory-Pattern ermöglicht es, verschiedene Implementierungen von Objekten zu erstellen, basierend auf der Systemkonfiguration oder den Anforderungen des verteilten Systems. Dies kann dazu beitragen, dass das System einfacher an unterschiedliche Umgebungen oder Anforderungen angepasst werden kann.
+\item \textbf{Vereinfachung der Objekterstellung:} In verteilten Systemen kann die Erstellung von Objekten, insbesondere von Ressourcen wie Verbindungen zu Datenbanken oder externen Diensten, komplex sein. Das Factory-Pattern kann dazu beitragen, diese Komplexität zu kapseln und die Erstellung von Objekten für den Client-Code zu vereinfachen. Dadurch wird der Code leichter verständlich und wartbar.
+\item \textbf{Zentrale Verwaltung von Ressourcen:} In verteilten Systemen kann die Verwaltung von Ressourcen wie Verbindungen oder Diensten eine Herausforderung darstellen. Durch die Verwendung des Factory-Patterns können diese Ressourcen zentral erstellt und verwaltet werden, was zu einer besseren Kontrolle und einem effizienteren Ressourcenmanagement führt.
+\item \textbf{Load Balancing und Failover:} Das Factory-Pattern kann in verteilten Systemen dazu verwendet werden, Load Balancing und Failover-Mechanismen zu implementieren. Die Factory kann die Anfragen auf verschiedene Knoten oder Instanzen verteilen, um die Last auszugleichen oder im Falle eines Ausfalls auf einen anderen Knoten umzuschalten. Dies trägt zur Skalierbarkeit und Fehlertoleranz des Systems bei.
 \end{itemize}
 \begin{figure}[!ht]
   \centering
@@ -1658,6 +1722,8 @@ Das Diagramm~\ref{fig:factory-class} beschreibt das Factory Pattern.
 \item Eine ProductFactory-Klasse, die für die Erstellung von Product-Objekten verantwortlich ist.
 \end{itemize}
 Das Factory-Pattern kapselt die Logik zur Erstellung von Produktobjekten in der ProductFactory-Klasse. Der Client-Code verwendet die createProduct()-Methode der Factory, um ein Produktobjekt zu erstellen, ohne sich um die konkreten Implementierungsdetails der Produktklassen kümmern zu müssen. Das Diagramm zeigt, dass die ProductFactory-Klasse das Product-Interface verwendet, um Produktobjekte zu erstellen, wobei die konkreten Produktklassen die Implementierung bereitstellen.
+\\\\
+Es exisiteren eine Anzahl von Herausforderungen, aber das Factory-Pattern gilt ale eine wichtige Option zur Erzeugung in der Architektur von verteilten Systemen.
 % TODO Product Interface - offen
 %\begin{figure}[!ht]
 %  \centering
@@ -1665,8 +1731,8 @@ Das Factory-Pattern kapselt die Logik zur Erstellung von Produktobjekten in der 
 %  \caption{Factory Pattern Sequenz}
 %  \label{fig:factory-seq}
 %\end{figure}
-
-Das Factory-Pattern in verteilten Systemen bieter darüber hinaus eine Reihe von Vorteilen, die dazu beitragen, den Code sauberer und wartbarer zu gestalten Wie auch immer, obwohl das Factory-Pattern in vielen verteilten Systemen Vorteile bietet, gibt es auch Situationen, in denen Probleme auftreten können. Einige sind im Folgenden angesprochen:
+\examplevs{
+Das Factory-Pattern in VS bietet eine Vielzahl von Herausforderungen:
 \begin{itemize}
 \item Kommunikationslatenz: In verteilten Systemen kann die Kommunikation zwischen den Knoten und den Factory-Instanzen Latenz verursachen. Wenn der Factory-Code auf einem zentralen Knoten gehostet wird, kann dies zu Verzögerungen bei der Objekterstellung führen und die Gesamtleistung des Systems beeinträchtigen.
 \item Synchronisation: In verteilten Systemen kann die Synchronisation der Factory-Instanzen über mehrere Knoten hinweg eine Herausforderung darstellen. Wenn der Factory-Code oder die Konfigurationsinformationen geändert werden, müssen alle Factory-Instanzen im System aktualisiert werden, um konsistent zu bleiben. Dies kann zu zusätzlicher Komplexität und möglichen Inkonsistenzen führen.
@@ -1675,10 +1741,10 @@ Das Factory-Pattern in verteilten Systemen bieter darüber hinaus eine Reihe von
 \item Schwerer zu testen: In verteilten Systemen kann das Testen von Factory-Implementierungen aufgrund der beteiligten Knoten und der möglichen Latenz- oder Synchronisationsprobleme schwieriger sein. Die Testbarkeit von Factories und den erstellten Objekten kann in solchen Umgebungen eingeschränkt sein, was zu einer geringeren Codequalität führen kann.
 \item Overhead: Die Verwendung von Factories in verteilten Systemen kann zusätzlichen Overhead verursachen, insbesondere wenn die Objekterstellung häufig stattfindet oder eine große Anzahl von Knoten beteiligt ist. In solchen Fällen kann der zusätzliche Overhead, der durch die Kommunikation zwischen den Knoten und der Factory entsteht, die Leistung des Systems beeinträchtigen.
 \end{itemize}
+}
 
-Trotz dieser Herausforderungen und Probleme ist das Factory-Pattern eine wichtige Option in der Architektur eines verteilten Systems sein. 
 
-\subsubsection{Dependency Injection Pattern}
+\subsection{Dependency Injection Pattern}
 
 Das Dependency Injection (DI) Pattern ist ein Entwurfsmuster, bei dem die Abhängigkeiten eines Objekts von außen bereitgestellt werden, anstatt dass das Objekt sie selbst erstellt. Dies kann helfen, den Code modularer, testbarer und wartbarer zu gestalten. Es kann wie folgt angewendet werden:
 \begin{itemize}
@@ -1687,8 +1753,10 @@ Das Dependency Injection (DI) Pattern ist ein Entwurfsmuster, bei dem die Abhän
 \item Verwenden Sie einen DI-Container oder ein Framework (z. B. Spring in Java), um Abhängigkeiten zu konfigurieren, zu erstellen und in die jeweiligen Komponenten zu injizieren.
 \item Stellen Sie sicher, dass die Komponenten im System sich nur auf die definierten Schnittstellen oder abstrakten Klassen beziehen, anstatt direkt auf die konkreten Implementierungen zuzugreifen.
 \end{itemize}    
-Wenn das DI-Pattern in einem verteilten System implementiert ist, können verschiedene Knoten unterschiedliche Implementierungen oder Konfigurationen der Abhängigkeiten verwenden, ohne den Code der einzelnen Komponenten ändern zu müssen. Dies ermöglicht eine größere Flexibilität und Anpassungsfähigkeit des Systems an verschiedene Umgebungen und Anforderungen. Ein Beispiel für das Dependency Injection-Pattern in einem verteilten System könnte ein System mit mehreren Microservices sein, die über ein Netzwerk kommunizieren. Jeder Microservice hat seine eigene Aufgabe und benötigt möglicherweise Zugriff auf verschiedene externe Ressourcen oder Dienste. Anstatt dass jeder Microservice direkt auf diese Ressourcen zugreift, werden die Abhängigkeiten über DI bereitgestellt. Dies ermöglicht es, die Ressourcen zentral zu verwalten und bei Bedarf unterschiedliche Implementierungen oder Konfigurationen bereitzustellen.
-\\\\
+Wenn das DI-Pattern in einem verteilten System implementiert ist, können verschiedene Knoten unterschiedliche Implementierungen oder Konfigurationen der Abhängigkeiten verwenden, ohne den Code der einzelnen Komponenten ändern zu müssen. Dies ermöglicht eine größere Flexibilität und Anpassungsfähigkeit des Systems an verschiedene Umgebungen und Anforderungen. 
+\examplevs{
+Ein Beispiel für das Dependency Injection-Pattern in einem verteilten System könnte ein System mit mehreren Microservices sein, die über ein Netzwerk kommunizieren. Jeder Microservice hat seine eigene Aufgabe und benötigt möglicherweise Zugriff auf verschiedene externe Ressourcen oder Dienste. Anstatt dass jeder Microservice direkt auf diese Ressourcen zugreift, werden die Abhängigkeiten über DI bereitgestellt. Dies ermöglicht es, die Ressourcen zentral zu verwalten und bei Bedarf unterschiedliche Implementierungen oder Konfigurationen bereitzustellen.
+}
 Um die Funktionsweise des Patterns zu verdeutlichen, soll nochmals das Fallbeispiel mit der Lampe bemüht werden. Der Fokus liegt darauf, dass der Pi (Controller) die Lampe (Model) kontrolliert. 
 \\\\
 Zunächst erstellen wir eine Schnittstelle für die Abhängigkeit:\\
@@ -1745,8 +1813,12 @@ public class Main {
 \end{lstlisting}
 \end{minipage}
 
-Dependency Injection (DI) ist ein nützliches Muster für die Entwicklung von Anwendungen. Es hat jedoch auch Nachteile, insbesondere in verteilten Systemen. Einer der Nachteile ist, dass DI in verteilten Systemen eine zusätzliche Komplexität einführen kann, insbesondere wenn viele verschiedene Komponenten vorhanden sind, die miteinander kommunizieren müssen. DI kann auch die Leistung beeinträchtigen, insbesondere wenn die Abhängigkeiten zwischen den Komponenten in einem verteilten System über ein Netzwerk übertragen werden müssen. Ein weiterer Nachteil von DI in verteilten Systemen ist, dass es ein Sicherheitsrisiko darstellen kann, wenn es nicht ordnungsgemäß implementiert wird. Außerdem kann DI die Skalierbarkeit beeinträchtigen, wenn die Komponenten in der Anwendung nicht ordnungsgemäß entkoppelt sind. Schließlich kann DI auch das Debugging erschweren, insbesondere wenn es viele verschiedene Komponenten gibt, die miteinander interagieren. Daher müssen diese Nachteile von Dependency Injection berücksichtigt werden, wenn sie in verteilten Systemen eingesetzt wird, um sicherzustellen, dass die Implementierung angemessen ist und die Anforderungen des Systems erfüllt.
-\\\\
+Dependency Injection (DI) ist ein nützliches Muster für die Entwicklung von Anwendungen. 
+\examplevs{
+\paragraph{Nachteile von DI}\mbox{}\\ 
+Es hat jedoch auch Nachteile, insbesondere in verteilten Systemen. Einer der Nachteile ist, dass DI in verteilten Systemen eine zusätzliche Komplexität einführen kann, insbesondere wenn viele verschiedene Komponenten vorhanden sind, die miteinander kommunizieren müssen. DI kann auch die Leistung beeinträchtigen, insbesondere wenn die Abhängigkeiten zwischen den Komponenten in einem verteilten System über ein Netzwerk übertragen werden müssen. Ein weiterer Nachteil von DI in verteilten Systemen ist, dass es ein Sicherheitsrisiko darstellen kann, wenn es nicht ordnungsgemäß implementiert wird. Außerdem kann DI die Skalierbarkeit beeinträchtigen, wenn die Komponenten in der Anwendung nicht ordnungsgemäß entkoppelt sind. Schließlich kann DI auch das Debugging erschweren, insbesondere wenn es viele verschiedene Komponenten gibt, die miteinander interagieren. Daher müssen diese Nachteile von Dependency Injection berücksichtigt werden, wenn sie in verteilten Systemen eingesetzt wird, um sicherzustellen, dass die Implementierung angemessen ist und die Anforderungen des Systems erfüllt.
+}
+\paragraph{Reflexion}mox{}\\
 Dependency Injection (DI) wird häufig mit einem Konzept aus der Programmierung verbunden das Reflections (Reflexion) genannt wird. In der Informatik bezieht sich Reflection (Reflexion) auf die Fähigkeit eines Computerprogramms, seine eigene Struktur und sein Verhalten zur Laufzeit zu analysieren und zu manipulieren. Diese Fähigkeit ermöglicht es einem Programm, Informationen über seine eigenen Komponenten, wie Klassen, Methoden, Attribute, etc., zu untersuchen und sogar deren Eigenschaften und Funktionalitäten zu ändern.
 \\\\
 Reflection wird in vielen Programmiersprachen unterstützt, z. B. in Java, C\#, Python und JavaScript. Reflexion kann in verschiedenen Szenarien nützlich sein, wie zum Beispiel:
@@ -1763,21 +1835,21 @@ Trotz seiner Vorteile kann die Verwendung von Reflection jedoch auch Nachteile h
 \item Sicherheit: Durch den Zugriff auf private und geschützte Code-Elemente kann die Sicherheit eines Programms beeinträchtigt werden.
 \item Wartbarkeit: Der Einsatz von Reflection kann zu schwer lesbarem und schwer wartbarem Code führen, da die Beziehungen zwischen Code-Elementen nicht immer offensichtlich sind.
 \end{itemize}   
-Daher ist es wichtig, Reflection nur dann einzusetzen, wenn es wirklich notwendig ist, und dabei auf Best Practices und Sicherheitsaspekte zu achten.
+Daher ist es wichtig, Reflection nur dann einzusetzen, wenn es wirklich notwendig ist, und dabei auf Best Practices und Sicherheitsaspekte zu achten.\footnote{Block (Deutsch): die dunkle Seite von Java \url{https://codegym.cc/de/groups/posts/de.45.reflection-api-reflection-die-dunkle-seite-von-java}}
 
-\subsubsection{Adapter und Wrapper Pattern}
+\subsection{Adapter und Wrapper Pattern}
 
-Das Adapter Pattern und das Wrapper Pattern sind beide Strukturpattern, die in verteilten Systemen verwendet werden können, um die Interoperabilität zwischen verschiedenen Komponenten zu gewährleisten. Obwohl beide Muster ähnlich sind, gibt es einige Unterschiede, die im Folgenden erläutert werden.
+Die Adapter und das Wrapper Pattern sind beides Strukturpattern, die in verteilten Systemen verwendet werden können, um die Interoperabilität zwischen verschiedenen Komponenten zu gewährleisten. Obwohl beide Muster ähnlich sind, gibt es einige Unterschiede, die im Folgenden erläutert werden.
 \\\\
-Das Adapter Pattern ermöglicht die Zusammenarbeit von Komponenten mit unterschiedlichen Schnittstellen, indem es eine Zwischenschicht zwischen ihnen einfügt. Das Muster definiert eine Klasse, die die Schnittstelle einer Komponente in die Schnittstelle einer anderen Komponente übersetzt, so dass sie miteinander kommunizieren können. Das Adapter Pattern kann verwendet werden, um zwei Komponenten mit unterschiedlichen Protokollen oder Datenformaten miteinander zu verbinden. Es kann auch verwendet werden, um eine bestehende Komponente an eine neue Schnittstelle anzupassen, ohne den Code der Komponente selbst zu ändern.
+Das \textbf{Adapter Pattern} ermöglicht die Zusammenarbeit von Komponenten mit unterschiedlichen Schnittstellen, indem es eine Zwischenschicht zwischen ihnen einfügt. Das Muster definiert eine Klasse, die die Schnittstelle einer Komponente in die Schnittstelle einer anderen Komponente übersetzt, so dass sie miteinander kommunizieren können. Das Adapter Pattern kann verwendet werden, um zwei Komponenten mit unterschiedlichen Protokollen oder Datenformaten miteinander zu verbinden. Es kann auch verwendet werden, um eine bestehende Komponente an eine neue Schnittstelle anzupassen, ohne den Code der Komponente selbst zu ändern.
 \\\\
-Das Wrapper Pattern hingegen definiert eine neue Klasse, die eine vorhandene Komponente umschließt, um ihre Schnittstelle oder ihr Verhalten zu ändern oder zu erweitern. Das Muster ermöglicht es, eine Komponente anzupassen, ohne den Code der Komponente selbst zu ändern. 
+Das \textbf{Wrapper Pattern} hingegen definiert eine neue Klasse, die eine vorhandene Komponente umschließt, um ihre Schnittstelle oder ihr Verhalten zu ändern oder zu erweitern. Das Muster ermöglicht es, eine Komponente anzupassen, ohne den Code der Komponente selbst zu ändern. 
 \\\\
-Sowohl das Adapter Pattern als auch das Wrapper Pattern sind nützliche Muster für die Entwicklung von verteilten Systemen, da sie die Interoperabilität zwischen verschiedenen Komponenten erleichtern und die Wiederverwendbarkeit von vorhandenem Code erhöhen. Die Wahl des geeigneten Musters hängt von den spezifischen Anforderungen des Systems ab.
+Sowohl das Adapter als auch das Wrapper Pattern sind nützliche Muster für die Entwicklung von verteilten Systemen, da sie die Interoperabilität zwischen verschiedenen Komponenten erleichtern und die Wiederverwendbarkeit von vorhandenem Code erhöhen. Die Wahl des geeigneten Musters hängt von den spezifischen Anforderungen des Systems ab.
 
 
-\subsubsection{Interceptor Pattern}
-Das Interceptor Pattern ist ein Behavioral Pattern, das in verteilten Systemen eingesetzt wird, um die Kommunikation zwischen Komponenten zu steuern. Das Pattern verwendet sogenannte Interceptor- Komponenten, die die eingehenden und ausgehenden Nachrichten der Anwendung abfangen und modifizieren können.
+\subsection{Interceptor Pattern}
+Das Interceptor Pattern ist ein Verhaltenspattern (Behavioral Pattern), das in verteilten Systemen eingesetzt wird, um die Kommunikation zwischen Komponenten zu steuern. Das Pattern verwendet sogenannte Interceptor- Komponenten, die die eingehenden und ausgehenden Nachrichten/Events/Parameter der Anwendung abfangen und modifizieren können.
 \\\\
 Interceptors werden verwendet, um verschiedene Funktionen auszuführen, wie z.B. Sicherheitsüberprüfungen, Protokollierung, Leistungsüberwachung und Fehlerbehebung. Interceptors können auch verwendet werden, um die Kommunikation zwischen Komponenten zu optimieren, indem sie unerwünschte Nachrichten entfernen oder redundante Nachrichten zusammenfassen.
 \\\\
@@ -1821,7 +1893,7 @@ Nicht zu Letzt sind die Aspekte der Implementierung zu diskutieren:
 \end{itemize} 
 Durch die Verwendung des Interceptor Patterns können die Finanztransaktionen sicher und effektiv überwacht werden, ohne dass Änderungen am Quellcode der Anwendung selbst vorgenommen werden müssen. Die Interceptor-Komponenten können auch problemlos hinzugefügt, entfernt oder geändert werden, um den Anforderungen der Anwendung gerecht zu werden.
 
-\subsubsection{Fassade Pattern}
+\subsection{Fassade Pattern}
 Das Fassade Pattern ist ein Strukturpattern, das in verteilten Systemen verwendet werden kann, um eine vereinfachte Schnittstelle für den Zugriff auf komplexe Subsysteme bereitzustellen. Es dient als eine Art vereinfachte Schicht, die die Interaktion zwischen Client-Code und einem komplexen Subsystem abstrahiert.
 
 In verteilten Systemen kann das Fassade Pattern genutzt werden, um die Komplexität von Systemen zu reduzieren, indem eine einzige Schnittstelle bereitgestellt wird, die als Einstiegspunkt für den Zugriff auf das System dient. Dies kann dazu beitragen, die Komplexität des Systems für den Benutzer zu reduzieren und die Wartbarkeit des Codes zu verbessern.
@@ -1879,7 +1951,7 @@ Der Client-Code erstellt eine Instanz der Fassade und ruft die performAction()-M
 
 
 
-\subsubsection{Pipeline Pattern}
+\subsection{Pipeline Pattern}
 Das Pipeline Pattern ist ein Architekturmuster für verteilte Systeme, das es ermöglicht, komplexe Verarbeitungsprozesse aufzubauen, indem die Verarbeitung in einzelne Schritte aufgeteilt wird, die sequentiell ausgeführt werden. Jeder Schritt wird von einem spezialisierten Modul durchgeführt, das in der Lage ist, einen bestimmten Verarbeitungsschritt auszuführen. Im Pipeline Pattern gibt es drei grundlegende Komponenten:
 \begin{itemize} 
 \item Die Pipeline: eine Abfolge von Verarbeitungsschritten, die in einer bestimmten Reihenfolge ausgeführt werden.
@@ -1903,7 +1975,7 @@ Ein wichtiger Aspekt bei der Implementierung des Watchdog Patterns ist die Trenn
 
 Insgesamt ist das Watchdog Pattern ein leistungsfähiges Entwurfsmuster, das dazu beiträgt, die Robustheit und Zuverlässigkeit von Softwaresystemen zu erhöhen. Durch die frühzeitige Erkennung und Behebung von Problemen kann es dazu beitragen, die Ausfallzeiten und die potenziellen Auswirkungen auf Benutzer und Kunden zu reduzieren.
 
-\subsubsection{Master-Worker Pattern}
+\subsection{Master-Worker Pattern}
 Das Master-Worker Pattern, auch bekannt als Master-Slave Pattern, ist ein grundlegendes Entwurfsmuster in der Informatik, das nicht speziell für verteilte Systeme entwickelt wurde. Es ist eine Methode zur Organisation von Systemen, bei der eine zentrale Einheit (Master) die Kontrolle über mehrere untergeordnete Einheiten (Worker) hat. Das Hauptziel dieses Musters ist es, die Arbeitslast effizient auf mehrere Prozessoren oder Knoten zu verteilen und die Skalierbarkeit und Zuverlässigkeit des Gesamtsystems zu verbessern.
 
 In verteilten Systemen der Informatik ist das Master-Worker Pattern von großer Bedeutung, da es die folgenden Vorteile bietet:

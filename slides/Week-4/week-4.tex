@@ -8,130 +8,93 @@
 \author{Prof. Dr. Martin Becke}
 \date{\today}
 
-
 \begin{document}
 
 \begin{frame}
     \titlepage
 \end{frame}
 
-
 \begin{frame}{Architekturmuster}
-    \textbf{Architekturmuster} beschreiben die grundlegende strukturelle Organisation eines Softwaresystems. Sie definieren große Systemkomponenten und ihre Beziehungen untereinander. Sie legen den Rahmen für das gesamte System fest.
-    \\
-    \textbf{Ziele:} Verteilung von Verantwortlichkeiten, Kommunikationswege und Datenfluss.
-\end{frame}
-\begin{frame}{Schichtenarchitektur (Layered Architecture)}
-    Die Schichtenarchitektur ist ein grundlegendes Architekturmuster, das Systeme in mehrere Schichten unterteilt, wobei jede Schicht eine bestimmte Funktion erfüllt und auf der darunterliegenden Schicht aufbaut.  
-\mbox{}\\
-    \textbf{Analogie:} Wie ein mehrstöckiges Gebäude: Jede Etage hat eine spezifische Funktion (Wohnen, Arbeiten, Schlafen) und baut auf der darunterliegenden Etage auf.
+    \textbf{Definition:} Beschreiben die grundlegende Organisation eines Softwaresystems.
+    \begin{itemize}
+        \item Strukturierung großer Systemkomponenten
+        \item Definieren von Kommunikationswegen und Datenflüssen
+    \end{itemize}
+    \textbf{Reflexionsfrage:} Warum sind Architekturmuster für skalierbare Systeme wichtig?
 \end{frame}
 
+\begin{frame}{Schichtenarchitektur}
+    \textbf{Prinzip:} Aufteilung in Schichten mit spezifischen Funktionen.
 
-\begin{frame}{Schichten vs. Ebenen (Layers vs. Tiers)}
-    \textbf{Layer (Schicht):} Logische Gruppierung von Funktionen innerhalb einer Anwendung.
-
-    \textbf{Tier (Ebene):}  Physische oder logische Aufteilung von Anwendungen auf verschiedene Server oder Geräte.
-
-    Ein Layer kann aus mehreren Tiers bestehen.  
-    \mbox{}\\
-    \textbf{Beispiel:} Eine dreischichtige Architektur (Präsentation, Anwendung, Daten) kann auf drei verschiedenen Servern (Client, Anwendungsserver, Datenbank) implementiert werden.
+    \begin{itemize}
+        \item Trennung von Präsentation, Logik und Datenhaltung
+        \item Verbesserte Wartbarkeit und Skalierbarkeit
+    \end{itemize}
+    \textbf{Analogie:} Ein Gebäude mit Etagen – jede Schicht hat eine Funktion.
 \end{frame}
-
-\begin{frame}{Zeitgesteuert vs. Ereignisgesteuert (Time-Triggered vs. Event-Triggered)}
-    \textbf{Zeitgesteuert:} Aktionen werden nach einem festen Zeitplan ausgeführt. Wie ein Uhrwerk:  Es tickt in regelmäßigen Intervallen.
-
-    \textbf{Ereignisgesteuert:}  Aktionen werden durch Ereignisse ausgelöst. Wie ein Lichtschalter:  Er reagiert auf das Drücken des Schalters.
-\end{frame}
-
 
 \begin{frame}{Middleware}
-    \textbf{Middleware} ist eine Softwareschicht, die zwischen Anwendung und Betriebssystem liegt und die Kommunikation und Interaktion zwischen verschiedenen Komponenten oder Systemen in einem verteilten System vereinfacht. Sie bietet Dienste wie Kommunikationsprotokolle, Datenkonvertierung, Namensauflösung und Sicherheit.  Wie ein Dolmetscher:  Er übersetzt zwischen verschiedenen Sprachen und ermöglicht die Kommunikation zwischen Menschen, die unterschiedliche Sprachen sprechen.
-    \mbox{}\\
-    \textbf{Bemerkung:} Middelware ist eng verknüpft die Transparenzeigenschaften zu erreichen? Diskussion: warum?
+    \textbf{Definition:} Vermittelt zwischen Anwendung und Betriebssystem.
+    \begin{itemize}
+        \item Erleichtert Kommunikation zwischen verteilten Systemen
+        \item Bietet Dienste wie Sicherheit, Namensauflösung
+    \end{itemize}
+    \textbf{Diskussionsfrage:} Wie kann Middleware helfen, heterogene Systeme zu verbinden?
 \end{frame}
-
-\begin{frame}{Single-Node-Architektur}
-    Die \textbf{Single-Node-Architektur} beschreibt Systeme, die auf einem einzigen Knoten ausgeführt werden.  Sie ist die einfachste Form eines verteilten Systems (1-Tier-Architektur) und eignet sich für kleine Anwendungen oder für die Entwicklung und das Testen.  
-    \mbox{}\\
-    \textbf{Analogie:}  Wie ein einzelner Musiker:  Es kann alleine ein einfaches Musikstück spielen, aber für komplexere Stücke benötigt es ein Orchester (mehrere Knoten).
-\end{frame}
-
 
 \begin{frame}{Client-Server-Architektur}
-    Die \textbf{Client-Server-Architektur} teilt ein System in Clients, die Dienste anfordern, und Server, die diese Dienste bereitstellen.  Wie ein Restaurant:  Die Gäste (Clients) bestellen Essen, und die Küche (Server) bereitet es zu.  Diese Architektur ist weit verbreitet und bildet die Grundlage für viele Anwendungen im Internet.
-    \mbox{}\\
-    \textbf{Varianten Aufteiliung:} Beispielhaft abhängig vom Client: Thin Client, Thick Client, Hybrid Client.\\
-    \textbf{Variante Resourcesharing:} Varianten: Dediziert, Shared, virtuell (VPS), Cloud, Edge 
+   
+    \textbf{Prinzip:} Clients fordern Dienste von Servern an.
+    \textbf{Beispiel:} Restaurant (Gäste bestellen, Küche bereitet Essen zu).
+    \textbf{Varianten:}
+    \begin{itemize}
+        \item Thin Client – Logik auf Server
+        \item Thick Client – Logik auf Client
+        \item Hybrid Client – Mischung aus beidem
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{n-Tier-Architektur und Kaskadenkommunikation}
-    Die \textbf{n-Tier}-Architektur erweitert das Client-Server-Modell, indem sie die Anwendung in mehrere Ebenen (Tiers) unterteilt. Diese Ebenen können auf verschiedenen Servern oder Maschinen laufen und über das Netzwerk miteinander kommunizieren. Eine häufige Form ist die 3-Tier-Architektur (Präsentation, Anwendung, Daten).  Die kaskadenartige Kommunikation zwischen den Tiers kann zu Latenzproblemen und erhöhter Komplexität führen.
+\begin{frame}{n-Tier-Architektur}
+    \textbf{Prinzip:} Mehrstufiges Client-Server-Modell.
+    \begin{itemize}
+        \item Klare Trennung von Präsentation, Logik, Datenbank
+        \item Erhöhte Modularität, aber komplexere Kommunikation
+    \end{itemize}
+    \textbf{Reflexionsfrage:} Wann ist eine 5-Tier-Architektur sinnvoll?
 \end{frame}
-
-
-\begin{frame}{n-Tier Stub/Skeleton Chains}
-    In einer n-Tier-Architektur werden oft \textbf{Stubs und Skeletons} verwendet, um die Kommunikation zwischen den Schichten zu vereinfachen. Ein Stub ist ein Platzhalter für einen entfernten Methodenaufruf, während ein Skeleton die Implementierung auf der Serverseite bereitstellt.  Wie ein Telefonanruf:  Der Anrufer (Stub) wählt die Nummer und spricht mit dem Angerufenen (Skeleton).
-\end{frame}
-
-
-\begin{frame}{Event-Driven Architektur (EDA)}
-    In der \textbf{EDA} kommunizieren die Komponenten durch den Austausch von Ereignissen (Events). Komponenten reagieren auf Ereignisse, anstatt direkt miteinander zu interagieren.  Wie ein Nachrichtensystem:  Abonnenten (Komponenten) erhalten Nachrichten (Events) zu bestimmten Themen.  Diese Architektur fördert lose Kopplung und Skalierbarkeit.
-\end{frame}
-
-\begin{frame}{Lambda-Architektur}
-    Die \textbf{Lambda-Architektur} wird oft in Kombination mit EDA verwendet, um große Datenmengen in Echtzeit und im Batch-Modus zu verarbeiten.  Sie besteht aus drei Schichten: Batch Layer (für historische Daten), Speed Layer (für Echtzeitdaten) und Serving Layer (für Abfragen und Analysen).  Wie ein Nachrichtenarchiv:  Alte Nachrichten werden im Archiv (Batch Layer) gespeichert, neue Nachrichten werden sofort verarbeitet (Speed Layer) und Benutzer können auf alle Nachrichten zugreifen (Serving Layer).
-\end{frame}
-
 
 \begin{frame}{Microservices-Architektur}
-    Die \textbf{Microservices-Architektur} unterteilt eine Anwendung in kleine, unabhängige Services, die jeweils eine bestimmte Geschäftsfunktion ausführen.  Wie ein Team von Spezialisten:  Jeder Spezialist (Microservice) ist für einen bestimmten Bereich verantwortlich.  Diese Architektur fördert Flexibilität, Wartbarkeit und Skalierbarkeit, erhöht aber auch die Komplexität.
-\end{frame}
-
-
-\begin{frame}{Peer-to-Peer-Architektur (P2P)}
-    In der \textbf{P2P-Architektur} kommunizieren die Knoten (Peers) direkt miteinander, ohne dass ein zentraler Server erforderlich ist.  Wie ein Tauschring:  Die Teilnehmer (Peers) tauschen direkt untereinander Ressourcen aus. Diese Architektur ist robust, skalierbar und fehlertolerant, kann aber auch Herausforderungen bei der Sicherheit und der Suche nach Ressourcen mit sich bringen.
-\end{frame}
-
-
-\begin{frame}{Hexagonale Onion Architektur}
-    Die \textbf{Hexagonale Onion} Architektur kombiniert die Prinzipien der Hexagonalen Architektur (Ports and Adapters) und der Zwiebelarchitektur (Clean Architecture). Sie zielt darauf ab, die Kernlogik der Anwendung von externen Abhängigkeiten zu trennen und die Testbarkeit, Wartbarkeit und Erweiterbarkeit zu verbessern.  Wie eine Zwiebel:  Die Kernlogik (Entities) liegt im Zentrum, umgeben von Schichten für Anwendungslogik (Use Cases), Ports und Adapter sowie Infrastruktur.
-\end{frame}
-
-\begin{frame}{Diskussion: Womit starten}
-   
-    \textbf{Diskussion:} Schichten und MVC als Architektur- und Entwurfsmusteransatz.\\ 
-    \textbf{Hinweis:} Im Gegensatz zu Entwurfsmustern oder Idiomen bestimmen Architekturmuster nicht ein konkretes (meist kleines oder lokales) Teilproblem, sondern die grundlegende Organisation und Interaktion zwischen den Komponenten einer Anwendung. 
-\end{frame}
-
-
-\begin{frame}{Entwurfsmuster (Design Patterns) - Überblick}
-\textbf{Entwurfsmuster} sind bewährte Lösungen für wiederkehrende Probleme in der Softwareentwicklung. Sie bieten wiederverwendbare Blaupausen für die Gestaltung von Code und die Interaktion zwischen Objekten und Klassen. Einige wichtige Entwurfsmuster in verteilten Systemen sind:  Singleton, Observer, Factory Method, Adapter.
-\end{frame}
-
-
-\begin{frame}{Model-View-Controller (MVC)}
-    MVC trennt eine Anwendung in drei Komponenten:
+    \textbf{Prinzip:} Kleine, unabhängige Dienste mit klaren Schnittstellen.
+    \textbf{Diskussion:}
     \begin{itemize}
-        \item \textbf{Model:}  Daten und Geschäftslogik.
-        \item \textbf{View:}  Präsentation und Benutzerinteraktion.
-        \item \textbf{Controller:}  Steuerung und Koordination.
+        \item Skalierbarkeit
+        \item Unabhängige Entwicklung
+        \item Höhere Komplexität
     \end{itemize}
-    MVC fördert die Trennung von Anliegen und verbessert die Wartbarkeit und Testbarkeit.  Wie ein Theaterstück: Das Drehbuch (Model), die Schauspieler (View) und der Regisseur (Controller) arbeiten zusammen.
 \end{frame}
 
-
-\begin{frame}{CVM und VCM}
-    CVM (Controller-View-Model) und VCM (View-Controller-Model) sind Variationen des MVC-Musters, die die Reihenfolge der Komponenten im Schichtenmodell verändern.  Sie sind keine eigenständigen Muster, sondern eher spezielle Ausprägungen von MVC.
+\begin{frame}{Event-Driven Architektur (EDA)}
+    \textbf{Prinzip:} Komponenten reagieren auf Ereignisse.
+    \textbf{Beispiel:} Nachrichtensystem – Abonnenten erhalten Updates.
+    \textbf{Vorteile:}
+    \begin{itemize}
+        \item Hohe Entkopplung
+        \item Gute Skalierbarkeit
+    \end{itemize}
 \end{frame}
 
+\begin{frame}{Function as a Service (FaaS)}
+    \textbf{Definition:} 
+    \begin{itemize}
+        \item FaaS ist ein Cloud-Computing-Modell, bei dem Anwendungen als einzelne, ausführbare Funktionen bereitgestellt werden.
+        \item Entwickler schreiben Code, ohne sich um die zugrunde liegende Infrastruktur kümmern zu müssen.
+    \end{itemize}
+    Cloud First
+\end{frame}    
 
-\begin{frame}{Vertreter (Proxy)}
-    Ein Proxy ist ein Stellvertreter für ein anderes Objekt oder einen anderen Dienst.  Er kontrolliert den Zugriff auf das eigentliche Objekt und kann zusätzliche Funktionen wie Caching oder Sicherheit bieten.  Wie ein Türsteher: Er kontrolliert den Zugang zum Club.  Proxies sind nützlich, um die Komplexität von verteilten Systemen zu verbergen und die Leistung zu verbessern.
-
-    \textbf{Arten:} Forward Proxy, Reverse Proxy, Caching Proxy, Load Balancing Proxy.
+\begin{frame}{Diskussion: Womit starten?}
+    \textbf{Thema:} Schichtenarchitektur vs. Microservices.
+    \textbf{Diskussionsfrage:} Wann ist welche Architektur vorteilhaft?
 \end{frame}
-
-
 
 \end{document}
