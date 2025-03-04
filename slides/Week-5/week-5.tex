@@ -41,8 +41,9 @@
 \begin{frame}{Broker vs. Proxy}
     Broker und Proxies vermitteln beide die Kommunikation zwischen Komponenten, aber auf unterschiedliche Weise:
     \begin{itemize}
-        \item \textbf{Broker:} Empfängt, speichert und leitet Nachrichten weiter. Kann diese auch filtern oder transformieren.
         \item \textbf{Proxy:} Agiert als transparenter Stellvertreter, der den Zugriff auf einen Dienst kontrolliert.
+        \item \textbf{Broker:} Empfängt, speichert und leitet Nachrichten weiter. Kann diese auch filtern oder transformieren.
+        \item \textbf{Trader:} Wie Broker, nur das auch noch ein erweitertes Regelwerk bei der Auswahl (bis hin zu autonomen Verhalten) genutzt wird.
     \end{itemize}
     Die Wahl zwischen Broker und Proxy hängt vom gewünschten Grad an Kontrolle und Flexibilität ab.
 \end{frame}
@@ -92,9 +93,9 @@
     Das Watchdog Pattern dient zur Überwachung von Prozessen oder Ressourcen und greift ein, wenn Probleme auftreten. Vergleichbar mit einem Wachhund: Er schlägt Alarm, wenn etwas nicht stimmt.
 \end{frame}
 
-\begin{frame}{Master-Worker Pattern}
-    Das Master-Worker Pattern verteilt die Arbeit auf mehrere Worker, die vom Master koordiniert werden. Es erhöht die Leistung und Skalierbarkeit. \newline \textbf{Beispiel:} MapReduce-Paradigma.
-\end{frame}
+%\begin{frame}{Master-Worker Pattern}
+%    Das Master-Worker Pattern verteilt die Arbeit auf mehrere Worker, die vom Master koordiniert werden. Es erhöht die Leistung und Skalierbarkeit. \newline \textbf{Beispiel:} MapReduce-Paradigma.
+%\end{frame}
 
 \begin{frame}{MapReduce}
     MapReduce ist ein Programmiermodell für die Verarbeitung großer Datenmengen auf verteilten Systemen. Es besteht aus zwei Phasen:
