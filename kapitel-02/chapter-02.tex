@@ -2136,15 +2136,18 @@ public class LampController {
 In diesem Beispiel wurde eine Lamp-Schnittstelle erstellt, die als Middleware fungiert, um eine Lampe aus der Entfernung (über Netzwerk) zu steuern. Die LampFactory-Klasse dient als Application-Stub, der die Erstellung und Verbindung zur Middleware verwaltet. Die Lamp Controller-Anwendung verwendet die Lamp-Schnittstelle über die Factory-Methode, um die Lampe ein- und auszuschalten.
 \\\\
 In einer realen Anwendung könnte die LampFactory-Klasse die Verbindung zu einer tatsächlichen Middleware herstellen, anstatt einfach eine lokale Implementierung zu erstellen. Natürlich ist die Annahme einer Objektmenge nur aus dem Datentyp Boolean naiv, zeigt aber die Funktionsweise ausreichend auf. Die Anwendung selbst muss sich jedoch nicht um diese Details kümmern, da der Application-Stub diese Verantwortung übernimmt.
-\\\\
-Diese zunächst einfache und naive Darstellung ist als Möglichkeit gedacht, um zunächst einen Überblick zu schaffen. Natürlich müssen hier verschiedene Aspekte verfeinert und für das bessere Verständnis nochmal diskutiert werden. Hier wird auf das Praktikum verwiesen.
-\\\\
-Als erstes muss man aber bereits festhalten, dass aus der naiven Ansicht der statischen Komponentensicht häufig ein Verhalten abgeleitet wird, welches aber auf einer missverstandenen Interpretation der Architektur zurückzuführen ist, weniger auf ein noch nicht eingeführtes Verhalten.  
-\\\\
-Ist die Beschreibung des Verhaltens in der Architektur das Ziel, muss nochmals auf die Nutzung des Schichtenmodells hingewiesen werden. Jede Schicht kapselt die Sequenzen nach der zugeordneten Verantwortlichkeit.
+\examplevs{
+Diese zunächst einfache und naive Darstellung ist als Möglichkeit gedacht, um einfach einen Überblick zu schaffen. Natürlich müssen hier verschiedene Aspekte verfeinert und für das bessere Verständnis nochmal diskutiert werden. Hier wird auf das Praktikum verwiesen.
+}
+\importantvs{
+\paragraph{Modellierung je Schicht, nicht über die Schichten}\mbox{}\\
+Man muss aber festhalten, dass aus der naiven Ansicht der statischen Komponentensicht häufig ein Verhalten abgeleitet wird, welches auf einer missverstandenen Interpretation der Architektur zurückzuführen ist, weniger auf ein noch nicht eingeführtes Verhalten. Ist die Beschreibung des Verhaltens in der Architektur das Ziel, sollte nochmals auf die Nutzung des Schichtenmodells hingewiesen werden. Jede Schicht kapselt die Sequenzen nach der zugeordneten Verantwortlichkeit.
 Somit beschreiben die Sequenzen in der Applikationsschicht die der Applikation und die Sequenzen der Middleware die der Middleware. Was nicht geschehen sollte, ist eine Vermischung beider Schichten. So wäre eine gültige Sequenz der Applikation beschrieben in Diagramm~\ref{fig:rpc-app-seq-rpc} und eine der Middleware im Diagramm~\ref{fig:rpc-middleware-seq-rpc}. An der Sequenz in der Applikation selbst sollte man nicht ohne weiteres erkennen, dass es sich um einen entfernen Funktionsaufruf handelt. Diese Aufgabe wird von der Middleware übernommen.
-\\\\
-Es ist wichtig zu verstehen, dass die Sequenz der Applikation aus einer spezifischen Verarbeitung des Anwendungsfalls getrieben ist, wohingegen die Sequenz der Middleware eine generische Umsetzung repräsentiert, die von jeglichem Aufruf aus der Applikation heraus genutzt werden kann, solange sie die gleichen Charaktereigenschaften teilen. So kann man naiv die Beziehung zwischen einem entfernten Funktionsaufruf und der Middleware auch als eine 0:n- Beziehung beschreiben, wobei die Middleware  in diesem Fall eine generische Funktion für einen synchronen Funktionsaufruf repräsentiert. \\\\
+}
+\warningvs{
+Es ist wichtig zu verstehen, dass die Sequenz der Applikation aus einer spezifischen Verarbeitung des Anwendungsfalls getrieben ist, wohingegen die Sequenz der Middleware eine generische Umsetzung repräsentiert, die von jeglichem Aufruf aus der Applikation heraus genutzt werden kann, solange sie die gleichen Charaktereigenschaften teilen.
+}
+So kann man naiv die Beziehung zwischen einem entfernten Funktionsaufruf und der Middleware auch als eine 0:n- Beziehung beschreiben, wobei die Middleware  in diesem Fall eine generische Funktion für einen synchronen Funktionsaufruf repräsentiert. \\\\
 
 
  \begin{figure}[!ht]
@@ -2163,12 +2166,12 @@ Es ist wichtig zu verstehen, dass die Sequenz der Applikation aus einer spezifis
 \end{figure}
 
 Um die Middleware möglichst transparent und wiederverwendbar zu gestalten, soll der Marshalling-Prozess genauer betrachtet werden, der im Client-Stub und Server-Stub eine besondere Rolle spielt, bevor die Nachrichten für den entfernten Funktionsaufruf versendet werden. 
-\paragraph{Marshalling\\\\}
+\paragraph{Marshalling}\mbox{}\\
 Der Marshalling-Prozess und die Serialisierung sind Begriffe, die oft im Zusammenhang mit der Remote Procedure Call (RPC) Architektur verwendet werden. Beide Prozesse sind zwar miteinander verknüpft, es gibt jedoch grundlegende Unterschiede zwischen ihnen.
 \\\\
-Der Marshalling-Prozess ist ein Verfahren, bei dem Daten und Parameter in einer Form gewandelt werden, die über das Netzwerk gesendet und auf der anderen Seite wieder zusammengesetzt werden kann. Kurz: aus einem Funktionsaufruf wird eine Nachricht generiert. Dieser Prozess ist in der RPC-Architektur besonders wichtig, da hierdurch entfernte Prozeduraufrufe zwischen verschiedenen Systemen mit unterschiedlichen Datenformaten, Speicherlayouts oder sogar Programmiersprachen umgesetzt werden können.
+Der \textbf{Marshalling-Prozess} ist ein Verfahren, bei dem Daten und Parameter in einer Form gewandelt werden, die über das Netzwerk gesendet und auf der anderen Seite wieder zusammengesetzt werden kann. Kurz: aus einem Funktionsaufruf wird eine Nachricht generiert. Dieser Prozess ist in der RPC-Architektur besonders wichtig, da hierdurch entfernte Prozeduraufrufe zwischen verschiedenen Systemen mit unterschiedlichen Datenformaten, Speicherlayouts oder sogar Programmiersprachen umgesetzt werden können.
 \importantvs{
-Der Marshalling-Prozess besteht aus mehreren Schritten:
+Der \textbf{Marshalling-Prozess} besteht aus mehreren Schritten:
 \begin{itemize} 
 \item Umwandlung der Daten und Parameter in ein plattformunabhängiges Format, oft in Form von Byte-Arrays.
 \item Anfügen von Metadaten, wie zum Beispiel Typinformationen, um den Empfänger darüber zu informieren, wie die Daten wiederhergestellt werden können.
@@ -2176,12 +2179,14 @@ Der Marshalling-Prozess besteht aus mehreren Schritten:
 \end{itemize} 
 }
 \examplevs{
+\paragraph{Serialisierung}\mbox{}\\
 Die Serialisierung ist der Prozess der Umwandlung eines Objekts oder einer Datenstruktur in eine lineare, sequenzielle Darstellung, die zum Speichern oder Übertragen über ein Netzwerk verwendet werden kann. Serialisierung ist ein wichtiger Teil des Marshalling-Prozesses, da sie die Daten in eine übertragbare Form konvertiert. Sie ermöglicht es, den Zustand eines Objekts oder einer Datenstruktur zu erhalten, sodass es auf der Empfängerseite wiederhergestellt und verwendet werden kann. Unterschiede zwischen Marshalling und Serialisierung:
 \begin{itemize} 
 \item Anwendungsbereich: Serialisierung ist ein generischer Prozess, der nicht nur in der RPC-Architektur, sondern auch in anderen Anwendungen wie der persistenten Speicherung von Objekten und der Interprozesskommunikation verwendet wird. Marshalling ist spezifisch für die RPC-Architektur und bezieht sich auf das Vorbereiten von Daten und Parametern für entfernte Prozeduraufrufe.
 \item Metadaten: Marshalling beinhaltet das Hinzufügen von Metadaten, die zur Interpretation und Rekonstruktion der übertragenen Daten auf der Empfängerseite erforderlich sind. Bei der Serialisierung werden hauptsächlich die Daten selbst in eine sequenzielle Darstellung umgewandelt, ohne notwendigerweise zusätzliche Metadaten hinzuzufügen.
 \end{itemize} 
 }
+
 Im Weiteren soll ein Beispiel für einen Marshalling-Prozess ausgearbeitet werden. Angenommen, es gibt zwei Systeme A und B, die unterschiedliche Programmiersprachen und Datenformate verwenden. System A möchte eine Funktion auf System B aufrufen, die zwei Parameter akzeptiert: einen String und einen Integer. 
 
 Der Marshalling-Prozess auf System A würde wie folgt aussehen:
@@ -2191,7 +2196,8 @@ Der Marshalling-Prozess auf System A würde wie folgt aussehen:
 \item Zusammenpacken der Byte-Arrays und Metadaten in einer Nachricht, die über das Netzwerk gesendet werden kann
 \end{itemize} 
 
-Das Ziel, den Marshalling Process möglich generisch zu gestallten, ist in dem Prinzip \enquote{Copy in, Copy out} zusammengefasst. Der Begriff \enquote{Copy in, Copy out} (auch als \enquote{Call by Value-Result} bezeichnet) ist eine Semantik zur Übergabe von Parametern bei entfernten Prozeduraufrufen (RPCs) oder in Programmiersprachen. Es beschreibt die Art und Weise, wie Daten und Parameter zwischen dem aufrufenden und dem aufgerufenen System übertragen werden. Hier ist das grundlegende Prinzip von \enquote{Copy in, Copy out}:
+\paragraph{Copy in, Copy out}\mbox{}\\
+Das Ziel, den Marshalling-Prozess möglich generisch zu gestallten, ist in dem Prinzip \enquote{Copy in, Copy out} gut repräsentiert. Der Begriff \enquote{Copy in, Copy out} (auch als \enquote{Call by Value-Result} bezeichnet) ist eine Semantik zur Übergabe von Parametern bei entfernten Prozeduraufrufen (RPCs) oder in Programmiersprachen. Es beschreibt die Art und Weise, wie Daten und Parameter zwischen dem aufrufenden und dem aufgerufenen System übertragen werden. Hier ist das grundlegende Prinzip von \enquote{Copy in, Copy out}:
 \begin{itemize} 
 \item \textbf{Copy in}: Beim Aufruf einer entfernten Funktion kopiert das aufrufende System die Werte der Parameter in eine Nachricht, die an das aufgerufene System gesendet wird. Dieser Schritt beinhaltet den Marshalling-Prozess, bei dem die Parameter in ein plattformunabhängiges Format konvertiert und Metadaten hinzugefügt werden.
 \item \textbf{Copy out}: Nachdem die entfernte Funktion auf dem aufgerufenen System ausgeführt wurde, werden die Ergebnisse (Rückgabewerte oder geänderte Parameter) zurück zum aufrufenden System gesendet. Der Rückgabewert und die geänderten Parameter durchlaufen den Marshalling-Prozess erneut, um sie in eine übertragbare Form zu bringen. Anschließend kopiert das aufrufende System die empfangenen Daten in die ursprünglichen Variablen oder Speicherbereiche.
@@ -2226,8 +2232,14 @@ Ein Code-Generator für Interface Definition Language ist ein Software-Tool, das
 \begin{itemize} 
 \item Analyse der IDL-Datei: Der Code-Generator liest und analysiert die IDL-Datei, die die Schnittstellendefinitionen, Funktionen, Datenstrukturen und Datentypen enthält, die für die Kommunikation zwischen den verschiedenen Komponenten eines verteilten Systems benötigt werden.
 \item Parsen der IDL-Datei: Der Code-Generator verwendet einen Parser, um die IDL-Datei in einen abstrakten Syntaxbaum (AST) oder ein ähnliches internes Format zu zerlegen, dass leichter für die Codegenerierung verwendet werden kann.
+
 \item Code-Generierung: Basierend auf dem internen Format erstellt der Code-Generator automatisch den notwendigen Client- und Server-Code für die Kommunikation über das verteilte System. Dies kann Stub- und Skeleton-Code für verschiedene Programmiersprachen umfassen, die für den Remote Procedure Call verwendet werden.
+
 \item Sprachspezifische Anpassungen: Der Code-Generator berücksichtigt die Besonderheiten der jeweiligen Zielsprache, um sicherzustellen, dass der generierte Code den Konventionen und Syntaxanforderungen dieser Sprache entspricht. Dies umfasst die Anpassung von Datentypen, Namenskonventionen und anderen sprachspezifischen Details.
+\end{itemize} 
+}
+\examplevs{
+\begin{itemize} 
 \item Code-Ausgabe: Schließlich gibt der Code-Generator den erstellten Code als Dateien aus, die in das Zielsystem integriert werden können. Dies ermöglicht Entwicklern, die generierten Stubs und Skeletons in ihrem Projekt zu verwenden, um die definierten Schnittstellen über RPC aufzurufen oder bereitzustellen.
 \end{itemize} 
 }
@@ -2265,9 +2277,10 @@ In diesem Beispiel erstellen wir eine Instanz des MathServiceStub, der als Clien
 
 Durch die korrekte Bestimmung der Datentypen und die Verwendung von IDL, Stub und Skeleton wird sichergestellt, dass die \enquote{Copy in, Copy out}-Semantik korrekt angewendet wird und die Kommunikation zwischen dem aufrufenden und dem aufgerufenen System erfolgreich ist. Zudem kann man sich durch gute Code Generatoren viel Arbeit ersparen. 
 
+
 RPC-Lösungen wie XML-RPC und gRPC arbeiten auch nach dem \enquote{Copy in, Copy out}-Prinzip und nutzen die Marshalling/Unmarshalling-Techniken, um Daten zwischen den aufrufenden und aufgerufenen Systemen zu übertragen. 
 
-XML-RPC ist eine RPC-Technik, die XML für die Kodierung von Daten und HTTP für die Datenübertragung verwendet. In diesem Beispiel implementieren wir einen einfachen Additionsdienst:\\\\
+XML-RPC ist eine RPC-Technik, die XML für die Kodierung von Daten und HTTP für die Datenübertragung verwendet. In diesem Beispiel implementieren wir einen einfachen Additionsdienst:
 
 \noindent\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={XML-RPC in Python},captionpos=b,label={lst:xmp-rpc-python}]
@@ -2284,67 +2297,68 @@ server.serve_forever()
 
 In diesem Beispiel ist die \enquote{add}-Funktion auf dem Server registriert. Der Client verwendet einen Proxy, um die entfernte Funktion aufzurufen. Die Parameter (5 und 7) werden automatisch in XML kodiert (gemarshalled), und die Anfrage wird über HTTP an den Server gesendet. Der Server führt die Funktion aus und sendet das Ergebnis (12) zurück, das wiederum vom Client automatisch aus XML dekodiert (unmarshalled) wird.
 
-Als alternative zu XML-RPC kann auch gRPC betrachtet werden. gRPC ist eine moderne, leistungsfähige RPC-Implementierung, die auf Protocol Buffers für die Datenkodierung und HTTP/2 für die Datenübertragung basiert. In diesem Beispiel implementieren wir denselben Additionsdienst wie im XML-RPC-Beispiel:
 
-Zuerst definieren wir die Schnittstelle in einer Protocol Buffers IDL-Datei: \\\\
+%Als alternative zu XML-RPC kann auch gRPC betrachtet werden. gRPC ist eine moderne, leistungsfähige RPC-Implementierung, die auf Protocol Buffers für die Datenkodierung und HTTP/2 für die Datenübertragung basiert. In diesem Beispiel implementieren wir denselben Additionsdienst wie im XML-RPC-Beispiel:
 
-\noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={gRPC IDL},captionpos=b,label={lst:grpc-idl}]
-syntax = "proto3";
+%Zuerst definieren wir die Schnittstelle in einer Protocol Buffers IDL-Datei: \\\\
 
-service MathService {
-  rpc Add(AddRequest) returns (AddResponse);
-}
+%\noindent\begin{minipage}{\textwidth}
+%\begin{lstlisting}[caption={gRPC IDL},captionpos=b,label={lst:grpc-idl}]
+%syntax = "proto3";
 
-message AddRequest {
-  int32 a = 1;
-  int32 b = 2;
-}
+%service MathService {
+%  rpc Add(AddRequest) returns (AddResponse);
+%}
 
-message AddResponse {
-  int32 result = 1;
-}
-\end{lstlisting}
-\end{minipage}
+%message AddRequest {
+%  int32 a = 1;
+%  int32 b = 2;
+%}
 
-Weiter braucht es noch eine Implementierung der serverseitigen Funktion:\\\\
+%message AddResponse {
+%  int32 result = 1;
+%}
+%\end{lstlisting}
+%\end{minipage}
 
-\noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={gRPC Server Python},captionpos=b,label={lst:grpc-server}]
-import grpc
-from concurrent import futures
-import math_service_pb2
-import math_service_pb2_grpc
+%Weiter braucht es noch eine Implementierung der serverseitigen Funktion:\\\\
 
-class MathServiceImpl(math_service_pb2_grpc.MathServiceServicer):
-    def Add(self, request, context):
-        return math_service_pb2.AddResponse(result=request.a + request.b)
+%\noindent\begin{minipage}{\textwidth}
+%\begin{lstlisting}[caption={gRPC Server Python},captionpos=b,label={lst:grpc-server}]
+%import grpc
+%from concurrent import futures
+%import math_service_pb2
+%import math_service_pb2_grpc
 
-server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-math_service_pb2_grpc.add_MathServiceServicer_to_server(MathServiceImpl(), server)
-server.add_insecure_port("[::]:8080")
-server.start()
-server.wait_for_termination()
-\end{lstlisting}
-\end{minipage}
+%class MathServiceImpl(math_service_pb2_grpc.MathServiceServicer):
+%    def Add(self, request, context):
+%        return math_service_pb2.AddResponse(result=request.a + request.b)
 
-\noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={gRPC Client Python},captionpos=b,label={lst:grpc-client}]
-import grpc
-import math_service_pb2
-import math_service_pb2_grpc
+%server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+%math_service_pb2_grpc.add_MathServiceServicer_to_server(MathServiceImpl(), server)
+%server.add_insecure_port("[::]:8080")
+%server.start()
+%server.wait_for_termination()
+%\end{lstlisting}
+%\end{minipage}
 
-channel = grpc.insecure_channel("localhost:8080")
-stub = math_service_pb2_grpc.MathServiceStub(channel)
-request = math_service_pb2.AddRequest(a=5, b=7)
-response = stub.Add(request)
-print("Result of 5 + 7:", response.result)
-\end{lstlisting}
-\end{minipage}
-In diesem gRPC-Beispiel wird die Schnittstelle in einer Protocol Buffers IDL-Datei definiert. Der Server implementiert die Add-Funktion und registriert sie im gRPC-Server. Der Client erstellt einen Stub, um die entfernte Funktion aufzurufen. Die Anfrage- und Antwortdaten werden automatisch in Protocol Buffers kodiert (gemarshalled) und dekodiert (unmarshalled).
-\\\\
-In beiden Beispielen (XML-RPC und gRPC) arbeiten die Lösungen nach dem \enquote{Copy in, Copy out}-Prinzip.
-\\\\
+%\noindent\begin{minipage}{\textwidth}
+%\begin{lstlisting}[caption={gRPC Client Python},captionpos=b,label={lst:grpc-client}]
+%import grpc
+%import math_service_pb2
+%import math_service_pb2_grpc
+
+%channel = grpc.insecure_channel("localhost:8080")
+%stub = math_service_pb2_grpc.MathServiceStub(channel)
+%request = math_service_pb2.AddRequest(a=5, b=7)
+%response = stub.Add(request)
+%print("Result of 5 + 7:", response.result)
+%\end{lstlisting}
+%\end{minipage}
+%In diesem gRPC-Beispiel wird die Schnittstelle in einer Protocol Buffers IDL-Datei definiert. Der Server implementiert die Add-Funktion und registriert sie im gRPC-Server. Der Client erstellt einen Stub, um die entfernte Funktion aufzurufen. Die Anfrage- und Antwortdaten werden automatisch in Protocol Buffers kodiert (gemarshalled) und dekodiert (unmarshalled).
+
+%In beiden Beispielen (XML-RPC und gRPC) arbeiten die Lösungen nach dem \enquote{Copy in, Copy out}-Prinzip.
+\paragraph{ Skeleton, Server-Stub und Server-Proxy }\mbox{}\\
 In der RPC (Remote Procedure Call) Terminologie beziehen sich die Begriffe Skeleton, Server-Stub und Server-Proxy auf verschiedene Aspekte der serverseitigen Implementierung, die in der Kommunikation zwischen Client und Server verwendet werden. 
 
 \begin{itemize} 
@@ -2360,85 +2374,86 @@ Bevor das Kapitel um RPC abgeschlossen wird, soll nochmal ein verwandtes Thema z
 \item Kommunikationsprotokoll: RPC verwendet in der Regel ein standardisiertes Protokoll wie HTTP, gRPC oder XML-RPC, um Anfragen und Antworten über das Netzwerk zu übertragen. RMI verwendet häufig properitäte Protokolle, wie das Java-RMI-Protokoll. Das Java-RMI-Protokoll basiert auf der Java-RMI-Wire-Protocol-Spezifikation  und ist speziell für die Übertragung von Java-Objekten entwickelt worden.
 \end{itemize} 
 
-\paragraph{Java RMI Beispiel}\mbox{}\\
-Hier ist ein einfaches Java RMI-Beispiel, das einen Additionsdienst bereitstellt. Dieses Beispiel besteht aus zwei Teilen: dem Server und dem Client. Das gegebene Java RMI-Beispiel demonstriert, wie man einen  entfernten Dienst erstellt, der zwei Zahlen addiert. Hier ist der Hintergrund und die Erklärung für die verschiedenen Teile des Beispiels:
-\\\\
-Das Remote-Interface definiert die Methoden, die von entfernten Clients aufgerufen werden können. In diesem Fall gibt es eine einzige Methode add, die zwei Ganzzahlen als Parameter akzeptiert und ihre Summe als Ergebnis zurückgibt. Das Interface erweitert java.rmi.Remote, was erforderlich ist, um ein Interface als RMI-fähig zu kennzeichnen.\\\\
+%\paragraph{Java RMI Beispiel}\mbox{}\\
+%Hier ist ein einfaches Java RMI-Beispiel, das einen Additionsdienst bereitstellt. Dieses Beispiel besteht aus zwei Teilen: dem Server und dem Client. Das gegebene Java RMI-Beispiel demonstriert, wie man einen  entfernten Dienst erstellt, der zwei Zahlen addiert. Hier ist der Hintergrund und die Erklärung für die verschiedenen Teile des Beispiels:
+%\\\\
+%Das Remote-Interface definiert die Methoden, die von entfernten Clients aufgerufen werden können. In diesem Fall gibt es eine einzige Methode add, die zwei Ganzzahlen als Parameter akzeptiert und ihre Summe als Ergebnis zurückgibt. Das Interface erweitert java.rmi.Remote, was erforderlich ist, um ein Interface als RMI-fähig zu kennzeichnen.\\\\
 
-\noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={Remote-Interface (Calculator.java)},captionpos=b,label={lst:rmi-serverI}]
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+%\noindent\begin{minipage}{\textwidth}
+%\begin{lstlisting}[caption={Remote-Interface (Calculator.java)},captionpos=b,label={lst:rmi-serverI}]
+%import java.rmi.Remote;
+%import java.rmi.RemoteException;
 
-public interface Calculator extends Remote {
-    int add(int x, int y) throws RemoteException;
-}
-\end{lstlisting}
-\end{minipage}
-Implementierung des Remote-Interfaces (CalculatorImpl.java):
-Die CalculatorImpl-Klasse implementiert das Calculator-Interface und erweitert UnicastRemoteObject. Durch das Erweitern von UnicastRemoteObject wird die Implementierung automatisch exportiert, sodass sie von entfernten Clients aufgerufen werden kann.\\\\
+%public interface Calculator extends Remote {
+%    int add(int x, int y) throws RemoteException;
+%}
+%\end{lstlisting}
+%\end{minipage}
+%Implementierung des Remote-Interfaces (CalculatorImpl.java):
+%Die CalculatorImpl-Klasse implementiert das Calculator-Interface und erweitert UnicastRemoteObject. Durch das Erweitern von UnicastRemoteObject wird die Implementierung automatisch exportiert, sodass sie von entfernten Clients aufgerufen werden kann.\\\\
 
-\noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={Remote-Interface Implementierung (CalculatorImpl.java.java)},captionpos=b,label={lst:rmi-serverII}]
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+%\noindent\begin{minipage}{\textwidth}
+%\begin{lstlisting}[caption={Remote-Interface Implementierung (CalculatorImpl.java.java)},captionpos=b,label={lst:rmi-serverII}]
+%import java.rmi.RemoteException;
+%import java.rmi.server.UnicastRemoteObject;
 
-public class CalculatorImpl extends UnicastRemoteObject implements Calculator {
-    public CalculatorImpl() throws RemoteException {
-    }
+%public class CalculatorImpl extends UnicastRemoteObject implements Calculator {
+%    public CalculatorImpl() throws RemoteException {
+%    }
 
-    @Override
-    public int add(int x, int y) throws RemoteException {
-        return x + y;
-    }
-}
-\end{lstlisting}
-\end{minipage}
-Der RMI-Server ist für die Registrierung und Bereitstellung des entfernten Dienstes verantwortlich. Im Beispiel wird eine CalculatorImpl-Instanz erstellt, und die RMI-Registry wird gestartet, um den Dienst unter dem Namen \enquote{CalculatorService} zu veröffentlichen. Der Server wartet dann auf eingehende Client-Anfragen.
+%    @Override
+%    public int add(int x, int y) throws RemoteException {
+%        return x + y;
+%    }
+%}
+%\end{lstlisting}
+%\end{minipage}
+%Der RMI-Server ist für die Registrierung und Bereitstellung des entfernten Dienstes verantwortlich. Im Beispiel wird eine CalculatorImpl-Instanz erstellt, und die RMI-Registry wird gestartet, um den Dienst unter dem Namen \enquote{CalculatorService} zu veröffentlichen. Der Server wartet dann auf eingehende Client-Anfragen.
 
-\noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={ RMI-Server (RMIServer.java)},captionpos=b,label={lst:rmi-serverIII}]
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+%\noindent\begin{minipage}{\textwidth}
+%\begin{lstlisting}[caption={ RMI-Server (RMIServer.java)},captionpos=b,label={lst:rmi-serverIII}]
+%import java.rmi.registry.LocateRegistry;
+%import java.rmi.registry.Registry;
 
-public class RMIServer {
-    public static void main(String[] args) {
-        try {
-            CalculatorImpl calculator = new CalculatorImpl();
-            Registry registry = LocateRegistry.createRegistry(1099);
-            registry.rebind("CalculatorService", calculator);
-            System.out.println("CalculatorService is ready.");
-        } catch (Exception e) {
-            System.err.println("Server exception: " + e.toString());
-            e.printStackTrace();
-        }
-    }
-}
-\end{lstlisting}
-\end{minipage}
-Der RMI-Client ist für das Herstellen einer Verbindung zum RMI-Server und das Aufrufen der entfernten Methoden verantwortlich. Im Beispiel wird der Client zunächst mit der RMI-Registry verbunden und holt dann den \enquote{CalculatorService} aus der Registry. Anschließend wird die add-Methode auf dem Remote-Dienst aufgerufen, um zwei Zahlen zu addieren, und das Ergebnis wird auf der Konsole ausgegeben.\\\\
+%public class RMIServer {
+%    public static void main(String[] args) {
+%        try {
+%            CalculatorImpl calculator = new CalculatorImpl();
+%            Registry registry = LocateRegistry.createRegistry(1099);
+%            registry.rebind("CalculatorService", calculator);
+%            System.out.println("CalculatorService is ready.");
+%        } catch (Exception e) {
+%            System.err.println("Server exception: " + e.toString());
+%            e.printStackTrace();
+%        }
+%    }
+%}
+%\end{lstlisting}
+%\end{minipage}
+%Der RMI-Client ist für das Herstellen einer Verbindung zum RMI-Server und das Aufrufen der entfernten Methoden verantwortlich. Im Beispiel wird der Client zunächst mit der RMI-Registry verbunden und holt dann den \enquote{CalculatorService} aus der Registry. Anschließend wird die add-Methode auf dem Remote-Dienst aufgerufen, um zwei Zahlen zu addieren, und das Ergebnis wird auf der Konsole ausgegeben.\\\\
 
-Das Beispiel illustriert die grundlegende Funktionsweise von Java RMI in verteilten Systemen. Mit RMI können Entwickler entfernte Objekte und Methodenaufrufe so behandeln, als wären sie lokale Objekte und Methoden, was die Entwicklung von verteilten Anwendungen vereinfacht.\\\\
-\noindent\begin{minipage}{\textwidth}
-\begin{lstlisting}[caption={ RMI-Client (RMIClient.java)},captionpos=b,label={lst:rmi-serverIV}]
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+%Das Beispiel illustriert die grundlegende Funktionsweise von Java RMI in verteilten Systemen. Mit RMI können Entwickler entfernte Objekte und Methodenaufrufe so behandeln, als wären sie lokale Objekte und Methoden, was die Entwicklung von verteilten Anwendungen vereinfacht.\\\\
+%\noindent\begin{minipage}{\textwidth}
+%\begin{lstlisting}[caption={ RMI-Client (RMIClient.java)},captionpos=b,label={lst:rmi-serverIV}]
+%import java.rmi.registry.LocateRegistry;
+%import java.rmi.registry.Registry;
 
-public class RMIClient {
-    public static void main(String[] args) {
-        try {
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-            Calculator calculatorService = (Calculator) registry.lookup("CalculatorService");
-            int result = calculatorService.add(5, 3);
-            System.out.println("5 + 3 = " + result);
-        } catch (Exception e) {
-            System.err.println("Client exception: " + e.toString());
-            e.printStackTrace();
-        }
-    }
-}
-\end{lstlisting}
-\end{minipage}
+%public class RMIClient {
+%    public static void main(String[] args) {
+%        try {
+%            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+%            Calculator calculatorService = (Calculator) registry.lookup("CalculatorService");
+%            int result = calculatorService.add(5, 3);
+%            System.out.println("5 + 3 = " + result);
+%        } catch (Exception e) {
+%            System.err.println("Client exception: " + e.toString());
+%            e.printStackTrace();
+%        }
+%    }
+%}
+%\end{lstlisting}
+%\end{minipage}
+\newpage
 \subsubsection{P2P Chord}
 Die Peer-to-Peer (P2P) Chord-Architektur ist ein verteiltes Hashtabellen-System, das auf einem strukturierten Overlay-Netzwerk basiert und eine wichtige Rolle in verteilten Systemen spielt. Chord wurde erstmals 2001 von Ion Stoica, Robert Morris, David Karger, M. Frans Kaashoek und Hari Balakrishnan in ihrem wissenschaftlichen Artikel \enquote{Chord: A Scalable Peer-to-peer Lookup Service for Internet Applications} vorgestellt. Die Hauptziele der Chord-Architektur sind Skalierbarkeit, Fehlertoleranz, Lastverteilung und Dezentralisierung.
 \\\\
@@ -2448,17 +2463,17 @@ Struktur und Funktionsweise:
 \item \textbf{Key-Node Mapping}: Jeder Schlüssel wird dem Knoten zugewiesen, der seinem Identifier am nächsten ist. Dadurch kann jeder Knoten durch Hashing des Schlüssels leicht ermitteln, welchem Knoten eine bestimmte Ressource (z.B. Datei oder Service) zugeordnet ist.
 \item \textbf{Finger Tables}: Jeder Knoten im Chord-Netzwerk speichert eine sogenannte \enquote{Finger Table}, die Informationen über andere Knoten im Netzwerk enthält. Diese Tabelle ermöglicht effiziente und schnelle Routing-Operationen, da sie in jedem Schritt die Distanz zum Zielknoten mindestens halbiert. Die Finger Table enthält Verweise auf Knoten, die exponentiell weiter in der Größe entfernt sind, wodurch die Gesamtzahl der Schritte zur Lokalisierung eines Knotens logarithmisch zur Anzahl der Knoten im Netzwerk wird.
 \item \textbf{Lookup-Operationen}: Wenn ein Knoten eine Anfrage nach einem bestimmten Schlüssel erhält, kann er entweder direkt die zugeordnete Ressource bereitstellen, wenn der Schlüssel diesem Knoten zugewiesen ist, oder die Anfrage entlang der Finger Table an den nächstgelegenen bekannten Knoten weiterleiten. Dieser Vorgang wird wiederholt, bis der zuständige Knoten gefunden wird. Aufgrund der Struktur der Finger Table ist die Anzahl der benötigten Schritte logarithmisch zur Anzahl der Knoten im Netzwerk.
-\item Dynamik und Fehlertoleranz: Chord ist in der Lage, Knoten hinzuzufügen oder zu entfernen, ohne die Funktionsfähigkeit des gesamten Systems zu beeinträchtigen. Dazu werden die Finger Tables und die Key-Node-Zuordnungen entsprechend aktualisiert. Chord bietet auch Fehlertoleranz durch redundante Speicherung von Informationen und regelmäßige Aktualisierung der Finger Tables und Verweise zwischen Knoten.
+\item \textbf{Dynamik und Fehlertoleranz:} Chord ist in der Lage, Knoten hinzuzufügen oder zu entfernen, ohne die Funktionsfähigkeit des gesamten Systems zu beeinträchtigen. Dazu werden die Finger Tables und die Key-Node-Zuordnungen entsprechend aktualisiert. Chord bietet auch Fehlertoleranz durch redundante Speicherung von Informationen und regelmäßige Aktualisierung der Finger Tables und Verweise zwischen Knoten.
 \end{itemize} 
-
-Es existieren zahlreiche Beispiele für Anwendungen, die sämtliche Ideen der Chord Architektur aufnehmen oder auch nur teilweise implementieren. Die folgende Aufzählung ist bei weitem nicht umfassend und soll nur einen Eindruck über die Möglichkeiten vermitteln:
+\examplevs{
+\paragraph{Beispielanwendungen}\mbox{}\\
 \begin{itemize} 
 \item Dateifreigabe: Chord kann als Basis für verteilte Dateispeicherung und -freigabe verwendet werden, wie es in Systemen wie BitTorrent und anderen P2P-Filesharing-Plattformen der Fall ist. Benutzer können Dateien hochladen und herunterladen, ohne auf zentrale Server angewiesen zu sein, wodurch die Last und Abhängigkeiten verteilt werden.
 \item Distributed Domain Name System (DDNS): Chord kann zur Implementierung eines verteilten Domain Name Systems (DNS) eingesetzt werden, das die Zuordnung von Domainnamen zu IP-Adressen verwaltet. Durch die Verwendung von Chord wird das System dezentralisiert, wodurch es weniger anfällig für zentrale Angriffe oder Ausfälle ist.
 \item Content Distribution Networks (CDN): Chord kann zur effizienten Verwaltung und Verteilung von Inhalten in CDNs verwendet werden. Die Knoten speichern und verteilen dabei Teile der Inhalte, um den Zugriff auf diese Ressourcen zu beschleunigen und den Verkehr auf zentralisierten Servern zu reduzieren.
 \item Distributed Databases: Chord kann als Basis für verteilte Datenbanksysteme verwendet werden, bei denen die Daten und Anfragen auf mehrere Knoten verteilt werden, um die Lastverteilung zu verbessern und die Fehlertoleranz zu erhöhen.
 \end{itemize}     
-
+}
 Die P2P Chord-Architektur ist ein bedeutender Ansatz für verteilte Systeme, da sie Skalierbarkeit, Fehlertoleranz, Dezentralisierung und Lastverteilung ermöglicht.  Die Chord-Architektur hat die Art und Weise, wie verteilte Systeme entwickelt und implementiert werden, grundlegend verändert und ermöglicht den Aufbau von effizienten und robusten dezentralisierten Anwendungen, die in der Lage sind, mit den Anforderungen moderner Internetanwendungen und der ständig wachsenden Benutzerbasis Schritt zu halten. Chords Einfluss reicht weit über den Bereich der verteilten Systeme hinaus und hat auch dazu beigetragen, die Grundlagen für die Entwicklung von Blockchain-Technologien und dezentralisierten autonomen Organisationen (DAOs) zu legen, die auf ähnlichen Prinzipien der Dezentralisierung und Konsensfindung basieren.
 \\\\
 Um die Funktionsweie eines Chord-Netzes zu verdeutlichen, entwickeln wir im folgenden ein Beispiel mit 16 Schlüsselplätzen. Das Beispiel zeigt wie sich in einem Chord-Netzwerk Knoten (Nodes) auf die Schlüsselplätze aufteilen.
@@ -2480,7 +2495,7 @@ In diesem Beispiel sind die Knoten (Nodes) im Identifier-Raum wie folgt verteilt
   \label{fig:chord-lookup}
 \end{figure}
 Für das Auffinden der Nodes ohne Optimierung wie Fingertables ist nun eine lineare Suche über den Ring notwendig, der in der Graphik~\ref{fig:chord-lookup} beschrieben ist. Eine Suche (Lookup) für den Key 7 wird an dem Node 1 abgesetzt\footnote{Die Anfrage könnte auch an jeden anderen Knoten gestellt werden}. Node 1 ist nicht verantwortlich und leitet an Node 2 weiter, der sie schließlich an Node 3 weiterleitet. Node 3 ist für Key 7 zuständig und wird die angeforderte Ressource zurückgeben.
-\\\\
+\paragraph{Fingertable}\mbox{}\\
 Um den Suchaufwand zu reduzieren, kann zusätzlicher Aufwand für Strukturen betrieben werden, die wir als Fingertables bezeichnen. 
 Fingertables sind ein zentraler Bestandteil der Chord-Architektur, die eine effiziente und schnelle Suche nach Schlüsseln und Knoten im Netzwerk ermöglichen. In einem Chord-Netzwerk speichert jeder Knoten eine Fingertable, die Informationen über andere Knoten im Netzwerk enthält. Die Fingertable besteht aus mehreren Einträgen, wobei jeder Eintrag auf einen \enquote{Finger} im Chord-Ring verweist. Die Funktionsweise von Fingertables kann wie folgt beschrieben werden:
 \begin{itemize} 
