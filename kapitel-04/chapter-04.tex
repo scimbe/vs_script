@@ -13,31 +13,35 @@ Eine der Hauptanforderungen an die Koordination in verteilten Systemen ist die S
 Ein weiterer wichtiger Aspekt der Koordination ist die Einigung (Konsens). In verteilten Systemen müssen Knoten oft auf ein gemeinsames Ergebnis oder eine Entscheidung einigen. Dies kann beispielsweise bei der Wahl eines Leaders oder der Bestätigung einer Transaktion erforderlich sein. Es gibt verschiedene Konsensalgorithmen, wie zum Beispiel Paxos, oder Raft, die sicherstellen, dass ein solcher Konsens auch in Anwesenheit von Fehlern und Verzögerungen im System erreicht wird.
 
 Die Handhabung von Fehlern und Wiederherstellung ist ein weiterer entscheidender Aspekt der Koordination in verteilten Systemen. Knoten können aufgrund von Hardware-, Software- oder Netzwerkfehlern ausfallen, und das System muss in der Lage sein, solche Ausfälle zu erkennen und angemessen darauf zu reagieren. Wiederherstellungsstrategien wie Replikation, Sharding und Checkpointing helfen dabei, die Datenintegrität aufrechtzuerhalten und das System nach einem Ausfall wieder in einen konsistenten Zustand zu bringen.
-
+\examplevs{
 Eines der bekanntesten Beispiele für verteilte Systeme und ihre Koordination ist das Hadoop-Ökosystem. Hadoop ist ein Open-Source-Framework, das auf verteilten Systemen zum Speichern und Verarbeiten großer Datenmengen ausgelegt ist. Hadoop verwendet eine Master-Slave-Architektur, bei der der Hadoop Distributed File System (HDFS) NameNode die Metadaten speichert und die DataNodes die eigentlichen Daten speichern und verarbeiten. Koordination wird durch den YARN (Yet Another Resource Negotiator) erreicht, der als Cluster-Ressourcenmanager fungiert und die Ressourcen effizient auf die verschiedenen Anwendungen verteilt. In verteilten Datenbanken müssen Transaktionen, die auf unterschiedlichen Knoten ausgeführt werden, koordiniert werden, um die ACID-Eigenschaften (Atomicity, Consistency, Isolation und Durability) sicherzustellen. Hierzu kommen Techniken wie Zwei-Phasen-Commit oder Three-Phasen-Commit zum Einsatz, die eine globale Einigung über das Ergebnis einer Transaktion ermöglichen und so die Datenintegrität gewährleisten.
-
+}
+\examplevs{
 In der Welt des Internets ist die Domain Name System (DNS)-Hierarchie ein weiteres Beispiel für ein verteiltes System, das Koordination erfordert. DNS ist ein hierarchisches und verteilt angelegtes System zur Zuordnung von Domainnamen zu IP-Adressen. Hierarchische Strukturen wie Root-, Top-Level- und Second-Level-Domain-Server arbeiten zusammen, um die Anfragen der Benutzer effizient aufzulösen und die korrekten IP-Adressen zurückzugeben.
-
+}
 Insgesamt ist die Koordination in verteilten Systemen eine komplexe und essenzielle Aufgabe, um die korrekte Funktion und Leistung des Systems sicherzustellen. 
 
 \subsection{Konsistenz}
 
 Konsistenz ist ein wichtiges Konzept in verteilten Systemen und bezieht sich darauf, wie Datenänderungen über verschiedene Knoten hinweg sichtbar sind. In einfachen Worten bedeutet Konsistenz, dass alle Knoten im verteilten System immer die gleiche Sicht auf die Daten haben sollten. Es gibt verschiedene Stufen der Konsistenz, von strikter Konsistenz bis hin zu schwacher oder sich annährende Konsistenz, je nach den Anforderungen der Anwendung und den zugrunde liegenden Mechanismen, die zur Gewährleistung der Konsistenz eingesetzt werden.
 
-\textbf{Strikte Konsistenz} ist das stärkste Konsistenzmodell, bei dem alle Knoten im verteilten System sofort die gleichen Daten sehen, sobald eine Änderung vorgenommen wurde. Das bedeutet, wenn ein Knoten eine Aktualisierung vornimmt, sind alle anderen Knoten sofort über diese Aktualisierung informiert, bevor sie weitere Lese- oder Schreiboperationen durchführen. In der Praxis ist es jedoch schwierig, strikte Konsistenz in verteilten Systemen zu erreichen, insbesondere aufgrund der physikalischen Begrenzungen der Informationsübertragung.
-
+\paragraph{Strikte Konsistenz}\mbox{}\\
+Strikte Konsistenz ist das stärkste Konsistenzmodell, bei dem alle Knoten im verteilten System sofort die gleichen Daten sehen, sobald eine Änderung vorgenommen wurde. Das bedeutet, wenn ein Knoten eine Aktualisierung vornimmt, sind alle anderen Knoten sofort über diese Aktualisierung informiert, bevor sie weitere Lese- oder Schreiboperationen durchführen. In der Praxis ist es jedoch schwierig, strikte Konsistenz in verteilten Systemen zu erreichen, insbesondere aufgrund der physikalischen Begrenzungen der Informationsübertragung.
+\examplevs{
 Licht ist das schnellste Medium, mit dem Informationen übertragen werden können, aber selbst Licht hat eine endliche Geschwindigkeit von etwa 299.792 Kilometern pro Sekunde (km/s) im Vakuum. Diese Geschwindigkeit begrenzt, wie schnell Informationen zwischen verschiedenen Knoten in einem verteilten System ausgetauscht werden können.
 
 Um zu zeigen, dass selbst Licht zu langsam ist, um strikte Konsistenz zu erreichen, betrachten wir ein hypothetisches verteiltes System mit zwei Knoten, die 3.000 Kilometer voneinander entfernt sind. Um die strikte Konsistenz aufrechtzuerhalten, müssen Informationen zwischen diesen Knoten sofort ausgetauscht werden, sobald eine Änderung vorgenommen wurde.
 
 Die minimale Zeit, die benötigt wird, um Informationen über diese Entfernung mit Lichtgeschwindigkeit zu übertragen, kann berechnet werden, indem man die Entfernung durch die Lichtgeschwindigkeit teilt:
+}
 \begin{lstlisting}[caption={Berechnung Lichtgeschwindigkeit},captionpos=b,label={lst:licht}]
 t = Distanz / Lichtgeschwindigkeit
 t = 3.000 km / 299.792 km/s
 t =  0,01 s
 \end{lstlisting}
+\examplevs{
 In diesem Beispiel würde es also mindestens 0,01 Sekunden dauern, um Informationen über die Datenaktualisierung zwischen den beiden Knoten auszutauschen. Dies ist eine Ewigkeit im Kontext einer Datenbankanwendung, in der wir Lokal in einem Takt von mehreren GHz auf diesen Daten Operationen ausführen. In dieser Zeit wäre das verteilte System inkonsistent, da der zweite Knoten noch keine Kenntnis von der Aktualisierung hätte. Daher ist es praktisch unmöglich, strikte Konsistenz in verteilten Systemen zu erreichen, selbst wenn die Informationsübertragung mit Lichtgeschwindigkeit stattfindet.
-
+}
 In realen verteilten Systemen sind Konsistenzmodelle wie sequentielle Konsistenz, kausale Konsistenz oder sich annährende Konsistenz häufiger anzutreffen, da sie ein ausgewogenes Verhältnis zwischen Leistung und Konsistenz bieten und besser mit den inhärenten Latenzen und Unwägbarkeiten in verteilten Systemen umgehen können.
 
 Neben physikalischen Größen hält aber bereits die Logik eine Herausforderung für die Konsistenz  bereit. 
@@ -53,32 +57,33 @@ Das CAP-Theorem, auch bekannt als Brewer's Theorem, ist ein fundamentales Prinzi
 Das CAP-Theorem impliziert, dass verteilte Systeme in der Praxis immer zwischen Konsistenz und Verfügbarkeit abwägen müssen, da Partitionstoleranz als grundlegende Anforderung für verteilte Systeme angesehen wird.
 
 Der Grund für diesen Trade-off liegt in den Unwägbarkeiten und Latenzen, die in verteilten Systemen vorhanden sind. Netzwerkpartitionen können aufgrund von Hardware-, Software- oder Konfigurationsfehlern auftreten. Wenn ein System auf strikte Konsistenz besteht, kann es während einer Netzwerkpartition nicht verfügbar sein, da es nicht möglich ist, alle Knoten zu synchronisieren, bis die Partition behoben ist. Andererseits, wenn ein System auf hohe Verfügbarkeit besteht, müssen Anfragen auch während einer Netzwerkpartition beantwortet werden, selbst wenn dies bedeutet, dass die Konsistenz beeinträchtigt wird.
-\\\\
+\examplevs{
 In realen Anwendungen ist der Trade-off zwischen Konsistenz und Verfügbarkeit häufig von den spezifischen Anforderungen der Anwendung abhängig. Zum Beispiel sind in einigen Anwendungen, wie Finanztransaktionssystemen, Konsistenz und Datenintegrität von größter Bedeutung. In solchen Fällen wäre ein System, das stärker auf Konsistenz ausgerichtet ist, wie beispielsweise ein System, das auf dem Paxos- oder Raft-Konsensalgorithmus basiert, besser geeignet.
 
 In anderen Anwendungen, wie beispielsweise sozialen Netzwerken oder Content-Delivery-Netzwerken, ist Verfügbarkeit möglicherweise wichtiger als strenge Konsistenz. In solchen Fällen können Systeme, die auf schwacher Konsistenz oder  sich annährende Konsistenz basieren, wie beispielsweise Amazon's Dynamo oder Apache Cassandra, besser geeignet sein, um den Anforderungen gerecht zu werden.
-
+}
 Insgesamt zeigt das CAP-Theorem die fundamentale Herausforderung bei der Gestaltung von verteilten Systemen auf und betont die Notwendigkeit, den Trade-off zwischen Konsistenz und Verfügbarkeit in Abhängigkeit von den spezifischen Anforderungen und Prioritäten der Anwendung sorgfältig abzuwägen.
 
 \subsection{Konsistenzmodell}
 
 Da verteilte Systeme immer häufiger in der modernen Computertechnik eingesetzt werden, ist es wichtig, fortgeschrittene Techniken und Ansätze zu entwickeln, um den Konsistenz-Verfügbarkeits-Trade-off effektiv zu bewältigen. Einige solcher Ansätze umfassen:
 \begin{itemize}
-\item Tunable Consistency: Eine Möglichkeit, den Konsistenz-Verfügbarkeits-Trade-off zu bewältigen, besteht darin, Systeme mit anpassbarer Konsistenz (tunable consistency) zu entwerfen. In solchen Systemen kann die Konsistenzstufe für verschiedene Teile der Anwendung oder sogar für verschiedene Anfragen dynamisch angepasst werden. Ein Beispiel hierfür ist Apache Cassandra, bei dem die Konsistenzstufe für Lese- und Schreiboperationen auf einer Per-Anfrage-Basis angepasst werden kann.
-\item Quorum-Systeme: Quorum-Systeme sind ein weiterer Ansatz zur Bewältigung des Konsistenz-Verfügbarkeits-Trade-offs. In einem Quorum-System wird die Mehrheit (oder ein festgelegter Prozentsatz) der Knoten benötigt, um eine Entscheidung zu treffen oder eine Operation durchzuführen. Dies ermöglicht eine gewisse Konsistenz und Verfügbarkeit, auch in Anwesenheit von Netzwerkpartitionen. Beispiele für Quorum-basierte Systeme sind Google Spanner und Amazon DynamoDB.
-\item CRDTs (Conflict-free Replicated Data Types): CRDTs sind spezielle Datenstrukturen, die entwickelt wurden, um in verteilten Systemen repliziert zu werden, ohne dass es zu Konflikten kommt. Sie ermöglichen das Zusammenführen von Updates aus verschiedenen Knoten, ohne dass ein zentraler Koordinator erforderlich ist. CRDTs können dazu beitragen, die Verfügbarkeit zu erhöhen, während sie gleichzeitig eine gewisse Konsistenz aufrechterhalten. Ein Beispiel für ein System, das CRDTs verwendet, ist Riak.
-\item Hybride Ansätze: In einigen Fällen kann es sinnvoll sein, hybride Ansätze zu verwenden, die verschiedene Konsistenzmodelle und Techniken kombinieren, um den Konsistenz-Verfügbarkeits-Trade-off effektiv zu bewältigen. Ein Beispiel hierfür ist das COPS-System (Clusters of Order-Preserving Servers), das eine Kombination aus sequentieller Konsistenz und eventual Konsistenz verwendet, um Daten über mehrere Rechenzentren hinweg zu replizieren.
+\item \textbf{Tunable Consistency:} Eine Möglichkeit, den Konsistenz-Verfügbarkeits-Trade-off zu bewältigen, besteht darin, Systeme mit anpassbarer Konsistenz (tunable consistency) zu entwerfen. In solchen Systemen kann die Konsistenzstufe für verschiedene Teile der Anwendung oder sogar für verschiedene Anfragen dynamisch angepasst werden. Ein Beispiel hierfür ist Apache Cassandra, bei dem die Konsistenzstufe für Lese- und Schreiboperationen auf einer Per-Anfrage-Basis angepasst werden kann.
+\item \textbf{Quorum-Systeme:} Quorum-Systeme sind ein weiterer Ansatz zur Bewältigung des Konsistenz-Verfügbarkeits-Trade-offs. In einem Quorum-System wird die Mehrheit (oder ein festgelegter Prozentsatz) der Knoten benötigt, um eine Entscheidung zu treffen oder eine Operation durchzuführen. Dies ermöglicht eine gewisse Konsistenz und Verfügbarkeit, auch in Anwesenheit von Netzwerkpartitionen. Beispiele für Quorum-basierte Systeme sind Google Spanner und Amazon DynamoDB.
+\item \textbf{CRDTs (Conflict-free Replicated Data Types):} CRDTs sind spezielle Datenstrukturen, die entwickelt wurden, um in verteilten Systemen repliziert zu werden, ohne dass es zu Konflikten kommt. Sie ermöglichen das Zusammenführen von Updates aus verschiedenen Knoten, ohne dass ein zentraler Koordinator erforderlich ist. CRDTs können dazu beitragen, die Verfügbarkeit zu erhöhen, während sie gleichzeitig eine gewisse Konsistenz aufrechterhalten. Ein Beispiel für ein System, das CRDTs verwendet, ist Riak.
+\item \textbf{Hybride Ansätze:} In einigen Fällen kann es sinnvoll sein, hybride Ansätze zu verwenden, die verschiedene Konsistenzmodelle und Techniken kombinieren, um den Konsistenz-Verfügbarkeits-Trade-off effektiv zu bewältigen. Ein Beispiel hierfür ist das COPS-System (Clusters of Order-Preserving Servers), das eine Kombination aus sequentieller Konsistenz und eventual Konsistenz verwendet, um Daten über mehrere Rechenzentren hinweg zu replizieren.
 \end{itemize}
+\warningvs{
 Mit welchen Mitteln man sich auch immer hilft, wichtig ist das/ein Konsistenzmodell zu verstehen, dass die Freiheitsgrade deutlich macht in dem man sich bewegen kann. Konsistenzmodelle beschreiben, wie ein verteiltes System den Zustand seiner Daten unter den verschiedenen Knoten synchronisiert und aufrechterhält. 
-\\\\
+}
 Es gibt verschiedene Konsistenzmodelle, wie jenes, das von Kyle Kingsbury entwickelt wurde. Das Modell ist allerdings  kein spezifisches Konsistenzmodell, sondern ein Framework zur Analyse und Validierung von verteilten Systemen hinsichtlich ihrer Datenkonsistenz- und Sicherheitseigenschaften, das verschiedene Modelle aufnimmt und sie ordnet. Diese Ordnung ist nicht standardisiert, so dass es in der Praxis Überlappungen und unterschiedliche Interpretationen geben kann. 
 \\\\
 In dieser Ausarbeitung konzentriert sich das Modellkonzept auf die Unterscheidung von datenzentrische Konsistenzmodelle und client-zentrische Konsistenzmodelle. datenzentrische Konsistenzmodelle konzentrieren sich darauf, wie verteilte Systeme den Zustand ihrer Daten unter den verschiedenen Knoten synchronisieren und aufrechterhalten. Sie beschreiben die Konsistenzanforderungen auf Systemebene und betreffen die Sichtbarkeit und Reihenfolge von Lese- und Schreiboperationen auf den Knoten.
 \\\\
 Client-zentrische Konsistenzmodelle hingegen legen den Fokus auf die Sichtbarkeit und Reihenfolge von Lese- und Schreiboperationen aus der Perspektive eines einzelnen Clients. Sie beschreiben, welche Garantien ein verteiltes System in Bezug auf die Konsistenz für einen bestimmten Client oder eine Gruppe von Clients bietet.
-\\\\
+\importantvs{
 Kurz gesagt, datenzentrische Konsistenzmodelle beziehen sich auf die Konsistenz auf der Ebene des verteilten Systems, während client-zentrische Konsistenzmodelle die Konsistenz aus der Perspektive der Clients betrachten. Zunächst konzentriert sich das Skript auf die datenzentrische Sicht. 
-
+}
 \subsection{Datenzentrische Konsistenzmodelle}
 Einige der datenzentrischen Konsistenzmodelle, die im Rahmen der Diskussion analysiert werden sollten, sind:
 \begin{itemize}
@@ -94,7 +99,7 @@ In diesem Skript wird versucht sich mit systematischen Methoden, insbesondere de
 \subsubsection{Atomare Konsistenz}
 
 Linearizability, auch als atomare Konsistenz bezeichnet oder manchmal mit starker (strong) Konsistenz gleichgesetzt, ist ein strenges Konsistenzmodell, bei dem jede Operation in einem verteilten System so aussieht, als ob sie sofort und in einer atomaren Weise auf alle Knoten im System angewendet wird. Linearizability stellt sicher, dass es eine globale Reihenfolge für alle Operationen gibt und dass diese Reihenfolge den Echtzeit-Verlauf der Operationen widerspiegelt.
-
+\examplevs{
 In der Praxis kann die Umsetzung von Linearizability in verteilten Systemen eine Herausforderung darstellen, da sie strenge Anforderungen an die Synchronisation und Kommunikation zwischen Knoten stellt. Hier sind einige Faktoren, die bei der praktischen Umsetzung von Linearizability berücksichtigt werden müssen:
 
 \begin{itemize}
@@ -102,18 +107,20 @@ In der Praxis kann die Umsetzung von Linearizability in verteilten Systemen eine
 \item Durchsatz: Die Anforderungen an die Synchronisation und Kommunikation zwischen Knoten, die für die Umsetzung von Linearizability erforderlich sind, können auch den Durchsatz des Systems beeinträchtigen, da Knoten möglicherweise auf die Bestätigung anderer Knoten warten müssen, bevor sie weitere Operationen durchführen können.
 \item Verfügbarkeit: In Anbetracht des CAP-Theorems kann die Umsetzung von Linearizability die Verfügbarkeit des Systems beeinträchtigen, insbesondere in Szenarien, in denen Netzwerkpartitionen auftreten.
 \end{itemize}
+}
+\paragraph{Zyklus-basiert}\mbox{}\\
 Um Linearizability in verteilten Systemen praktisch umzusetzen, werden häufig Konsensalgorithmen wie Paxos, Raft oder Zab verwendet. Diese Protokolle führen die Idee eines Zyklus ein, welches das System Synchronisiert und Konsens etabliert. Die Einhaltungen der Anforderungen im Zyklus können herausfordernd sein, und nicht alle Abweichungen im Verhalten können einer Lösung zugeführt werden. Dennoch, diese Algorithmen ermöglichen es den Knoten, sich auf eine gemeinsame Reihenfolge von Operationen zu einigen und sicherzustellen, dass die Linearizability-Anforderungen erfüllt sind. Diese Algorithmen werden im späteren Kapitel nochmals genauer betrachtet. Trotz der Herausforderungen bei der Umsetzung von Linearizability kann dieses Konsistenzmodell in bestimmten Anwendungsfällen, in denen Datenintegrität und Konsistenz von größter Bedeutung sind (z. B. in Finanztransaktionssystemen), von Vorteil sein. Dennoch müssen Systemarchitekten und Entwickler die Auswirkungen auf Latenz, Durchsatz und Verfügbarkeit sorgfältig abwägen und möglicherweise weniger strenge Konsistenzmodelle in Betracht ziehen, wenn die Anforderungen der Anwendung dies zulassen.
 
 \subsubsection{Sequentielle Konsistenz}
 Sequential Consistency, oder sequentielle Konsistenz, ist ein Konsistenzmodell, bei dem die Operationen zum Beispiel in einer verteilten Datenbank in einer Reihenfolge ausgeführt werden, die für alle Knoten gleich ist. Während die tatsächliche Synchronisation der Knoten verzögert auftreten kann, bleibt die Reihenfolge der Operationen über alle Knoten hinweg konsistent.
-\\\\
+\examplevs{
 Um dies zu veranschaulichen, betrachten wir ein verteiltes System mit drei Knoten A, B und C, das einen gemeinsamen Zähler speichert. Nehmen wir an, es gibt zwei Benutzer, Benutzer 1 und Benutzer 2, die gleichzeitig den Zähler inkrementieren möchten. Der anfängliche Wert des Zählers ist 0.
 
 Benutzer 1 sendet eine Inkrementanforderung an Knoten A, während Benutzer 2 eine Inkrementanforderung an Knoten B sendet. Da die beiden Anforderungen gleichzeitig erfolgen, ist die Reihenfolge der Operationen unklar. Um sequentielle Konsistenz zu gewährleisten, müssen alle Knoten jedoch eine gemeinsame Reihenfolge der Operationen einhalten.
 \\\\
 Angenommen, das verteilte System einigt sich darauf, dass die Operation von Benutzer 1 vor der Operation von Benutzer 2 ausgeführt wird. In diesem Fall müssen alle Knoten die Inkrementanforderung von Benutzer 1 zuerst verarbeiten und den Zähler auf 1 erhöhen. Anschließend verarbeiten sie die Inkrementanforderung von Benutzer 2 und erhöhen den Zähler auf 2.
 Diese Vereinbarung kann auf vielfältige Weise getroffen werden, wie zum Beispiel vordefiniert oder über ein Abstimmungsverhalten. 
-\\\\
+}
 Wichtig ist, dass die Reihenfolge der Operationen auf allen Knoten gleich ist, auch wenn die tatsächliche Synchronisation der Knoten verzögert erfolgen kann. Zum Beispiel kann Knoten C die Inkrementanforderungen von Benutzer 1 und Benutzer 2 etwas später als Knoten A und B erhalten. Solange Knoten C jedoch die Operationen in derselben Reihenfolge verarbeitet, wird die sequentielle Konsistenz eingehalten.
 \\\\
 Dieses Konsistenzmodell bietet eine ausgewogene Mischung aus Konsistenz und Leistung und wird häufig in verteilten Systemen verwendet, bei denen eine strikte oder kausale Konsistenz nicht unbedingt erforderlich ist.
@@ -121,7 +128,7 @@ Dieses Konsistenzmodell bietet eine ausgewogene Mischung aus Konsistenz und Leis
 
 \subsubsection{Kausale Konsistenz}
 Kausale Konsistenz ist ein Konsistenzmodell in verteilten Systemen, das darauf abzielt, die kausalen Beziehungen zwischen Operationen zu erhalten. Im Wesentlichen bedeutet dies, dass Operationen, die kausal voneinander abhängig sind, in der gleichen Reihenfolge auf allen Knoten im verteilten System ausgeführt werden müssen. Im Gegensatz dazu können Operationen, die keine kausale Beziehung zueinander haben, in unterschiedlicher Reihenfolge auf verschiedenen Knoten ausgeführt werden, ohne die Konsistenz zu beeinträchtigen.
-\\\\
+\examplevs{
 Ein praktisches Beispiel zur Veranschaulichung der kausalen Konsistenz wäre ein verteiltes soziales Netzwerk, bei dem Benutzer Nachrichten posten und auf Nachrichten anderer Benutzer antworten können. Die kausale Konsistenz stellt sicher, dass Antworten in der richtigen Reihenfolge angezeigt werden, bezogen auf die zugrunde liegenden Nachrichten.
 
 Betrachten Sie folgendes Szenario: Alice und Bob sind Benutzer des sozialen Netzwerks und haben Zugriff auf verschiedene Knoten des verteilten Systems. Alice postet eine Nachricht (Nachricht A) und Bob sieht diese Nachricht und antwortet darauf (Antwort B). In diesem Fall gibt es eine kausale Beziehung zwischen Nachricht A und Antwort B, da Antwort B eine direkte Reaktion auf Nachricht A ist.
@@ -129,9 +136,9 @@ Betrachten Sie folgendes Szenario: Alice und Bob sind Benutzer des sozialen Netz
 Da kausale Konsistenz die kausalen Beziehungen zwischen Operationen erhalten muss, muss Antwort B in der richtigen Reihenfolge nach Nachricht A auf allen Knoten im verteilten System angezeigt werden. Unabhängig von der tatsächlichen Zeit, zu der die Knoten die Informationen über die Nachricht A und Antwort B erhalten, stellt die kausale Konsistenz sicher, dass die Antwort B niemals vor der Nachricht A angezeigt wird.
 
 Angenommen, ein anderer Benutzer, Carol, postet währenddessen eine unabhängige Nachricht (Nachricht C), die keine Beziehung zu den Nachrichten von Alice oder Bob hat. Da es keine kausale Beziehung zwischen Nachricht C und den anderen Nachrichten gibt, kann Nachricht C in einer beliebigen Reihenfolge in Bezug auf Nachricht A und Antwort B auf verschiedenen Knoten erscheinen, ohne die kausale Konsistenz zu beeinträchtigen.
-\\\\
+
 In diesem Beispiel haben wir gesehen, wie kausale Konsistenz dazu beiträgt, die kausalen Beziehungen zwischen Operationen in verteilten Systemen zu erhalten, indem sie sicherstellt, dass kausal abhängige Operationen in der richtigen Reihenfolge auf allen Knoten ausgeführt werden. Kausale Konsistenz ist besonders nützlich in Anwendungen, bei denen die zeitliche Abfolge von Ereignissen wichtig ist, wie beispielsweise in sozialen Netzwerken, Foren oder Kommunikationssystemen.
-\\\\
+}
 Kausale Konsistenz bietet eine nützliche Balance zwischen Leistung und Konsistenz in verteilten Systemen, indem sie eine natürliche Ordnung für kausal verwandte Operationen aufrechterhält, ohne die Systemleistung übermäßig zu beeinträchtigen. Um kausale Konsistenz in der Praxis umzusetzen, werden häufig Vektoruhren oder andere Techniken zur Erfassung von kausalen Beziehungen eingesetzt.
 
 Ein weiterer Ansatz zur Implementierung kausaler Konsistenz ist die Verwendung von Version Vektoren. Sie ähneln Vektoruhren, erfassen jedoch die Versionen von Objekten anstelle von Ereignissen. Version Vektoren ermöglichen es, Konflikte zwischen kausalen Versionen von Objekten zu erkennen und aufzulösen.
@@ -142,13 +149,13 @@ Eventual Consistency ist ein Konsistenzmodell für verteilte Systeme, bei dem di
 In einem verteilten System, das Eventual Consistency implementiert, kann es vorkommen, dass verschiedene Knoten unterschiedliche Versionen von Daten haben, insbesondere wenn gleichzeitige Updates stattfinden oder die Kommunikation zwischen den Knoten verzögert ist. Im Laufe der Zeit werden jedoch die Knoten die Updates replizieren und die Daten synchronisieren, bis alle Knoten eine konsistente Ansicht der Daten haben.
 
 Ein praktisches Beispiel für Eventual Consistency ist das Amazon DynamoDB-System, ein hochverfügbarer und skalierbarer NoSQL-Datenbankservice. Amazon DynamoDB verwendet Eventual Consistency, um eine hohe Verfügbarkeit und Leistung zu gewährleisten, selbst wenn das System über mehrere Rechenzentren und geografische Standorte verteilt ist.
-
+\examplevs{
 Angenommen, ein E-Commerce-Unternehmen verwendet Amazon DynamoDB, um die Bestandsinformationen für seine Produkte zu verwalten. Wenn ein Kunde eine Bestellung aufgibt und ein Produkt kauft, wird der Bestand des Produkts in DynamoDB aktualisiert. Aufgrund der Eventual Consistency kann es jedoch vorkommen, dass verschiedene Knoten im DynamoDB-System unterschiedliche Bestandszahlen für das Produkt haben, während die Updates repliziert werden.
 
 Ein weiterer Kunde, der zur gleichen Zeit die Produktseite besucht, sieht möglicherweise die alte Bestandszahl, die noch nicht aktualisiert wurde. Im Laufe der Zeit wird jedoch das Update auf alle Knoten im System repliziert, und alle Kunden werden schließlich die korrekte und konsistente Bestandszahl sehen.
 
 Dieses Beispiel verdeutlicht das Konzept der Eventual Consistency, bei dem verteilte Systeme vorübergehende Inkonsistenzen zulassen, um eine höhere Verfügbarkeit und Skalierbarkeit zu erzielen, und schließlich eine konsistente Ansicht der Daten erreichen, wenn keine weiteren Updates mehr erfolgen.
-
+}
 Eventual Consistency ist für Entwickler von großer Bedeutung, insbesondere wenn sie verteilte Systeme oder Anwendungen mit hohen Verfügbarkeits- und Skalierbarkeitsanforderungen entwerfen. Die Implementierung von Eventual Consistency in einer Anwendung kann dazu beitragen, einige Herausforderungen im Zusammenhang mit verteilten Systemen zu bewältigen.
 
 
@@ -158,27 +165,27 @@ Client-zentrische Konsistenzmodelle sind eine Kategorie von Konsistenzmodellen i
 \subsubsection{Monotonic Reads}
 
 Monotonic Reads ist ein client-zentrisches Konsistenzmodell, das die Konsistenz der Daten aus der Perspektive eines Clients oder Benutzers gewährleistet. Bei Monotonic Reads erhält ein Client, der wiederholt Lesevorgänge auf einem verteilten System ausführt, niemals ältere Daten als die, die er zuvor gelesen hat. Sobald ein Client eine bestimmte Version der Daten gelesen hat, werden alle nachfolgenden Lesevorgänge des Clients Daten liefern, die gleich oder neuer als die zuvor gelesene Version sind. Dieses Modell verhindert, dass ein Client Inkonsistenzen aufgrund von veralteten Daten bemerkt.
-
+\examplevs{
 Ein konkretes Beispiel für Monotonic Reads ist ein verteiltes E-Commerce-System, bei dem Benutzer den Lagerbestand von Artikeln abfragen können. Angenommen, ein Benutzer fragt den Lagerbestand eines bestimmten Artikels ab und erhält die Antwort, dass 10 Einheiten auf Lager sind. Kurz darauf wird der Lagerbestand aufgrund einer neuen Lieferung auf 15 Einheiten erhöht. Wenn der Benutzer später erneut den Lagerbestand abfragt, sollte das System nach dem Monotonic Reads-Prinzip sicherstellen, dass der Benutzer mindestens 15 Einheiten als Antwort erhält und nicht die ältere Information von 10 Einheiten, die er zuvor gesehen hat.
-
+}
 In der Praxis kann die Umsetzung von Monotonic Reads in einem verteilten System verschiedene Ansätze erfordern, abhängig von der Architektur und den Anforderungen des Systems. Eine mögliche Methode zur Implementierung von Monotonic Reads besteht darin, einen Zeitstempel oder eine Versionsnummer für jeden Datensatz zu speichern, die bei jeder Aktualisierung des Datensatzes erhöht wird. Wenn ein Client eine Leseanfrage stellt, kann das System den Zeitstempel oder die Versionsnummer der zuletzt gelesenen Version speichern und sicherstellen, dass alle nachfolgenden Leseanfragen nur Daten zurückgeben, die gleich oder neuer als dieser Zeitstempel oder diese Versionsnummer sind.
-
-Ein praktischer Einsatz von Monotonic Reads könnte beispielsweise in einem verteilten Datenbanksystem oder einer Anwendung zur Verwaltung verteilter Dateisysteme erfolgen. In solchen Systemen ist es wichtig, dass Clients eine konsistente Ansicht der Daten erhalten, um Inkonsistenzen oder Verwirrung bei den Benutzern zu vermeiden. Durch die Implementierung von Monotonic Reads kann das System sicherstellen, dass die Benutzer immer eine konsistente und fortschreitende Ansicht der Daten erhalten, selbst wenn das System selbst mit Replikations- oder Synchronisationsherausforderungen konfrontiert ist.
-
+\examplevs{
+Ein weiterer praktischer Einsatz von Monotonic Reads könnte beispielsweise in einem verteilten Datenbanksystem oder einer Anwendung zur Verwaltung verteilter Dateisysteme erfolgen. In solchen Systemen ist es wichtig, dass Clients eine konsistente Ansicht der Daten erhalten, um Inkonsistenzen oder Verwirrung bei den Benutzern zu vermeiden. Durch die Implementierung von Monotonic Reads kann das System sicherstellen, dass die Benutzer immer eine konsistente und fortschreitende Ansicht der Daten erhalten, selbst wenn das System selbst mit Replikations- oder Synchronisationsherausforderungen konfrontiert ist.
+}
 \subsubsection{Monotonic Writes}
 
 Monotonic Writes ist ein client-zentrisches Konsistenzmodell, das darauf abzielt, die Konsistenz der Daten aus der Perspektive eines Clients oder Benutzers zu gewährleisten, indem sichergestellt wird, dass die Schreibvorgänge eines Clients in der Reihenfolge ausgeführt werden, in der sie vom Client eingereicht wurden. Im Gegensatz zu Monotonic Reads, bei dem es um die Konsistenz von Lesevorgängen geht, konzentriert sich Monotonic Writes darauf, die richtige Reihenfolge von Schreibvorgängen beizubehalten, um Inkonsistenzen zu vermeiden, die durch ungeordnete Schreibvorgänge entstehen können.
-
+\examplevs{
 Ein Fallbeispiel für Monotonic Writes ist ein verteiltes System zur Verwaltung von Banktransaktionen. Angenommen, ein Benutzer führt zwei Überweisungen in einer bestimmten Reihenfolge aus: zunächst eine Überweisung von 100 € von Konto A auf Konto B und anschließend eine Überweisung von 50 € von Konto B auf Konto C. Monotonic Writes stellt sicher, dass diese Transaktionen in der korrekten Reihenfolge verarbeitet werden, um Konsistenzprobleme zu vermeiden, die entstehen könnten, wenn die zweite Transaktion vor der ersten Transaktion verarbeitet würde.
-
-In der Praxis kann die Implementierung von Monotonic Writes in einem verteilten System verschiedene Ansätze erfordern, abhängig von der Systemarchitektur und den Anforderungen. Eine mögliche Methode zur Umsetzung von Monotonic Writes besteht darin, die Schreibvorgänge mit Zeitstempeln oder Versionsnummern zu versehen und die Schreibvorgänge in einer Warteschlange zu halten, bis sie in der richtigen Reihenfolge verarbeitet werden können. Eine weitere Möglichkeit besteht darin, ein verteiltes Transaktionsprotokoll zu verwenden, um die Reihenfolge der Schreibvorgänge zu verfolgen und sicherzustellen, dass sie in der richtigen Reihenfolge ausgeführt werden.
+}
+In der Praxis kann auch die Implementierung von Monotonic Writes in einem verteilten System verschiedene Ansätze erfordern, abhängig von der Systemarchitektur und den Anforderungen. Eine mögliche Methode zur Umsetzung von Monotonic Writes besteht darin, die Schreibvorgänge mit Zeitstempeln oder Versionsnummern zu versehen und die Schreibvorgänge in einer Warteschlange zu halten, bis sie in der richtigen Reihenfolge verarbeitet werden können. Eine weitere Möglichkeit besteht darin, ein verteiltes Transaktionsprotokoll zu verwenden, um die Reihenfolge der Schreibvorgänge zu verfolgen und sicherzustellen, dass sie in der richtigen Reihenfolge ausgeführt werden.
 
 \subsubsection{Read your Writes}
 Read Your Writes ist ein client-zentrisches Konsistenzmodell, das darauf abzielt, die Konsistenz der Daten aus der Perspektive eines Clients oder Benutzers zu gewährleisten, indem sichergestellt wird, dass ein Client nach dem Ausführen eines Schreibvorgangs immer die von ihm geschriebenen Daten lesen kann. Dies stellt sicher, dass der Client die Auswirkungen seiner eigenen Schreibvorgänge sofort sieht und eine konsistente Ansicht der Daten erhält.
-
+\examplevs{
 Ein Fallbeispiel für Read Your Writes ist ein verteiltes System für soziale Netzwerke, bei dem Benutzer Statusaktualisierungen veröffentlichen können. Angenommen, ein Benutzer veröffentlicht eine neue Statusaktualisierung. Nach dem Veröffentlichen der Aktualisierung möchte der Benutzer die Liste seiner eigenen Statusaktualisierungen anzeigen. Read Your Writes stellt sicher, dass der Benutzer seine neueste Aktualisierung in der Liste sieht, selbst wenn das verteilte System noch dabei ist, die Aktualisierung auf alle Knoten zu replizieren.
-
-In der Praxis kann die Implementierung von Read Your Writes in einem verteilten System verschiedene Ansätze erfordern, abhängig von der Architektur und den Anforderungen des Systems. Eine mögliche Methode zur Umsetzung von Read Your Writes besteht darin, einen Cache auf Clientseite zu verwenden, um die kürzlich geschriebenen Daten zu speichern, sodass der Client die eigenen Schreibvorgänge sofort lesen kann, selbst wenn sie noch nicht auf alle Knoten im verteilten System repliziert wurden. Eine weitere Möglichkeit besteht darin, ein verteiltes Transaktionsprotokoll zu verwenden, um sicherzustellen, dass alle Lesevorgänge, die nach einem Schreibvorgang ausgeführt werden, die neuesten Daten enthalten.
+}
+Eine mögliche Methode zur Umsetzung von Read Your Writes besteht darin, einen Cache auf Clientseite zu verwenden, um die kürzlich geschriebenen Daten zu speichern, sodass der Client die eigenen Schreibvorgänge sofort lesen kann, selbst wenn sie noch nicht auf alle Knoten im verteilten System repliziert wurden. Eine weitere Möglichkeit besteht darin, ein verteiltes Transaktionsprotokoll zu verwenden, um sicherzustellen, dass alle Lesevorgänge, die nach einem Schreibvorgang ausgeführt werden, die neuesten Daten enthalten.
 
 \subsubsection{Writes follow Reads}
 Kausale Konsistenz und das \enquote{Writes follow Reads}-Prinzip sind eng miteinander verknüpft, da beide darauf abzielen, kausale Abhängigkeiten zwischen Operationen in verteilten Systemen aufrechtzuerhalten. \enquote{Writes follow Reads} ist eine Regel, die besagt, dass nach einer Leseoperation, die von einem bestimmten Knoten ausgeführt wird, alle Schreiboperationen, die von diesem Knoten initiiert werden und sich auf das gleiche Objekt beziehen, die gelesene Version oder eine neuere Version des Objekts berücksichtigen müssen.
@@ -192,9 +199,10 @@ Ein reales Beispiel für die Umsetzung des \enquote{Writes follow Reads}-Prinzip
 In Cassandra basiert die Konsistenz der Daten auf einem kausalen Konsistenzmodell, das das \enquote{Writes follow Reads}-Prinzip unterstützt. Um dies zu erreichen, verwendet Cassandra Version Vektoren, sogenannte Timestamps, um kausale Beziehungen zwischen Schreib- und Leseoperationen zu erfassen und zu verwalten.
 
 Wenn ein Benutzer in Cassandra eine Leseoperation durchführt, erhält er die neueste Version des angeforderten Objekts zusammen mit dessen Timestamp. Wenn der Benutzer daraufhin eine Schreiboperation auf demselben Objekt ausführt, muss er sicherstellen, dass der Timestamp der neuen Version höher ist als der Timestamp der gelesenen Version. Dies gewährleistet, dass Schreiboperationen auf den zuvor gelesenen Daten basieren und in einer logisch konsistenten Reihenfolge erfolgen.
-
+\examplevs{
 Ein konkretes Beispiel dafür ist die Verwendung von Cassandra zur Speicherung und Verwaltung von Benutzerprofilen in einem sozialen Netzwerk. Angenommen, ein Benutzer liest sein Profil und ändert dann seine E-Mail-Adresse. Im Rahmen des \enquote{Writes follow Reads}-Prinzips stellt Cassandra sicher, dass die neue E-Mail-Adresse auf der gelesenen Version des Profils basiert und in der richtigen Reihenfolge gespeichert wird.
-
+}
+\examplevs{
 Ein weiteres Beispiel kann auch in einem Mehrbenutzersystem besprochen werden. Google Docs ist ein webbasiertes kollaboratives Textverarbeitungssystem, das es mehreren Benutzern ermöglicht, in Echtzeit an einem gemeinsamen Dokument zu arbeiten. Google Docs verwendet das Operational Transformation (OT) Framework, um die Konsistenz in Echtzeit zu gewährleisten und gleichzeitige Änderungen von verschiedenen Benutzern zu verwalten.
 
 Angenommen, Alice und Bob arbeiten gleichzeitig an einem gemeinsamen Dokument in Google Docs. Alice liest einen Absatz und entscheidet, dass sie eine Änderung daran vornehmen möchte. Während sie ihre Änderungen vornimmt, liest Bob denselben Absatz und beschließt, ihn ebenfalls zu bearbeiten.
@@ -202,7 +210,7 @@ Angenommen, Alice und Bob arbeiten gleichzeitig an einem gemeinsamen Dokument in
 In diesem Szenario ist es wichtig, dass das System das \enquote{Writes follow Reads}-Prinzip einhält, um Konsistenz und kausale Ordnung der Operationen zu gewährleisten. Das OT-Framework in Google Docs stellt sicher, dass die Schreiboperationen von Alice und Bob auf den zuvor gelesenen Versionen des Absatzes basieren und in einer logisch konsistenten Reihenfolge angewendet werden.
 
 Wenn Alice ihre Änderungen vornimmt, erfasst das System die kausale Beziehung zwischen ihrer Lese- und Schreiboperation und wendet ihre Änderung auf den zuvor gelesenen Absatz an. Gleichzeitig wird Bobs Schreiboperation ebenfalls auf der Grundlage seiner gelesenen Version des Absatzes durchgeführt. Anschließend verwendet das OT-Framework Transformationsfunktionen, um mögliche Konflikte zwischen Alices und Bobs Änderungen aufzulösen und eine konsistente Ansicht des Dokuments für beide Benutzer zu gewährleisten.
-
+}
 \subsection{Alternative Konsistensmodelle und Sonderformen}
 Alternative Konsistenzmodelle sind Ansätze zur Datenkonsistenz in verteilten Systemen, die von den traditionellen ACID-Eigenschaften (Atomicity, Consistency, Isolation, Durability) abweichen. Diese Modelle wurden entwickelt, um die Leistung und Verfügbarkeit von verteilten Systemen zu verbessern, indem sie auf einige der Einschränkungen von ACID-basierten Ansätzen verzichten.
 
@@ -221,7 +229,7 @@ Die Idee hinter Continuous Consistency besteht darin, Metriken und Schwellenwert
 In einem System mit kontinuierlicher Konsistenz wird die Konsistenz schrittweise verbessert, indem inkonsistente Daten erkannt und synchronisiert werden, bis die festgelegten Schwellenwerte erreicht oder überschritten sind. Dieser Ansatz ermöglicht eine bessere Balance zwischen Konsistenz und Verfügbarkeit, indem er es erlaubt, Konsistenzanforderungen basierend auf den Anforderungen der Anwendung und den zugrunde liegenden Systembedingungen flexibel anzupassen.
 
 Continuous Consistency ist besonders nützlich für Anwendungen und Systeme, bei denen eine gewisse Toleranz gegenüber temporären Inkonsistenzen besteht, aber dennoch ein gewisses Maß an Konsistenz erforderlich ist. Ein Beispiel hierfür sind kollaborative Online-Editoren, bei denen Benutzer möglicherweise verschiedene Versionen eines Dokuments sehen, aber das System im Laufe der Zeit die Konsistenz verbessert, indem es die Änderungen zwischen den Benutzern synchronisiert.
-
+\examplevs{
 Hier ist ein vereinfachtes Fallbeispiel zur Veranschaulichung des Einsatzes von Metriken.
 
 Angenommen, Sie betreiben eine Online-Nachrichtenplattform, auf der Redakteure Artikel veröffentlichen und Benutzer Kommentare hinterlassen können. In diesem Szenario gibt es mehrere wichtige Konsistenzanforderungen:
@@ -240,7 +248,7 @@ Die Online-Nachrichtenplattform verwendet in unserem Beispiel eine verteilte Dat
 \item Bei jeder Aktualisierung der Daten (z. B. Hinzufügen/Ändern eines Artikels oder Hinzufügen eines Kommentars) messen Sie die Inkonsistenzdauer und die Inkonsistenzgröße. Diese Informationen können beispielsweise in Metadaten der Datenbank gespeichert werden.
 \item Anhand der gemessenen ID und IS können Sie entscheiden, wann und wie oft Aktualisierungen zwischen den Knoten der verteilten Datenbank synchronisiert werden sollen. Wenn beispielsweise die ID oder IS für Artikel die festgelegten Schwellenwerte überschreitet, kann die Synchronisationsfrequenz erhöht werden, um die Konsistenz schneller wiederherzustellen.
 \end{itemize}
-
+}
 Im Falle der Nichteinhaltung der festgelegten Metriken im CONIT-Modell (Inkonsistenzdauer oder Inkonsistenzgröße) kann das verteilte System verschiedene Maßnahmen ergreifen, um die Konsistenz zu verbessern oder die Auswirkungen der Inkonsistenzen zu minimieren. Diese Maßnahmen hängen von den spezifischen Anforderungen und Prioritäten des Systems ab.
 
 Einige mögliche Maßnahmen bei Nichteinhaltung der Metriken sind:
@@ -257,9 +265,14 @@ Es ist wichtig zu betonen, dass die Reaktion auf Nichteinhaltung der Metriken vo
 
 \subsubsection{Fork Consistency}
 
-Fork Consistency ist ein neueres Konsistenzmodell, das im Bereich der verteilten Systeme verwendet wird. Bevor wir auf das Modell selbst eingehen, ist es wichtig, den Kontext von Konsistenzmodellen in verteilten Systemen zu verstehen. In verteilten Systemen arbeiten mehrere Knoten oder Server zusammen, um gemeinsam Daten und Rechenressourcen bereitzustellen. Eine der größten Herausforderungen dabei ist die Koordination und Synchronisation der Daten zwischen den Knoten, um eine konsistente Ansicht für die Clients sicherzustellen.
 Traditionelle Konsistenzmodelle, wie Sequentielle Konsistenz und Linearisierbare Konsistenz, stellen strenge Anforderungen an die Reihenfolge, in der Operationen und ihre Ergebnisse zwischen den Knoten sichtbar sind. Diese Modelle sind zwar einfach zu verstehen und ermöglichen eine leichtere Programmierung, sie führen jedoch häufig zu Leistungseinbußen, da sie eine hohe Kommunikations- und Synchronisationslast erfordern.
+
+
 In den letzten Jahren wurden daher neue, schwächere Konsistenzmodelle entwickelt, die bessere Leistung und Skalierbarkeit ermöglichen. Eines dieser Modelle ist die Fork-Konsistenz. Fork Consistency ist ein Konsistenzmodell, das die Sicherheitsanforderungen für Systeme mit mehreren Autoren lockert, indem es zulässt, dass Benutzer eine inkonsistente Ansicht der Daten sehen, solange sie auf getrennten \enquote{Forks} oder \enquote{Verzweigungen} des Systems arbeiten.
+
+
+Fork Consistency ist daher  ein relativ neueres Konsistenzmodell, das im Bereich der verteilten Systeme verwendet wird. Bevor wir auf das Modell selbst eingehen, ist es wichtig, den Kontext von Konsistenzmodellen in verteilten Systemen zu verstehen. In verteilten Systemen arbeiten mehrere Knoten oder Server zusammen, um gemeinsam Daten und Rechenressourcen bereitzustellen. Eine der größten Herausforderungen dabei ist die Koordination und Synchronisation der Daten zwischen den Knoten, um eine konsistente Ansicht für die Clients sicherzustellen.
+
 Die Hauptidee hinter Fork Consistency ist, dass das System nicht versucht, alle Änderungen sofort zwischen allen Knoten zu synchronisieren. Stattdessen werden Änderungen lokal an den Knoten vorgenommen und erst später, wenn nötig, mit anderen Knoten synchronisiert. Dabei entstehen \enquote{Forks}, also Verzweigungen in der Versionshistorie der Daten. Solange diese Verzweigungen getrennt bleiben, kann das System weiterarbeiten, ohne sich um die Konsistenz der Daten zwischen den Knoten sorgen zu müssen.
 Während Fork Consistency einige Vorteile in Bezug auf Leistung und Skalierbarkeit bietet, hat es auch einige Nachteile und Herausforderungen:
 \\\\
@@ -271,9 +284,9 @@ Nicht zu letzt ist es eine schwierige Programmierung. Im Gegensatz zu strengeren
 \\\\
 Trotz dieser Herausforderungen bietet Fork Consistency in bestimmten Szenarien, insbesondere solchen mit einer hohen Anzahl von Knoten und Schreiboperationen, erhebliche Vorteile in Bezug auf Leistung und Skalierbarkeit. Um die Herausforderungen der Fork Consistency zu bewältigen, können Entwickler und Systemarchitekten verschiedene Strategien anwenden:
 Konfliktlösung: Die Implementierung einer effizienten und robusten Strategie zur Konfliktlösung ist entscheidend, um die verschiedenen Verzweigungen der Daten erfolgreich zusammenzuführen. Dies kann beispielsweise durch den Einsatz von speziellen Algorithmen zur Zusammenführung von Daten, sogenannten Merge- oder Reconciliation-Algorithmen, erreicht werden. In einigen Fällen kann die Konfliktlösung auch manuell oder semi-manuell durch Benutzer oder Administratoren durchgeführt werden.
-Anwendungsspezifische Konsistenz: In
-\\\\
-vielen Fällen ist es möglich, die Anforderungen an die Konsistenz auf Anwendungsebene zu definieren und anzupassen. Entwickler können dabei spezifische Mechanismen zur Handhabung von Inkonsistenzen implementieren, die den Anforderungen ihrer Anwendung am besten entsprechen. Ein Beispiel dafür ist die Verwendung von Convergent Replicated Data Types (CRDTs) oder Conflict-Free Replicated Data Types, die eine automatische Konfliktlösung ohne Koordination zwischen den Knoten ermöglichen.
+
+\subsubsection{Anwendungsspezifische Konsistenz}
+In vielen Fällen ist es möglich, die Anforderungen an die Konsistenz auf Anwendungsebene zu definieren und anzupassen. Entwickler können dabei spezifische Mechanismen zur Handhabung von Inkonsistenzen implementieren, die den Anforderungen ihrer Anwendung am besten entsprechen. Ein Beispiel dafür ist die Verwendung von Convergent Replicated Data Types (CRDTs) oder Conflict-Free Replicated Data Types, die eine automatische Konfliktlösung ohne Koordination zwischen den Knoten ermöglichen.
 \\\\
 Um die Auswirkungen von Inkonsistenzen auf Benutzer und Anwendungen zu minimieren, können Systeme Strategien zur Steuerung der Sichtbarkeit von Änderungen auf Client-Seite implementieren. Beispielsweise können Clients dazu angehalten werden, nur konsistente Daten anzuzeigen, bis alle Verzweigungen erfolgreich zusammengeführt wurden. In einigen Fällen kann es sinnvoll sein, den Konsistenzgrad dynamisch an die aktuellen Anforderungen und Bedingungen des Systems anzupassen. Dies kann durch die Implementierung von Mechanismen erreicht werden, die es ermöglichen, zwischen verschiedenen Konsistenzmodellen zu wechseln, je nach Last, Netzwerkbedingungen oder Benutzeranforderungen.
 Insgesamt bietet Fork Consistency ein interessantes und flexibles Konsistenzmodell für verteilte Systeme mit hoher Schreiblast und Skalierungsanforderungen. Um die damit verbundenen Herausforderungen zu bewältigen, ist es jedoch wichtig, sowohl auf System- als auch auf Anwendungsebene geeignete Mechanismen zur Handhabung von Inkonsistenzen, Konfliktlösung und Synchronisation zu implementieren.
@@ -299,45 +312,6 @@ Um die multidimensionale Konsistenz zu erreichen, können verschiedene Techniken
 \item Visualisierung und Exploration: Die Visualisierung und Exploration der Daten und Ergebnisse kann dazu beitragen, Muster und Zusammenhänge aufzudecken, die zur multidimensionalen Konsistenz beitragen.
 \end{itemize}
 Insgesamt ist die multidimensionale Konsistenz ein wichtiger Aspekt bei der Gewährleistung der Qualität und Gültigkeit von Daten, Modellen und Ergebnissen in verschiedenen Anwendungsbereichen. Es trägt dazu bei, eine konsistente und fundierte Grundlage für Entscheidungen und Maßnahmen auf der Grundlage von Datenanalysen zu schaffen.
-\\\\
-Ein einfaches Beispiel für multidimensionale Konsistenz könnte die Analyse von Verkaufsdaten in einem Einzelhandelsgeschäft sein. Angenommen, wir haben folgende Verkaufsdaten für verschiedene Produkte (A, B und C) und Regionen (Nord, Süd, Ost und West):
-
-\begin{table}[ht!]
-\centering
-\begin{tabular}{@{}llr@{}}
-Produkt & Region & Verkaufszahlen \\ 
-A       & Nord   & 100            \\
-A       & Süd    & 90             \\
-A       & Ost    & 110            \\
-A       & West   & 120            \\
-B       & Nord   & 150            \\
-B       & Süd    & 140            \\
-B       & Ost    & 160            \\
-B       & West   & 170            \\
-C       & Nord   & 50             \\
-C       & Süd    & 45             \\
-C       & Ost    & 55             \\
-C       & West   & 60             \\ 
-\end{tabular}
-\caption{Verkaufsdaten für verschiedene Produkte und Regionen}
-\end{table}
-Die multidimensionale Konsistenz in diesem Beispiel bezieht sich auf die Konsistenz der Verkaufszahlen über die verschiedenen Produkte und Regionen hinweg. Um die multidimensionale Konsistenz zu überprüfen, sollten wir die Verkaufszahlen sowohl in Bezug auf die Produkte als auch auf die Regionen analysieren.
-
-Wir können zunächst die Verkaufszahlen für jedes Produkt über alle Regionen hinweg überprüfen:
-\begin{itemize}
-    \item Produkt A: 100 (Nord) + 90 (Süd) + 110 (Ost) + 120 (West) = 420
-    \item Produkt B: 150 (Nord) + 140 (Süd) + 160 (Ost) + 170 (West) = 620
-    \item Produkt C: 50 (Nord) + 45 (Süd) + 55 (Ost) + 60 (West) = 210
-\end{itemize}
-Dann können wir die Verkaufszahlen für jede Region über alle Produkte hinweg überprüfen:
-\begin{itemize}
-    \item Region Nord: 100 (A) + 150 (B) + 50 (C) = 300
-    \item Region Süd: 90 (A) + 140 (B) + 45 (C) = 275
-    \item Region Ost: 110 (A) + 160 (B) + 55 (C) = 325
-    \item Region West: 120 (A) + 170 (B) + 60 (C) = 350
-\end{itemize}
-
-In diesem Beispiel scheinen die Verkaufszahlen über die verschiedenen Produkte und Regionen hinweg konsistent zu sein. Es gibt keine offensichtlichen Inkonsistenzen oder Widersprüche in den Daten, und die Zahlen erscheinen plausibel. 
 
 \subsubsection{Adaptable Consistency}
 
@@ -374,40 +348,35 @@ Ein Beispiel für einen Write-Write-Konflikt könnte in einem verteilten Kollabo
 
 Um Write-Write-Konflikte in verteilten Systemen zu bewältigen, können verschiedene Ansätze verfolgt werden, darunter:
 \begin{itemize}
-\item Sperren und Transaktionen: Das System kann exklusive Sperren für Datensätze verwenden, um sicherzustellen, dass nur ein Client gleichzeitig auf einen Datensatz zugreifen kann. Transaktionen können ebenfalls eingesetzt werden, um mehrere Schreibvorgänge atomar zu behandeln und sicherzustellen, dass sie entweder vollständig abgeschlossen oder abgebrochen werden, um Konsistenzprobleme zu vermeiden.
+\item \textbf{Sperren und Transaktionen:} Das System kann exklusive Sperren für Datensätze verwenden, um sicherzustellen, dass nur ein Client gleichzeitig auf einen Datensatz zugreifen kann. Transaktionen können ebenfalls eingesetzt werden, um mehrere Schreibvorgänge atomar zu behandeln und sicherzustellen, dass sie entweder vollständig abgeschlossen oder abgebrochen werden, um Konsistenzprobleme zu vermeiden.
 Datenbanksysteme: Relationale Datenbanksysteme wie PostgreSQL und MySQL verwenden Sperren und Transaktionen, um Konsistenz und Datenintegrität in verteilten Umgebungen sicherzustellen. Bei diesen Systemen können Clients Transaktionen verwenden, um mehrere Schreibvorgänge zusammenzufassen und sicherzustellen, dass sie entweder vollständig abgeschlossen oder abgebrochen werden, um Konsistenzprobleme zu vermeiden.
-\item Optimistische Nebenläufigkeitskontrolle: Bei dieser Methode wird angenommen, dass Konflikte selten auftreten. Clients können ihre Schreibvorgänge ausführen, ohne auf Sperren zu warten. Vor dem Commit wird überprüft, ob Konflikte aufgetreten sind. Im Falle eines Konflikts wird eine der Transaktionen zurückgerollt und später erneut ausgeführt.
+\item  \textbf{Optimistische Nebenläufigkeitskontrolle:} Bei dieser Methode wird angenommen, dass Konflikte selten auftreten. Clients können ihre Schreibvorgänge ausführen, ohne auf Sperren zu warten. Vor dem Commit wird überprüft, ob Konflikte aufgetreten sind. Im Falle eines Konflikts wird eine der Transaktionen zurückgerollt und später erneut ausgeführt.
 Apache Cassandra: Dieses verteilte NoSQL-Datenbanksystem verwendet die optimistische Nebenläufigkeitskontrolle, um hohe Leistung und Skalierbarkeit zu ermöglichen. Clients führen Schreibvorgänge aus, ohne auf Sperren zu warten, und das System verwendet Zeitstempel, um Konflikte aufzulösen, wenn sie auftreten. Die neueste Änderung (basierend auf dem Zeitstempel) hat Vorrang und überschreibt ältere Änderungen.
-\item Versionskontrolle und Zusammenführungsstrategien: In einigen Systemen, insbesondere in kollaborativen Anwendungen, kann es sinnvoll sein, verschiedene Versionen der Daten beizubehalten und Strategien zum Zusammenführen von Änderungen zu implementieren, die gleichzeitig vorgenommen wurden. Diese Strategien können automatisch sein oder Benutzerinteraktion erfordern, um die Zusammenführung abzuschließen.
+\item  \textbf{Versionskontrolle und Zusammenführungsstrategien:} In einigen Systemen, insbesondere in kollaborativen Anwendungen, kann es sinnvoll sein, verschiedene Versionen der Daten beizubehalten und Strategien zum Zusammenführen von Änderungen zu implementieren, die gleichzeitig vorgenommen wurden. Diese Strategien können automatisch sein oder Benutzerinteraktion erfordern, um die Zusammenführung abzuschließen.
 Ein anderes Beispiel neben Google Docs ist Git. Git ist ein verteiltes Versionskontrollsystem, das häufig von Softwareentwicklern zur Verwaltung von Quellcode verwendet wird. Git behält verschiedene Versionen der Dateien bei und ermöglicht es Benutzern, Änderungen zusammenzuführen, die von verschiedenen Entwicklern gleichzeitig vorgenommen wurden. Wenn ein Write-Write-Konflikt auftritt, fordert Git den Benutzer auf, die Konflikte manuell zu lösen, bevor die Änderungen zusammengeführt werden können.
 \end{itemize}
 Die aller Beste Strategie ist allerdings dem grundlegenden Problem aus dem Wege zu gehen und die Schreibvorgänge auf einem System zu sequenzialisieren. Ein gängiger Ansatz zur Sequenzialisierung von Schreibvorgängen in verteilten Systemen besteht darin, einen sogenannten \enquote{Primary} oder \enquote{Master} Knoten zu verwenden. Bei diesem Ansatz werden alle Schreibvorgänge an einen zentralen Knoten gesendet, der dafür verantwortlich ist, die Schreibvorgänge in einer bestimmten Reihenfolge auszuführen und die aktualisierten Daten an die anderen Knoten im verteilten System zu replizieren.
-
+\examplevs{
 Ein Beispiel für ein verteiltes System, das Schreibzugriffe sequenziell verarbeitet, ist MongoDB im Primary-Secondary-Modus. In dieser Konfiguration empfängt der Primary-Knoten alle Schreibvorgänge und führt sie in einer bestimmten Reihenfolge aus, bevor die aktualisierten Daten an die sekundären Knoten repliziert werden. Die sekundären Knoten können Lesevorgänge ausführen, um die Last auf dem Primary-Knoten zu verringern.
-\\\\
+}
 Es gibt jedoch auch Nachteile bei der Verwendung von sequenziellen Schreibvorgängen in verteilten Systemen. Durch die Sequenzialisierung der Schreibvorgänge kann die Skalierbarkeit eingeschränkt werden, da der zentrale Knoten ein Engpass für die Leistung und Verfügbarkeit des Systems werden kann. Aus diesem Grund verwenden viele verteilte Systeme die anderen Ansätze trotz ihrer Nachteile. Die Synchronization der Master mit den Replikationen ist zudem auch wiederum eine eigene Herausforderung die aber nicht nur in diesem sondern jedem anderen Szenario besteht.  
-
+\\\\
 Jede dieser Lösungsstrategien hat ihre eigenen Vor- und Nachteile, und die Wahl der am besten geeigneten Strategie hängt von den spezifischen Anforderungen und Merkmalen des verteilten Systems ab. Die Beispiele hier veranschaulichen die Vielfalt der Ansätze, die in der Praxis angewendet werden, um Write-Write-Konflikte zu bewältigen und die Konsistenz und Datenintegrität in verteilten Systemen aufrechtzuerhalten. Dennoch werden in der Praxis auch immer wieder Strategien wie replicated-write protocols eingesetzt die ein hohes Mass an Abstimmung und Konsenz bedürfen und in einem späteren Kapitel im Kontext von Raft und Paxos nochmal betrachtet werden.  
-
-
-
-	
-
-
 
 \subsection{Synchronisation}
 
-Die Synchronisation in verteilten Systemen ist eine komplexe Herausforderung, da mehrere Prozesse oder Knoten auf gemeinsame Ressourcen zugreifen können, ohne dass eine klare Ordnung oder ein gemeinsames Zeitgefühl vorhanden ist. In einem verteilten System kann es schwierig sein, sicherzustellen, dass die verschiedenen Kopien der Ressourcen konsistent sind und dass die Daten und Aktionen in der richtigen Reihenfolge ausgeführt werden.
-
+Die Synchronisation in verteilten Systemen ist eine komplexe Herausforderung, da mehrere Prozesse oder Knoten auf gemeinsame Ressourcen zugreifen können, ohne dass eine klare Ordnung oder ein gemeinsame Zeit vorhanden ist. In einem verteilten System kann es schwierig sein, sicherzustellen, dass die verschiedenen Kopien der Ressourcen konsistent sind und dass die Daten und Aktionen in der richtigen Reihenfolge ausgeführt werden.
+\examplevs{
 Ein Beispiel für eine Herausforderung der Synchronisation in verteilten Systemen ist die Replikation von Daten beispielhaft in einem verteilten Datenbanksystem. Wenn mehrere Kopien einer Datenbank auf verschiedenen Knoten im Netzwerk ausgeführt werden, müssen die Änderungen an den Daten in Echtzeit zwischen den Knoten synchronisiert werden, um die Konsistenz der Daten zu gewährleisten. Da es keine gemeinsame Uhr gibt, die die Zeit auf allen Knoten synchronisiert, kann es schwierig sein, die Reihenfolge der Änderungen zu bestimmen und sicherzustellen, dass alle Knoten die neuesten Daten haben.
-\\\\
+}
 \textbf{Remote-write protocols} und \textbf{Local-write protocols} sind zwei Ansätze zur Synchronisation von Schreibzugriffen in verteilten Systemen. Remote-write protocols erlauben es einem Knoten, Schreibzugriffe auf gemeinsame Ressourcen auszuführen, wobei die Änderungen dann an andere Knoten im Netzwerk übertragen werden. Local-write protocols hingegen erlauben nur einem Knoten, Schreibzugriffe auf eine Ressource auszuführen, und synchronisieren dann die Änderungen mit den anderen Knoten im Netzwerk.
-
+\examplevs{
 Ein Beispiel für den Einsatz von remote-write protocols ist eine Anwendung, die auf einer verteilten Datenbank aufbaut und gleichzeitige Schreibzugriffe von mehreren Knoten erfordert. Wenn mehrere Knoten gleichzeitig Änderungen an einer Tabelle der Datenbank vornehmen, kann es zu Konflikten kommen, die die Konsistenz der Datenbank beeinträchtigen können. Ein Ansatz zur Vermeidung dieser Konflikte besteht darin, dass jeder Knoten Remote-Schreibzugriffe auf die Datenbank ausführt, um Änderungen auf anderen Knoten im Netzwerk zu aktualisieren. Ein Beispiel für eine solche Anwendung ist ein Echtzeit-Börsensystem, bei dem mehrere Knoten gleichzeitig Trades auf die Datenbank schreiben. Durch die Verwendung von remote-write protocols kann die Konsistenz der Datenbank gewährleistet werden, ohne dass es zu Konflikten oder Inkonsistenzen kommt.
-
+}
+\examplevs{
 Ein dem gegenüberstehendes Beispiel für den Einsatz von Local-write protocols ist eine Anwendung, bei der ein Knoten eine hohe Anzahl von Schreibzugriffen auf eine Ressource ausführt. Wenn ein Knoten mehrere Schreibzugriffe hintereinander ausführt, kann die Latenz und Netzwerkbelastung hoch sein, wenn jede Änderung an andere Knoten im Netzwerk übertragen werden muss. Ein Ansatz zur Optimierung dieser Prozesse besteht darin, dass jeder Knoten nur lokale Schreibzugriffe auf seine eigene Kopie der Ressource ausführt und dann Änderungen zwischen den Knoten synchronisiert, um sicherzustellen, dass alle Knoten die gleichen Daten haben. Ein Beispiel für eine solche Anwendung ist ein Produktkatalog, bei dem ein Knoten Produktbeschreibungen und -bilder in die Datenbank schreibt. Durch die Verwendung von Local-write protocols kann die Latenz und Netzwerkbelastung reduziert werden, während gleichzeitig die Konsistenz der Datenbank gewährleistet wird.
-\\\\
-In beiden Fällen ist die Wahl zwischen remote-write protocols und local-write protocols von den spezifischen Anforderungen und Einschränkungen des verteilten Systems abhängig. Wie es auch sei, die Wahl dieser Protokolle negiert nicht die Herausforderungen der Koordination über die verschiedenen Systeme. Daher gibt es verschiedene weitere Lösungsstrategien für die Synchronisation von verschiedenen nodes in verteilten Systemen, die je nach Anwendungsanforderungen und Systemarchitektur verwendet werden können:
+}
+De Wahl zwischen remote-write protocols und local-write protocols ist von den spezifischen Anforderungen und Einschränkungen des verteilten Systems abhängig. Wie es auch sei, die Wahl dieser Protokolle negiert nicht die Herausforderungen der Koordination über die verschiedenen Systeme. Daher gibt es verschiedene weitere Lösungsstrategien für die Synchronisation von verschiedenen nodes in verteilten Systemen, die je nach Anwendungsanforderungen und Systemarchitektur verwendet werden können:
 \\\\
 Die folgenden Absätze geben einen detaillierteren Blick in die Ansätze \textbf{Physikalische Uhren}, \textbf{Logische Uhren} und \textbf{Locking}. 
 
@@ -422,19 +391,22 @@ Um dieses Problem zu lösen, verwenden verteilte Systeme häufig Synchronisation
 Ein weiteres Beispiel ist das Google TrueTime API, das in Googles Spanner-Datenbanksystem verwendet wird. TrueTime verwendet eine Kombination von GPS und Atomuhren, um eine sehr genaue Zeitbasis für die Synchronisierung von Operationen im Spanner-System zu bieten. Dies ermöglicht Spanner, konsistente Transaktionen über eine globale Skala von Datenzentren hinweg durchzuführen.
 \\\\
 In der Uhren- und Messtechnik bezieht sich die \textbf{Präzision} auf die Konsistenz von Messungen oder Wiederholbarkeit, während die \textbf{Akkuratesse} (Genauigkeit) sich auf die Nähe von Messungen zum tatsächlichen, wahren Wert bezieht.
-\\\\
-Die Präzision ist die Standardabweichung der Messungen. Angenommen, wir haben eine Reihe von Messungen $x_1, x_2, \ldots, x_n$, dann ist die Präzision definiert als:
+\importantvs{
+Die \textbf{Präzision} ist die Standardabweichung der Messungen. Angenommen, wir haben eine Reihe von Messungen $x_1, x_2, \ldots, x_n$, dann ist die Präzision definiert als:
 \begin{equation}
 \sigma = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 \end{equation}
 wobei $\bar{x}$ der Durchschnittswert der Messungen ist.
 \\\\
-Die Akkuratesse ist der Unterschied zwischen dem Durchschnittswert der Messungen und dem wahren Wert. Wenn $T$ der wahre Wert ist, dann ist die Akkuratesse definiert als:
+}
+\importantvs{
+Die \textbf{Akkuratesse} ist der Unterschied zwischen dem Durchschnittswert der Messungen und dem wahren Wert. Wenn $T$ der wahre Wert ist, dann ist die Akkuratesse definiert als:
 \begin{equation}
 A = |T - \bar{x}|
 \end{equation}
+}
 In einer idealen Situation wäre eine Uhr sowohl präzise als auch akkurat: Sie würde konsequent die gleiche Zeit anzeigen (hohe Präzision) und diese Zeit wäre nahe an der tatsächlichen Zeit (hohe Akkuratesse). In der Praxis gibt es jedoch oft einen Kompromiss zwischen Präzision und Akkuratesse.
-\\\\
+\paragraph{UTC}\mbox{}\\
 Häufig wird die UTC als Basis für eine präzise und akkurate Uhr gewählt.
 Die \textbf{Universal Time Coordinated (UTC)} ist der Zeitstandard, der zur Koordination von Weltzeit verwendet wird. Es handelt sich dabei um eine atomare Zeitskala, die auf International Atomic Time (TAI), mit Sprüngen von einer Sekunde, basiert, um sie nahe an der mittleren Sonnenzeit (UT1) zu halten.
 
@@ -444,7 +416,7 @@ Die Verwendung von UTC als Akronym für Coordinated Universal Time in Englisch o
 
 \subsubsection{Globale Zeitstempel}
 Globale Zeitstempel sind ein Synchronisationsmechanismus in verteilten Systemen, der auf einer gemeinsamen Uhr basiert. Die Idee besteht darin, dass alle Knoten oder Prozesse in einem verteilten System ihre Uhren synchronisieren und jeder Operation oder jedem Ereignis einen eindeutigen Zeitstempel zuweisen. Diese Zeitstempel ermöglichen es, Ereignisse und Operationen in der richtigen Reihenfolge auszuführen und Inkonsistenzen zu vermeiden. Einige Vorteile von globalen Zeitstempeln sind die einfache Handhabung von Ereignisreihenfolgen und die Möglichkeit, gleichzeitige Ereignisse leicht zu erkennen.
-\\\\
+\examplevs{
 Ein minimales Beispiel für die Verwendung von globalen Zeitstempeln in der Praxis ist ein verteiltes Auktionssystem, bei dem Benutzer Gebote für Artikel abgeben.
 
 Angenommen, wir haben ein verteiltes Auktionssystem mit drei Knoten (A, B und C), die Gebote für verschiedene Artikel speichern und verwalten. In diesem System gibt es zwei Benutzer, Alice und Bob, die Gebote für denselben Artikel abgeben.
@@ -455,7 +427,7 @@ Angenommen, wir haben ein verteiltes Auktionssystem mit drei Knoten (A, B und C)
 \item Die Knoten vergleichen die globalen Zeitstempel der Gebote (T1 und T2), um die Reihenfolge der Gebote zu bestimmen und den Gewinner der Auktion zu ermitteln.
 \end{itemize}
 In diesem Beispiel ermöglichen die globalen Zeitstempel, dass alle Knoten im verteilten Auktionssystem eine einheitliche Sicht auf die Reihenfolge der Gebote haben, wodurch potenzielle Inkonsistenzen vermieden werden. Es ist wichtig, dass die Knoten ihre Uhren regelmäßig synchronisieren, um eine hohe Genauigkeit der globalen Zeitstempel zu gewährleisten.
-\\\\
+}
 Um eine gemeinsame Uhr in verteilten Systemen zu etablieren, gibt es neben den beschriebenen Ansätzen weitere Algorithmen und Protokolle um dies zu erlangen. Die Hauptziele dieser Ansätze sind die Synchronisation der Uhren der einzelnen Knoten und die Minimierung der Abweichungen zwischen ihnen, hier spielt der Einsatz zusätlicher Hardware eine Rolle, oder die Abkehr von einen zentralen Zeitgeber, wie einer Atomuhr:
 \begin{itemize}
 \item \textbf{Precision Time Protocol} (PTP): PTP ist ein alternatives Protokoll zu NTP, das entwickelt wurde, um eine präzise Zeitsynchronisation in verteilten Systemen zu erreichen. Im Gegensatz zu NTP ist PTP speziell für lokale Netzwerke (LANs) entwickelt worden und ermöglicht eine höhere Genauigkeit in der Zeitsynchronisation. PTP verwendet einen sogenannten \enquote{Grandmaster Clock} sowie \enquote{Ordinary Clocks} und \enquote{Boundary Clocks}, um eine präzise Synchronisation über das Netzwerk zu erreichen.
@@ -468,7 +440,7 @@ Alle Verfahren, inklusive insbesondere NTP, sind nur eine Auswahl, aber von solc
 
 \subsubsection{Network Time Protocol (NTP)}
 Das Network Time Protocol (NTP) ist ein weit verbreitetes Protokoll zur Synchronisation der Systemuhren von Computern in einem Netzwerk. Die mathematischen Grundlagen von NTP basieren auf der Schätzung von Netzwerkverzögerungen und der Verwendung von Zeitservern, um eine genaue Zeitsynchronisation zu erreichen.
-\\\\
+\importantvs{
 Um die Netzwerkverzögerung zu schätzen, verwendet NTP vier Zeitstempel:
 
 \begin{enumerate}
@@ -484,24 +456,26 @@ Mit diesen Zeitstempeln kann NTP die Netzwerkverzögerung und die Offset-Zeit be
 Die Netzwerkverzögerung ist die Zeit, die benötigt wird, um Nachrichten zwischen Client und Server zu senden und zu empfangen. Der Offset ist die durchschnittliche Zeitdifferenz zwischen dem Client und dem Server. Ob die Annahme für die Berechnung im Internet immer zutrifft, darf aber bezweifelt werden.
 
 Dennoch, der Offset ist die durchschnittliche Zeitdifferenz zwischen dem Client und dem Server. Nachdem der Offset und die Netzwerkverzögerung berechnet wurden, verwendet der Client diese Informationen, um seine Uhr anzupassen und mit der Serverzeit zu synchronisieren.
-\\\\
+}
 NTP ist ein hierarchisches Protokoll, das mehrere Schichten von Zeitservern verwendet, um eine genaue Zeitsynchronisation zu erreichen. An der Spitze der Hierarchie steht der Stratum-1-Server, der direkt mit einer externen Zeitquelle wie einem GPS- oder Atomuhr-Referenzsignal verbunden ist. Die Server der nächsten Schicht (Stratum-2) sind mit Stratum-1-Servern verbunden und so weiter. Clients wählen in der Regel den Server mit der geringsten Verzögerung und dem geringsten Stratum für die Synchronisation aus.
-\\\\
-Ein Beispiel für ein Problem bei der Verwendung von NTP ist die mögliche Anfälligkeit für Netzwerkverzögerungsschwankungen. Angenommen, es gibt einen Client und einen NTP-Server, die folgende Zeitstempel haben:
+\examplevs{
+Problem Netzwerkverzögerungsschwankungen:
 \begin{align*}
 t1 &= 10 \text{ ms} \quad &(\text{Client sendet Anfrage}) \\
 t2 &= 15 \text{ ms} \quad &(\text{Server empfängt Anfrage}) \\
 t3 &= 20 \text{ ms} \quad &(\text{Server sendet Antwort}) \\
 t4 &= 30 \text{ ms} \quad &(\text{Client empfängt Antwort})
 \end{align*}
+}
+\examplevs{
 Die Netzwerkverzögerung (D) und der Offset (\(\theta\)) können wie folgt berechnet werden:
 \begin{align*}
 D &= (t4 - t1) - (t3 - t2) = 15 \text{ ms} \\
 \theta &= \frac{(t2 - t1) + (t3 - t4)}{2} = -2.5 \text{ ms}
 \end{align*}
 In diesem Fall beträgt die Netzwerkverzögerung 15 ms und der Offset -2,5 ms. Der Client würde seine Uhr um -2,5 ms anpassen, um mit dem Server synchronisiert zu werden. Wenn jedoch die Netzwerkverzögerung während der Synchronisation plötzlich schwankt, kann dies zu Fehlern bei der Uhrenanpassung führen. Beispielsweise könnte die Netzwerkverzögerung bei der nächsten Synchronisation auf 20 ms ansteigen, was zu einer inkorrekten Berechnung des Offsets und möglicherweise zu einer inkorrekten Uhrenanpassung führen würde.
-
-Um solche Probleme zu vermeiden, verwendet NTP verschiedene Techniken wie die Auswahl mehrerer Zeitserver und die Filterung von Zeitstempeln, um die Genauigkeit der Zeitsynchronisation zu erhöhen und die Auswirkungen von Netzwerkverzögerungsschwankungen zu minimieren.
+}
+Um Probleme mit Verzögerungen zu vermeiden, verwendet NTP verschiedene Techniken wie die Auswahl mehrerer Zeitserver und die Filterung von Zeitstempeln, um die Genauigkeit der Zeitsynchronisation zu erhöhen und die Auswirkungen von Netzwerkverzögerungsschwankungen zu minimieren.
 \\\\
 NTP kann eine hohe Genauigkeit beim Abgleich von verteilten Knoten erreichen, wenn es ordnungsgemäß konfiguriert und betrieben wird. Die Genauigkeit von NTP hängt von verschiedenen Faktoren ab, wie der Qualität der Netzwerkverbindungen, der Anzahl und Qualität der Zeitserver, der Latenz und der Stabilität der Verbindungen.
 
@@ -551,6 +525,8 @@ Dann wird der Client seine Uhr auf die empfangene Serverzeit T1 plus die geschä
 \begin{align*}
 \text{Neue Client-Zeit} &= T1 + \text{Netzwerkverzögerung}
 \end{align*}
+
+\examplevs{
 Angenommen, ein Client möchte seine Uhr mit einem Zeitserver synchronisieren. Die folgenden Zeitstempel werden während des Prozesses aufgezeichnet:
 \begin{itemize}
 \item T0 (Anfrage vom Client gesendet): 10:00:00,000
@@ -570,36 +546,40 @@ Die geschätzte Netzwerkverzögerung beträgt:
 &= 0,75\text{ Sekunden}
 \end{align*}
 Die neue Client-Zeit wird auf 10:00:01,000 + 0,75 = 10:00:01,750 eingestellt.
+}
 Cristian's Algorithmus ist ein einfaches Protokoll zur Zeit-Synchronisation, das aufgrund seiner Einfachheit und Leistungsfähigkeit in vielen Anwendungen eingesetzt werden kann. Es ist jedoch nicht das präziseste Protokoll und wird oft durch fortschrittlichere Protokolle wie NTP oder PTP ersetzt, insbesondere wenn eine höhere Genauigkeit erforderlich ist.
 \\\\
 Ein Problem bei der Verwendung von Cristian's Algorithmus ist, dass es anfällig für unvorhergesehene Netzwerkverzögerungen und Jitter sein kann, insbesondere wenn das Netzwerk überlastet oder überlastet ist. Dies kann zu inkonsistenten Ergebnissen führen und die Genauigkeit der Zeit-Synchronisation beeinträchtigen.
-\\\\
+\examplevs{
 Ein Beispiel, in dem Cristian's Algorithmus in der Praxis eingesetzt wird, ist in der Telekommunikationsindustrie zu finden. Hier werden häufig mehrere Netzwerk-Knoten verwendet, um die Übertragung von Sprach- und Datensignalen zu synchronisieren. Cristian's Algorithmus kann verwendet werden, um die Uhrzeit auf diesen Knoten zu synchronisieren und so eine genaue Übertragung von Signalen zu gewährleisten. Allerdings ist es in einigen Fällen möglicherweise nicht genau genug, um den hohen Anforderungen dieser Anwendungen gerecht zu werden, insbesondere wenn die Netzwerkverzögerung schwankt.
-
+}
 \subsubsection{Berkeley Algorithm}
 
 Der Berkeley-Algorithmus, benannt nach der University of California, Berkeley, wo er entwickelt wurde, ist ein verteiltes Zeitsynchronisationsprotokoll, welches in Netzwerken eingesetzt wird, um die Uhrzeiten von Computern oder anderen Knoten zu synchronisieren.  Der Berkeley-Algorithmus unterscheidet sich von anderen Zeitsynchronisationsprotokollen wie dem Network Time Protocol (NTP) dadurch, dass er auf einem Master-Slave-Modell basiert und keine Hierarchie von Zeitservern erfordert.
 \\\\
-Der Berkeley-Algorithmus beruht auf dem grundlegenden Prinzip, dass ein ausgewählter Knoten im Netzwerk, der sogenannte \enquote{Master}, für die Zeitsynchronisation verantwortlich ist. Die anderen Knoten, die als \enquote{Slaves} bezeichnet werden, stellen ihre Uhrzeiten anhand der vom Master bereitgestellten Informationen ein. Der Algorithmus läuft in mehreren Schritten ab, die im Folgenden erläutert werden.
+Der Berkeley-Algorithmus beruht auf dem grundlegenden Prinzip, dass ein ausgewählter Knoten im Netzwerk, der sogenannte \enquote{Master}, für die Zeitsynchronisation verantwortlich ist. Die anderen Knoten, die als \enquote{Slaves} bezeichnet werden, stellen ihre Uhrzeiten anhand der vom Master bereitgestellten Informationen ein. 
+\examplevs{
+Der Algorithmus läuft in mehreren Schritten ab, die im Folgenden erläutert werden.
 
 Zunächst wählt der Master zufällig oder auf Grundlage bestimmter Kriterien, wie beispielsweise der Zuverlässigkeit, aus den Knoten im Netzwerk aus. Sobald ein Master festgelegt ist, sendet er eine Anfrage an alle Slave-Knoten, um deren aktuelle Uhrzeiten zu ermitteln. Die Slaves antworten mit ihren jeweiligen Uhrzeiten, und der Master sammelt diese Informationen.
 
 Anschließend berechnet der Master den mittleren Zeitwert der gesammelten Uhrzeiten, wobei er auch seine eigene Uhrzeit berücksichtigt. Der resultierende Mittelwert stellt die referenzierte Synchronisationszeit dar, die an alle Slave-Knoten im Netzwerk weitergegeben wird. Die Slaves aktualisieren daraufhin ihre Uhrzeiten entsprechend der empfangenen Synchronisationszeit.
-\\\\
+}
+\examplevs{
 Ein praxisnahes Beispiel für die Anwendung des Berkeley-Algorithmus könnte ein verteiltes System sein, das aus mehreren Sensoren besteht, die in einer industriellen Anlage Umgebungsdaten wie Temperatur, Druck und Feuchtigkeit erfassen. In einem solchen Szenario ist es wichtig, dass die Sensoren ihre Daten zeitlich korrekt protokollieren, um eine präzise Überwachung und Steuerung der Anlage zu ermöglichen.
 Ein Sensor könnte in diesem Fall als Master fungieren und regelmäßig Anfragen an die anderen Sensoren im Netzwerk senden, um deren Uhrzeiten zu ermitteln. Nachdem der Master die Uhrzeiten der anderen Sensoren erhalten und den Mittelwert berechnet hat, teilt er diesen Wert mit den Slave-Sensoren, die daraufhin ihre Uhrzeiten entsprechend aktualisieren. Durch diesen Prozess wird sichergestellt, dass alle Sensoren im Netzwerk synchronisiert sind und die erfassten Daten korrekt zeitlich abgestimmt sind.
-
+}
 Mitnehmen kann man, das dieser Ansatz eine effiziente und einfache Methode zur Zeitsynchronisation bietet. Er eignet sich insbesondere für Anwendungen, bei denen eine hohe Genauigkeit der Zeitsynchronisation nicht unbedingt erforderlich ist, da der Algorithmus aufgrund von Netzwerklatenzen und Uhrzeitabweichungen möglicherweise keine extrem präzise Synchronisation erreicht. Dennoch erfüllt der Berkeley-Algorithmus in vielen Fällen die Anforderungen an eine angemessene Zeitsynchronisation und kann die Koordination von Aktionen und die Konsistenz von Daten in verteilten Systemen effektiv gewährleisten.
-\\\\
+\examplevs{
 Ein weiteres praxisnahes Beispiel für den Einsatz des Berkeley-Algorithmus könnte ein verteiltes System von Computern in einem Unternehmen sein, das gemeinsam an der Verarbeitung von Transaktionen oder der Durchführung von Analysen arbeitet. In diesem Fall wäre es wichtig, dass alle Computer ihre Aufgaben in einer synchronisierten Weise ausführen, um Inkonsistenzen oder Verzögerungen bei der Bearbeitung von Aufgaben zu vermeiden.
 
 Ein zentraler Computer oder Server könnte als Master ausgewählt werden und regelmäßig Zeitabfragen an die anderen Computer im Netzwerk senden. Nachdem der Master die Uhrzeiten der anderen Computer gesammelt hat und den Mittelwert berechnet hat, teilt er die Synchronisationszeit mit den Slave-Computern. Diese passen daraufhin ihre Uhrzeiten entsprechend an, wodurch ein synchronisiertes Verhalten im Netzwerk ermöglicht wird.
-\\\\
+}
 Obwohl er in vielen Situationen nützlich ist, muss man beachten, dass er nicht immer die optimale Lösung für Zeitsynchronisationsprobleme darstellt. In Szenarien, in denen eine extrem präzise Zeitsynchronisation erforderlich ist oder in denen die Latenzzeiten im Netzwerk erheblich variieren, könnte der Einsatz anderer Synchronisationsprotokolle wie dem Network Time Protocol (NTP) oder dem Precision Time Protocol (PTP) angebracht sein. In diesen Fällen bieten diese Protokolle eine höhere Genauigkeit und Zuverlässigkeit bei der Zeitsynchronisation.
 \\\\
-Die Genauigkeit hängt von verschiedenen Faktoren ab, wie zum Beispiel der Netzwerklatenz, der Anzahl der Knoten im Netzwerk und der Häufigkeit, mit der die Synchronisationsanfragen durchgeführt werden. Eine exakte Angabe der Genauigkeit des Algorithmus ist daher schwierig, da sie von den spezifischen Bedingungen des jeweiligen Systems abhängt. Insbesonde die Netzwerklatenz beeinflusst die Genauigkeit des Algorithmus maßgeblich, da sie die Zeitdifferenz zwischen dem Senden und Empfangen von Nachrichten im Netzwerk darstellt. In Systemen mit hohen oder stark variierenden Latenzen kann der Berkeley-Algorithmus Schwierigkeiten haben, eine hohe Genauigkeit bei der Zeitsynchronisation zu erreichen. Die durch Latenz bedingte Ungenauigkeit kann minimiert werden, indem man die Latenzzeit bei der Berechnung der mittleren Uhrzeit berücksichtigt. Allerdings bleibt eine gewisse Ungenauigkeit bestehen, insbesondere in Netzwerken mit stark variierenden Latenzzeiten.
+%Die Genauigkeit hängt von verschiedenen Faktoren ab, wie zum Beispiel der Netzwerklatenz, der Anzahl der Knoten im Netzwerk und der Häufigkeit, mit der die Synchronisationsanfragen durchgeführt werden. Eine exakte Angabe der Genauigkeit des Algorithmus ist daher schwierig, da sie von den spezifischen Bedingungen des jeweiligen Systems abhängt. Insbesonde die Netzwerklatenz beeinflusst die Genauigkeit des Algorithmus maßgeblich, da sie die Zeitdifferenz zwischen dem Senden und Empfangen von Nachrichten im Netzwerk darstellt. In Systemen mit hohen oder stark variierenden Latenzen kann der Berkeley-Algorithmus Schwierigkeiten haben, eine hohe Genauigkeit bei der Zeitsynchronisation zu erreichen. Die durch Latenz bedingte Ungenauigkeit kann minimiert werden, indem man die Latenzzeit bei der Berechnung der mittleren Uhrzeit berücksichtigt. Allerdings bleibt eine gewisse Ungenauigkeit bestehen, insbesondere in Netzwerken mit stark variierenden Latenzzeiten.
 \\\\
-Auch die Konvergenzzeit, also die Zeit, die benötigt wird, um eine stabile Synchronisation der Uhrzeiten in einem Netzwerk zu erreichen, hat hier Abhängigkeiten.  Insbonsere hängt diese von der Häufigkeit ab, mit der der Master Synchronisationsanfragen an die Slaves sendet. Wenn der Master beispielsweise alle 10 Sekunden eine Synchronisationsanfrage sendet, würde es bei einem synchronisierten System möglicherweise mehrere Zyklen von 10 Sekunden dauern, um eine stabile Synchronisation zu erreichen. 
+Auch die Konvergenzzeit, also die Zeit, die benötigt wird, um eine stabile Synchronisation der Uhrzeiten in einem Netzwerk zu erreichen, hat Abhängigkeiten.  Insbonsere hängt diese von der Häufigkeit ab, mit der der Master Synchronisationsanfragen an die Slaves sendet. Wenn der Master beispielsweise alle 10 Sekunden eine Synchronisationsanfrage sendet, würde es bei einem synchronisierten System möglicherweise mehrere Zyklen von 10 Sekunden dauern, um eine stabile Synchronisation zu erreichen. 
 \\\\
 Interessant ist noch wahrzunehmen, dass der Berkeley-Algorithmus nicht notwendigerweise auf einer kontinuierlichen Synchronisation basiert. Stattdessen kann die Synchronisation in bestimmten Intervallen oder als Reaktion auf bestimmte Ereignisse stattfinden. In solchen Fällen hängt die Konvergenzzeit von der Häufigkeit dieser Intervalle oder Ereignisse ab
 
@@ -617,8 +597,9 @@ Die grundlegenden Regeln für logische Uhren sind:
 \item Die Uhr des empfangenden Prozesses $P_j$ wird auf das Maximum der eigenen Uhr und des empfangenen Zeitstempels (plus eins) gesetzt: $C_j := \max(C_j, C_i + 1)$.
 \end{itemize}    
 \end{itemize}
-
+\warningvs{
 Die \enquote{happens-before} Relation, auch als kausale Ordnung bezeichnet, ist eine binäre Relation $\to$ auf der Menge der Ereignisse in einem verteilten System. Die Relation definiert eine partielle Ordnung auf der Menge der Ereignisse und erfasst die kausalen Beziehungen zwischen den Ereignissen. Mathematisch gesehen ist die \enquote{happens-before} Relation transitiv, asymmetrisch und irreflexiv.
+}
 
 Für zwei Ereignisse $e_1$ und $e_2$ gilt die \enquote{happens-before} Relation $e_1 \to e_2$, wenn eine der folgenden Bedingungen erfüllt ist:
 \begin{itemize}
@@ -626,7 +607,7 @@ Für zwei Ereignisse $e_1$ und $e_2$ gilt die \enquote{happens-before} Relation 
 \item $e_1$ ist das Senden einer Nachricht, und $e_2$ ist das Empfangen dieser Nachricht.
 \end{itemize}  
 Die logischen Uhren von Lamport ermöglichen es, die \enquote{happens-before} Relation in verteilten Systemen konsistent abzubilden. Wenn $e_1 \to e_2$ gilt, dann ist auch $C(e_1) < C(e_2)$, das heißt, der logische Zeitstempel des Ereignisses $e_1$ ist kleiner als der logische Zeitstempel des Ereignisses $e_2$. Es ist wichtig zu beachten, dass die Umkehrung dieser Aussage nicht unbedingt wahr ist: Wenn $C(e_1) < C(e_2)$, bedeutet dies nicht zwangsläufig, dass $e_1 \to e_2$. Die logischen Uhren erfassen die kausale Ordnung der Ereignisse, können aber keine vollständige Ordnung der Ereignisse liefern.
-
+\examplevs{
 Ein Beispiel für die Verwendung von logischen Uhren in einem verteilten System wäre die folgende Ereignisabfolge:
 \begin{itemize}
 \item Prozess $P_1$ führt ein internes Ereignis aus (Uhrzeit $C_1 = 1$).
@@ -636,6 +617,7 @@ Ein Beispiel für die Verwendung von logischen Uhren in einem verteilten System 
 \end{itemize}  
 
 In diesem Beispiel ist das Ereignis 3 kausal vor dem Ereignis 4, da die Nachricht von $P_1$ an $P_2$ gesendet wird. Die logischen Uhren reflektieren diese kausale Ordnung korrekt, da $C(e_3) < C(e_4)$ gilt. Allerdings kann aus den logischen Uhren allein keine vollständige Ordnung der Ereignisse abgeleitet werden, da beispielsweise die Ereignisse 1 und 2 unabhängig voneinander sind und keine direkte kausale Beziehung besteht.
+}
 \paragraph{Ordnungsbegriffe\\\\}
 In der Theorie der verteilten Systeme werden die Begriffe \enquote{teilweise Ordnung}, \enquote{totale Ordnung} und \enquote{kausale Ordnung} häufig verwendet, um die Beziehungen zwischen Ereignissen in solchen Systemen zu beschreiben.
 \\\\
@@ -650,7 +632,10 @@ Sowohl Lamport-Uhren als auch Vektoruhren sind Mechanismen zur Erfassung dieser 
 \subsubsection{Lamport Clock}
 In einem Transaktionskonzept können Lamport-Uhren verwendet werden, um eine konsistente, globale Ordnung der Transaktionen in einem verteilten System zu etablieren und somit mögliche Konflikte zu erkennen und aufzulösen. Zeitstempel, die auf Lamport-Uhren basieren, werden dabei den Transaktionen zugeordnet, um ihre relative Ordnung im System zu bestimmen.
 
-Betrachten wir ein verteiltes System mit mehreren Prozessen, die Transaktionen ausführen. Wir bezeichnen eine Transaktion als $T_i$, wobei $i$ einen eindeutigen Identifikator für die Transaktion darstellt. Um Lamport-Uhren in diesem Transaktionskonzept einzubinden, verwenden wir die folgenden Schritte:
+Betrachten wir ein verteiltes System mit mehreren Prozessen, die Transaktionen ausführen. Wir bezeichnen eine Transaktion als $T_i$, wobei $i$ einen eindeutigen Identifikator für die Transaktion darstellt. 
+
+\importantvs{
+Um Lamport-Uhren in diesem Transaktionskonzept einzubinden, verwenden wir die folgenden Schritte:
 \begin{itemize}
 \item Jeder Prozess $P_j$ im verteilten System führt eine logische Uhr $C_j$ mit. Jedes Mal, wenn ein Prozess eine Transaktion initiiert, wird die logische Uhr $C_j$ inkrementiert, und der Transaktion $T_i$ wird der Zeitstempel $C_j(T_i)$ zugeordnet.
 
@@ -658,9 +643,10 @@ Betrachten wir ein verteiltes System mit mehreren Prozessen, die Transaktionen a
 
 \item Bei der Ausführung von Transaktionen werden die zugeordneten Zeitstempel verwendet, um die relative Ordnung der Transaktionen zu bestimmen und mögliche Konflikte aufzulösen. Zum Beispiel kann ein Konflikt in Form eines schreibgeschützten Zugriffs auf dieselben Daten auftreten. In solchen Fällen kann der Zeitstempel verwendet werden, um die Transaktionen konsistent zu ordnen, indem die Transaktion mit dem kleineren Zeitstempel vor der Transaktion mit dem größeren Zeitstempel ausgeführt wird.
 \end{itemize}
-
+}
+\examplevs{
 Ein praktisches Beispiel für die Anwendung von Lamport-Uhren in einem Transaktionskonzept ist die Google Spanner-Datenbank. Spanner ist eine globale, verteilte Datenbank, die konsistente und konfliktfreie Transaktionen über mehrere Rechenzentren hinweg gewährleistet. Obwohl Spanner in seiner Implementierung nicht ausschließlich auf Lamport-Uhren basiert, verwendet es ein ähnliches Konzept, das als TrueTime bezeichnet wird. TrueTime ermöglicht es, eine globale Ordnung von Ereignissen und Transaktionen in der Spanner-Datenbank herzustellen, indem jedem Ereignis ein Zeitstempel zugeordnet wird, der sowohl aus einer logischen als auch aus einer physischen Komponente besteht.
-\\\\
+}
 Die Implementierung von Lamport-Uhren in verteilten Systemen bringt einige Herausforderungen mit sich. Einige der wesentlichen Schwierigkeiten sind:
 \begin{itemize}
 \item Skalierbarkeit: Lamport-Uhren funktionieren gut in kleinen verteilten Systemen, können jedoch bei einer großen Anzahl von Prozessen oder Knoten zu einer erhöhten Kommunikationslast führen. Dies liegt daran, dass jeder Prozess bei der Kommunikation sowohl seinen eigenen Zeitstempel als auch den des empfangenen Ereignisses aktualisieren muss.
@@ -669,11 +655,11 @@ Die Implementierung von Lamport-Uhren in verteilten Systemen bringt einige Herau
 \item Overhead: Die Verwendung von Lamport-Uhren führt zu einem zusätzlichen Overhead bei der Kommunikation zwischen den Prozessen. Jede Nachricht muss den Zeitstempel des sendenden Prozesses enthalten, und die logischen Uhren müssen bei jedem Nachrichtenaustausch aktualisiert werden. Dies erhöht den Kommunikationsaufwand und die Komplexität der Implementierung.
 \item Fehlertoleranz: In verteilten Systemen können Fehler wie Netzwerk- oder Prozessausfälle auftreten. Die Implementierung von Lamport-Uhren muss in der Lage sein, solche Fehler zu erkennen und angemessen darauf zu reagieren, um die konsistente Ordnung der Ereignisse aufrechtzuerhalten.
 \end{itemize}
-Um einige dieser Herausforderungen zu bewältigen, wurden alternative Ansätze wie vektorielle Uhren entwickelt. Vektorielle Uhren sind eine Erweiterung von Lamport-Uhren und bieten eine vollständige Ordnung der Ereignisse in verteilten Systemen. Sie verwenden einen Vektor von Zeitstempeln anstelle einer einzelnen logischen Uhr, wodurch sie die Ordnung der Ereignisse präziser abbilden können
+Um einige dieser Herausforderungen zu bewältigen, wurden alternative Ansätze entwickelt. 
 
 \subsubsection{Vector Clock}
 Vektoruhren sind eine Erweiterung der Lamport-Uhren, die zur Ordnung von Ereignissen in verteilten Systemen verwendet werden. Im Gegensatz zu Lamport-Uhren, die nur eine partielle Ordnung der Ereignisse ermöglichen, können Vektoruhren eine partielle Ordnungsrelation  über die Ereignisse herstellen, indem sie kausale Beziehungen und Konkurrenz zwischen Ereignissen präzise erfassen. Somit sind, anders als bei der Lamport Uhr, die kausalen Ordnungen auch umkehrbar.
-\\\\
+\importantvs{
 Mathematisch gesehen besteht eine Vektoruhr aus einem Vektor von Zeitstempeln, wobei jede Komponente des Vektors die Uhr eines bestimmten Prozesses im verteilten System repräsentiert. Wir bezeichnen den Vektor der logischen Uhren für einen Prozess $P_i$ als $V_i$, und die Komponente $V_i[j]$ repräsentiert die logische Uhr von $P_i$ für Prozess $P_j$. Die Vektoruhren folgen den folgenden Regeln:
 \begin{itemize}
 \item Jeder Prozess $P_i$ im verteilten System führt eine Vektoruhr $V_i$ mit der Länge $n$ (Anzahl der Prozesse im System) und initialisiert alle Komponenten auf Null.
@@ -691,40 +677,45 @@ Die Ordnung der Ereignisse in einem verteilten System mit Vektoruhren kann durch
 \item $E_1 \to E_2$ (happens-before): Wenn für alle $k$, $V_1[k] \leq V_2[k]$ und für mindestens ein $k$, $V_1[k] < V_2[k]$ gilt.
 \item $E_1 \parallel E_2$ (konkurrierend): Wenn für mindestens ein $k$, $V_1[k] < V_2[k]$ und für mindestens ein $k$, $V_2[k] < V_1[k]$ gilt.
 \end{itemize}
+}
+\importantvs{
 Um Vektoruhren in einem Transaktionskonzept zu integrieren, können wir die folgenden Schritte ausführen:
 \begin{itemize}
 \item Jeder Prozess $P_j$ im verteilten System führt eine Vektoruhr $V_j$ mit und weist jeder initiierten Transaktion $T_i$ den aktuellen Vektorzeitstempel $V_j(T_i)$ zu.
 \item Bei der Kommunikation zwischen Prozessen zur Koordination von Transaktionen (z. B. zum Sperren von Ressourcen oder zur Synchronisation) werden die Vektoruhren der beteiligten Prozesse entsprechend den oben beschriebenen Regeln aktualisiert.
 \item Bei der Ausführung von Transaktionen werden die zugeordneten Vektorzeitstempel verwendet, um die relative Ordnung der Transaktionen zu bestimmen und mögliche Konflikte aufzulösen. Zum Beispiel kann ein Konflikt in Form eines schreibgeschützten Zugriffs auf dieselben Daten auftreten. In solchen Fällen kann der Vektorzeitstempel verwendet werden, um die Transaktionen konsistent zu ordnen, indem die Transaktion, die gemäß der \enquote{happens-before} Relation früher stattfindet, vor der anderen Transaktion ausgeführt wird.
 \end{itemize}
+}
+
 Ein praktisches Beispiel für die Anwendung von Vektoruhren in einem Transaktionskonzept ist die Implementierung von verteilten Datenbanksystemen, die konsistente und konfliktfreie Transaktionen über mehrere Knoten hinweg gewährleisten müssen. Vektoruhren können dazu verwendet werden, eine globale Ordnung von Ereignissen und Transaktionen in der Datenbank herzustellen und dabei sowohl kausale Beziehungen als auch Konkurrenzverhältnisse präzise abzubilden. Dies ermöglicht es, die Datenbank auf einem konsistenten Zustand zu halten und mögliche Anomalien oder Inkonsistenzen in den verarbeiteten Transaktionen zu vermeiden.
 
 
 \subsubsection{Conflict-Free Replicated Data Types}
 Conflict-Free Replicated Data Types (CRDTs) sind eine Klasse von verteilten Datenstrukturen, die es ermöglichen, Replikationen von Daten in verteilten Systemen auf einfache Weise und ohne Koordination zu aktualisieren und zu synchronisieren. Sie sind besonders nützlich in Anwendungen, in denen es schwierig oder unpraktisch ist, eine globale Synchronisation oder Locking-Strategie einzusetzen. CRDTs bieten eine starke Eventualkonsistenz, was bedeutet, dass alle Replikationen des Datenbestands letztendlich den gleichen Zustand erreichen, solange keine weiteren Updates durchgeführt werden.
-\\\\
+\examplevs{
 Der mathematische Unterbau von CRDTs basiert auf den Konzepten der Halbgruppen, Monoiden und Gittern. Diese algebraischen Strukturen ermöglichen es, CRDTs durch ihre Operationen und Verknüpfungen zu definieren und deren Konvergenz- und Konsistenz-Eigenschaften zu untersuchen.
 
 Eine Halbgruppe ist eine algebraische Struktur $(S, \cdot)$, bei der $S$ eine Menge und $\cdot$ eine assoziative binäre Operation ist, die zwei Elemente aus $S$ zu einem weiteren Element aus $S$ verknüpft. Eine Halbgruppe wird zu einem Monoid, wenn es ein neutrales Element in $S$ gibt, so dass die Verknüpfung jedes Elements aus $S$ mit dem neutralen Element das ursprüngliche Element unverändert lässt.
 
 Ein Gitter ist eine algebraische Struktur $(L, \wedge, \vee)$, wobei $L$ eine Menge und $\wedge$, $\vee$ zwei binäre Operationen sind, die die Verknüpfung in Form von \enquote{meet} (min) und \enquote{join} (max) darstellen. Ein Gitter erfüllt die Idempotenz-, Kommutativ- und Assoziativgesetze sowie das Absorptionsgesetz.
-\\\\
+}
 CRDTs können in zwei grundlegende Kategorien eingeteilt werden: operation-basierte CRDTs (CmRDTs) und zustandsbasierte CRDTs (CvRDTs). Bei CmRDTs werden die Operationen auf den Replikationen ausgeführt und die entsprechenden Operationen an die anderen Replikationen weitergegeben. Bei CvRDTs hingegen wird der vollständige Zustand der Replikation übertragen und durch die Verwendung von Lattice-basierten Merge-Funktionen vereinigt.
-\\\\
+\paragraph{G-Counter)}\mbox{}\\
 Ein grundlegender CvRDT ist der Grow-only Counter (G-Counter). Sein Zustand kann als Monoid $(\mathbb{N}, +, 0)$ dargestellt werden, wobei $\mathbb{N}$ die Menge der natürlichen Zahlen, $+$ die Addition und $0$ das neutrale Element ist. Die G-Counter-Operationen umfassen das Inkrementieren und das Abrufen
 des Wertes. Um den G-Counter zu inkrementieren, wird die lokale Replikation des betreffenden Knotens um eins erhöht. Um den Wert des G-Counters abzurufen, werden die Werte aller Replikationen summiert.
-\\\\
+\paragraph{2P-Set)}\mbox{}\\
 Ein weiteres Beispiel für einen CvRDT ist der 2P-Set (Zwei-Phasen-Set), der das Hinzufügen und Entfernen von Elementen in einem verteilten Set ermöglicht. Der Zustand des 2P-Set kann als Paar von Monoiden dargestellt werden, wobei das erste Monoid $(A, \cup, \emptyset)$ das Hinzufügen von Elementen und das zweite Monoid $(R, \cup, \emptyset)$ das Entfernen von Elementen repräsentiert. Hierbei ist $A$ das \enquote{add}-Set, $R$ das \enquote{remove}-Set, $\cup$ die Vereinigungsmenge und $\emptyset$ die leere Menge als neutrales Element.
 
 Um ein Element $x$ zu einem 2P-Set hinzuzufügen, fügt man es dem \enquote{add}-Set $A$ hinzu. Um ein Element $x$ aus einem 2P-Set zu entfernen, fügt man es dem \enquote{remove}-Set $R$ hinzu. Um den aktuellen Zustand des Sets abzurufen, berechnet man die Differenz zwischen dem \enquote{add}-Set $A$ und dem \enquote{remove}-Set $R$, das heißt $A \setminus R$. Dabei ist es wichtig zu beachten, dass ein entferntes Element nicht erneut hinzugefügt werden kann, da es sich bereits im \enquote{remove}-Set befindet.
-\\\\
+\paragraph{Konvergenzeigenschaften von CRDTs )}\mbox{}\\
 Die Konvergenzeigenschaften von CRDTs ergeben sich aus den algebraischen Strukturen, auf denen sie basieren. Da sowohl Monoiden als auch Gitter Idempotenz-, Kommutativ- und Assoziativgesetze erfüllen, können Updates auf CRDTs in beliebiger Reihenfolge angewendet werden, ohne die Konsistenz der Daten zu beeinträchtigen. Solange alle Updates schließlich auf allen Replikationen angewendet werden, wird das verteilte System einen konsistenten Zustand erreichen.
 \\\\
 CRDTs und logische Uhren können gemeinsam verwendet werden, um verteilte Datenstrukturen zu entwickeln, die sowohl zeitliche Kausalität als auch Eventualkonsistenz gewährleisten. Eine Möglichkeit, logische Uhren in CRDTs zu integrieren, besteht darin, die Zustandsinformationen der CRDTs mit Version Vektoren oder Lamport-Zeitstempeln zu versehen.
 Ein Version Vektor ist eine Datenstruktur, die für jeden Knoten im verteilten System einen Zähler enthält. Diese Zähler werden bei jedem Update des Knotens inkrementiert und ermöglichen es, die Kausalitätsbeziehungen zwischen den Ereignissen im verteilten System zu bestimmen. Lamport-Zeitstempel sind ähnlich, aber sie verwenden einzelne Zähler für das gesamte System und erhöhen den Zähler bei jedem Ereignis, das auftritt.
 \\\\
 Durch die Verwendung von logischen Uhren in Kombination mit CRDTs kann man verteilte Datenstrukturen entwickeln, die sowohl kausale Konsistenz als auch Eventualkonsistenz gewährleisten. Ein Beispiel dafür ist das Dot-Context Labeling Schema, das CRDTs mit logischen Uhren verbindet, um kausale verteilte Datenstrukturen zu erstellen, die Ereignisse im verteilten System in der richtigen zeitlichen Reihenfolge betrachten und dabei dennoch eine Eventualkonsistenz aufrechterhalten.
-\\\\
+
+\paragraph{Dot-Context Labeling}\mbox{}\\
 Das Dot-Context Labeling Schema wurde entwickelt, um die Schwierigkeiten bei der Verwaltung von verteilten Datenstrukturen zu bewältigen, die sowohl kausale Konsistenz als auch Eventualkonsistenz erfordern. Ein Dot besteht aus einem Paar (i, c), wobei i die ID des Knotens im verteilten System und c der logische Zeitstempel des Knotens zum Zeitpunkt der Erstellung des Elements ist.
 \\\\
 Die Verwendung von Dots ermöglicht es, den kausalen Zusammenhang zwischen den Elementen in der verteilten Datenstruktur zu bestimmen, indem man ihre Labels vergleicht. Wenn zwei Elemente denselben Dot haben, sind sie identisch. Wenn zwei Elemente unterschiedliche Dots haben und die logischen Zeitstempel ihrer Dots in einer kausalen Beziehung stehen, können sie in der richtigen zeitlichen Reihenfolge betrachtet werden.
@@ -745,25 +736,25 @@ Das Dot-Context Labeling Schema ermöglicht es in diesem Beispiel, Textänderung
 
 \subsubsection{Locking}
 In verteilten Systemen ist die Koordination von Zugriffen auf gemeinsam genutzte Ressourcen eine wichtige Aufgabe, um Datenkonsistenz und Integrität zu gewährleisten. Eine weit verbreitete Technik zur Koordination solcher Zugriffe ist das \textit{Locking}. Dabei werden Ressourcen gesperrt, um gleichzeitige Zugriffe und damit verbundene Inkonsistenzen zu vermeiden. In diesem Abschnitt geben wir eine Einführung in Locking-Verfahren in verteilten Systemen und diskutieren grundlegende Konzepte und Herausforderungen.
-\\\\
-Ein Locking-Verfahren in verteilten Systemen basiert auf der Idee, dass ein Prozess, der auf eine gemeinsame Ressource zugreifen möchte, zunächst eine Erlaubnis (einen \textit{Lock}) anfordert und erhält. Während ein Prozess einen Lock auf einer Ressource hält, sind andere Prozesse daran gehindert, auf dieselbe Ressource zuzugreifen. Nach Abschluss der Operation gibt der Prozess den Lock wieder frei, sodass andere Prozesse darauf zugreifen können. Es gibt verschiedene Locking-Verfahren, die je nach Anwendungsfall eingesetzt werden, wie beispielsweise \textit{Shared Locks} und \textit{Exclusive Locks}.
+\importantvs{
+Ein Locking-Verfahren in verteilten Systemen basiert auf der Idee, dass ein Prozess, der auf eine gemeinsame Ressource zugreifen möchte, zunächst eine Erlaubnis (einen \textit{Lock}) anfordert und erhält. Während ein Prozess einen Lock auf einer Ressource hält, sind andere Prozesse daran gehindert, auf dieselbe Ressource zuzugreifen. Nach Abschluss der Operation gibt der Prozess den Lock wieder frei, sodass andere Prozesse darauf zugreifen können.
+}
+Es gibt verschiedene Locking-Verfahren, die je nach Anwendungsfall eingesetzt werden, wie beispielsweise \textit{Shared Locks} und \textit{Exclusive Locks}.
 \\\\
 Ein \textbf{Shared Lock}, auch bekannt als Lese-Sperre, erlaubt es mehreren Prozessen oder Threads, gleichzeitig auf eine bestimmte Ressource zuzugreifen, solange sie diese nur lesen und nicht verändern. Dies ist sinnvoll, wenn die Daten von mehreren Prozessen gleichzeitig gelesen werden müssen und es nicht wichtig ist, ob die Daten während des Lesevorgangs verändert werden. Shared Locks erhöhen die Konkurrenz und verbessern die Leistung, da sie den gleichzeitigen Zugriff auf Ressourcen erlauben, solange keine Änderungen vorgenommen werden.
 \\\\
 Ein \textbf{Exclusive Lock}, auch bekannt als Schreib-Sperre, erlaubt es dagegen nur einem einzigen Prozess oder Thread, auf eine bestimmte Ressource zuzugreifen. Dieser Lock wird verwendet, wenn ein Prozess oder Thread die Daten verändern muss. Während ein Exclusive Lock gehalten wird, können keine anderen Prozesse oder Threads, auch nicht solche, die nur lesen wollen, auf die Ressource zugreifen. Dies stellt sicher, dass die Daten konsistent bleiben und keine Konflikte oder unerwarteten Zustände auftreten.
-\\\\
+
 In verteilten Systemen ist die Implementierung von Locking-Verfahren komplexer als in zentralisierten Systemen, da Prozesse und Ressourcen über mehrere Knoten verteilt sind. Eine der Herausforderungen besteht darin, einen globalen Zustand der Locks im gesamten verteilten System zu verwalten. Um dies zu erreichen, können zentrale oder dezentrale Koordinatoren verwendet werden. Zentrale Koordinatoren stellen einen einzelnen Anlaufpunkt für Lock-Anforderungen dar, was zu einem Engpass führen kann, während dezentrale Koordinatoren eine bessere Skalierbarkeit ermöglichen, aber auch eine höhere Komplexität aufweisen.
 
 Ein weiteres Problem in verteilten Locking-Systemen ist die Vermeidung von Deadlocks, bei denen zwei oder mehr Prozesse in einem Zustand verharren, in dem jeder auf die Freigabe eines Locks wartet, der von einem anderen gehalten wird. Um Deadlocks zu verhindern oder aufzulösen, können verschiedene Strategien angewendet werden, wie zum Beispiel das Timeout-basierte Abbrechen von Lock-Anforderungen, das Erkennen von Deadlocks und das geordnete Anfordern von Locks.
 
-Trotz der Herausforderungen bieten Locking-Verfahren in verteilten Systemen eine wichtige Möglichkeit, die Konsistenz und Integrität von Daten in solchen Systemen zu gewährleisten. Durch den Einsatz geeigneter Locking-Strategien und die Berücksichtigung von Skalierbarkeit, Deadlock-Vermeidung und Koordinationsmechanismen können verteilte Systeme effektiv koordiniert und verwaltet werden.
-
 In verteilten Systemen können verschiedene Locking-Ansätze eingesetzt werden, um den Zugriff auf gemeinsam genutzte Ressourcen zu koordinieren. Im Folgenden werden zwei praktische Beispiele für Locking-Implementierungen in verteilten Systemen vorgestellt.
-\\\\
+\paragraph{Zentrale Lock-Manager }\mbox{}\\
 Der zentrale Lock-Manager ist die einfachere Lösung, der für die Verwaltung und Zuweisung von Locks für gemeinsam genutzte Ressourcen verantwortlich sein kann. In einem verteilten Datenbankmanagementsystem kann beispielsweise ein zentraler Lock-Manager die Zugriffe auf Tabellen oder Zeilen in der Datenbank koordinieren.
 
 Angenommen, mehrere Transaktionen möchten gleichzeitig auf eine bestimmte Zeile in einer verteilten Datenbank zugreifen. In diesem Fall senden die Transaktionen Lock-Anforderungen an den zentralen Lock-Manager. Der Lock-Manager entscheidet, welcher Transaktion der Zugriff gewährt wird, und sendet eine entsprechende Antwort zurück. Die anderen Transaktionen müssen warten, bis der Lock freigegeben wird. Sobald die Transaktion, die den Lock hält, ihre Arbeit abgeschlossen hat, gibt sie den Lock frei und informiert den zentralen Lock-Manager, der den Lock dann an eine wartende Transaktion weitergibt.
-\\\\
+\paragraph{2PL}\mbox{}\\
 Das \textbf{Zweiphasen-Locking-Protokoll} (2PL) ist eine gängige Technik zur Sicherstellung der Serialisierbarkeit von Transaktionen in Datenbanksystemen. Es kann auch in verteilten Systemen eingesetzt werden, um die Konsistenz der gemeinsam genutzten Ressourcen zu gewährleisten. Beim zweiphasigen Locking gibt es zwei Phasen: die Lock-Phase, in der Transaktionen Locks auf Ressourcen anfordern, und die Unlock-Phase, in der die Locks freigegeben werden.
 \\\\
 Angenommen, mehrere Transaktionen möchten in einem verteilten System auf verschiedene Ressourcen zugreifen. Jede Transaktion führt die folgenden Schritte aus:
@@ -816,7 +807,7 @@ Im Kontext verteilter Systeme können die Philosophen als verteilte Prozesse und
 \end{itemize}
 
 Um das Philosophenproblem in verteilten Systemen zu lösen, müssen Strategien entwickelt werden, die Deadlocks verhindern, Verhungern minimieren und die Leistung optimieren. Einige mögliche Lösungsansätze sind die Verwendung eines zentralen Koordinators, die Implementierung einer Hierarchie von Ressourcen, die Anwendung von Timeout- oder Lease-basierten Mechanismen und die Nutzung von Quorum-basierten Verfahren. Jeder dieser Ansätze hat seine eigenen Vor- und Nachteile und kann je nach den Anforderungen des spezifischen verteilten Systems angepasst werden.
-
+\importantvs{
 Bei der zentralisierten Lösung wird ein zentraler Koordinator verwendet, um die Freigabe und Belegung der Ressourcen (in diesem Fall Gabeln) zu verwalten. Die Philosophen senden Anfragen an den Koordinator, bevor sie versuchen, Gabeln aufzunehmen oder abzulegen. Der Koordinator entscheidet, ob ein Philosoph die angeforderten Gabeln erhalten kann, und antwortet entsprechend.
 
 Für die Implementierung in Java können Sie separate Task für jeden Philosophen erstellen und einen weiteren Task für den zentralen Koordinator. Die Kommunikation zwischen Philosophen und Koordinator kann über eine BlockingQueue erfolgen.
@@ -826,15 +817,20 @@ Ein zentraler Koordinator kann bei sehr großen Systemen mit vielen Prozessen od
 Erweitert man diesen Ansatz um eine Hierarchie der Ressourcen sind einige Probleme gelöst, wie eine einfache und effektive Methode zur Vermeidung von Deadlocks.
 
 Versucht man den Ansatz mit den Hierarchien in einen dezentralen Ansatz zu überführen, kann es dennoch zu Verhungern führen, wenn einige Philosophen immer wieder von anderen überstimmt werden.
-
+}
+\importantvs{
 In der dezentralisierten Lösung gibt es keinen zentralen Koordinator. Stattdessen versuchen die Philosophen selbstständig, Gabeln aufzunehmen und abzulegen, indem sie einige Regeln befolgen, um Deadlocks und Verhungern zu vermeiden. Eine mögliche Strategie ist die Hierarchie der Ressourcen: Jede Gabel wird einer Priorität zugewiesen, und die Philosophen müssen die Gabeln in aufsteigender Reihenfolge der Priorität aufnehmen.
 
 In Java können Sie auch für diesen Ansatz separate Tasks für jeden Philosophen erstellen. Die Philosophen können auf gemeinsame Ressourcen (Gabeln) zugreifen und Lock-Objekte verwenden, um den Zugriff auf die Gabeln zu synchronisieren.
-
+}
 Die Wahl des geeigneten Lösungsansatzes für das Philosophenproblem in verteilten Systemen hängt von den spezifischen Anforderungen des Systems und den damit verbundenen Herausforderungen ab. Einige Systeme können von zentralisierten Lösungen profitieren, während andere dezentrale oder quorum-basierte Ansätze bevorzugen. In jedem Fall sollte die Lösung sorgfältig abgewogen und an die Bedürfnisse des Systems angepasst werden, dieses Script bietet im nächsten Kapitel algorithmische Lösungsstrategien an.
 
 \paragraph{Goldene Regel\\\\}
-Eine goldene Regel bei physischen Uhren soll aber bereits jetzt herausgestellt werden. Physische Uhren werden nicht zurückgestellt. Hier sind einige der Hauptgründe, warum das Zurückstellen von Uhren in einem verteilten System problematisch sein kann:
+Eine goldene Regel bei physischen Uhren soll aber bereits jetzt herausgestellt werden. 
+\warningvs{
+Physische Uhren werden nicht zurückgestellt. 
+}
+Hier sind einige der Hauptgründe, warum das Zurückstellen von Uhren in einem verteilten System problematisch sein kann:
 \begin{itemize}
 \item Verletzung der Ordnung: Wenn eine Uhr zurückgestellt wird, kann dies dazu führen, dass die Ordnung der Ereignisse und Operationen verletzt wird. In einem verteilten System ist es wichtig, dass die Reihenfolge der Ereignisse und Operationen konsistent ist, um Inkonsistenzen zu vermeiden. Durch das Zurückstellen der Uhr kann es passieren, dass ein Ereignis, das später auftritt, einen älteren Zeitstempel erhält als ein früheres Ereignis, was zu Fehlern und Inkonsistenzen führen kann.
 \item Doppelte Zeitstempel: Das Zurückstellen einer Uhr kann dazu führen, dass mehrere Ereignisse denselben Zeitstempel erhalten. Dies kann es schwierig machen, die tatsächliche Reihenfolge der Ereignisse zu bestimmen und kann zu Inkonsistenzen im verteilten System führen.
@@ -887,7 +883,7 @@ Beispielsweise könnte ein einfacher Koordinationsprozess folgendermaßen ausseh
 
 Es ist wichtig zu beachten, dass in der Praxis die Koordination von Abstimmungen in verteilten Systemen eine komplexe Aufgabe ist, insbesondere in Anbetracht von Knotenausfällen, Netzwerkverzögerungen und -partitionen. Daher sind Konsensprotokolle wie Paxos und Raft essentiell, um sicherzustellen, dass das System korrekt funktioniert, auch unter schwierigen Bedingungen.
 
-\subsubsection{Zentral vs dezentral}
+\subsubsection{Zentrale vs dezentrale Konsensbildung}
 
 In zentralisierten Ansätzen zur Konsensbildung in verteilten Systemen wird ein einzelner Knoten, oft als \enquote{Leader} oder \enquote{Koordinator} bezeichnet, verwendet, um die Konsensbildung zu steuern. Dieser Knoten ist verantwortlich für die Initiierung der Abstimmungen, die Sammlung der Stimmen der anderen Knoten und die Entscheidung, ob ein Konsens erreicht wurde. Der Vorteil dieses Ansatzes liegt in seiner Einfachheit, da die Koordination und Kontrolle auf einen einzigen Knoten konzentriert ist. Allerdings hat dieser Ansatz auch Nachteile. Der Koordinator stellt einen Single Point of Failure dar: Wenn der Koordinator ausfällt, kann das System nicht mehr funktionieren, bis der Koordinator wiederhergestellt ist oder ein neuer Koordinator gewählt wird. Zudem kann der Koordinator zu einem Flaschenhals für die Leistung des Systems werden, insbesondere wenn das System eine große Anzahl von Knoten hat oder wenn die Anforderungen an die Konsensbildung hoch sind.
 
@@ -992,10 +988,10 @@ Bevor sich den einzelnen Techniken mit mehr Details gewidmet werden soll, soll d
 Die Charakterisierung der Fehlerarten hilft dabei, ihre möglichen Auswirkungen auf das System zu erkennen und angemessene Maßnahmen zur Fehlerbehebung und -vermeidung zu ergreifen.
 In verteilten Systemen können Fehlerarten in vier Hauptkategorien eingeteilt werden:
 \begin{itemize}
-\item Hardware-Fehler: Diese Fehler treten auf, wenn die physischen Komponenten des Systems, wie Prozessoren, Speicher oder Netzwerkgeräte, versagen oder beschädigt werden. Hardware-Fehler können aufgrund von Alterung, Herstellungsfehlern, Umgebungseinflüssen oder externen Einwirkungen wie Stromausfällen auftreten.
-\item Software-Fehler: Software-Fehler sind Fehler, die aufgrund von Fehlern im Code, Design oder der Implementierung der Software in einem verteilten System entstehen. Beispiele für Software-Fehler sind Programmierfehler, Logikfehler oder fehlerhafte Konfigurationen, die zu inkorrektem Verhalten, Systemabstürzen oder inkonsistenten Zuständen führen können.
-\item Kommunikationsfehler: In verteilten Systemen ist die Kommunikation zwischen den Knoten von entscheidender Bedeutung. Kommunikationsfehler treten auf, wenn Nachrichten zwischen den Knoten verloren gehen, verzögert werden oder fehlerhaft sind. Dies kann aufgrund von Netzwerkproblemen, Überlastung oder Fehlern in den Kommunikationsprotokollen geschehen.
-\item Byzantinische Fehler: Byzantinische Fehler sind eine besondere Art von Fehlern, bei denen Knoten im verteilten System fehlerhafte, inkonsistente oder böswillige Informationen weitergeben können. Diese Fehler sind schwer zu erkennen und zu beheben, da sie von Fehlern in der Hard- oder Software, menschlichen Fehlern oder sogar böswilligen Angriffen stammen können.
+\item \textbf{Hardware-Fehler:} Diese Fehler treten auf, wenn die physischen Komponenten des Systems, wie Prozessoren, Speicher oder Netzwerkgeräte, versagen oder beschädigt werden. Hardware-Fehler können aufgrund von Alterung, Herstellungsfehlern, Umgebungseinflüssen oder externen Einwirkungen wie Stromausfällen auftreten.
+\item \textbf{Software-Fehler:} Software-Fehler sind Fehler, die aufgrund von Fehlern im Code, Design oder der Implementierung der Software in einem verteilten System entstehen. Beispiele für Software-Fehler sind Programmierfehler, Logikfehler oder fehlerhafte Konfigurationen, die zu inkorrektem Verhalten, Systemabstürzen oder inkonsistenten Zuständen führen können.
+\item \textbf{Kommunikationsfehler:} In verteilten Systemen ist die Kommunikation zwischen den Knoten von entscheidender Bedeutung. Kommunikationsfehler treten auf, wenn Nachrichten zwischen den Knoten verloren gehen, verzögert werden oder fehlerhaft sind. Dies kann aufgrund von Netzwerkproblemen, Überlastung oder Fehlern in den Kommunikationsprotokollen geschehen.
+\item \textbf{Byzantinische Fehler:} Byzantinische Fehler sind eine besondere Art von Fehlern, bei denen Knoten im verteilten System fehlerhafte, inkonsistente oder böswillige Informationen weitergeben können. Diese Fehler sind schwer zu erkennen und zu beheben, da sie von Fehlern in der Hard- oder Software, menschlichen Fehlern oder sogar böswilligen Angriffen stammen können.
 \end{itemize}
 In der Literatur zu verteilten Systemen werden die Begriffe \enquote{failure}, \enquote{error} und \enquote{fault} oft verwendet, um unterschiedliche Aspekte von Fehlern und ihren Auswirkungen auf das System zu beschreiben. Es ist wichtig, diese Begriffe korrekt zu verwenden, um Missverständnisse zu vermeiden. Hier ist eine Differenzierung der Begriffe für verteilte Systeme:
 \begin{itemize}
@@ -1009,14 +1005,19 @@ In der Diskussion über verteilte Systeme ist es entscheidend, diese Begriffe kl
 \subsubsection{Fehlermodelle}
 
 In verteilten Systemen sind die Begriffe Verfügbarkeit, Zuverlässigkeit, Sicherheit und Wartbarkeit von zentraler Bedeutung und unterscheiden sich in ihren spezifischen Anforderungen und Eigenschaften.
-
-Die Verfügbarkeit bezieht sich auf die Fähigkeit eines Systems, zu jedem gewünschten Zeitpunkt betriebsbereit und zugänglich zu sein. Verfügbarkeit ist besonders wichtig in Systemen, die kontinuierlichen Betrieb erfordern, wie etwa in Online-Handelsplattformen oder Flugverkehrskontrollsystemen. Verfügbarkeit wird oft in Prozentzahlen ausgedrückt, wobei ein \enquote{Five-Nines} System (99,999\% verfügbar) als hochverfügbar gilt.
-\\\\
-Die Zuverlässigkeit hingegen beschäftigt sich mit der Fähigkeit eines Systems, korrekte und konsistente Ergebnisse zu liefern. Ein zuverlässiges System ist eines, das im Laufe der Zeit konsequent und vorhersehbar funktioniert, ohne unerwartete Ausfälle oder Fehlfunktionen. Es ist entscheidend, dass das System bei der Ausführung seiner Aufgaben korrekt und ohne Fehler arbeitet.
-\\\\
-Sicherheit bezieht sich auf den Schutz eines Systems vor böswilligen Angriffen oder unbeabsichtigten Schäden. Dies kann den Schutz von Daten vor unbefugtem Zugriff, die Vermeidung von Dienstunterbrechungen durch Angriffe und die Gewährleistung der Integrität von Transaktionen und Daten umfassen. Sicherheit ist in verteilten Systemen eine besondere Herausforderung, da die Daten über mehrere Standorte und möglicherweise über öffentliche Netzwerke hinweg verteilt sind.
-\\\\
-Die Wartbarkeit schließlich bezieht sich auf die Fähigkeit, Änderungen an einem System vorzunehmen, sei es zur Behebung von Fehlern, zur Verbesserung der Funktion oder zur Anpassung an neue Anforderungen. Ein gut wartbares System ist eines, das so konzipiert ist, dass es einfach zu verstehen, zu modifizieren und zu verbessern ist. Dies kann durch gute Software-Design-Praktiken, ausführliche Dokumentation und die Verwendung von Standards und Konventionen erreicht werden.
+\importantvs{
+Die \textbf{Verfügbarkeit} bezieht sich auf die Fähigkeit eines Systems, zu jedem gewünschten Zeitpunkt betriebsbereit und zugänglich zu sein. Verfügbarkeit ist besonders wichtig in Systemen, die kontinuierlichen Betrieb erfordern, wie etwa in Online-Handelsplattformen oder Flugverkehrskontrollsystemen. Verfügbarkeit wird oft in Prozentzahlen ausgedrückt, wobei ein \enquote{Five-Nines} System (99,999\% verfügbar) als hochverfügbar gilt.
+}
+\importantvs{
+Die \textbf{Zuverlässigkeit}  beschäftigt sich mit der Fähigkeit eines Systems, korrekte und konsistente Ergebnisse zu liefern. Ein zuverlässiges System ist eines, das im Laufe der Zeit konsequent und vorhersehbar funktioniert, ohne unerwartete Ausfälle oder Fehlfunktionen. Es ist entscheidend, dass das System bei der Ausführung seiner Aufgaben korrekt und ohne Fehler arbeitet.
+}
+\importantvs{
+\textbf{Sicherheit} bezieht sich auf den Schutz eines Systems vor böswilligen Angriffen oder unbeabsichtigten Schäden. Dies kann den Schutz von Daten vor unbefugtem Zugriff, die Vermeidung von Dienstunterbrechungen durch Angriffe und die Gewährleistung der Integrität von Transaktionen und Daten umfassen. Sicherheit ist in verteilten Systemen eine besondere Herausforderung, da die Daten über mehrere Standorte und möglicherweise über öffentliche Netzwerke hinweg verteilt sind.
+}
+\importantvs{
+Die \textbf{Wartbarkeit} schließlich bezieht sich auf die Fähigkeit, Änderungen an einem System vorzunehmen, sei es zur Behebung von Fehlern, zur Verbesserung der Funktion oder zur Anpassung an neue Anforderungen. Ein gut wartbares System ist eines, das so konzipiert ist, dass es einfach zu verstehen, zu modifizieren und zu verbessern ist. 
+}
+Dies kann durch gute Software-Design-Praktiken, ausführliche Dokumentation und die Verwendung von Standards und Konventionen erreicht werden.
 \begin{itemize}
 \item \textbf{Crash failure} tritt auf, wenn ein System plötzlich und ohne Vorwarnung aufhört zu funktionieren, bis zu diesem Zeitpunkt jedoch korrekt gearbeitet hat. Ein Beispiel dafür könnte ein Webserver sein, der plötzlich aufhört, Anfragen zu bearbeiten, möglicherweise aufgrund eines Hardware-Ausfalls oder eines schwerwiegenden Softwarefehlers.
 \item \textbf{Omission failure} tritt auf, wenn ein System nicht auf eingehende Anfragen reagiert. Ein Beispiel hierfür könnte ein E-Mail-Server sein, der aufhört, eingehende E-Mails zu akzeptieren, aber weiterhin ausgehende E-Mails sendet.
@@ -1029,13 +1030,14 @@ Die Wartbarkeit schließlich bezieht sich auf die Fähigkeit, Änderungen an ein
 \item \textbf{Arbitrary failure} tritt auf, wenn das System in einer Weise versagt, die nicht durch die anderen Fehlermodelle erfasst wird. Dies könnte alles umfassen, von unvorhersehbarem Verhalten aufgrund von Software-Bugs bis hin zu unerwarteten Effekten aufgrund von Hardware-Ausfällen. Ein Beispiel für einen beliebigen Fehler könnte ein verteiltes File-Sharing-System sein, das aufgrund eines unerwarteten Datenkorruptionsproblems beginnt, beschädigte Dateien zu verteilen.
 \end{itemize}
 Die Fehlersemantik bei der Nachrichtenübertragung in asynchronen und synchronen Systemen kann sich aufgrund der unterschiedlichen Charakteristika und Anforderungen dieser Systeme erheblich unterscheiden.
-
-In einem synchronen System gibt es strenge Timing-Anforderungen, und Nachrichten müssen innerhalb einer bestimmten Zeit übertragen und verarbeitet werden. Fehler können hier zum Beispiel auftreten, wenn eine Nachricht nicht innerhalb des erwarteten Zeitintervalls ankommt oder wenn die Verarbeitung einer Nachricht zu lange dauert. In solchen Fällen kann das System ein Timeout implementieren, bei dem es einen Fehler meldet, wenn eine Nachricht nicht innerhalb einer bestimmten Zeit ankommt oder verarbeitet wird. Des Weiteren können Fehler bei der Synchronisation auftreten, wenn beispielsweise die Uhrzeiten der Systemkomponenten nicht korrekt synchronisiert sind.
-
-In asynchronen Systemen hingegen gibt es keine festen Timing-Anforderungen, und Nachrichten können zu beliebigen Zeiten übertragen und verarbeitet werden. Fehler können hier zum Beispiel auftreten, wenn eine Nachricht verloren geht oder in der falschen Reihenfolge ankommt. Da es keine festen Timing-Anforderungen gibt, können solche Fehler schwieriger zu erkennen und zu handhaben sein. Oftmals werden Techniken wie Sequenznummern oder Quittungen verwendet, um die korrekte Übertragung und Reihenfolge von Nachrichten zu gewährleisten.
-
+\importantvs{
+In einem \textbf{synchronen System} gibt es strenge Timing-Anforderungen, und Nachrichten müssen innerhalb einer bestimmten Zeit übertragen und verarbeitet werden. Fehler können hier zum Beispiel auftreten, wenn eine Nachricht nicht innerhalb des erwarteten Zeitintervalls ankommt oder wenn die Verarbeitung einer Nachricht zu lange dauert. In solchen Fällen kann das System ein Timeout implementieren, bei dem es einen Fehler meldet, wenn eine Nachricht nicht innerhalb einer bestimmten Zeit ankommt oder verarbeitet wird. Des Weiteren können Fehler bei der Synchronisation auftreten, wenn beispielsweise die Uhrzeiten der Systemkomponenten nicht korrekt synchronisiert sind.
+}
+\importantvs{
+In \textbf{asynchronen Systemen} hingegen gibt es keine festen Timing-Anforderungen, und Nachrichten können zu beliebigen Zeiten übertragen und verarbeitet werden. Fehler können hier zum Beispiel auftreten, wenn eine Nachricht verloren geht oder in der falschen Reihenfolge ankommt. Da es keine festen Timing-Anforderungen gibt, können solche Fehler schwieriger zu erkennen und zu handhaben sein. Oftmals werden Techniken wie Sequenznummern oder Quittungen verwendet, um die korrekte Übertragung und Reihenfolge von Nachrichten zu gewährleisten.
+}
 Darüber hinaus kann es in beiden Arten von Systemen zu Übertragungsfehlern kommen, wenn beispielsweise Nachrichten aufgrund von Netzwerkproblemen verloren gehen oder beschädigt werden. In solchen Fällen können verschiedene Fehlererkennungs- und -korrekturtechniken verwendet werden, wie z. B. Prüfsummen, um die Integrität der übertragenen Daten zu überprüfen, oder Wiederholungsanfragen, um verlorene oder beschädigte Nachrichten erneut zu senden.
-
+\\\\
 Halting-Fehler oder Crash-Fehler in verteilten Systemen treten auf, wenn ein Knoten (oder mehrere Knoten) plötzlich und ohne Vorwarnung aufhört zu funktionieren, obwohl er bis zu diesem Zeitpunkt korrekt gearbeitet hat. Diese Art von Fehlern kann auf verschiedene Weisen klassifiziert werden, basierend auf verschiedenen Kriterien:
 \begin{itemize}
 \item Dauer des Ausfalls: Wenn der Ausfall vorübergehend ist und das System nach einer gewissen Zeit wieder normal funktioniert, spricht man von einem transienten Fehler. Ein permanentes Versagen tritt auf, wenn das System nicht in der Lage ist, sich selbst zu erholen und manuell repariert oder ersetzt werden muss.
@@ -1062,9 +1064,9 @@ Redundanz bezeichnet in der Informatik und speziell in verteilten Systemen die a
 
 In verteilten Systemen kann Redundanz auf verschiedenen Ebenen implementiert werden, einschließlich Datenredundanz, Rechenredundanz und Kommunikationsredundanz.
 \begin{itemize}
-\item Datenredundanz: Dabei werden mehrere Kopien der gleichen Daten auf unterschiedlichen Knoten im verteilten System gespeichert. Dies kann dazu beitragen, Datenverluste bei Ausfällen einzelner Knoten zu vermeiden und gleichzeitig die Datenverfügbarkeit zu erhöhen. Ein Beispiel für eine solche Strategie ist die Replikation von Daten in verteilten Datenbanksystemen. Hier werden die Daten auf mehrere Server repliziert, sodass bei Ausfall eines Servers die Daten auf den verbleibenden Servern weiterhin verfügbar sind.
-\item Rechenredundanz: Bei dieser Art der Redundanz werden Berechnungen auf mehreren Knoten im verteilten System parallel ausgeführt. Dies erhöht die Zuverlässigkeit, da bei Ausfall eines Knotens andere Knoten die Ergebnisse liefern können. Ein Beispiel hierfür ist das MapReduce-Modell, das in groß angelegten Datenverarbeitungsaufgaben wie z.B. bei Google und Hadoop eingesetzt wird. Bei MapReduce werden die Daten auf mehrere Knoten aufgeteilt (Map-Phase), die ihre Teilaufgaben unabhängig voneinander ausführen. Die Ergebnisse werden dann in der Reduce-Phase zusammengeführt.
-\item Kommunikationsredundanz: Diese Form der Redundanz beinhaltet die Bereitstellung von mehreren Kommunikationspfaden zwischen den Knoten in einem verteilten System. Im Falle eines Netzwerkausfalls können Nachrichten über alternative Pfade übertragen werden, was die Kommunikationszuverlässigkeit und -verfügbarkeit erhöht.
+\item \textbf{Datenredundanz:} Dabei werden mehrere Kopien der gleichen Daten auf unterschiedlichen Knoten im verteilten System gespeichert. Dies kann dazu beitragen, Datenverluste bei Ausfällen einzelner Knoten zu vermeiden und gleichzeitig die Datenverfügbarkeit zu erhöhen. Ein Beispiel für eine solche Strategie ist die Replikation von Daten in verteilten Datenbanksystemen. Hier werden die Daten auf mehrere Server repliziert, sodass bei Ausfall eines Servers die Daten auf den verbleibenden Servern weiterhin verfügbar sind.
+\item \textbf{Rechenredundanz:} Bei dieser Art der Redundanz werden Berechnungen auf mehreren Knoten im verteilten System parallel ausgeführt. Dies erhöht die Zuverlässigkeit, da bei Ausfall eines Knotens andere Knoten die Ergebnisse liefern können. Ein Beispiel hierfür ist das MapReduce-Modell, das in groß angelegten Datenverarbeitungsaufgaben wie z.B. bei Google und Hadoop eingesetzt wird. Bei MapReduce werden die Daten auf mehrere Knoten aufgeteilt (Map-Phase), die ihre Teilaufgaben unabhängig voneinander ausführen. Die Ergebnisse werden dann in der Reduce-Phase zusammengeführt.
+\item \textbf{Kommunikationsredundanz:} Diese Form der Redundanz beinhaltet die Bereitstellung von mehreren Kommunikationspfaden zwischen den Knoten in einem verteilten System. Im Falle eines Netzwerkausfalls können Nachrichten über alternative Pfade übertragen werden, was die Kommunikationszuverlässigkeit und -verfügbarkeit erhöht.
 \end{itemize}
 In verteilten Systemen ist die Widerstandsfähigkeit von Prozessen (Process Resilience) ein zentraler Aspekt der Redundanz und bezieht sich auf die Fähigkeit des Systems, trotz Prozessausfällen korrekt und effizient zu funktionieren. Ein solches System ist in der Lage, einzelne oder sogar mehrere gleichzeitige Prozessausfälle zu überstehen, ohne dass die Gesamtfunktionalität des Systems beeinträchtigt wird.
 
@@ -1089,19 +1091,21 @@ Die Skalierbarkeit von verteilten Systemen kann ebenfalls durch Replikation verb
 Schließlich ermöglicht Replikation auch eine schnellere Wiederherstellung nach Ausfällen. Wenn ein Knoten ausfällt, kann das System seine Daten und Dienste aus einer der anderen Repliken wiederherstellen und so die Ausfallzeit und den Datenverlust minimieren.
 \\\\
 Eine Möglichkeit, die Replikation umzusetzen, besteht darin, permanent Kopien der Daten auf mehreren Knoten im System zu halten. Dies stellt sicher, dass alle Replikate immer auf dem neuesten Stand sind und die Datenverfügbarkeit maximiert wird.
-\\\\
+\importantvs{
 Eine weitere Möglichkeit ist die \textbf{serverinitiierte Replikation}, bei der der Server eine Aktualisierung der Daten auf alle Knoten im System überträgt. Dies ist nützlich, wenn es eine zentrale Datenquelle gibt, von der aus alle Knoten aktualisiert werden müssen. Die serverinitiierte Replikation kann auch dazu beitragen, die Netzwerkbelastung zu reduzieren, da die Übertragung von Daten von einem zentralen Ort ausgeht.
-\\\\
+}
+\importantvs{
 \textbf{Clientinitiierte Replikation} ist ein weiterer Ansatz, bei dem Clients selbstständig Änderungen an einer Kopie der Daten vornehmen und diese Änderungen an andere Knoten im System übertragen. Dies ist nützlich, wenn es viele Clients gibt, die auf die Daten zugreifen und Änderungen vornehmen müssen.
-
+}
 Anwendungsbeispiele für Replikation sind vielfältig und umfassen die Datenspeicherung in der Cloud, verteilte Datenbanken, Webanwendungen, Peer-to-Peer-Netzwerke und viele andere Anwendungen. Zum Beispiel kann eine verteilte Datenbank mithilfe von Replikation eine höhere Verfügbarkeit und Zuverlässigkeit erreichen, indem sie Kopien der Daten auf mehrere Knoten im System hält. Wenn ein Knoten ausfällt oder nicht erreichbar ist, können andere Knoten die Arbeit fortsetzen und auf die Daten zugreifen.
-\\\\
+
+\paragraph{Passive und aktive Replikation}\mbox{}\\
 Passive und aktive Replikation sind zwei weitere Ansätze, um Daten und Dienste in verteilten Systemen zu duplizieren. Beide haben unterschiedliche Vorteile und Herausforderungen.
 
 \textbf{Passive Replikation}, auch als Primär-Backup-Replikation oder Master-Slave-Replikation bezeichnet, besteht darin, dass ein einziger Knoten, der Primärknoten, alle eingehenden Anfragen bearbeitet und die Änderungen auf die Daten anwendet. Die anderen Knoten, die sogenannten Backup-Knoten, halten Kopien der Daten und warten auf Aktualisierungen vom Primärknoten. Im Falle eines Ausfalls des Primärknotens wird einer der Backup-Knoten zum neuen Primärknoten. Der Hauptvorteil der passiven Replikation besteht darin, dass sie eine einfachere Konsistenzverwaltung ermöglicht, da alle Änderungen an den Daten durch den Primärknoten gesteuert werden. Allerdings kann dies auch zu einem Engpass in der Leistung führen, da alle Anfragen vom Primärknoten bearbeitet werden müssen.
 
 \textbf{Aktive Replikation}, auch als Multi-Master- oder State-Machine-Replikation bezeichnet, bedeutet, dass alle Knoten im System gleichzeitig eingehende Anfragen bearbeiten und Änderungen auf ihren Daten vornehmen können. In diesem Ansatz muss das System sicherstellen, dass die Änderungen auf allen Knoten konsistent sind, was eine sorgfältige Koordination und Konsistenzverwaltung erfordert. Der Hauptvorteil der aktiven Replikation besteht darin, dass sie eine bessere Skalierbarkeit und Leistung bietet, da Anfragen auf mehrere Knoten verteilt werden können. Allerdings ist die Konsistenzverwaltung in diesem Ansatz komplexer und erfordert den Einsatz von Konsensalgorithmen und anderen Mechanismen, um die Konsistenz der Daten auf allen Knoten aufrechtzuerhalten.
-\\\\
+\paragraph{Cold, warm, hot}\mbox{}\\
 \textbf{Cold}, \textbf{Warm} und \textbf{Hot} Replikation sind Begriffe, die verwendet werden, um unterschiedliche Grade der Verfügbarkeit und Aktualität von replizierten Daten und Diensten in verteilten Systemen zu beschreiben. Diese Begriffe helfen dabei, die verschiedenen Replikationsstrategien hinsichtlich ihrer Leistung und Auswirkungen auf die Wiederherstellung nach Ausfällen besser zu verstehen.
 \begin{itemize}
 \item Cold Replikation (kalte Replikation): Bei der Cold Replikation werden die Daten in regelmäßigen Abständen, aber nicht in Echtzeit, zwischen dem Primärknoten und den Backup-Knoten synchronisiert. Kalte Replikation ist die am wenigsten aktuelle Form der Replikation und wird häufig für Backup- und Archivierungszwecke eingesetzt. Im Falle eines Ausfalls kann die Wiederherstellung der Daten aus einer Cold-Replikation mehr Zeit in Anspruch nehmen, da die Daten möglicherweise nicht auf dem neuesten Stand sind und zusätzliche Schritte erforderlich sind, um den Backup-Knoten in Betrieb zu nehmen.
@@ -1137,38 +1141,6 @@ Es gibt verschiedene Erasure Coding-Verfahren, die auf unterschiedlichen mathema
 Ein wichtiger Aspekt bei der Anwendung von Erasure Coding ist die fragmentierte Datenverarbeitung, insbesondere wenn es darum geht, Operationen wie Updates oder Lesezugriffe auf die Daten durchzuführen. Da die Daten in Fragmente aufgeteilt und verteilt gespeichert werden, müssen verteilte Systeme diese Fragmentierung berücksichtigen und Operationen entsprechend koordinieren. Dies kann zu einer erhöhten Komplexität in der Verarbeitung und Verwaltung von Daten führen, insbesondere in Systemen mit hoher Dynamik und ständig wechselnden Anforderungen.
 
 Ein weiterer wichtiger Aspekt ist die Datenwiederherstellung nach Ausfällen. Obwohl Erasure Coding eine hohe Fehlertoleranz bietet, kann die Wiederherstellung der Daten unter Umständen zeitaufwändiger und rechenintensiver sein als bei traditionellen Replikationsmethoden. Dies liegt daran, dass die Paritätsinformationen zur Rekonstruktion der ursprünglichen Daten verwendet werden müssen, was zusätzliche Rechenressourcen erfordert.
-\\\\
-Das folgende Beispiel soll die Funktionsweise verdeutlichen. Stellen Sie sich ein verteiltes Speichersystem vor, das eine Datei mit dem Inhalt \enquote{ABCDEFGH} speichern muss. Um Erasure Coding anzuwenden, teilen wir die Datei in vier Datenfragmente auf (k=4):
-\begin{itemize}
-\item Fragment 1 (F1): \enquote{AB}
-\item Fragment 2 (F2): \enquote{CD}
-\item Fragment 3 (F3): \enquote{EF}
-\item Fragment 4 (F4): \enquote{GH}
-\end{itemize}
-Wir verwenden ein (6,4)-Erasure-Coding-Schema, d.h. wir erstellen zwei zusätzliche Paritätsfragmente (n-k=2) auf Basis der ursprünglichen Datenfragmente. In diesem Beispiel verwenden wir ein vereinfachtes XOR-Verfahren, um die Paritätsfragmente zu generieren:
-\begin{itemize}
-\item Paritätsfragment 1 (P1): [berechnet aus F1, F2, F3, F4]
-\item Paritätsfragment 2 (P2): [berechnet aus F1, F2, F3, F4]
-\end{itemize}
-Wir haben nun insgesamt sechs Fragmente (n=6):
-\begin{itemize}
-\item Fragment 1: \enquote{AB}
-\item Fragment 2: \enquote{CD}
-\item Fragment 3: \enquote{EF}
-\item Fragment 4: \enquote{GH}
-\item Paritätsfragment 1: \enquote{P1}
-\item Paritätsfragment 2: \enquote{P2}
-\end{itemize}  
-Diese Fragmente werden auf sechs verschiedene Knoten in unserem verteilten Speichersystem verteilt.
-\\\\
-Angenommen, Knoten 1 und Knoten 2, die Fragment 1 und Fragment 2 speichern, fallen aus. Trotzdem können wir die ursprüngliche Datei immer noch aus den verbleibenden Fragmenten rekonstruieren:
-\begin{itemize}
-\item F1 = rekonstruiert aus F3, F4, P1, P2
-\item F2 = rekonstruiert aus F3, F4, P1, P2
-\end{itemize}  
-Durch das Kombinieren von Fragment 1, Fragment 2, Fragment 3 und Fragment 4 erhalten wir die ursprüngliche Datei \enquote{ABCDEFGH} zurück.
-\\\\
-Dieses Beispiel zeigt, wie Erasure Coding die ursprünglichen Daten in kleinere Fragmente aufteilt und zusätzliche Paritätsinformationen erstellt, um eine effiziente Datenredundanz und Fehlertoleranz zu ermöglichen. Bitte beachten Sie, dass dies ein stark vereinfachtes Beispiel ist und reale Erasure-Coding-Verfahren wie Reed-Solomon-Codes komplexere mathematische Operationen verwenden, um die Paritätsinformationen zu generieren.
 
 \subsubsection{Fehlertoleranz durch Wiederherstellung}
 
@@ -1176,9 +1148,9 @@ Fehlertoleranz durch Wiederherstellung ist eine Methode, bei der verteilte Syste
 
 Einige gängige Techniken zur Fehlertoleranz durch Wiederherstellung sind:
 \begin{itemize}
-\item Checkpointing: Dabei handelt es sich um eine Technik, bei der der Zustand eines Systems oder einer Anwendung in regelmäßigen Abständen gespeichert wird. Im Falle eines Fehlers kann das System auf den zuletzt gespeicherten Zustand zurückgesetzt und von dort aus weitergeführt werden. Checkpointing kann auf Prozessebene, auf Knotenebene oder für das gesamte verteilte System angewendet werden.
-\item Nachrichtenprotokollierung: Bei dieser Methode werden alle eingehenden und ausgehenden Nachrichten eines Knotens oder Prozesses protokolliert. Im Falle eines Ausfalls kann das System die protokollierten Nachrichten verwenden, um den Zustand des Knotens oder Prozesses wiederherzustellen und seine Ausführung fortzusetzen.
-\item Rollback-Recovery: Hierbei handelt es sich um eine Technik, bei der das System nach einem Fehler auf einen früheren, konsistenten Zustand zurückgesetzt wird. Rollback-Recovery kann sowohl auf Prozessebene als auch auf Systemebene angewendet werden und verwendet häufig Checkpointing oder Nachrichtenprotokollierung, um den korrekten Zustand wiederherzustellen.
+\item \textbf{Checkpointing:} Dabei handelt es sich um eine Technik, bei der der Zustand eines Systems oder einer Anwendung in regelmäßigen Abständen gespeichert wird. Im Falle eines Fehlers kann das System auf den zuletzt gespeicherten Zustand zurückgesetzt und von dort aus weitergeführt werden. Checkpointing kann auf Prozessebene, auf Knotenebene oder für das gesamte verteilte System angewendet werden.
+\item \textbf{Nachrichtenprotokollierung:} Bei dieser Methode werden alle eingehenden und ausgehenden Nachrichten eines Knotens oder Prozesses protokolliert. Im Falle eines Ausfalls kann das System die protokollierten Nachrichten verwenden, um den Zustand des Knotens oder Prozesses wiederherzustellen und seine Ausführung fortzusetzen.
+\item \textbf{Rollback-Recovery:} Hierbei handelt es sich um eine Technik, bei der das System nach einem Fehler auf einen früheren, konsistenten Zustand zurückgesetzt wird. Rollback-Recovery kann sowohl auf Prozessebene als auch auf Systemebene angewendet werden und verwendet häufig Checkpointing oder Nachrichtenprotokollierung, um den korrekten Zustand wiederherzustellen.
 \end{itemize}  
 Anwendungsbeispiele für Fehlertoleranz durch Wiederherstellung:
 \begin{itemize}

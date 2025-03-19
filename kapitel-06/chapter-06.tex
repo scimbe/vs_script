@@ -5,9 +5,9 @@
 
 \section{Betrieb}
 Der Betrieb eines verteilten Systems bezieht sich auf alle Aktivitäten, die erforderlich sind, um das System am laufen zu halten und seine Leistung zu optimieren. Diese Aktivitäten können das Einrichten und Konfigurieren von Hardware und Software, das Überwachen des Systemverhaltens, das Beheben von Problemen und Ausfällen, das Aktualisieren von Komponenten und das Durchführen von Änderungen oder Erweiterungen am System einschließen.
-\\\\
+\importantvs{
 Eine der zentralen Herausforderungen im Betrieb eines verteilten Systems ist das Management der Komplexität. Verteilte Systeme bestehen oft aus vielen unterschiedlichen Komponenten, die auf verschiedenen Maschinen laufen und miteinander interagieren. Die Koordination und das Management dieser Komponenten können schwierig sein, besonders wenn das System groß ist oder sich schnell ändert.
-\\\\
+}
 Ein weiteres wichtiges Thema im Betrieb von verteilten Systemen ist die Fehlertoleranz. Verteilte Systeme sind anfällig für eine Vielzahl von Ausfällen, von Netzwerkproblemen bis hin zu Hardware- oder Softwarefehlern. Die Entwicklung von Strategien zur Erkennung und Wiederherstellung von solchen Ausfällen ist eine wichtige Aufgabe im Betrieb dieser Systeme.
 \\\\
 Eine Reihe von Tools und Techniken können helfen, den Betrieb von verteilten Systemen zu erleichtern und zu automatisieren. Dazu gehören Konfigurationsmanagement-Tools wie Ansible oder Puppet, Monitoring- und Debugging-Tools wie Prometheus oder Jaeger, und Orchestrierungstools wie Kubernetes oder Docker Swarm, die helfen können. Die Automatisierung der Prozesse nimmt einen wesentlichen Aspekt in der Diskussion ein.
@@ -23,15 +23,25 @@ Die Bedeutung des Monitorings in verteilten Systemen lässt sich anhand von drei
 \item Fehlerdiagnose: Im Falle eines Systemausfalls oder einer Fehlfunktion kann das Monitoring dazu beitragen, das Problem zu identifizieren. Dies ist besonders wichtig in verteilten Systemen, in denen ein Fehler in einem Knoten das gesamte System beeinträchtigen kann.
 \item Systemintegrität: Monitoring hilft, die Integrität und Zuverlässigkeit eines verteilten Systems zu gewährleisten. Dies kann durch Überwachung von Metriken wie Latenz, Auslastung, Fehlerraten und mehr erreicht werden.
 \end{itemize}
+\examplevs{
 Ein Beispiel für das Monitoring in verteilten Systemen ist die Überwachung von Servern in einem verteilten Datenbanksystem. Administratoren könnten Metriken wie CPU- und Speicherauslastung, Netzwerklatenz und Anzahl der gleichzeitigen Datenbankverbindungen überwachen. Durch die Analyse dieser Metriken könnten sie feststellen, ob die Serverlast gleichmäßig verteilt ist und ob es notwendig ist, zusätzliche Ressourcen hinzuzufügen oder die Last anders zu verteilen.
-\\\\
+}
+\examplevs{
 Ein anderes Beispiel könnte das Monitoring eines verteilten Dateisystems sein. Hier könnten Metriken wie die Anzahl der Dateioperationen, die Latenz dieser Operationen und der Speicherplatzverbrauch überwacht werden. Durch die Überwachung dieser Metriken könnten Administratoren erkennen, ob das System effizient funktioniert und ob es notwendig ist, weitere Speicherressourcen hinzuzufügen oder bestimmte Dateioperationen zu optimieren.
-\\\\
+}
+\examplevs{
 Ein drittes Beispiel um die Breits zu verdeutlichen, könnte ein Microservices-Architektur Anwendungssystem sein. In solch einem Szenario kann Monitoring auf verschiedene Ebenen angewendet werden, wie die Leistung und Verfügbarkeit jeder Microservice-Einheit, die Kommunikation und den Datenaustausch zwischen den Microservices, sowie die Orchestrierung und das Management dieser Einheiten. Monitoring hilft dabei, mögliche Engpässe, Fehlfunktionen oder Ineffizienzen zu erkennen und gibt Einblicke, um eine schnellere Fehlerbehebung und eine effizientere Ressourcennutzung zu ermöglichen.
-\\\\
-Monitoring in verteilten Systemen basiert auf einer Reihe von technischen Grundlagen und Metriken, die zuverlässige und aussagekräftige Informationen über das System liefern. Eine Anfordung ist eine zentrale Erfassung der Daten. Auch wenn die Behauptung fehlleitend ist, sollte zunächst der pauschale Ansatz gewählt werden, wenn es nicht messbar ist, ist es nicht wichtig. Die Quantifizierung von Kennzahlen in Metriken ist eine wesentliche Herausforderung. Verschiedene Arten von Überwachungswerkzeugen und -software ermöglichen das Sammeln, Speichern und Analysieren von Monitoring-Daten. Diese Tools können speziell für verteilte Systeme entwickelt sein, wie etwa Prometheus, Grafana oder \textbf{E}lasticsearch, \textbf{L}ogstash und \textbf{K}ibana (ELK Stack).
+}
+Monitoring in verteilten Systemen basiert auf einer Reihe von technischen Grundlagen und Metriken, die zuverlässige und aussagekräftige Informationen über das System liefern. Eine Anfordung ist eine zentrale Erfassung der Daten. 
+\warningvs{
+Auch wenn die Behauptung fehlleitend ist, sollte zunächst der pauschale Ansatz gewählt werden, wenn es nicht messbar ist, ist es nicht wichtig. 
+}
+Die Quantifizierung von Kennzahlen in Metriken ist eine wesentliche Herausforderung. Verschiedene Arten von Überwachungswerkzeugen und -software ermöglichen das Sammeln, Speichern und Analysieren von Monitoring-Daten. 
+\examplevs{
+Diese Tools können speziell für verteilte Systeme entwickelt sein, wie etwa Prometheus, Grafana oder \textbf{E}lasticsearch, \textbf{L}ogstash und \textbf{K}ibana (ELK Stack).
+}
 Auch kann es Architekturfragen beeinflussen, wo Monitoring-Agenten in den verteilten Systemen einzubetten sind. Monitoring-Agenten sind Software-Komponenten, die auf Systemknoten installiert sind und Daten  oder Proben sammeln. 
-\\\\
+\paragraph{Logging und Tracing}\mbox{}\\
 Ein wichtiges Element des Monitoring ist das Logging und Tracing. Logs enthalten detaillierte Informationen über Systemereignisse und können wertvolle Daten für das Monitoring bereitstellen. Tracing ist eine Technik, bei der individuelle Transaktionen oder Anfragen im System verfolgt werden, um Leistungsprobleme oder Fehler zu diagnostizieren.
 Am Ende ist es notwendig alle Daten zu einem Gesamtbild zusammenzufügen, was zunächst als Datenaggregation und -analyse bezeichnet wird und einen eigenen Zweig der Informatik ausmacht. Einfach gesprochen, die gesammelten Daten müssen aggregiert und analysiert werden, um aussagekräftige Einblicke zu gewinnen. Dies kann durch verschiedene statistische Methoden, maschinelles Lernen oder andere Analysetechniken erfolgen.
 Die Auswahl der zu überwachenden Metriken hängt von den spezifischen Anforderungen und Zielen des verteilten Systems ab. Hier sind einige gängige Metriken, die in verteilten Systemen überwacht werden:
@@ -43,11 +53,11 @@ Die Auswahl der zu überwachenden Metriken hängt von den spezifischen Anforderu
 \end{itemize}
 \paragraph{Monitoring-Kategorien \\\\}
 System-Monitoring ist eine übergeordnete Kategorie, die sich auf die Überwachung der physischen und virtuellen Ressourcen bezieht, die ein System bereitstellt. Es geht darum, den Zustand und die Leistung der Server, ihrer Betriebssysteme und der zugehörigen Hardware zu überwachen. Dabei wird auf Metriken wie CPU-Auslastung, Arbeitsspeicherbelegung, Speicherplatzverwendung und Betriebssystemprozesse geachtet. Es liefert einen Einblick in die Effizienz und den Status der grundlegenden Infrastruktur, die das System unterstützt.
-
+\paragraph{Netzwerk-Monitoring}\mbox{}\\
 Netzwerk-Monitoring, eine Subkategorie des System-Monitorings, konzentriert sich auf die Überwachung der Verbindungen zwischen den Komponenten eines Systems. Es beinhaltet die Überwachung von Netzwerkverkehr, Bandbreitennutzung, Latenz, Paketverlust und anderen netzwerkspezifischen Metriken. Netzwerk-Monitoring ist entscheidend, um die Verbindungszustände zwischen verschiedenen Systemkomponenten zu verstehen und Netzwerkengpässe oder -ausfälle zu identifizieren.
-
+\paragraph{Anwendungs-Monitoring}\mbox{}\\
 Anwendungs-Monitoring konzentriert sich auf die Überwachung der Leistung und Funktionalität von Softwareanwendungen und Diensten, die auf dem System ausgeführt werden. Es beinhaltet die Überwachung von Metriken wie Reaktionszeiten, Fehler- und Ausfallraten und Benutzeraktivität. Anwendungs-Monitoring liefert Einblicke in das Verhalten und die Leistung von Softwareanwendungen, und kann dazu beitragen, Softwareprobleme zu identifizieren und die Nutzererfahrung zu optimieren.
-
+\paragraph{Datenfluss-Monitoring}\mbox{}\\
 Datenfluss-Monitoring andererseits, ist auf die Überwachung der Bewegung von Daten innerhalb des Systems fokussiert. Es verfolgt die Pfade, die Daten durch das System nehmen, und misst Metriken wie Durchsatz, Latenz und Datenqualität. Datenfluss-Monitoring ist entscheidend für verteilte Systeme, in denen Daten zwischen vielen verschiedenen Komponenten und Standorten hin- und herbewegt werden. Es hilft dabei, Probleme mit Datenverlust, -verzögerung oder -beschädigung zu erkennen und mit Metriken zu bestimmen.
 \paragraph{Metriken\\\\}
 Bestimmte Metriken können noch relativ leicht erfasst werden, bei anderen Metriken braucht es komplexe Strategien, um diese in einen funktionalen Rahmen einzubetten. Beispiele für relativ einfache und  spezifische Metriken können sein: 
@@ -79,7 +89,7 @@ Die Wahl der richtigen Tools und Technologien ist ein weiterer wichtiger Aspekt 
 Die Metriken und damit die  Daten sollen in einer Form aggregiert und dargestellt werden, die sinnvolle Einblicke ermöglicht und die Erkennung von Mustern und Anomalien erleichtert. Dies kann durch die Nutzung von Datenvisualisierung, maschinellem Lernen und anderen Analysetechniken unterstützt werden.
 \\\\
 Letztendlich sollte eine effektive Monitoring-Strategie in der Lage sein mit den richtigen Metriken proaktiv auf Probleme zu reagieren, indem sie Alarme und Benachrichtigungen auslöst, wenn bestimmte Schwellenwerte überschritten werden. Sie sollte auch die Möglichkeit zur automatischen Anpassung und Skalierung bieten, um auf wechselnde Systembedingungen reagieren zu können.
-\\\\
+\paragraph{Modelle}\mbox{}\\
 Es ist ein kontinuierlicher Prozess, der ständige Überwachung, Anpassung und Verbesserung erfordert, um mit der Entwicklung und Veränderung des Systems Schritt zu halten. Die einzelnen Punkte werden in verschiedenen Modellen unterschiedlich adressiert. 
 \begin{itemize}
 \item Benchmarks und Performance-Modelle: Diese Methode beinhaltet die Entwicklung von Benchmarks und Modellen, um die Leistung des Systems unter verschiedenen Bedingungen und Arbeitslasten zu analysieren und zu vergleichen. Dies kann helfen, Leistungsengpässe und Optimierungsmöglichkeiten zu identifizieren.
@@ -123,9 +133,10 @@ Bestimmte Anwendungssektoren weisen eigene spezifische Anforderungen für das Mo
 \item Auditierung und Protokollierung: Im Rahmen der Compliance müssen Banken in der Lage sein, Transaktionen zu überprüfen und nachzuverfolgen. Dies erfordert ein umfassendes Protokollierungssystem, das Informationen über alle durchgeführten Transaktionen speichert. Diese Informationen müssen über einen bestimmten Zeitraum aufbewahrt und bei Bedarf den Regulierungsbehörden vorgelegt werden können.
 \item Authentifizierung und Zugriffskontrolle auch für das Monitoring: Um sicherzustellen, dass nur autorisierte Benutzer auf das System zugreifen können, muss ein robustes Authentifizierungs- und Zugriffskontrollsystem implementiert werden. Dies kann Technologien wie Multi-Faktor-Authentifizierung, Rollenbasierte Zugriffskontrolle und regelmäßige Zugriffsüberprüfungen umfassen.
 \end{itemize}
+\importantvs{
 Allgemein ist die Einhaltung von Standards und Vorschriften wesentlich, nicht nur für den Bankensektor. Aber insbesondere für die Banken können beispielhaft verscheidene branchenspezifische Standards und Vorschriften genannt werden, wie z.B. die Payment Card Industry Data Security Standard (PCI DSS) für Kreditkartentransaktionen und die Basel III Standards für Bankenaufsicht und -regulierung. Diese Standards legen Anforderungen an die Systemarchitektur, Sicherheitsmaßnahmen und operative Verfahren auch für das Monitoring fest. 
 Festzustellen ist, dass die Monitoring Modelle zum einen den QoS sicherstellen sollen, aber selbst auch wieder eigene Anforderungen an den QoS stellen. 
-
+}
 \paragraph{Werkzeuge und Technologien\\\\}
 Es gibt eine breite Palette von Werkzeugen und Technologien, die beim Monitoring von verteilten Systemen eingesetzt werden können. Diese können in verschiedene Kategorien eingeteilt werden, je nachdem, welchen Aspekt des Systems sie überwachen oder welche Funktionen sie bereitstellen. Hier sind einige Beispiele:
 \begin{itemize}
@@ -163,7 +174,7 @@ Self-Healing Systeme und Monitoring in verteilten Systemen sind zwei Konzepte, d
 Self-Healing oder selbstheilende Systeme sind Systeme, die in der Lage sind, ihre eigenen Fehler oder Defekte zu erkennen und automatisch zu beheben, ohne menschliches Eingreifen. Sie haben das Potenzial, die Zuverlässigkeit und Verfügbarkeit von Systemen zu verbessern, indem sie die Zeit reduzieren, die für die Wiederherstellung von Ausfällen benötigt wird, und indem sie die menschliche Fehleranfälligkeit reduzieren.
 \\\\
 Das Ziel kann durch verschiedene Mechanismen erreicht werden, einschließlich Fehlertoleranz, Redundanz, automatisierter Fehlerbehebung und adaptiven Verhaltensweisen. In verteilten Systemen, in denen Komponenten über verschiedene physische Standorte verteilt sind, sind Self-Healing-Mechanismen besonders wichtig, um die Auswirkungen von Ausfällen und Netzwerkinstabilitäten zu minimieren.
-\\\\
+\examplevs{
 Ein gutes Beispiel für den Zusammenhang zwischen Monitoring und Self-Healing kann in der Cloud-Infrastruktur, speziell bei einem Dienst wie Amazon Web Services (AWS), gefunden werden.
 \\\
 AWS bietet mehrere Monitoring-Tools wie Amazon CloudWatch an, mit denen Benutzer den Zustand und die Leistung ihrer Ressourcen und Anwendungen in Echtzeit überwachen können. Mit diesen Tools können Benutzer Alarme einstellen, um Benachrichtigungen zu erhalten, wenn bestimmte Schwellenwerte überschritten werden oder wenn Anomalien erkannt werden.
@@ -177,7 +188,7 @@ Diese neue Instanz würde dann automatisch dem Load Balancer hinzugefügt, der d
 Dies ist ein einfaches Beispiel für ein Self-Healing-System: Durch die Kombination von Monitoring (CloudWatch) und automatisierten Aktionen (Starten und Stoppen von EC2-Instanzen basierend auf CPU-Auslastung) kann das System auf Probleme reagieren und diese selbstständig beheben.
 \\\\
 In einer realen Umgebung kann die Anwendung von Self-Healing-Regeln viel komplexer sein, als es die zuvor vorgestellten Beispiele vermuten lassen. Dabei werden oft mehrere Ebenen der Fehlererkennung und -behandlung beteiligt. Ein komplexeres Beispiel könnte wie folgt aussehen:
-
+}
 Angenommen, es wird eine große Microservice-basierte Anwendung in einer Kubernetes-Umgebung betrieben. Hierbei könnten fortschrittliche Überwachungstools wie Prometheus zur Erfassung von Metriken und Grafana zur Visualisierung dieser Metriken verwendet werden. Falls ein bestimmter Microservice eine erhöhte Latenz aufweist, würde dies durch das Monitoring-Tool festgestellt und könnte eine automatische Reaktion auslösen. Durch die Flexibilität von Kubernetes könnten zusätzliche Pods für diesen speziellen Microservice automatisch gestartet werden, um die Last besser zu verteilen und die Performance zu verbessern.
 Gleichzeitig könnte eine andere Regel festgelegt sein, um zu überprüfen, ob dieser spezielle Microservice wiederholt Probleme verursacht. Falls dies der Fall ist, könnte eine komplexere Self-Healing-Regel ausgelöst werden. Beispielsweise könnte ein Rollback auf eine vorherige Version des Microservice ausgelöst werden, falls die aktuelle Version instabil ist. Alternativ könnte ein spezialisierter Fehlerbehebungsservice gestartet werden, um das Problem genauer zu analysieren.
 \\\\
@@ -205,8 +216,10 @@ Debugging in verteilten Systemen stellt eine Herausforderung dar, da es die Koor
 \item Log-Aggregation-Tools: Logs von verteilen Systemen können groß und schwer zu handhaben sein. Log-Aggregation-Tools wie ELK Stack (Elasticsearch, Logstash, Kibana) oder Fluentd helfen dabei, Logs von verschiedenen Quellen zu sammeln, zu filtern und zu analysieren.
 \item Fehlerüberwachung und Crash-Reporting-Tools: Diese Tools, wie z.B. Sentry oder Bugsnag, erfassen Fehler und Crash-Berichte von Anwendungen, auch in verteilten Umgebungen.
 \end{itemize}
+\examplevs{
 Im Folgenden soll ein einfaches Fallbeispiel den Nutzen deutlich machen. In dem gegebenen Szenario wird ein verteiltes System, das aus mehreren Microservices besteht, die in einer Kubernetes-Cluster-Umgebung betrieben werden, betrachtet. Eine unerklärliche Verlängerung der Antwortzeit wird bei einem der Services festgestellt. Zur Fehlerbehebung könnte ein Tool wie Jaeger eingesetzt werden. Mit einem Tool wie Jaeger wird eine detaillierte Spur der durch den Service laufenden Anfrage erstellt. Durch diese Tracing-Operation kann erkannt werden, wo genau die Verzögerung auftritt - möglicherweise dauert ein bestimmter Service zu lange oder es liegt ein Netzwerklatenzproblem vor.
-\\
+}
+\examplevs{
 Jaeger\footnote{Source: \url{https://www.jaegertracing.io/}} ist ein Open-Source-Tracing-System, das von Uber Technologies entwickelt und für die Distributed Context Propagation und das Distributed Transaction Monitoring entwickelt wurde und sollte nur als ein Beispiel von vielen Möglichkeiten betrachtet werden. Es hilft Entwicklern, die Leistung von komplexen, verteilten Systemen zu analysieren und Probleme zu debuggen. Jaeger sammelt und visualisiert detaillierte Informationen über Anfragen und Transaktionen, die ein verteiltes System durchlaufen. Hier ist eine detailliertere Beschreibung, wie Jaeger funktioniert:
 \begin{itemize}
 \item \textbf{Trace-Erzeugung}: Im Kern von Jaegers Funktionalität steht die Generierung von Traces. Ein Trace in Jaeger ist eine Aufzeichnung einer Reihe von Ereignissen, die eine einzelne Transaktion oder Anfrage darstellen, die durch das verteilte System läuft. Jedes Ereignis oder jeder Punkt in der Trace wird als Span bezeichnet.
@@ -217,14 +230,16 @@ Jaeger\footnote{Source: \url{https://www.jaegertracing.io/}} ist ein Open-Source
 
 \item \textbf{Trace-Analyse und Visualisierung}: Schließlich stellt Jaeger eine Web-Oberfläche zur Verfügung, die es Entwicklern ermöglicht, die gesammelten Traces zu durchsuchen und zu analysieren. Für jede Trace zeigt Jaeger eine Gantt-Diagramm-ähnliche Darstellung aller zugehörigen Spans, geordnet nach dem Zeitpunkt ihrer Ausführung. Dies hilft Entwicklern, die Interaktionen zwischen den Services und die Ausführungszeiten zu verstehen und Performance-Probleme oder Fehler zu identifizieren.
 \end{itemize}
-Der Einsatz von Jaeger erfordert eine gewisse Anstrengung. Zunächst einmal müssen die Anwendungen und Services so konfiguriert werden, dass sie Tracing-Informationen erzeugen und an Jaeger senden. Dies kann durch das Einbinden von Jaeger-Client-Bibliotheken in die Anwendung oder durch die Verwendung von Middleware oder Proxy-Komponenten, die automatisch Tracing-Informationen generieren, erreicht werden.
+}
+Der Einsatz von diesen Tools, wie Jaeger, erfordert eine gewisse Anstrengung. Zunächst einmal müssen die Anwendungen und Services so konfiguriert werden, dass sie Tracing-Informationen erzeugen und an Werkzeuge wie Jaeger senden. Dies kann durch das Einbinden von Client-Bibliotheken in die Anwendung oder durch die Verwendung von Middleware oder Proxy-Komponenten, die automatisch Tracing-Informationen generieren, erreicht werden.
 \\\\
-Dann muss eine Jaeger-Instanz aufgesetzt und verwaltet werden, die die Traces sammelt und speichert. Dies beinhaltet die Einrichtung und Verwaltung des Speicher-Backends und die Sicherstellung, dass die Jaeger-Instanz zuverlässig läuft und mit der Last umgehen kann. Schließlich müssen Entwickler lernen, wie sie die Jaeger-Web-Oberfläche verwenden und Traces interpretieren, um Probleme zu diagnostizieren und zu debuggen.
+Dann muss eine Instanz des Werkzeugs aufgesetzt und verwaltet werden, die die Traces sammelt und speichert. Dies beinhaltet die Einrichtung und Verwaltung des Speicher-Backends und die Sicherstellung, dass die Jaeger-Instanz zuverlässig läuft und mit der Last umgehen kann. Schließlich müssen Entwickler lernen, wie sie die Jaeger-Web-Oberfläche verwenden und Traces interpretieren, um Probleme zu diagnostizieren und zu debuggen.
 Es ist leicht zu erkennen, dass hier ein weiteres kleines verteiltes System, mit all seinen Anforderungen aufgebaut wird. 
-\\\\
-\textbf{Snapshot-Techniken} dienen dazu, den Zustand eines Systems oder einer Anwendung zu einem bestimmten Zeitpunkt festzuhalten. Diese Snapshots können dann analysiert werden, um den Systemzustand zum Zeitpunkt eines Fehlers zu untersuchen. \textbf{Replay-Techniken} hingegen ermöglichen es, die Ausführung eines Systems oder einer Anwendung auf der Basis eines Snapshots oder einer Aufzeichnung zu wiederholen. Dies kann hilfreich sein, um die Ursache von schwer zu reproduzierenden Fehlern zu finden. Dies kann in einem realen System, in einem emulierten oder simulierten System geschehen. 
-
+\paragraph{Snapshot-Techniken}\mbox{}\\
+Snapshot-Techniken dienen dazu, den Zustand eines Systems oder einer Anwendung zu einem bestimmten Zeitpunkt festzuhalten. Diese Snapshots können dann analysiert werden, um den Systemzustand zum Zeitpunkt eines Fehlers zu untersuchen. \textbf{Replay-Techniken} hingegen ermöglichen es, die Ausführung eines Systems oder einer Anwendung auf der Basis eines Snapshots oder einer Aufzeichnung zu wiederholen. Dies kann hilfreich sein, um die Ursache von schwer zu reproduzierenden Fehlern zu finden. Dies kann in einem realen System, in einem emulierten oder simulierten System geschehen. 
+\examplevs{
 Ein Beispiel für die Anwendung von Replay-Techniken könnte ein Szenario in einem verteilten Datenbanksystem sein. Angenommen, eine unerklärliche Inkonsistenz in den Daten wird beobachtet, die vermutlich durch eine Reihe von Transaktionen verursacht wurde, die über verschiedene Knoten in dem verteilten System verteilt waren. Mit Replay-Techniken könnte der genaue Pfad dieser Transaktionen verfolgt und das Problem möglicherweise isoliert werden.
+}
 Einige Werkzeuge, die diese Techniken unterstützen, sind:
 \begin{itemize}
 \item Record and Replay Frameworks: Diese Werkzeuge, wie beispielsweise Mozilla's rr oder Pernosco, ermöglichen es, die Ausführung eines Programms aufzuzeichnen, um es später erneut abzuspielen. Sie können nützlich sein, um schwer zu reproduzierende Fehler zu untersuchen.
@@ -241,6 +256,7 @@ Es gibt verschiedene Strategien für die Fehlerinjektion, darunter Hardware-, So
 \item \textbf{Software-Fehlerinjektion}: Hier werden Fehler auf Softwareebene eingeführt. Dazu können Exception-Handling-Fehler, logische Fehler oder Synchronisationsfehler gehören.
 \item \textbf{Netzwerk-Fehlerinjektion}: In dieser Strategie werden Netzwerkfehler simuliert, wie z.B. Netzwerkausfälle, hohe Latenz oder Paketverlust.
 \end{itemize}
+\examplevs{
 Eines der bekanntesten Werkzeuge für die Fehlerinjektion in verteilten Systemen ist Chaos Monkey von Netflix. Chaos Monkey wurde entwickelt, um die Ausfallsicherheit des Netflix-Streaming-Dienstes zu testen, indem es zufällig Instanzen von Services in der Produktion abschaltet.
 \\\\
 Angenommen, es wird ein verteiltes System betrieben, das aus mehreren Microservices besteht, die in einer Kubernetes-Cluster-Umgebung laufen. Zur Überprüfung der Robustheit und Fehlerresistenz dieses Systems wird die Netzwerkfehlerinjektion mit einem Werkzeug wie Gremlin durchgeführt.
@@ -250,7 +266,7 @@ Gremlin ist eine alternative Plattform für Chaos Engineering, die es ermöglich
 Durch die Beobachtung der Reaktion des Systems auf diese Fehler könnten Schwachstellen in der Fehlerbehandlung und -wiederherstellung des Systems identifiziert und behoben werden. Es könnte festgestellt werden, dass bestimmte Services nicht richtig mit Netzwerkfehlern umgehen oder dass die Ausfallzeiten aufgrund von Fehlern länger sind als erwartet.
 \\\\
 Durch das regelmäßige Durchführen solcher Fehlerinjektionstests könnte die Zuverlässigkeit und Ausfallsicherheit des verteilten Systems verbessert und die Wahrscheinlichkeit von Ausfällen in der Produktion verringert werden.
-\\\\
+}
 Fehler in verteilten Systemen können auf verschiedenen Ebenen auftreten, und die Ebene, auf der der Fehler auftritt, kann einen erheblichen Einfluss auf die Art des zu verwendenden Werkzeugs haben. Die Ebenen können grob in Systemebene und Anwendungsebene unterteilt werden.
 
 \begin{itemize}
@@ -268,39 +284,41 @@ Drei häufige Bereiche, in denen Probleme auftreten, sind Performance, Konfigura
 \textbf{Konfigurationsfehler} in verteilten Systemen können zu einer Vielzahl von Problemen führen, von Diensten, die nicht starten, bis hin zu unerwarteten Verhalten oder Fehlern. Das Debugging von Konfigurationsfehlern erfordert oft das Durchsuchen von Logdateien, um Fehlermeldungen oder Warnungen zu finden, die auf das Problem hinweisen könnten.
 \\\\
 Für größere Systeme können Konfigurationsmanagement-Werkzeuge wie Ansible oder Puppet verwendet werden, um die Konfiguration von Diensten zu standardisieren und zu vereinfachen. Einige dieser Werkzeuge bieten auch Möglichkeiten zur Überprüfung und Validierung der Konfiguration, die helfen können, Konfigurationsfehler zu vermeiden oder zu entdecken.
-\\\\
+\examplevs{
+\paragraph{Beispiel Ansible}\mbox{}\\
 Ansible ist ein Open-Source-Software-Tool zur Automatisierung von IT-Aufgaben wie der Konfigurationsverwaltung, der Bereitstellung von Anwendungen und der Orchestrierung komplexer Systemänderungen. Es verwendet eine deklarative Sprache, um Systemkonfigurationen zu beschreiben, was bedeutet, dass der Benutzer festlegt, wie das System aussehen soll, und Ansible dann die notwendigen Änderungen vornimmt, um den gewünschten Zustand zu erreichen.
 \\\\\
 Ein Hauptmerkmal von Ansible ist dessen Agentenlosigkeit: Es verwendet Secure Shell (SSH) zur Kommunikation mit Zielsystemen und erfordert keine separaten Agentenprogramme. Diese Eigenschaft macht Ansible leichtgewichtig und einfach zu bedienen, da keine zusätzliche Infrastruktur oder Software installiert und gewartet werden muss.
 
 Ansible nutzt \enquote{Playbooks}, die in der menschenlesbaren Daten Serialisierungssprache YAML geschrieben sind, um komplexe IT-Workflows zu definieren. Ein Playbook enthält eine Liste von Aufgaben, die Ansible auf einer Gruppe von Zielsystemen ausführen soll.
-\\\\
+}
+\examplevs{
+\paragraph{Beispiel Puppet}\mbox{}\\
 Puppet ist eine weit verbreitete Open-Source-Konfigurationsmanagement- und Automatisierungsplattform, die in Ruby geschrieben ist. Wie Ansible verwendet Puppet eine deklarative Sprache, um Systemkonfigurationen zu beschreiben. Benutzer definieren den gewünschten Systemzustand, und Puppet führt dann die notwendigen Änderungen durch, um diesen Zustand zu erreichen.
 
 Im Gegensatz zu Ansible verwendet Puppet ein Master-Agent-Modell. Puppet-Agents werden auf den Zielsystemen installiert und kommunizieren mit dem Puppet-Master, um ihre Konfigurationen abzurufen und Änderungen vorzunehmen.
 
 Puppet verwendet eine eigene domänenspezifische Sprache (DSL) zur Beschreibung von Systemkonfigurationen. Diese DSL kann eine stärkere Kontrolle und Flexibilität bieten als YAML, kann aber auch schwieriger zu lernen und zu verwenden sein.
-\\\\
+}
 \textbf{Netzwerkprobleme} können zu einer Vielzahl von Problemen in verteilten Systemen führen, von Verbindungsabbrüchen über hohe Latenz bis hin zu Paketverlust. Das Debugging von Netzwerkproblemen kann die Verwendung von Netzwerküberwachungswerkzeugen wie Wireshark oder tcpdump erfordern, um den Netzwerkverkehr zu überwachen und Probleme zu identifizieren.
 
 Darüber hinaus können Netzwerksimulationswerkzeuge verwendet werden, um Netzwerkbedingungen wie Latenz, Bandbreite oder Paketverlust zu simulieren und zu untersuchen, wie das System unter diesen Bedingungen funktioniert.
 \\\\
-Maschinelles Lernen kann auf viele Arten in verteilten Systemen eingesetzt werden, um die Effizienz und Leistung zu verbessern. Eine typische Anwendung ist die Nutzung maschinellen Lernens für die Leistungsoptimierung und Anomalieerkennung in verteilten Systemen.
+%Maschinelles Lernen kann auf viele Arten in verteilten Systemen eingesetzt werden, um die Effizienz und Leistung zu verbessern. Eine typische Anwendung ist die Nutzung maschinellen Lernens für die Leistungsoptimierung und Anomalieerkennung in verteilten Systemen.
 
-Ein realistisches Beispiel könnte ein verteiltes Datenspeichersystem sein, das maschinelles Lernen verwendet, um die Datenzugriffs- und Speichermuster zu lernen und die Daten effizienter zu speichern und abzurufen.
+%Ein realistisches Beispiel könnte ein verteiltes Datenspeichersystem sein, das maschinelles Lernen verwendet, um die Datenzugriffs- und Speichermuster zu lernen und die Daten effizienter zu speichern und abzurufen.
 
-In diesem Szenario könnte das System maschinelles Lernen verwenden, um Muster in den Anfragen der Benutzer zu erkennen. Beispielsweise könnte es erkennen, dass bestimmte Daten häufig zusammen abgerufen werden oder dass bestimmte Daten zu bestimmten Zeiten häufiger abgerufen werden.
-\\\\
-Basierend auf diesen Mustern könnte das System dann die Daten so organisieren und speichern, dass häufig zusammen abgerufene Daten näher beieinander liegen, wodurch die Zugriffszeiten verbessert werden könnten. Es könnte auch Daten, die zu bestimmten Zeiten häufig abgerufen werden, vorab in den Cache laden, um die Antwortzeiten zu verbessern.
+%In diesem Szenario könnte das System maschinelles Lernen verwenden, um Muster in den Anfragen der Benutzer zu erkennen. Beispielsweise könnte es erkennen, dass bestimmte Daten häufig zusammen abgerufen werden oder dass bestimmte Daten zu bestimmten Zeiten häufiger abgerufen werden.
+%\\\\
+%Basierend auf diesen Mustern könnte das System dann die Daten so organisieren und speichern, dass häufig zusammen abgerufene Daten näher beieinander liegen, wodurch die Zugriffszeiten verbessert werden könnten. Es könnte auch Daten, die zu bestimmten Zeiten häufig abgerufen werden, vorab in den Cache laden, um die Antwortzeiten zu verbessern.
 
-Ein solches System könnte mit einem Supervised Learning-Algorithmus implementiert werden, der auf historischen Anfragedaten trainiert wird. Es könnten auch Online-Learning-Techniken verwendet werden, um das Modell kontinuierlich zu aktualisieren und anzupassen, während neue Anfragen eintreffen.
+%Ein solches System könnte mit einem Supervised Learning-Algorithmus implementiert werden, der auf historischen Anfragedaten trainiert wird. Es könnten auch Online-Learning-Techniken verwendet werden, um das Modell kontinuierlich zu aktualisieren und anzupassen, während neue Anfragen eintreffen.
 
-Die Verwendung maschinellen Lernens in dieser Weise könnte dazu beitragen, die Leistung des verteilten Systems erheblich zu verbessern und die Benutzererfahrung zu optimieren. Es könnte auch dazu beitragen, die Ressourcen des Systems effizienter zu nutzen und die Betriebskosten zu senken.
-\\\\
-Einige Werkzeuge, wie etwa OverOps, nutzen maschinelles Lernen, um automatisch Anomalien oder Fehler in den erzeugten Daten zu erkennen. Diese Werkzeuge können oft helfen, subtile oder schwer zu findende Fehler zu identifizieren, die durch manuelle Analyse leicht übersehen werden könnten.
+%Die Verwendung maschinellen Lernens in dieser Weise könnte dazu beitragen, die Leistung des verteilten Systems erheblich zu verbessern und die Benutzererfahrung zu optimieren. Es könnte auch dazu beitragen, die Ressourcen des Systems effizienter zu nutzen und die Betriebskosten zu senken.
+%\\\\
+%Einige Werkzeuge, wie etwa OverOps, nutzen maschinelles Lernen, um automatisch Anomalien oder Fehler in den erzeugten Daten zu erkennen. Diese Werkzeuge können oft helfen, subtile oder schwer zu findende Fehler zu identifizieren, die durch manuelle Analyse leicht übersehen werden könnten.
 
-Das Debugging von verteilten Systemen ist extrem von den unterschiedlichen Umgebungen - wie Cloud-Umgebungen, Container-Umgebungen und serverlosen Architekturen - abhängig und muss mit verschiedenen Ansätzen und Werkzeugen umgesetzt werden. Die folgende Diskussion gibt eine weitere Einsicht in die vorgestellten Debug-Szenarien und versucht über den Vergleich die Komplexität deutlich zu machen. 
-
+%Das Debugging von verteilten Systemen ist extrem von den unterschiedlichen Umgebungen - wie Cloud-Umgebungen, Container-Umgebungen und serverlosen Architekturen - abhängig und muss mit verschiedenen Ansätzen und Werkzeugen umgesetzt werden. Die folgende Diskussion gibt eine weitere Einsicht in die vorgestellten Debug-Szenarien und versucht über den Vergleich die Komplexität deutlich zu machen. 
 In Cloud-Umgebungen kann das Debugging besonders herausfordernd sein, da die Systeme oft auf einer großen Anzahl von Servern verteilt sind und eine Vielzahl von Diensten und Technologien involviert sind. Werkzeuge wie Logging-Services (z.B. CloudWatch in AWS), verteilte Tracing-Tools (z.B. Jaeger oder Zipkin), und Application Performance Management (APM) Tools (z.B. New Relic, Datadog) werden oft verwendet, um Informationen über das Systemverhalten zu sammeln und zu analysieren.
 
 Darüber hinaus bieten Cloud-Provider oft eigene Tools und Dienste für das Monitoring und Debugging an, wie z.B. Stackdriver Debugger für Google Cloud Platform, Azure Monitor für Microsoft Azure oder X-Ray für AWS.
@@ -312,9 +330,9 @@ Zusätzlich können Monitoring- und Logging-Tools, die für Container-Umgebungen
 Serverlose Architekturen, auch bekannt als Function-as-a-Service (FaaS), stellen eine besondere Herausforderung für das Debugging dar, da sie keine dauerhaften Instanzen haben, auf denen Debugging-Werkzeuge ausgeführt werden könnten, und sie können sehr kurzlebige und dynamische Arbeitslasten haben.
 
 Um diese Herausforderungen zu bewältigen, sind oft spezielle Debugging-Strategien und Werkzeuge erforderlich. Cloud-Provider bieten in der Regel spezielle Monitoring- und Debugging-Tools für ihre serverlosen Dienste an, wie AWS X-Ray für AWS Lambda oder Stackdriver Debugger für Google Cloud Functions.
-
+\\\\
 Zusätzlich können lokale Emulatoren, wie der AWS SAM CLI für AWS Lambda oder der Emulator für Google Cloud Functions, verwendet werden, um serverlose Funktionen lokal auszuführen und zu debuggen.
-
+\\\\
 Eine besondere Rolle spielen auch Application Performance Management (APM) Tools, wie New Relic, Dynatrace oder AppDynamics. Sie bieten automatisierte Methoden zur Sammlung und Analyse von Leistungsdaten in verteilten Systemen und können helfen, Leistungsprobleme zu identifizieren und zu lokalisieren, indem sie die Ausführung von Code auf granularer Ebene verfolgen.
 
 \subsection{Deployment}
@@ -335,16 +353,17 @@ Folgend wird eine detailliertere Beschreibung des Rolling Deployment-Prozesses d
 \item Fortlaufende Aktualisierung: Wenn die aktualisierten Knoten ordnungsgemäß funktionieren, wiederholen Sie den Prozess mit den nächsten Knoten. Fahren Sie fort, bis alle Knoten aktualisiert sind.
 \end{itemize} 
 Ein großer Vorteil des Rolling Deployment ist, dass es die Risiken im Zusammenhang mit einer Aktualisierung minimiert. Wenn ein Problem mit der neuen Softwareversion auftritt, wird es nur einen Teil Ihrer Infrastruktur betreffen, anstatt das gesamte System lahmzulegen.
-\\\\
+\examplevs{
 Ein bekanntes Beispiel für ein Unternehmen, das Rolling Deployment verwendet, ist Netflix. Netflix verfügt über ein umfangreiches verteiltes System, um den Millionen von Nutzern, die gleichzeitig streamen, gerecht zu werden. Sie verwenden eine Methode namens \enquote{\textbf{Red/Black}\index{Red/Black} Deployment}, die eine spezielle Form des Rolling Deployment ist. Dabei wird eine vollständige Kopie der Produktionsinfrastruktur erstellt (die \enquote{rote} Infrastruktur), auf der die neue Softwareversion getestet wird. Die \enquote{schwarze} Infrastruktur bleibt in der Zwischenzeit live. Sobald die neue Version stabil ist, wird der Datenverkehr allmählich auf die rote Infrastruktur umgeleitet. Wenn Probleme auftreten, kann der Datenverkehr schnell auf die schwarze Infrastruktur zurückgeleitet werden. Eine Variante, die eine konsequentere Umschaltung verlangt, ist das Blue-Green Deployment.
+}
 \item \textbf{Blue-Green Deployment} (Blau-Grün-Deployment):
 Bei dieser Methode werden zwei identische Produktionsumgebungen bereitgestellt, die als \enquote{blau} und \enquote{grün} bezeichnet werden. Während die blaue Umgebung die aktive Produktionsumgebung ist, wird das Update in der grünen Umgebung bereitgestellt. Wenn die grüne Umgebung vollständig getestet und für bereit befunden wurde, wird der Verkehr von der blauen Umgebung auf die grüne Umgebung umgeleitet. Dies ermöglicht nahezu null Ausfallzeiten und eine schnelle Rückkehr zur vorherigen Version, wenn Probleme auftreten.
 \\\\
-Rolling Deployment: Bei dieser Methode wird das Update schrittweise auf das System angewendet. Anstatt das Update auf alle Instanzen gleichzeitig anzuwenden, wird es auf eine Untergruppe von Instanzen angewendet, während der Rest des Systems normal weiterläuft. Sobald das Update in der Untergruppe erfolgreich war, wird es auf eine weitere Untergruppe angewendet, und so weiter, bis das gesamte System aktualisiert ist. Dies minimiert die Ausfallzeit und reduziert das Risiko, dass ein problematisches Update das gesamte System beeinträchtigt.
+\textbf{Rolling Deployment:} Bei dieser Methode wird das Update schrittweise auf das System angewendet. Anstatt das Update auf alle Instanzen gleichzeitig anzuwenden, wird es auf eine Untergruppe von Instanzen angewendet, während der Rest des Systems normal weiterläuft. Sobald das Update in der Untergruppe erfolgreich war, wird es auf eine weitere Untergruppe angewendet, und so weiter, bis das gesamte System aktualisiert ist. Dies minimiert die Ausfallzeit und reduziert das Risiko, dass ein problematisches Update das gesamte System beeinträchtigt.
 \\\\
-A/B-Tests (auch als Split-Tests bekannt): Bei dieser Methode wird das Update einer kleinen Gruppe von Benutzern (Gruppe A) zur Verfügung gestellt, während der Rest der Benutzer (Gruppe B) die aktuelle Version der Software verwendet. Dies ermöglicht es, die Auswirkungen des Updates zu testen und Feedback zu sammeln, bevor es auf den Rest der Benutzer ausgerollt wird.
+\textbf{A/B-Tests} (auch als Split-Tests bekannt): Bei dieser Methode wird das Update einer kleinen Gruppe von Benutzern (Gruppe A) zur Verfügung gestellt, während der Rest der Benutzer (Gruppe B) die aktuelle Version der Software verwendet. Dies ermöglicht es, die Auswirkungen des Updates zu testen und Feedback zu sammeln, bevor es auf den Rest der Benutzer ausgerollt wird.
 \\\\
-Schattenbereitstellung (Shadow Deployment): Bei dieser Methode wird das Update in einer "Schatten"-Umgebung bereitgestellt, die den Produktionsverkehr spiegelt. Dies ermöglicht es, das Verhalten des Updates unter realen Bedingungen zu testen, ohne die Benutzer zu beeinträchtigen.
+\textbf{Schattenbereitstellung (Shadow Deployment):} Bei dieser Methode wird das Update in einer "Schatten"-Umgebung bereitgestellt, die den Produktionsverkehr spiegelt. Dies ermöglicht es, das Verhalten des Updates unter realen Bedingungen zu testen, ohne die Benutzer zu beeinträchtigen.
 \item \textbf{Canary Deployment} (Kanarienvogel-Deployment):
 Bei dieser Strategie werden neue Anwendungs- oder Systemversionen zunächst auf eine begrenzte Benutzer- oder Servergruppe (die "Kanarienvögel") ausgerollt, bevor sie auf das gesamte System ausgeweitet werden. Diese Methode wird oft genutzt, um das Risiko einer neuen Software-Version zu minimieren, indem deren Auswirkungen auf eine begrenzte Gruppe getestet werden, bevor sie breiter ausgerollt wird.
 \\\\
@@ -355,11 +374,13 @@ Im Folgenden erkennen wir eine detailliertere Beschreibung des Canary Deployment
 \item Ausweitung der Bereitstellung: Wenn die neue Version gut funktioniert und keine größeren Probleme festgestellt werden, wird die Bereitstellung auf weitere Server oder Benutzer ausgeweitet. Dieser Schritt wird solange wiederholt, bis die gesamte Anwendung oder das gesamte System auf die neue Version umgestellt ist.
 \item Rückkehr zum alten Zustand bei Problemen: Sollten Probleme auftreten, kann die Bereitstellung gestoppt und die neue Version von den betroffenen Servern oder Benutzergruppen entfernt werden. Dadurch wird das Risiko minimiert, dass größere Teile des Systems durch fehlerhafte Software betroffen sind.
 \end{itemize} 
+\examplevs{
 Ein bekanntes Unternehmen, das Canary Deployments verwendet, ist Facebook. Sie stellen neue Funktionen und Änderungen zunächst einer begrenzten Gruppe von Benutzern zur Verfügung und überwachen deren Verhalten und Feedback, um sicherzustellen, dass die neuen Änderungen gut funktionieren und von den Benutzern gut angenommen werden. Wenn alles gut läuft, wird die neue Funktion oder Änderung nach und nach für mehr Benutzer freigeschaltet, bis sie schließlich für alle verfügbar ist.
+}
 \end{itemize} 
 Diese Beispiele stellen nur eine Auswahl der verfügbaren Deployment-Strategien in verteilten Systemen dar. Jede Strategie hat ihre eigenen Vor- und Nachteile, und die Wahl der richtigen Strategie hängt von den spezifischen Anforderungen des Systems, der Risikobereitschaft und den Geschäftsanforderungen ab und ist auch nicht selten von der Update-Strategie eines Unternehmes abhängig. Gerade bei sicherheitsrelevanten und kritischen Systemen erfordert dies besondere Überlegungen. 
 Die adressierte Lösung in einem Systeme könnte in medizinischen Geräte, Flugverkehrskontrollsysteme oder auch industriellen Kontrollsystemen eingesetzt werden. 
-\\\\
+\paragraph{Sicherheitskritisches System}\mbox{}\\
 Fehler in solchen Systemen können schwerwiegende Folgen haben, einschließlich der Gefährdung von Menschenleben, erheblicher finanzieller Verluste oder bedeutender Betriebsunterbrechungen. Daher müssen die Updates sehr sorgfältig und methodisch durchgeführt werden.
 Folgend werden einige Strategien genannt, die bei der Aktualisierung von sicherheitsrelevanten und kritischen Systemen häufig verwendet werden:
 \begin{itemize} 
@@ -385,12 +406,14 @@ Continuous Delivery (CD) kann dazu beitragen, das Risiko von Updates zu minimier
 In diesem Kontext könnten aber auch andere Strategien am Beispiel des Waterfall-Modells, anderen agilen Methoden oder auch DevOps besprochen werden. Häufig ist die Umsetzung in einem großen verteilten System, auch nicht in einer vollständigen Reinform vorzufinden.
 \\\\
 Der Markt für DevOps-Tools, Konfigurationsmanagement und Deployment-Management ist in den letzten Jahren von einem erheblichen Wachstum belebt. Dieses Wachstum wird insbesondere durch die steigende Nachfrage nach Automatisierung und schnelleren Bereitstellungszyklen in der Softwareentwicklung sowie durch die zunehmende Akzeptanz von Cloud-Technologien und DevOps-Praktiken getrieben.
-\\\\
+\examplevs{
 Marktforschungsberichte schätzen, dass der weltweite DevOps-Markt im Jahr 2020 etwa 10 Milliarden US-Dollar betrug und voraussichtlich auf über 15 Milliarden US-Dollar bis 2026 anwachsen wird. Dies würde einer jährlichen Wachstumsrate von etwa 15-20\% entsprechen. Es ist zu beachten, dass dieser Markt nicht nur Konfigurations- und Bereitstellungsmanagement-Tools umfasst, sondern auch andere Aspekte von DevOps, wie Continuous Integration und Continuous Delivery (CI/CD), Überwachung und Logging, und Zusammenarbeitstools.
-\\\\
+}
 Es ist auch wichtig zu beachten, dass viele Unternehmen ihre DevOps-Tools als Teil breiterer Plattformen oder Serviceangebote nutzen. Beispielsweise bieten Cloud-Anbieter wie Amazon Web Services, Google Cloud und Microsoft Azure ihre eigenen DevOps-Tools und -Services an, die oft eng in ihre jeweiligen Plattformen integriert sind. Daher kann die Größe des Marktes für diese Tools auch von der allgemeinen Nachfrage nach Cloud-Diensten und -Plattformen beeinflusst werden.
 \\\\
-Es gibt eine Vielzahl von Deployment-Management-Tools zur Auswahl, und die besten Tools für eine bestimmte Person oder ein bestimmtes Team können je nach spezifischen Anforderungen, dem technischen Stack und der Organisationsstruktur variieren. Allerdings gibt es einige Tools, die allgemein anerkannt und weit verbreitet sind, und es kann hilfreich sein, sich mit diesen vertraut zu machen. Hier sind einige davon:
+Es gibt eine Vielzahl von Deployment-Management-Tools zur Auswahl, und die besten Tools für eine bestimmte Person oder ein bestimmtes Team können je nach spezifischen Anforderungen, dem technischen Stack und der Organisationsstruktur variieren. Allerdings gibt es einige Tools, die allgemein anerkannt und weit verbreitet sind, und es kann hilfreich sein, sich mit diesen vertraut zu machen. 
+\examplevs{
+Hier sind einige davon:
 \begin{itemize} 
 \item Jenkins: Jenkins ist ein Open-Source-Automatisierungsserver, der in erster Linie für Continuous Integration und Continuous Delivery verwendet wird. Jenkins unterstützt eine Vielzahl von Plugins, die die Automatisierung von fast allem ermöglichen, was mit der Entwicklung und Bereitstellung von Software zu tun hat.
 \item Ansible: Ansible ist ein Open-Source-Tool für das Konfigurationsmanagement und die Automatisierung von IT-Aufgaben. Es kann auch für das Deployment Management verwendet werden und ermöglicht es den Benutzern, komplexe Multi-Tier-Anwendungs-Deployments zu definieren.
@@ -399,6 +422,7 @@ Es gibt eine Vielzahl von Deployment-Management-Tools zur Auswahl, und die beste
 \item Terraform: Terraform ist ein Infrastruktur-als-Code-Tool, das es ermöglicht, Infrastruktur in einer Vielzahl von Cloud-Diensten zu definieren und bereitzustellen.
 \item Chef: Chef ist ein weit verbreitetes Open-Source-Tool für das Konfigurationsmanagement, das auf Ruby basiert. Es hilft beim Automatisieren des Prozesses der Infrastrukturkonfiguration und -verwaltung, von der Bereitstellung von Servern bis hin zur Installation und Aktualisierung von Softwarepaketen. Es wurde entwickelt, um die Herausforderungen der Skalierbarkeit und Komplexität in großen IT-Umgebungen zu bewältigen.
 \end{itemize} 
+}
 Jedes dieser Tools hat seine Stärken und kann in verschiedenen Situationen nützlich sein. Zu Beginn eines Projektes ist es vielleicht am besten, zunächst ein oder zwei Werkzeuge auszuwählen, da die Werkzeuge eine durchaus vorhandene Komplexität in sich tragen. Es ist auch hilfreich, die Grundlagen der Containerisierung und der Infrastruktur als Code zu verstehen, da diese Konzepte in vielen modernen Deployment-Management-Tools eine zentrale Rolle spielen.
 \paragraph{Infrastruktur als Code \\\\}
 Infrastruktur als Code (IaC) ist ein Ansatz zur Infrastrukturautomatisierung, der auf denselben Prinzipien basiert, die für die Softwareentwicklung gelten. Bei IaC wird die gesamte IT-Infrastruktur in Codeform definiert und verwaltet, was zu einer effizienteren und zuverlässigeren Infrastruktur führt.
