@@ -323,7 +323,7 @@ Es gibt verschiedene Ansätze, um die Skalierbarkeit von verteilten Systemen zu 
 
 \importantvs{
   \begin{itemize}
-    \item \textbf{Vertikale Skalierung} bezieht sich auf das Hinzufügen weiterer Ressourcen (z.B. CPU, RAM, Speicher) zu einem einzelnen Server, um dessen Leistungsfähigkeit zu erhöhen. Mit anderen Worten, das System wird durch eine Erhöhung der Kapazität eines einzelnen Servers verbessert. Beispielsweise kann ein System mit vertikaler Skalierung mit einer leistungsstärkeren CPU oder einer höheren RAM-Kapazität ausgestattet werden, um eine höhere Arbeitslast zu bewältigen. Diese Art der Skalierung ist besonders nützlich, wenn das System mehr Rechenleistung benötigt, um komplexe Operationen auszuführen oder große Datenmengen zu verarbeiten. Zu bemerken ist vielleicht, dass die vertikale Skalierung nicht die Umsetzung mit einem System verlangt, sondern die Skalierung in den festen Größen (Anzahl der Server) der Systemarchitektur.
+    \item \textbf{Vertikale Skalierung} bezieht sich auf das Hinzufügen weiterer Ressourcen (z.B. CPU, RAM, Speicher) zu einem einzelnen Server, um dessen Leistungsfähigkeit zu erhöhen. Mit anderen Worten, das System wird durch eine Erhöhung der Kapazität eines einzelnen Servers verbessert. Beispielsweise kann ein System mit vertikaler Skalierung mit einer leistungsstärkeren CPU oder einer höheren RAM-Kapazität ausgestattet werden, um eine höhere Arbeitslast zu bewältigen. Diese Art der Skalierung ist besonders nützlich, wenn das System mehr Rechenleistung benötigt, um komplexe Operationen auszuführen oder große Datenmengen zu verarbeiten. Zu bemerken ist vielleicht, dass die vertikale Skalierung nicht die Umsetzung mit einem System verlangt im verteilten System verlangt, sondern die Skalierung in den festen Größen (Anzahl der Server je Dienst) in der Systemarchitektur.
 
     \item \textbf{Horizontale Skalierung} dagegen bezieht sich auf das Hinzufügen weiterer Ressourcen (z.B. Server) zu einem System, um die Leistungsfähigkeit zu verbessern. Mit anderen Worten, mehrere Knoten werden hinzugefügt, um die Arbeitslast auf mehrere Server aufzuteilen. Beispielsweise kann ein System mit horizontaler Skalierung so konfiguriert werden, dass es Anfragen auf mehrere Server aufteilt, wodurch eine höhere Anzahl von Anfragen gleichzeitig verarbeitet werden kann. Diese Art der Skalierung ist besonders nützlich, wenn das System auf eine hohe Anzahl von Anfragen oder eine erhöhte Datenmenge reagieren muss.
   \end{itemize}
@@ -375,7 +375,7 @@ Ein weiterer Ansatz besteht darin, die Lastverteilung zu optimieren, um sicherzu
           Speedup = \frac{T_1}{T_p}
         \end{equation*}
 
-        Dabei steht $T_1$ für die Ausführungszeit der Aufgabe auf einem einzelnen Prozessor (ohne Parallelisierung) und $T_p$ für die Ausführungszeit der Aufgabe auf einem parallelen System mit $p$ Prozessoren (mit Parallelisierung). Ein Speedup von $s$ bedeutet, dass das System auf $s$-fache Geschwindigkeit beschleunigt wurde im Vergleich zur Ausführung auf einem einzelnen Prozessor. Ein idealer Speedup von $p$ würde bedeuten, dass die Aufgabe auf $p$ Prozessoren $p$-mal schneller ausgeführt wird als auf einem einzelnen Prozessor. $P$ ist der parallesierbare Anteil, $N$ sind die Anzahl der Prozessoren:
+        Dabei steht $T_1$ für die Ausführungszeit der Aufgabe auf einem einzelnen Prozessor (ohne Parallelisierung) und $T_p$ für die Ausführungszeit der Aufgabe auf einem parallelen System mit $p$ Prozessoren (mit Parallelisierung). Ein Speedup von $s$ bedeutet, dass das System auf $s$-fache Geschwindigkeit beschleunigt wurde im Vergleich zur Ausführung auf einem einzelnen Prozessor. Ein idealer Speedup von $p$ würde bedeuten, dass die Aufgabe auf $p$ Prozessoren $p$-mal schneller ausgeführt wird als auf einem einzelnen Prozessor. $P$ ist der parallesierbare Anteil, $N$ sind die Anzahl der Prozessoren, $n$ sind die Anteile der Paralelliserung der Recheneinheit:
 
         \begin{align*}
           Speedup & = \frac{1}{(P/n) + ((1 - P)/N)} \
@@ -383,7 +383,7 @@ Ein weiterer Ansatz besteht darin, die Lastverteilung zu optimieren, um sicherzu
                   & = 5.9
         \end{align*}
 
-        Das bedeutet, dass das System, welches die Aufgabe auf 8 Prozessoren ausführt, nicht schneller arbeiten wird als 6 Prozessoren. Die parallele Ausführung der Teilaufgaben hat keine Auswirkungen auf die Gesamtzeit, da es keinen sequenziell auszuführenden Anteil gibt, der durch Parallelisierung beschleunigt werden kann.
+        Das bedeutet, dass das System, welches die Aufgabe auf 8 Prozessoren ausgeführt (bei 95\% Paralellisierbarkeit), nicht schneller arbeiten wird als 6 Prozessoren. Die parallele Ausführung der Teilaufgaben hat keine Auswirkungen auf die Gesamtzeit, da es keinen sequenziell auszuführenden Anteil gibt, der durch Parallelisierung beschleunigt werden kann.
 }
         In diesem Beispiel zeigt das Amdahlsche Gesetz, dass die parallele Ausführung der Teilaufgaben in diesem System keinen Leistungsvorteil bietet, da der sequenziell auszuführende Anteil bestimmend ist. Dieses muss immer als Grundlage für das Gustafsons Gesetz verstanden werden.
 
